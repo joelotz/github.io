@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-05-03T00:00:00+05:30</updated><entry><title>Running Shell Scripts on Files from Nautilus</title><link href="/running-shell-scripts-on-files-from-nautilus.html" rel="alternate"></link><published>2020-05-03T00:00:00+05:30</published><updated>2020-05-03T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:None,2020-05-03:/running-shell-scripts-on-files-from-nautilus.html</id><summary type="html"></summary><content type="html">&lt;p&gt;​   &lt;/p&gt;
+&lt;p&gt;In a &lt;a href="fmpeg-converting-mp4-videos-to-mov.html"&gt;previous post&lt;/a&gt; I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. &lt;a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager"&gt;AskUbuntu&lt;/a&gt; had a decent guide that explained how.&lt;/p&gt;
+&lt;p&gt;First create a new file in the &lt;code&gt;/.local/share/nautilus/scripts/&lt;/code&gt; folder using vi, gedit, or your favorite text editor.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/.local/share/nautilus/scripts/
+gedit &amp;lt;name of script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, of course, make the script executable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod +x ~/.local/share/nautilus/scripts/&amp;lt;name of script.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Writing the Video Transcode Script with FFMpeg&lt;/h3&gt;
+&lt;p&gt;Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (&lt;code&gt;sudo apt install zenity&lt;/code&gt;) or comment out the pop-ups. It may be useful to add an progress-box for the future…&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="c1"&gt;## assumes FFPMEG is installed&lt;/span&gt;
+&lt;span class="c1"&gt;## converts a mp4 vidoe file to mov container in order ot use in DVR&lt;/span&gt;
+
+&lt;span class="c1"&gt;# strip new line char passed by Nautilus&lt;/span&gt;
+&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -e &lt;span class="s1"&gt;&amp;#39;s/\r//g&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#convert to lowercase in order to check extension...i can&amp;#39;t work the lowercase into the logic below so this is a work around&lt;/span&gt;
+&lt;span class="nv"&gt;FILENAME2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="p"&gt;,,&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;#check to see if file ends with .mp4&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME2&lt;/span&gt;&lt;span class="p"&gt;: -4&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;.mp4&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="c1"&gt;# cut off the extension and rename to file.mov&lt;/span&gt;
+    &lt;span class="nv"&gt;FILENAME3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILENAME&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; cut -f &lt;span class="m"&gt;1&lt;/span&gt; -d &lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; 
+    &lt;span class="nv"&gt;NEWFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME3&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.mov&amp;quot;&lt;/span&gt;
+
+
+    &lt;span class="c1"&gt;# determined width and height of the video&lt;/span&gt;
+    &lt;span class="c1"&gt;# the assumption is the output file is desired to be the same same as input &lt;/span&gt;
+    &lt;span class="nv"&gt;WIDTH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ffprobe -v error -show_entries &lt;span class="nv"&gt;stream&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;width -of &lt;span class="nv"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;noprint_wrappers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;:nokey&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;HEIGHT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ffprobe -v error -show_entries &lt;span class="nv"&gt;stream&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;height -of &lt;span class="nv"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;noprint_wrappers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;:nokey&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;FRAMERATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ffprobe -v error -select_streams v:0 -show_entries &lt;span class="nv"&gt;stream&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;avg_frame_rate -of &lt;span class="nv"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;noprint_wrappers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;:nokey&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# this is the processing magic, notice I use the original FILENAME variable due to my goofy hack&lt;/span&gt;
+    &lt;span class="c1"&gt;# https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format&lt;/span&gt;
+    ffmpeg -i &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -c:v dnxhd -profile:v dnxhr_hqx -vf &lt;span class="s2"&gt;&amp;quot;scale=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;WIDTH&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HEIGHT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;,fps=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FRAMERATE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;,format=yuv422p10le&amp;quot;&lt;/span&gt; -c:a pcm_s16le &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;NEWFILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# finished message box&lt;/span&gt;
+    zenity --info --title &lt;span class="s2"&gt;&amp;quot;Procesing completed&amp;quot;&lt;/span&gt; --text &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILENAME3&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.mp4 has been transcoded to a .mov file at size &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;WIDTH&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HEIGHT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; and framerate=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FRAMERATE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; --width&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;
+
+&lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="c1"&gt;# it does not end in .mp4 so do not process&lt;/span&gt;
+    zenity --error --title &lt;span class="s2"&gt;&amp;quot;This is not an .mp4 file&amp;quot;&lt;/span&gt; --text &lt;span class="s2"&gt;&amp;quot;File must end with extension &amp;#39;.mp4&amp;#39;&amp;quot;&lt;/span&gt; --width&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="misc"></category><category term="Ubuntu"></category><category term="bash"></category></entry><entry><title>ImageMagick Converting png Images to a Custom pdf</title><link href="/imagemagick-converting-png-images-to-a-custom-pdf.html" rel="alternate"></link><published>2020-04-30T00:00:00+05:30</published><updated>2020-04-30T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:None,2020-04-30:/imagemagick-converting-png-images-to-a-custom-pdf.html</id><summary type="html"></summary><content type="html">&lt;h2&gt;Installing ImageMagick on Ubuntu 20.04&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
+sudo apt build-essential checkinstall &lt;span class="c1"&gt;# provides all the libraris for compiling&lt;/span&gt;
+sudo apt build-dep imagemagick &lt;span class="c1"&gt;# install compilation dependencies&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The first time I did this installation the program complained and errored that it was missing &lt;a href="http://www.imagemagick.org/download/delegates/"&gt;delegates&lt;/a&gt; when I tried to manipulate the png images. &lt;a href="https://askubuntu.com/questions/745660/imagemagick-png-delegate-install-problems"&gt;This page&lt;/a&gt; from StackExchange explained how to install the image libraries. I didn’t know which ones were important or how often they are used so I installed them all.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build it. &lt;/p&gt;
+&lt;p&gt;First download the binary tar, extract it, and move into the newly extracted directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+tar xf ImageMagick.tar.gz
+&lt;span class="nb"&gt;cd&lt;/span&gt; ImageMagick-7*
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;While in the source code directory execute the &lt;code&gt;configure&lt;/code&gt; command. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;./configure&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next compile with the &lt;code&gt;make&lt;/code&gt; command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Install ImageMagick.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will install the compiled binaries. Now run &lt;code&gt;ldconfig&lt;/code&gt; command to link the static libraries. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ldconfig /usr/local/lib
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Confirm installation and final check. Run the &lt;code&gt;identity&lt;/code&gt; command to confirm that “something” is installed. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;indentify -version
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The I&lt;a href="https://imagemagick.org/script/download.php"&gt;mageMagick website&lt;/a&gt; also has a couple commands to verify installation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;identify logo.gif
+display logo.gif
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Converting a Bunch of Images to a pdf&lt;/h2&gt;
+&lt;p&gt;I have a bunch of scan images of an old handwritten recipe book. The originals are in &lt;a href="https://en.wikipedia.org/wiki/Paper_size"&gt;A5 paper size&lt;/a&gt; and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s &lt;code&gt;convert&lt;/code&gt; command. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ImageDir
+convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
+    -resize 595x421 &lt;span class="se"&gt;\&lt;/span&gt;
+    -background white &lt;span class="se"&gt;\&lt;/span&gt;
+    -gravity North &lt;span class="se"&gt;\&lt;/span&gt;
+    -extent 595x421 &lt;span class="se"&gt;\&lt;/span&gt;
+    output.pdf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;OK, this is complicated and took a couple hours to figure out. So what is going on here?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The &lt;code&gt;-resize&lt;/code&gt; option is sizing the images to imagemagick 595x421. &lt;a href="https://imagemagick.org/script/command-line-options.php#page"&gt;This is the A5 page size (dots per inch) in landscape.&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-gravity&lt;/code&gt; &lt;a href="https://imagemagick.org/script/command-line-options.php#extent"&gt;must go before &lt;code&gt;-extent&lt;/code&gt;&lt;/a&gt;. You can find all the options for an argument using &lt;code&gt;identify -list &amp;lt;option&amp;gt;&lt;/code&gt;. “North” means center the images on the page horizontally and top-aligned vertically. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-extent&lt;/code&gt; sets the image size. At &lt;a href="https://imagemagick.org/script/command-line-options.php#page"&gt;page size is dots per inch for A5&lt;/a&gt; is 421x595.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Note: you can specify the dpi with the &lt;code&gt;-density&lt;/code&gt; option. The &lt;a href="https://imagemagick.org/script/command-line-options.php#density"&gt;default is 72dpi&lt;/a&gt; so I left it as is. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;### Lower Res/ Smaller File&lt;/p&gt;
+&lt;p&gt;You can make a lower resolution and smaller file size for web or email.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;convert *.png -compress jpeg -resize 595x421 -background white &lt;span class="se"&gt;\&lt;/span&gt;
+    -gravity North -extent 595x421 output.pdf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Exiftool Adds pdf Metadata&lt;/h2&gt;
+&lt;p&gt;Easily install &lt;a href="https://exiftool.org/"&gt;Exiftool&lt;/a&gt; on Ubuntu.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install libimage-exiftool-perl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There are a bunch of &lt;a href="https://linoxide.com/linux-how-to/install-use-exiftool-linux-ubuntu-centos/"&gt;tutorials&lt;/a&gt; on using Exiftool.&lt;/p&gt;
+&lt;p&gt;Changing the exif data within the pdf file to add some fields is quite easy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;exiftool &lt;span class="se"&gt;\&lt;/span&gt;
+    -Creator&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Joe Lotz&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -keywords&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;recipebook;recipes&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -Author&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Grandma&amp;quot;&lt;/span&gt; output.pdf
+&lt;/pre&gt;&lt;/div&gt;</content><category term="misc"></category><category term="Ubuntu"></category><category term="ImageMagick"></category></entry><entry><title>Converting mp4 videos to mov with FFmpeg</title><link href="/converting-mp4-videos-to-mov-with-ffmpeg.html" rel="alternate"></link><published>2020-04-25T00:00:00+05:30</published><updated>2020-04-25T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:None,2020-04-25:/converting-mp4-videos-to-mov-with-ffmpeg.html</id><summary type="html"></summary><content type="html">&lt;p&gt;&lt;em&gt;Update:&lt;/em&gt; &lt;a href="running-shell-scripts-on-files-from-nautilus.html"&gt;Please see the post&lt;/a&gt; on how I turned this into a script that can be executed on a file by right-clicking. &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;These instructions will describe how I transcoded H.264 mp4 video files that I got from my GoPro Hero7 Black into a format that I could use with Linux version of Davinci Resolve 16.&lt;/p&gt;
+&lt;p&gt;GoPro outputs the video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 containter. This is great because:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;nearly everything can read and play H.264 mp4 files&lt;/li&gt;
+&lt;li&gt;since the H.265 mp4 is more space efficient you can save even more video to your memory card.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Yeah! But wait…. Not everything can read/play the new H.265 mp4 AND more importantly, not all versions of DR16 will decode (aka read) those files.&lt;/p&gt;
+&lt;p&gt;FYI, here are some great posts by havecamerawilltravel that you should read:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/"&gt;Hero7 Black Modes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/"&gt;How to Convery H.265 to H.264 in Handbrake&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in my free version. &lt;/p&gt;
+&lt;p&gt;In the &lt;a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf`"&gt;support notes of DR16&lt;/a&gt; it states that :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;macOS will read mp4 in both DR16 (free version) and DR16 Studio (paid version)&lt;/li&gt;
+&lt;li&gt;Windows will read mp4 in DR16 Studio only&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linux&lt;/strong&gt; will read mp4 in DR16 Studio only&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="DR16_InputCodecs" src="/media/joe/Working/Website/content/images/DR16_InputCodecs.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://handbrake.fr/"&gt;Handbrake&lt;/a&gt; is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. &lt;/p&gt;
+&lt;h3&gt;Installing FFmpeg on Ubuntu 20.04&lt;/h3&gt;
+&lt;p&gt;This is pretty simple, as described in this &lt;a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation"&gt;tutorial instructions&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install ffmpeg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Converting my Video from mp4 to mov&lt;/h3&gt;
+&lt;p&gt;TL;DR - here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 &lt;span class="se"&gt;\&lt;/span&gt;
+    -c:v dnxhd &lt;span class="se"&gt;\&lt;/span&gt;
+    -profile:v dnxhr_hqx &lt;span class="se"&gt;\&lt;/span&gt;
+    -vf &lt;span class="s2"&gt;&amp;quot;scale=3840:2160,fps=24000/1001,format=yuv422p10le&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -b:v 110M &lt;span class="se"&gt;\&lt;/span&gt;
+    -c:a pcm_s16le &lt;span class="se"&gt;\&lt;/span&gt;
+    output.mov
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Options/Arguments&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-i&lt;/code&gt; defines the input file&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-c:v&lt;/code&gt; (or the alias &lt;code&gt;-vcodec&lt;/code&gt;) defines the codec to use for the video&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can view all the installed and available codecs with:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ffmpeg -codecs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I see on the interwebs that most people seem to be using &lt;code&gt;dnxhd&lt;/code&gt; so that’s what I used. In experiments I had successful results with &lt;code&gt;libx264&lt;/code&gt; and &lt;code&gt;h264&lt;/code&gt; as well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-profile:v&lt;/code&gt; defines the profile to use for the video.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Accepted values are: &lt;code&gt;dnxhd&lt;/code&gt;, &lt;code&gt;dnxhr_444&lt;/code&gt;, &lt;code&gt;dnxhr_hqx&lt;/code&gt;, &lt;code&gt;dnxhr_hq&lt;/code&gt;, &lt;code&gt;dnxhr_sq&lt;/code&gt;, &lt;code&gt;dnxhr_lb&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I was able to convert 1920x1080 videos but kept getting an error when attempting 4k 3840x2160 videos. I was stuck at this point for a while until I found a post on &lt;a href="https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format"&gt;askubuntu&lt;/a&gt; explaining that a different profile was needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;dnxhd&lt;/code&gt;: The lists of available/possible resolutions can be &lt;a href="https://en.wikipedia.org/wiki/List_of_Avid_DNxHD_resolutions"&gt;looked up here&lt;/a&gt;, but they do not go bigger than 1080p.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h5&gt;DNxHR Profiles&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;DNxHR LB: &lt;code&gt;dnxhr_lb&lt;/code&gt; - Low Bandwidth. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;). Offline Quality.&lt;/li&gt;
+&lt;li&gt;DNxHR SQ: &lt;code&gt;dnxhr_sq&lt;/code&gt; - Standard Quality. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;). Suitable for delivery format.&lt;/li&gt;
+&lt;li&gt;DNxHR HQ: &lt;code&gt;dnxhr_hq&lt;/code&gt; - High Quality. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;DNxHR HQX: &lt;code&gt;dnxhr_hqx&lt;/code&gt; - High Quality. 10-bit 4:2:2 (&lt;code&gt;yuv422p10le&lt;/code&gt;). UHD/4K Broadcast-quality delivery.&lt;/li&gt;
+&lt;li&gt;DNxHR 444: &lt;code&gt;dnxhr_444&lt;/code&gt; - Finishing Quality. 10-bit 4:4:4 (&lt;code&gt;yuv444p10le&lt;/code&gt;). Cinema-quality delivery.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The above list was adapted from &lt;a href="https://en.wikipedia.org/wiki/DNxHR_codec"&gt;DNxHR codec&lt;/a&gt;. Note that the pix_format must match the profile! &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-vf&lt;/code&gt; is as alias for &lt;code&gt;-filter:v&lt;/code&gt; and creates the filtergraph that is used to filter the stream. You can specify each value but this is easier, for example &lt;code&gt;-pix_fmt=yuv422p10le&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;scale=&lt;/code&gt;width x height &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fps=&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;23.967 = 24000/1001 (or use the alias &lt;code&gt;ntsc-film&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;29.97 = 30000/1001 (or use the alias &lt;code&gt;ntsc&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;59.94 = 60000/1001&lt;/li&gt;
+&lt;li&gt;119.88 = 120000/1001&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;pix_fmts=&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For &lt;code&gt;dnxhr_lb&lt;/code&gt; , &lt;code&gt;dnxhr_sq&lt;/code&gt;, or &lt;code&gt;dnr_hq&lt;/code&gt; = yuv422p&lt;/li&gt;
+&lt;li&gt;For &lt;code&gt;dnxhr_hqx&lt;/code&gt; or &lt;code&gt;dnxhr_444&lt;/code&gt;=  yuv422p10le&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-c:a&lt;/code&gt; defines the codec to use for the audio&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="misc"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry></feed>

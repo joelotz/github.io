@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="">
-    <meta name="author" content="Joe">
+<head>
+        <meta charset="utf-8" />
+        <title>Operating a Pelican Website</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Delving into Delusion Atom Feed" />
+</head>
 
-    <title> Operating a Pelican Website | Delving into the Delusion </title>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Delving into Delusion </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/misc.html">misc</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/drafts/operating-a-pelican-website.html" rel="bookmark"
+           title="Permalink to Operating a Pelican Website">Operating a Pelican Website</a></h1>
+    </header>
 
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
-    <link rel="shortcut icon" href="/theme/images/favicon.ico">
-  </head>
-  <body>
-    <div class=container>
-<div class="header">
-    <a href="index.html">Delving into the Delusion</a> <span class="muted"></span>
-</div>
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-03T00:00:00+05:30">
+                Published: Sun 03 May 2020
+        </abbr>
 
-<div class=navigation>
-    <ul>
-            <li><a href="/index.html">Blog</a> </li>
-            <li><a href="/archives.html">Archive</a> </li>
-            <li><a href="/tags.html">Tags</a> </li>
-    </ul>
-</div>
-<div class=separator></div>        
-        <div class=body>
-    <h1 class="title"> Operating a Pelican Website</h1>
-    <p class=date> 2020-05-03 </p>
-    <p>These are my notes that I can refer back to if I have any questions.</p>
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/joe.html">Joe</a>
+        </address>
+<p>In <a href="/category/misc.html">misc</a>.</p>
+<p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> <a href="/tag/pelican.html">Pelican</a> </p>
+</footer><!-- /.post-info -->      <p>These are my notes that I can refer back to if I have any questions.</p>
 <h3>“Building” the Site, aka Site Generation</h3>
 <p>https://docs.getpelican.com/en/4.2.0/publish.html#site-generation</p>
 <p>To generate a single file:</p>
-<p><code>pelican content</code></p>
+<p><code>pelican content</code> or <code>pelican content -o output -s pelicanconf.py</code>  </p>
 <p><code>make html</code></p>
 <p><code>invoke build</code></p>
 <h3>Killing the Webserver</h3>
@@ -45,37 +48,45 @@
 <p>but I don’t always shut it down correctly. </p>
 <p>https://stackoverflow.com/questions/12647196/how-do-i-shut-down-a-python-simplehttpserver</p>
 <p>https://stackoverflow.com/questions/4465959/python-errno-98-address-already-in-use</p>
-    
-<div class=twitter>
-<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
-    <p class=tags>This entry was tagged as
-      <a href="/tag/ubuntu.html">Ubuntu</a>
-      <a href="/tag/pelican.html">Pelican</a>
-    </p>
-        </div>
-        
-<div class=footer>
-  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
-  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
-    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
-  </p> 
-  <p>
-    <div class=social style="font-size: 27px;">
-      <ul>
-<script language="JavaScript">
-          u = 'your_user';
-          s = 'gmail.com';
-          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
-        </script>
-            <li><i class="icon-envelope icon-large"></i> </li>
-        </a><a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="http://es.linkedin.com/in/you/en" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/you" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>
+<h3>Pushing to Github Pages</h3>
+<p>https://pages.github.com/</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> output
+git add --all
+git commit -m <span class="s2">&quot;this is my commit message&quot;</span>
+git push -s origin master   
+</pre></div>
+    </div><!-- /.entry-content -->
 
-        <a href="../feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
-      </ul>
-    </div>
-  </p>
-</div>    </div>
-  </body>
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
 </html>

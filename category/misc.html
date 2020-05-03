@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Delving into the Delusion - misc</title>
+        <title>Delving into Delusion - misc</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Delving into Delusion Atom Feed" />
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">Delving into the Delusion </a></h1>
+                <h1><a href="/">Delving into Delusion </a></h1>
                 <nav><ul>
                     <li class="active"><a href="/category/misc.html">misc</a></li>
                 </ul></nav>
@@ -16,119 +17,119 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/imagemagick-converting-png-images-to-a-custom-pdf.html">ImageMagick Converting png Images to a Custom pdf</a></h1>
+                    <h1 class="entry-title"><a href="/running-shell-scripts-on-files-from-nautilus.html">Running Shell Scripts on Files from Nautilus</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-05-03T00:00:00+05:30">
+                Published: Sun 03 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/joe.html">Joe</a>
+        </address>
+<p>In <a href="/category/misc.html">misc</a>.</p>
+<p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> <a href="/tag/bash.html">bash</a> </p>
+</footer><!-- /.post-info --><p>​   </p>
+<p>In a <a href="fmpeg-converting-mp4-videos-to-mov.html">previous post</a> I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. <a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager">AskUbuntu</a> had a decent guide that explained how.</p>
+<p>First create a new file in the <code>/.local/share/nautilus/scripts/</code> folder using vi, gedit, or your favorite text editor.</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/.local/share/nautilus/scripts/
+gedit &lt;name of script&gt;
+</pre></div>
+
+
+<p>Now, of course, make the script executable.</p>
+<div class="highlight"><pre><span></span>chmod +x ~/.local/share/nautilus/scripts/&lt;name of script.
+</pre></div>
+
+
+<h3>Writing the Video Transcode Script with FFMpeg</h3>
+<p>Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (<code>sudo apt install zenity</code>) or comment out the pop-ups. It may be useful to add an progress-box for the future…</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1">## assumes FFPMEG is installed</span>
+<span class="c1">## converts a mp4 vidoe file to mov container in order ot use in DVR</span>
+
+<span class="c1"># strip new line char passed by Nautilus</span>
+<span class="nv">FILENAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/\r//g&#39;</span><span class="k">)</span>
+
+<span class="c1">#convert to lowercase in order to check extension...i can&#39;t work the lowercase into the logic below so this is a work around</span>
+<span class="nv">FILENAME2</span><span class="o">=</span><span class="si">${</span><span class="nv">FILENAME</span><span class="p">,,</span><span class="si">}</span>
+
+<span class="c1">#check to see if file ends with .mp4</span>
+<span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">FILENAME2</span><span class="p">: -4</span><span class="si">}</span> <span class="o">==</span> <span class="s2">&quot;.mp4&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="c1"># cut off the extension and rename to file.mov</span>
+    <span class="nv">FILENAME3</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$FILENAME</span><span class="s2">&quot;</span> <span class="p">|</span> cut -f <span class="m">1</span> -d <span class="s1">&#39;.&#39;</span><span class="k">)</span> 
+    <span class="nv">NEWFILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME3</span><span class="si">}</span><span class="s2">.mov&quot;</span>
+
+
+    <span class="c1"># determined width and height of the video</span>
+    <span class="c1"># the assumption is the output file is desired to be the same same as input </span>
+    <span class="nv">WIDTH</span><span class="o">=</span><span class="k">$(</span>ffprobe -v error -show_entries <span class="nv">stream</span><span class="o">=</span>width -of <span class="nv">default</span><span class="o">=</span><span class="nv">noprint_wrappers</span><span class="o">=</span><span class="m">1</span>:nokey<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+    <span class="nv">HEIGHT</span><span class="o">=</span><span class="k">$(</span>ffprobe -v error -show_entries <span class="nv">stream</span><span class="o">=</span>height -of <span class="nv">default</span><span class="o">=</span><span class="nv">noprint_wrappers</span><span class="o">=</span><span class="m">1</span>:nokey<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+    <span class="nv">FRAMERATE</span><span class="o">=</span><span class="k">$(</span>ffprobe -v error -select_streams v:0 -show_entries <span class="nv">stream</span><span class="o">=</span>avg_frame_rate -of <span class="nv">default</span><span class="o">=</span><span class="nv">noprint_wrappers</span><span class="o">=</span><span class="m">1</span>:nokey<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+
+    <span class="c1"># this is the processing magic, notice I use the original FILENAME variable due to my goofy hack</span>
+    <span class="c1"># https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format</span>
+    ffmpeg -i <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span> -c:v dnxhd -profile:v dnxhr_hqx -vf <span class="s2">&quot;scale=</span><span class="si">${</span><span class="nv">WIDTH</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">HEIGHT</span><span class="si">}</span><span class="s2">,fps=</span><span class="si">${</span><span class="nv">FRAMERATE</span><span class="si">}</span><span class="s2">,format=yuv422p10le&quot;</span> -c:a pcm_s16le <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NEWFILE</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># finished message box</span>
+    zenity --info --title <span class="s2">&quot;Procesing completed&quot;</span> --text <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME3</span><span class="si">}</span><span class="s2">.mp4 has been transcoded to a .mov file at size </span><span class="si">${</span><span class="nv">WIDTH</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">HEIGHT</span><span class="si">}</span><span class="s2"> and framerate=</span><span class="si">${</span><span class="nv">FRAMERATE</span><span class="si">}</span><span class="s2">&quot;</span> --width<span class="o">=</span><span class="m">600</span>
+
+<span class="k">else</span> <span class="c1"># it does not end in .mp4 so do not process</span>
+    zenity --error --title <span class="s2">&quot;This is not an .mp4 file&quot;</span> --text <span class="s2">&quot;File must end with extension &#39;.mp4&#39;&quot;</span> --width<span class="o">=</span><span class="m">600</span>
+<span class="k">fi</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/imagemagick-converting-png-images-to-a-custom-pdf.html" rel="bookmark"
+                           title="Permalink to ImageMagick Converting png Images to a Custom pdf">ImageMagick Converting png Images to a Custom pdf</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-04-30T00:00:00+05:30">
                 Published: Thu 30 April 2020
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="/author/jo.html">Jo</a>
+                By                         <a class="url fn" href="/author/joe.html">Joe</a>
         </address>
 <p>In <a href="/category/misc.html">misc</a>.</p>
+<p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> <a href="/tag/imagemagick.html">ImageMagick</a> </p>
+</footer><!-- /.post-info -->                
+                <a class="readmore" href="/imagemagick-converting-png-images-to-a-custom-pdf.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
-</footer><!-- /.post-info --><h2>Installing ImageMagick on Ubuntu 20.04</h2>
-<div class="highlight"><pre><span></span>sudo apt update
-sudo apt build-essential checkinstall <span class="c1"># provides all the libraris for compiling</span>
-sudo apt build-dep imagemagick <span class="c1"># install compilation dependencies</span>
-</pre></div>
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/converting-mp4-videos-to-mov-with-ffmpeg.html" rel="bookmark"
+                           title="Permalink to Converting mp4 videos to mov with FFmpeg">Converting mp4 videos to mov with FFmpeg</a></h1>
+                </header>
 
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-04-25T00:00:00+05:30">
+                Published: Sat 25 April 2020
+        </abbr>
 
-<p>The first time I did this installation the program complained and errored that it was missing <a href="http://www.imagemagick.org/download/delegates/">delegates</a> when I tried to manipulate the png images. <a href="https://askubuntu.com/questions/745660/imagemagick-png-delegate-install-problems">This page</a> from StackExchange explained how to install the image libraries. I didn’t know which ones were important or how often they are used so I installed them all.</p>
-<div class="highlight"><pre><span></span>sudo apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
-</pre></div>
-
-
-<p>This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build it. </p>
-<p>First download the binary tar, extract it, and move into the newly extracted directory.</p>
-<div class="highlight"><pre><span></span>wget https://www.imagemagick.org/download/ImageMagick.tar.gz
-tar xf ImageMagick.tar.gz
-<span class="nb">cd</span> ImageMagick-7*
-</pre></div>
-
-
-<p>While in the source code directory execute the <code>configure</code> command. </p>
-<div class="highlight"><pre><span></span><span class="err">./configure</span>
-</pre></div>
-
-
-<p>Next compile with the <code>make</code> command.</p>
-<div class="highlight"><pre><span></span>make
-</pre></div>
-
-
-<p>Install ImageMagick.</p>
-<div class="highlight"><pre><span></span>sudo make install
-</pre></div>
-
-
-<p>This will install the compiled binaries. Now run <code>ldconfig</code> command to link the static libraries. </p>
-<div class="highlight"><pre><span></span>sudo ldconfig /usr/local/lib
-</pre></div>
-
-
-<p>Confirm installation and final check. Run the <code>identity</code> command to confirm that “something” is installed. </p>
-<div class="highlight"><pre><span></span>indentify -version
-</pre></div>
-
-
-<p>The I<a href="https://imagemagick.org/script/download.php">mageMagick website</a> also has a couple commands to verify installation.</p>
-<div class="highlight"><pre><span></span>identify logo.gif
-display logo.gif
-</pre></div>
-
-
-<h2>Converting a Bunch of Images to a pdf</h2>
-<p>I have a bunch of scan images of an old handwritten recipe book. The originals are in <a href="https://en.wikipedia.org/wiki/Paper_size">A5 paper size</a> and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s <code>convert</code> command. </p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ImageDir
-convert *.png <span class="se">\</span>
-    -resize 595x421 <span class="se">\</span>
-    -background white <span class="se">\</span>
-    -gravity North <span class="se">\</span>
-    -extent 595x421 <span class="se">\</span>
-    output.pdf
-</pre></div>
-
-
-<p>OK, this is complicated and took a couple hours to figure out. So what is going on here?</p>
-<ol>
-<li>
-<p>It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them out.</p>
-</li>
-<li>
-<p>The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The <code>-resize</code> option is sizing the images to imagemagick 595x421. <a href="https://imagemagick.org/script/command-line-options.php#page">This is the A5 page size (dots per inch) in landscape.</a></p>
-</li>
-<li>
-<p><code>-gravity</code> <a href="https://imagemagick.org/script/command-line-options.php#extent">must go before <code>-extent</code></a>. You can find all the options for an argument using <code>identify -list &lt;option&gt;</code>. “North” means center the images on the page horizontally and top-aligned vertically. </p>
-</li>
-<li>
-<p><code>-extent</code> sets the image size. At <a href="https://imagemagick.org/script/command-line-options.php#page">page size is dots per inch for A5</a> is 421x595.</p>
-</li>
-<li>
-<p>Note: you can specify the dpi with the <code>-density</code> option. The <a href="https://imagemagick.org/script/command-line-options.php#density">default is 72dpi</a> so I left it as is. </p>
-</li>
-</ol>
-<p>### Lower Res/ Smaller File</p>
-<p>You can make a lower resolution and smaller file size for web or email.</p>
-<div class="highlight"><pre><span></span>convert *.png -compress jpeg -resize 595x421 -background white <span class="se">\</span>
-    -gravity North -extent 595x421 output.pdf
-</pre></div>
-
-
-<h2>Exiftool Adds pdf Metadata</h2>
-<p>Easily install <a href="https://exiftool.org/">Exiftool</a> on Ubuntu.</p>
-<div class="highlight"><pre><span></span>sudo apt install libimage-exiftool-perl
-</pre></div>
-
-
-<p>There are a bunch of <a href="https://linoxide.com/linux-how-to/install-use-exiftool-linux-ubuntu-centos/">tutorials</a> on using Exiftool.</p>
-<p>Changing the exif data within the pdf file to add some fields is quite easy.</p>
-<div class="highlight"><pre><span></span>exiftool <span class="se">\</span>
-    -Creator<span class="o">=</span><span class="s2">&quot;Joe Lotz&quot;</span> <span class="se">\</span>
-    -keywords<span class="o">=</span><span class="s2">&quot;recipebook;recipes&quot;</span> <span class="se">\</span>
-    -Author<span class="o">=</span><span class="s2">&quot;Grandma&quot;</span> output.pdf
-</pre></div>                </article>
-            </aside><!-- /#featured -->
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/joe.html">Joe</a>
+        </address>
+<p>In <a href="/category/misc.html">misc</a>.</p>
+<p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> <a href="/tag/ffmpeg.html">FFmpeg</a> </p>
+</footer><!-- /.post-info -->                
+                <a class="readmore" href="/converting-mp4-videos-to-mov-with-ffmpeg.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>links</h2>
@@ -142,6 +143,7 @@ convert *.png <span class="se">\</span>
                 <div class="social">
                         <h2>social</h2>
                         <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                             <li><a href="#">You can add links in your config file</a></li>
                             <li><a href="#">Another social link</a></li>
