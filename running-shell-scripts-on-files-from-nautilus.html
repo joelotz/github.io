@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+
+    <title> Running Shell Scripts on Files from Nautilus | Delving into the Delusion </title>
+
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+  </head>
+  <body>
+    <div class=container>
+<div class="header">
+    <a href="index.html">Delving into the Delusion</a> <span class="muted"></span>
+</div>
+
+<div class=navigation>
+    <ul>
+            <li><a href="/index.html">Blog</a> </li>
+            <li><a href="/archives.html">Archive</a> </li>
+            <li><a href="/tags.html">Tags</a> </li>
+            <li><a href="/pages/projects.html">Projects</a> </li>
+            <li><a href="/pages/talks.html">Talks</a> </li>
+            <li><a href="/pages/about-me.html">About</a> </li>
+    </ul>
+</div>
+<div class=separator></div>        
+        <div class=body>
+    <h1 class="title"> Running Shell Scripts on Files from Nautilus</h1>
+    <p class=date> 2020-05-03 </p>
+    <p>In a <a href="fmpeg-converting-mp4-videos-to-mov.html">previous post</a> I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. <a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager">AskUbuntu</a> had a decent guide that explained how.</p>
+<p>First create a new file in the <code>/.local/share/nautilus/scripts/</code> folder using vi, gedit, or your favorite text editor.</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/.local/share/nautilus/scripts/
+gedit &lt;name of script&gt;
+</pre></div>
+
+
+<p>Now, of course, make the script executable.</p>
+<div class="highlight"><pre><span></span>chmod +x ~/.local/share/nautilus/scripts/&lt;name of script.
+</pre></div>
+
+
+<h3>Writing the Video Transcode Script with FFMpeg</h3>
+<p>Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (<code>sudo apt install zenity</code>) or comment out the pop-ups. It may be useful to add an progress-box for the future…</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1">## assumes FFPMEG is installed</span>
+<span class="c1">## converts a mp4 vidoe file to mov container in order ot use in DVR</span>
+
+<span class="c1"># strip new line char passed by Nautilus</span>
+<span class="nv">FILENAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/\r//g&#39;</span><span class="k">)</span>
+
+<span class="c1">#convert to lowercase in order to check extension...i can&#39;t work the lowercase into the logic below so this is a work around</span>
+<span class="nv">FILENAME2</span><span class="o">=</span><span class="si">${</span><span class="nv">FILENAME</span><span class="p">,,</span><span class="si">}</span>
+
+<span class="c1">#check to see if file ends with .mp4</span>
+<span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">FILENAME2</span><span class="p">: -4</span><span class="si">}</span> <span class="o">==</span> <span class="s2">&quot;.mp4&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="c1"># cut off the extension and rename to file.mov</span>
+    <span class="nv">FILENAME3</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$FILENAME</span><span class="s2">&quot;</span> <span class="p">|</span> cut -f <span class="m">1</span> -d <span class="s1">&#39;.&#39;</span><span class="k">)</span> 
+    <span class="nv">NEWFILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME3</span><span class="si">}</span><span class="s2">.mov&quot;</span>
+
+
+    <span class="c1"># determined width and height of the video</span>
+    <span class="c1"># the assumption is the output file is desired to be the same same as input </span>
+    <span class="nv">WIDTH</span><span class="o">=</span><span class="k">$(</span>ffprobe -v error -show_entries <span class="nv">stream</span><span class="o">=</span>width -of <span class="nv">default</span><span class="o">=</span><span class="nv">noprint_wrappers</span><span class="o">=</span><span class="m">1</span>:nokey<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+    <span class="nv">HEIGHT</span><span class="o">=</span><span class="k">$(</span>ffprobe -v error -show_entries <span class="nv">stream</span><span class="o">=</span>height -of <span class="nv">default</span><span class="o">=</span><span class="nv">noprint_wrappers</span><span class="o">=</span><span class="m">1</span>:nokey<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+    <span class="nv">FRAMERATE</span><span class="o">=</span><span class="k">$(</span>ffprobe -v error -select_streams v:0 -show_entries <span class="nv">stream</span><span class="o">=</span>avg_frame_rate -of <span class="nv">default</span><span class="o">=</span><span class="nv">noprint_wrappers</span><span class="o">=</span><span class="m">1</span>:nokey<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+
+    <span class="c1"># this is the processing magic, notice I use the original FILENAME variable due to my goofy hack</span>
+    <span class="c1"># https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format</span>
+    ffmpeg -i <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME</span><span class="si">}</span><span class="s2">&quot;</span> -c:v dnxhd -profile:v dnxhr_hqx -vf <span class="s2">&quot;scale=</span><span class="si">${</span><span class="nv">WIDTH</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">HEIGHT</span><span class="si">}</span><span class="s2">,fps=</span><span class="si">${</span><span class="nv">FRAMERATE</span><span class="si">}</span><span class="s2">,format=yuv422p10le&quot;</span> -c:a pcm_s16le <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NEWFILE</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># finished message box</span>
+    zenity --info --title <span class="s2">&quot;Procesing completed&quot;</span> --text <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FILENAME3</span><span class="si">}</span><span class="s2">.mp4 has been transcoded to a .mov file at size </span><span class="si">${</span><span class="nv">WIDTH</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">HEIGHT</span><span class="si">}</span><span class="s2"> and framerate=</span><span class="si">${</span><span class="nv">FRAMERATE</span><span class="si">}</span><span class="s2">&quot;</span> --width<span class="o">=</span><span class="m">600</span>
+
+<span class="k">else</span> <span class="c1"># it does not end in .mp4 so do not process</span>
+    zenity --error --title <span class="s2">&quot;This is not an .mp4 file&quot;</span> --text <span class="s2">&quot;File must end with extension &#39;.mp4&#39;&quot;</span> --width<span class="o">=</span><span class="m">600</span>
+<span class="k">fi</span>
+</pre></div>
+    
+<div class=twitter>
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+    <p class=tags>This entry was tagged as
+      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="/tag/bash.html">bash</a>
+    </p>
+        </div>
+        
+<div class=footer>
+  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
+    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
+  </p> 
+  <p>
+    <div class=social style="font-size: 27px;">
+      <ul>
+<script language="JavaScript">
+          u = 'your_user';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+        </script>
+            <li><i class="icon-envelope icon-large"></i> </li>
+        </a><a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="http://es.linkedin.com/in/you/en" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/you" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>
+
+        <a href="./feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+      </ul>
+    </div>
+  </p>
+</div>    </div>
+  </body>
+</html>
