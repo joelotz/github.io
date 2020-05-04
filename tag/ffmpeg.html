@@ -1,164 +1,67 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <title>Delving into Delusion - FFmpeg</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Delving into Delusion Atom Feed" />
-</head>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Delving into Delusion </a></h1>
-                <nav><ul>
-                    <li><a href="/category/misc.html">misc</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+    <title>Delving into Delusion <small>FFmpeg</small></title>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/converting-mp4-videos-to-mov-with-ffmpeg.html">Converting mp4 videos to mov with FFmpeg</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2020-04-25T00:00:00+05:30">
-                Published: Sat 25 April 2020
-        </abbr>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+  </head>
+  <body>
+    <div class=container>
+<div class="header">
+    <a href="index.html">Delving into Delusion</a> <span class="muted"></span>
+</div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/joe.html">Joe</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>.</p>
-<p>tags: <a href="/tag/ubuntu.html">Ubuntu</a> <a href="/tag/ffmpeg.html">FFmpeg</a> </p>
-</footer><!-- /.post-info --><p><em>Update:</em> <a href="running-shell-scripts-on-files-from-nautilus.html">Please see the post</a> on how I turned this into a script that can be executed on a file by right-clicking. </p>
-<hr>
-<p>These instructions will describe how I transcoded H.264 mp4 video files that I got from my GoPro Hero7 Black into a format that I could use with Linux version of Davinci Resolve 16.</p>
-<p>GoPro outputs the video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 containter. This is great because:</p>
-<ol>
-<li>nearly everything can read and play H.264 mp4 files</li>
-<li>since the H.265 mp4 is more space efficient you can save even more video to your memory card.</li>
-</ol>
-<p>Yeah! But wait…. Not everything can read/play the new H.265 mp4 AND more importantly, not all versions of DR16 will decode (aka read) those files.</p>
-<p>FYI, here are some great posts by havecamerawilltravel that you should read:</p>
-<ul>
-<li><a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/">Hero7 Black Modes</a></li>
-<li><a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/">How to Convery H.265 to H.264 in Handbrake</a></li>
-</ul>
-<p>My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in my free version. </p>
-<p>In the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf`">support notes of DR16</a> it states that :</p>
-<ul>
-<li>macOS will read mp4 in both DR16 (free version) and DR16 Studio (paid version)</li>
-<li>Windows will read mp4 in DR16 Studio only</li>
-<li><strong>Linux</strong> will read mp4 in DR16 Studio only</li>
-</ul>
-<p><img alt="DR16_InputCodecs" src="/media/joe/Working/Website/content/images/DR16_InputCodecs.png"></p>
-<p><a href="https://handbrake.fr/">Handbrake</a> is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. </p>
-<h3>Installing FFmpeg on Ubuntu 20.04</h3>
-<p>This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>.</p>
-<div class="highlight"><pre><span></span>sudo apt install ffmpeg
-</pre></div>
+<div class=navigation>
+    <ul>
+            <li><a href="/index.html">Blog</a> </li>
+            <li><a href="/archives.html">Archive</a> </li>
+            <li><a href="/tags.html">Tags</a> </li>
+    </ul>
+</div>
+<div class=separator></div>        
+        <div class=body>
+
+    <div class=entry-overview>
+      <div class=date>Apr 25, 2020</div>
+      <div class=detail>
+          <h1><a href="/converting-mp4-videos-to-mov-with-ffmpeg.html">Converting mp4 videos to mov with FFmpeg</a></h1>
+          <div class=summary><p> </p></div>
+      </div>
+    </div>
 
 
-<h3>Converting my Video from mp4 to mov</h3>
-<p>TL;DR - here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.</p>
-<div class="highlight"><pre><span></span>ffmpeg -i input.mp4 <span class="se">\</span>
-    -c:v dnxhd <span class="se">\</span>
-    -profile:v dnxhr_hqx <span class="se">\</span>
-    -vf <span class="s2">&quot;scale=3840:2160,fps=24000/1001,format=yuv422p10le&quot;</span> <span class="se">\</span>
-    -b:v 110M <span class="se">\</span>
-    -c:a pcm_s16le <span class="se">\</span>
-    output.mov
-</pre></div>
+        </div>
+        
+<div class=footer>
+  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
+    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
+  </p> 
+  <p>
+    <div class=social style="font-size: 27px;">
+      <ul>
+<script language="JavaScript">
+          u = 'your_user';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+        </script>
+            <li><i class="icon-envelope icon-large"></i> </li>
+        </a><a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="http://es.linkedin.com/in/you/en" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/you" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>
 
-
-<h4>Options/Arguments</h4>
-<ul>
-<li>
-<p><code>-i</code> defines the input file</p>
-</li>
-<li>
-<p><code>-c:v</code> (or the alias <code>-vcodec</code>) defines the codec to use for the video</p>
-</li>
-<li>
-<p>You can view all the installed and available codecs with:</p>
-<p><code>bash
-ffmpeg -codecs</code></p>
-<p>If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I see on the interwebs that most people seem to be using <code>dnxhd</code> so that’s what I used. In experiments I had successful results with <code>libx264</code> and <code>h264</code> as well.</p>
-</li>
-<li>
-<p><code>-profile:v</code> defines the profile to use for the video.</p>
-</li>
-<li>
-<p>Accepted values are: <code>dnxhd</code>, <code>dnxhr_444</code>, <code>dnxhr_hqx</code>, <code>dnxhr_hq</code>, <code>dnxhr_sq</code>, <code>dnxhr_lb</code>.</p>
-</li>
-<li>
-<p>I was able to convert 1920x1080 videos but kept getting an error when attempting 4k 3840x2160 videos. I was stuck at this point for a while until I found a post on <a href="https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format">askubuntu</a> explaining that a different profile was needed.</p>
-</li>
-<li>
-<p><code>dnxhd</code>: The lists of available/possible resolutions can be <a href="https://en.wikipedia.org/wiki/List_of_Avid_DNxHD_resolutions">looked up here</a>, but they do not go bigger than 1080p.</p>
-</li>
-<li>
-<h5>DNxHR Profiles</h5>
-<ul>
-<li>DNxHR LB: <code>dnxhr_lb</code> - Low Bandwidth. 8-bit 4:2:2 (<code>yuv422p</code>). Offline Quality.</li>
-<li>DNxHR SQ: <code>dnxhr_sq</code> - Standard Quality. 8-bit 4:2:2 (<code>yuv422p</code>). Suitable for delivery format.</li>
-<li>DNxHR HQ: <code>dnxhr_hq</code> - High Quality. 8-bit 4:2:2 (<code>yuv422p</code>).</li>
-<li>DNxHR HQX: <code>dnxhr_hqx</code> - High Quality. 10-bit 4:2:2 (<code>yuv422p10le</code>). UHD/4K Broadcast-quality delivery.</li>
-<li>DNxHR 444: <code>dnxhr_444</code> - Finishing Quality. 10-bit 4:4:4 (<code>yuv444p10le</code>). Cinema-quality delivery.</li>
-</ul>
-<p>The above list was adapted from <a href="https://en.wikipedia.org/wiki/DNxHR_codec">DNxHR codec</a>. Note that the pix_format must match the profile! </p>
-</li>
-<li>
-<p><code>-vf</code> is as alias for <code>-filter:v</code> and creates the filtergraph that is used to filter the stream. You can specify each value but this is easier, for example <code>-pix_fmt=yuv422p10le</code>. </p>
-</li>
-<li>
-<p><code>scale=</code>width x height </p>
-</li>
-<li><code>fps=</code><ul>
-<li>23.967 = 24000/1001 (or use the alias <code>ntsc-film</code>)</li>
-<li>29.97 = 30000/1001 (or use the alias <code>ntsc</code>)</li>
-<li>59.94 = 60000/1001</li>
-<li>119.88 = 120000/1001</li>
-</ul>
-</li>
-<li>
-<p><code>pix_fmts=</code></p>
-<ul>
-<li>For <code>dnxhr_lb</code> , <code>dnxhr_sq</code>, or <code>dnr_hq</code> = yuv422p</li>
-<li>For <code>dnxhr_hqx</code> or <code>dnxhr_444</code>=  yuv422p10le</li>
-</ul>
-</li>
-<li>
-<p><code>-c:a</code> defines the codec to use for the audio</p>
-</li>
-</ul>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-</body>
+        <a href="../feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+      </ul>
+    </div>
+  </p>
+</div>    </div>
+  </body>
 </html>
