@@ -29,7 +29,7 @@ In the [support notes of DR16](https://documents.blackmagicdesign.com/SupportNot
 - Windows will read mp4 in DR16 Studio only
 - **Linux** will read mp4 in DR16 Studio only
 
-![DR16_InputCodecs](/media/joe/Working/Blog/content/images/DR16_InputCodecs.png)
+![DR16 Input Codecs](/images/DR16_InputCodecs.png)
 
 [Handbrake](https://handbrake.fr/) is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. 
 
