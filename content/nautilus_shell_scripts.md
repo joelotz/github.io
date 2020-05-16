@@ -5,7 +5,7 @@ Author: Joe Lotz
 Summary:
 Keywords: ubuntu 20.04, nautilus, bash
 
-​In a [previous post](fmpeg-converting-mp4-videos-to-mov.html) I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. [AskUbuntu](https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager) had a decent guide that explained how.
+In a [previous post](fmpeg-converting-mp4-videos-to-mov.html) I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. [AskUbuntu](https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager) had a decent guide that explained how.
 
 First create a new file in the `/.local/share/nautilus/scripts/` folder using vi, gedit, or your favorite text editor.
 

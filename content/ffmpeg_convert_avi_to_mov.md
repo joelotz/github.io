@@ -1,39 +1,35 @@
-Title: Converting mp4 videos to mov with FFmpeg
+Title: Converting mp4 to mov with FFmpeg in Ubuntu
 Date: 2020-04-25
 Tags: Ubuntu, FFmpeg
 Author: Joe
 Summary:
 Keywords: ubuntu 20.04, ffmpeg, gopro, davinci resolve 16, H.264, mp4, mov
 
-
-
 *Update:* [Please see the post](running-shell-scripts-on-files-from-nautilus.html) on how I turned this into a script that can be executed on a file by right-clicking. 
 
 ----
 
-These instructions will describe how I transcoded H.264 mp4 video files that I got from my GoPro Hero7 Black into a format that I could use with Linux version of Davinci Resolve 16.
-
-GoPro outputs the video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 containter. This is great because:
+GoPro outputs video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 container. This is great because:
 
 1. nearly everything can read and play H.264 mp4 files
 2. since the H.265 mp4 is more space efficient you can save even more video to your memory card.
 
-Yeah! But wait…. Not everything can read/play the new H.265 mp4 AND more importantly, not all versions of DR16 will decode (aka read) those files.
+Yeah! But wait…. Not everything can read/play the new H.265 mp4.
 
 FYI, here are some great posts by havecamerawilltravel that you should read:
 
 - [Hero7 Black Modes](https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/)
-- [How to Convery H.265 to H.264 in Handbrake](https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/)
+- [How to Convert H.265 to H.264 in Handbrake](https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/)
 
-My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in my free version. 
+My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in the Linux free version. 
 
-In the [support notes of DR16](https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf`) it states that :
+In the [support notes of DR16](https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf) it states that :
 
 - macOS will read mp4 in both DR16 (free version) and DR16 Studio (paid version)
 - Windows will read mp4 in DR16 Studio only
 - **Linux** will read mp4 in DR16 Studio only
 
-![DR16_InputCodecs](/media/joe/Working/Website/content/images/DR16_InputCodecs.png)
+![DR16_InputCodecs](/media/joe/Working/Blog/content/images/DR16_InputCodecs.png)
 
 [Handbrake](https://handbrake.fr/) is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. 
 
@@ -47,7 +43,17 @@ sudo apt install ffmpeg
 
 ### Converting my Video from mp4 to mov
 
-TL;DR - here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.
+In my research and experimentation I found success in two codecs; Apple [ProRes](https://en.wikipedia.org/wiki/Apple_ProRes) and [Avid DNxHD](Avid DNxHD). You can view all the installed and available codecs on your machine with `ffmpeg -codecs`. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the interwebs. 
+
+As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted [AAC](https://en.wikipedia.org/wiki/Advanced_Audio_Coding) audio into [PCM](https://en.wikipedia.org/wiki/Pulse-code_modulation) audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit easier:
+
+```bash
+ffmpeg -i input.mp4 -c:v prores -profile:v 3 -c:a pcm_s16le output.mov
+```
+
+The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy details. 
+
+Here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.
 
 ```bash
 ffmpeg -i input.mp4 \
@@ -59,21 +65,19 @@ ffmpeg -i input.mp4 \
 	output.mov
 ```
 
-#### Options/Arguments
+#### Audio Transcoding
+
+Referring back to the [Black Magic Support Codecs](https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf), we see that mp3 and AAC are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the video.
+
+![DR16_InputAudio](/media/joe/Working/Blog/content/images/DR16_InputAudio.png)
+
+#### FFmpeg Options/Arguments
 
 - `-i` defines the input file
 
 - `-c:v` (or the alias `-vcodec`) defines the codec to use for the video
-  
-  - You can view all the installed and available codecs with:
-  
-    ```bash
-    ffmpeg -codecs
-    ```
-  
-    If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I see on the interwebs that most people seem to be using `dnxhd` so that’s what I used. In experiments I had successful results with `libx264` and `h264` as well.
-  
-- `-profile:v` defines the profile to use for the video.
+
+  `-profile:v` defines the profile to use for the video.
 
   - Accepted values are: `dnxhd`, `dnxhr_444`, `dnxhr_hqx`, `dnxhr_hq`, `dnxhr_sq`, `dnxhr_lb`.
 
