@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion - Uncategorized</title><link href="/" rel="alternate"></link><link href="/feeds/uncategorized.atom.xml" rel="self"></link><id>/</id><updated>2020-05-16T00:00:00+05:30</updated><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:None,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (DR16). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux DR16 doesn’t import AAC audio. I read on the BlackMagic forums that it is a licensing thing. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="DR16 Input Codecs" src="/images/DR16_InputAudio.png"&gt;&lt;/p&gt;
 &lt;p&gt;Since we are on Ubuntu and are comfortable with the command line and scripts…right??… we can just use ffmpeg to pop us out a PCM encoded .wav file that can be imported into the DR16 timeline and linked to the clip.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 -acodec pcm_s16le -ac &lt;span class="m"&gt;1&lt;/span&gt; -ar &lt;span class="m"&gt;16000&lt;/span&gt; input_audio.wav
 &lt;/pre&gt;&lt;/div&gt;
@@ -200,7 +201,7 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;li&gt;Windows will read mp4 in DR16 Studio only&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Linux&lt;/strong&gt; will read mp4 in DR16 Studio only&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt="DR16_InputCodecs" src="/media/joe/Working/Blog/content/images/DR16_InputCodecs.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="DR16 Input Codecs" src="/images/DR16_InputCodecs.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://handbrake.fr/"&gt;Handbrake&lt;/a&gt; is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. &lt;/p&gt;
 &lt;h3&gt;Installing FFmpeg on Ubuntu 20.04&lt;/h3&gt;
 &lt;p&gt;This is pretty simple, as described in this &lt;a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation"&gt;tutorial instructions&lt;/a&gt;.&lt;/p&gt;

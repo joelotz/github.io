@@ -104,7 +104,8 @@ div.entry-overview div.date         { float: left; width: 120px; color: #888;
 /*div.entry-overview h1:after         { content: " —"; }*/
 
 /* other alignment things */
-img.align-center        { margin: 15px auto; display: block; }
+/*img.align-center        { margin: 15px auto; display: block; } */
+img		        { margin: auto; display: block; width: 840px; }
 
 /* pagination */
 div.pagination          { margin: 36px 0 0 0; text-align: center; }
@@ -130,7 +131,7 @@ div.blog-epilogue a         {text-decoration: none;
 /* about img */
 img.align-left { 
     float: left; 
-    margin: 20px; 
+    margin: 0px;
 }
 
 /* github gists */
