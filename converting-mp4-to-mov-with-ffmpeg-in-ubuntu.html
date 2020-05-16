@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Joe">
 
-    <title> Converting mp4 videos to mov with FFmpeg | Delving into Delusion </title>
+    <title> Converting mp4 to mov with FFmpeg in Ubuntu | Delving into Delusion </title>
 
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
@@ -28,30 +28,29 @@
 </div>
 <div class=separator></div>        
         <div class=body>
-    <h1 class="title"> Converting mp4 videos to mov with FFmpeg</h1>
+    <h1 class="title"> Converting mp4 to mov with FFmpeg in Ubuntu</h1>
     <p class=date> 2020-04-25 </p>
     <p><em>Update:</em> <a href="running-shell-scripts-on-files-from-nautilus.html">Please see the post</a> on how I turned this into a script that can be executed on a file by right-clicking. </p>
 <hr>
-<p>These instructions will describe how I transcoded H.264 mp4 video files that I got from my GoPro Hero7 Black into a format that I could use with Linux version of Davinci Resolve 16.</p>
-<p>GoPro outputs the video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 containter. This is great because:</p>
+<p>GoPro outputs video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 container. This is great because:</p>
 <ol>
 <li>nearly everything can read and play H.264 mp4 files</li>
 <li>since the H.265 mp4 is more space efficient you can save even more video to your memory card.</li>
 </ol>
-<p>Yeah! But wait…. Not everything can read/play the new H.265 mp4 AND more importantly, not all versions of DR16 will decode (aka read) those files.</p>
+<p>Yeah! But wait…. Not everything can read/play the new H.265 mp4.</p>
 <p>FYI, here are some great posts by havecamerawilltravel that you should read:</p>
 <ul>
 <li><a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/">Hero7 Black Modes</a></li>
-<li><a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/">How to Convery H.265 to H.264 in Handbrake</a></li>
+<li><a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/">How to Convert H.265 to H.264 in Handbrake</a></li>
 </ul>
-<p>My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in my free version. </p>
-<p>In the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf`">support notes of DR16</a> it states that :</p>
+<p>My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in the Linux free version. </p>
+<p>In the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">support notes of DR16</a> it states that :</p>
 <ul>
 <li>macOS will read mp4 in both DR16 (free version) and DR16 Studio (paid version)</li>
 <li>Windows will read mp4 in DR16 Studio only</li>
 <li><strong>Linux</strong> will read mp4 in DR16 Studio only</li>
 </ul>
-<p><img alt="DR16_InputCodecs" src="/media/joe/Working/Website/content/images/DR16_InputCodecs.png"></p>
+<p><img alt="DR16_InputCodecs" src="/media/joe/Working/Blog/content/images/DR16_InputCodecs.png"></p>
 <p><a href="https://handbrake.fr/">Handbrake</a> is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. </p>
 <h3>Installing FFmpeg on Ubuntu 20.04</h3>
 <p>This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>.</p>
@@ -60,7 +59,14 @@
 
 
 <h3>Converting my Video from mp4 to mov</h3>
-<p>TL;DR - here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.</p>
+<p>In my research and experimentation I found success in two codecs; Apple <a href="https://en.wikipedia.org/wiki/Apple_ProRes">ProRes</a> and <a href="Avid DNxHD">Avid DNxHD</a>. You can view all the installed and available codecs on your machine with <code>ffmpeg -codecs</code>. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the interwebs. </p>
+<p>As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted <a href="https://en.wikipedia.org/wiki/Advanced_Audio_Coding">AAC</a> audio into <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation">PCM</a> audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit easier:</p>
+<div class="highlight"><pre><span></span>ffmpeg -i input.mp4 -c:v prores -profile:v <span class="m">3</span> -c:a pcm_s16le output.mov
+</pre></div>
+
+
+<p>The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy details. </p>
+<p>Here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.</p>
 <div class="highlight"><pre><span></span>ffmpeg -i input.mp4 <span class="se">\</span>
     -c:v dnxhd <span class="se">\</span>
     -profile:v dnxhr_hqx <span class="se">\</span>
@@ -71,7 +77,10 @@
 </pre></div>
 
 
-<h4>Options/Arguments</h4>
+<h4>Audio Transcoding</h4>
+<p>Referring back to the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">Black Magic Support Codecs</a>, we see that mp3 and AAC are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the video.</p>
+<p><img alt="DR16_InputAudio" src="/media/joe/Working/Blog/content/images/DR16_InputAudio.png"></p>
+<h4>FFmpeg Options/Arguments</h4>
 <ul>
 <li>
 <p><code>-i</code> defines the input file</p>
@@ -79,15 +88,9 @@
 <li>
 <p><code>-c:v</code> (or the alias <code>-vcodec</code>) defines the codec to use for the video</p>
 </li>
-<li>
-<p>You can view all the installed and available codecs with:</p>
-<p><code>bash
-ffmpeg -codecs</code></p>
-<p>If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I see on the interwebs that most people seem to be using <code>dnxhd</code> so that’s what I used. In experiments I had successful results with <code>libx264</code> and <code>h264</code> as well.</p>
-</li>
-<li>
+</ul>
 <p><code>-profile:v</code> defines the profile to use for the video.</p>
-</li>
+<ul>
 <li>
 <p>Accepted values are: <code>dnxhd</code>, <code>dnxhr_444</code>, <code>dnxhr_hqx</code>, <code>dnxhr_hq</code>, <code>dnxhr_sq</code>, <code>dnxhr_lb</code>.</p>
 </li>
@@ -133,10 +136,6 @@ ffmpeg -codecs</code></p>
 </li>
 </ul>
     
-<div class=twitter>
-<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
     <p class=tags>This entry was tagged as
       <a href="/tag/ubuntu.html">Ubuntu</a>
       <a href="/tag/ffmpeg.html">FFmpeg</a>
@@ -151,18 +150,23 @@ ffmpeg -codecs</code></p>
   <p>
     <div class=social style="font-size: 27px;">
       <ul>
-<script language="JavaScript">
-          u = 'your_user';
-          s = 'gmail.com';
-          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
-        </script>
-            <li><i class="icon-envelope icon-large"></i> </li>
-        </a><a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="http://es.linkedin.com/in/you/en" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/you" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>
 
-        <a href="./feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+        <a href="/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
       </ul>
     </div>
   </p>
 </div>    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   </body>
 </html>
