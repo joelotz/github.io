@@ -1,5 +1,3 @@
-
-
 Title: Installing and Using youtube-dl on Ubuntu 20.04
 Date: 2020-05-20
 Category: 
