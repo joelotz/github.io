@@ -9,7 +9,7 @@ I got bluetooth headphones for running since my old wired headphones were fallin
 
 The next challenge is getting music for the player. I’m streaming music and don’t really want to get all into torrenting. After a short time searching I see cross-platform utility named [youtube-dl](https://github.com/ytdl-org/youtube-dl/blob/master/README.md). 
 
-*Source: https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/*
+*Source: [https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/](https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/)*
 
 ```bash
 sudo apt install youtube-dl
@@ -29,7 +29,7 @@ youtube-dl -F https://www.youtube.com/watch?v=<id>
 
 If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; ID# 249, 250, 251, 140 are audio. The first three are in [webm](https://en.wikipedia.org/wiki/WebM) format and the last is [m4a](https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A), both are optimized for delivering on the web. 
 
-![youtube-dl](/media/joe/Working/Blog/content/images/youtube-dl.png)
+![youtube-dl](/images/youtube-dl.png)
 
 You can select the specific stream you want and download it.
 
@@ -39,7 +39,7 @@ youtube-dl -f 278 https://www.youtube.com/watch?v=yYzrSGRzttk
 
 The better method is to let youtube-dl choose the best audio stream and download it. 
 
-*Source: https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl*
+*Source: [https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl](https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl)*
 
 ```bash
 youtube-dl -f bestaudio https://www.youtube.com/watch?v=<id>
