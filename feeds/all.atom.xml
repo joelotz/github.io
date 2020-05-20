@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-05-16T00:00:00+05:30</updated><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:None,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (DR16). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux DR16 doesn’t import AAC audio. I read on the BlackMagic forums that it is a licensing thing. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-05-20T00:00:00+05:30</updated><entry><title>Installing and Using youtube-dl on Ubuntu 20.04</title><link href="/installing-and-using-youtube-dl-on-ubuntu-2004.html" rel="alternate"></link><published>2020-05-20T00:00:00+05:30</published><updated>2020-05-20T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:None,2020-05-20:/installing-and-using-youtube-dl-on-ubuntu-2004.html</id><summary type="html">&lt;p&gt;I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - &lt;a href="https://in.jbl.com/JBL+Endurance+DIVE.html"&gt;JBL Endurance Dive&lt;/a&gt;. I currently jog with my phone …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - &lt;a href="https://in.jbl.com/JBL+Endurance+DIVE.html"&gt;JBL Endurance Dive&lt;/a&gt;. I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the &lt;a href="https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r"&gt;SanDisk Clip Sport Plus&lt;/a&gt;. BUT, the JBL headphones have a built-in mp3 player with 1GB storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just running.&lt;/p&gt;
+&lt;p&gt;The next challenge is getting music for the player. I’m streaming music and don’t really want to get all into torrenting. After a short time searching I see cross-platform utility named &lt;a href="https://github.com/ytdl-org/youtube-dl/blob/master/README.md"&gt;youtube-dl&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Source: https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/&lt;/em&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install youtube-dl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now that it is installed, I recommend installing FFmpeg also. This is pretty simple, as described in this &lt;a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation"&gt;tutorial instructions&lt;/a&gt;. This is just a very useful utility to have and I use a bunch for transcoding video formats.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install ffmpeg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once you have chosen a youtube video, you can list all available audio/video formats and bitrates. Note, replace &lt;id&gt; with the actual ID of the video you want. Better yet, just copy/past the entire URL.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -F https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; ID# 249, 250, 251, 140 are audio. The first three are in &lt;a href="https://en.wikipedia.org/wiki/WebM"&gt;webm&lt;/a&gt; format and the last is &lt;a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A"&gt;m4a&lt;/a&gt;, both are optimized for delivering on the web. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="youtube-dl" src="/media/joe/Working/Blog/content/images/youtube-dl.png"&gt;&lt;/p&gt;
+&lt;p&gt;You can select the specific stream you want and download it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -f &lt;span class="m"&gt;278&lt;/span&gt; https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;yYzrSGRzttk
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The better method is to let youtube-dl choose the best audio stream and download it. &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Source: https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl&lt;/em&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -f bestaudio https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can specify the name of the downloaded file. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -f bestaudio https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt; --output &lt;span class="s2"&gt;&amp;quot;outputName.%(ext)s&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With FFmpeg installed, you can also convert to mp3. I know converting formats probably degrade the audio quality, but my cheap headphone mp3 player doesn’t play the webm file format. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And then finally, you can download, convert to mp3, and rename the file. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt; --output &lt;span class="s2"&gt;&amp;quot;outputName.%(ext)s&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:None,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (DR16). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux DR16 doesn’t import AAC audio. I read on the BlackMagic forums that it is a licensing thing. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="DR16 Input Codecs" src="/images/DR16_InputAudio.png"&gt;&lt;/p&gt;
 &lt;p&gt;Since we are on Ubuntu and are comfortable with the command line and scripts…right??… we can just use ffmpeg to pop us out a PCM encoded .wav file that can be imported into the DR16 timeline and linked to the clip.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 -acodec pcm_s16le -ac &lt;span class="m"&gt;1&lt;/span&gt; -ar &lt;span class="m"&gt;16000&lt;/span&gt; input_audio.wav
