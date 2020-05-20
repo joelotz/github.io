@@ -105,7 +105,7 @@ div.entry-overview div.date         { float: left; width: 120px; color: #888;
 
 /* other alignment things */
 /*img.align-center        { margin: 15px auto; display: block; } */
-img		        { margin: auto; display: block; width: 840px; }
+img		        { margin: 0px; display: block; width: 840px; }
 
 /* pagination */
 div.pagination          { margin: 36px 0 0 0; text-align: center; }
