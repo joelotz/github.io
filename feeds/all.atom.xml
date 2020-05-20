@@ -41,7 +41,21 @@
 
 &lt;p&gt;And then finally, you can download, convert to mp3, and rename the file. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt; --output &lt;span class="s2"&gt;&amp;quot;outputName.%(ext)s&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:None,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (DR16). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux DR16 doesn’t import AAC audio. I read on the BlackMagic forums that it is a licensing thing. &lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Audacity to Clean Up&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install audacity
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;em&gt;Source: &lt;a href="https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files"&gt;https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded folder. &lt;/p&gt;
+&lt;p&gt;Select “Tools &amp;gt; Macros…”&lt;/p&gt;
+&lt;p&gt;&lt;img alt="youtube-dl" src="/images/audacity_macros.png"&gt;&lt;/p&gt;
+&lt;p&gt;Make sure the macro “MP3 Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to normalize. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="youtube-dl" src="/images/audacity_macros2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Then the magic happens! The modified files will be in a new folder named “macro-output”.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:None,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (DR16). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux DR16 doesn’t import AAC audio. I read on the BlackMagic forums that it is a licensing thing. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="DR16 Input Codecs" src="/images/DR16_InputAudio.png"&gt;&lt;/p&gt;
 &lt;p&gt;Since we are on Ubuntu and are comfortable with the command line and scripts…right??… we can just use ffmpeg to pop us out a PCM encoded .wav file that can be imported into the DR16 timeline and linked to the clip.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 -acodec pcm_s16le -ac &lt;span class="m"&gt;1&lt;/span&gt; -ar &lt;span class="m"&gt;16000&lt;/span&gt; input_audio.wav
