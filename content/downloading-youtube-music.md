@@ -62,3 +62,23 @@ And then finally, you can download, convert to mp3, and rename the file.
 ```bash
 youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=<id> --output "outputName.%(ext)s"]
 ```
+
+### Audacity to Clean Up
+
+```bash
+sudo apt install audacity
+```
+
+*Source: [https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files](https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files)*
+
+The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded folder. 
+
+Select “Tools > Macros…”
+
+![youtube-dl](/images/audacity_macros.png)
+
+Make sure the macro “MP3 Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to normalize. 
+
+![youtube-dl](/images/audacity_macros2.png)
+
+Then the magic happens! The modified files will be in a new folder named “macro-output”.
