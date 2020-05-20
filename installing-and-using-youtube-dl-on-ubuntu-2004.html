@@ -32,7 +32,7 @@
     <p class=date> 2020-05-20 </p>
     <p>I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - <a href="https://in.jbl.com/JBL+Endurance+DIVE.html">JBL Endurance Dive</a>. I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the <a href="https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r">SanDisk Clip Sport Plus</a>. BUT, the JBL headphones have a built-in mp3 player with 1GB storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just running.</p>
 <p>The next challenge is getting music for the player. I’m streaming music and don’t really want to get all into torrenting. After a short time searching I see cross-platform utility named <a href="https://github.com/ytdl-org/youtube-dl/blob/master/README.md">youtube-dl</a>. </p>
-<p><em>Source: https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/</em></p>
+<p><em>Source: <a href="https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/">https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/</a></em></p>
 <div class="highlight"><pre><span></span>sudo apt install youtube-dl
 </pre></div>
 
@@ -48,14 +48,14 @@
 
 
 <p>If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; ID# 249, 250, 251, 140 are audio. The first three are in <a href="https://en.wikipedia.org/wiki/WebM">webm</a> format and the last is <a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A">m4a</a>, both are optimized for delivering on the web. </p>
-<p><img alt="youtube-dl" src="/media/joe/Working/Blog/content/images/youtube-dl.png"></p>
+<p><img alt="youtube-dl" src="/images/youtube-dl.png"></p>
 <p>You can select the specific stream you want and download it.</p>
 <div class="highlight"><pre><span></span>youtube-dl -f <span class="m">278</span> https://www.youtube.com/watch?v<span class="o">=</span>yYzrSGRzttk
 </pre></div>
 
 
 <p>The better method is to let youtube-dl choose the best audio stream and download it. </p>
-<p><em>Source: https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl</em></p>
+<p><em>Source: <a href="https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl">https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl</a></em></p>
 <div class="highlight"><pre><span></span>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
 </pre></div>
 
