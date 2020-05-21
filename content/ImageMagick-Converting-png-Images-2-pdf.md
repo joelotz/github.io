@@ -6,7 +6,7 @@ Author: Joe
 Summary:
 Keywords: ubuntu 20.04, imagemagick
 
-## Installing ImageMagick on Ubuntu 20.04
+### Installing ImageMagick on Ubuntu 20.04
 
 ```bash
 sudo apt update
@@ -67,7 +67,7 @@ identify logo.gif
 display logo.gif
 ```
 
-## Converting a Bunch of Images to a pdf
+### Converting a Bunch of Images to a pdf
 
 I have a bunch of scan images of an old handwritten recipe book. The originals are in [A5 paper size](https://en.wikipedia.org/wiki/Paper_size) and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s `convert` command. 
 
@@ -93,7 +93,7 @@ OK, this is complicated and took a couple hours to figure out. So what is going 
 
 5. Note: you can specify the dpi with the `-density` option. The [default is 72dpi](https://imagemagick.org/script/command-line-options.php#density) so I left it as is. 
 
-   ### Lower Res/ Smaller File
+#### Lower Res/ Smaller File
 
 You can make a lower resolution and smaller file size for web or email.
 
@@ -102,7 +102,7 @@ convert *.png -compress jpeg -resize 595x421 -background white \
 	-gravity North -extent 595x421 output.pdf
 ```
 
-## Exiftool Adds pdf Metadata
+### Exiftool Adds pdf Metadata
 
 Easily install [Exiftool](https://exiftool.org/) on Ubuntu.
 
