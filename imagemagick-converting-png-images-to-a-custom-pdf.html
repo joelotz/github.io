@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <! <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' /> >
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Text:400,700' rel='stylesheet' type='text/css' />
+    <! <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />    
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
@@ -30,8 +30,8 @@
 <div class=separator></div>        
         <div class=body>
     <h1 class="title"> ImageMagick Converting png Images to a Custom pdf</h1>
-    <p class=date> 2020-04-30 </p>
-    <h2>Installing ImageMagick on Ubuntu 20.04</h2>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 30, 2020 </p>
+    <h3>Installing ImageMagick on Ubuntu 20.04</h3>
 <div class="highlight"><pre><span></span>sudo apt update
 sudo apt build-essential checkinstall <span class="c1"># provides all the libraris for compiling</span>
 sudo apt build-dep imagemagick <span class="c1"># install compilation dependencies</span>
@@ -82,7 +82,7 @@ display logo.gif
 </pre></div>
 
 
-<h2>Converting a Bunch of Images to a pdf</h2>
+<h3>Converting a Bunch of Images to a pdf</h3>
 <p>I have a bunch of scan images of an old handwritten recipe book. The originals are in <a href="https://en.wikipedia.org/wiki/Paper_size">A5 paper size</a> and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s <code>convert</code> command. </p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ImageDir
 convert *.png <span class="se">\</span>
@@ -112,14 +112,14 @@ convert *.png <span class="se">\</span>
 <p>Note: you can specify the dpi with the <code>-density</code> option. The <a href="https://imagemagick.org/script/command-line-options.php#density">default is 72dpi</a> so I left it as is. </p>
 </li>
 </ol>
-<p>### Lower Res/ Smaller File</p>
+<h4>Lower Res/ Smaller File</h4>
 <p>You can make a lower resolution and smaller file size for web or email.</p>
 <div class="highlight"><pre><span></span>convert *.png -compress jpeg -resize 595x421 -background white <span class="se">\</span>
     -gravity North -extent 595x421 output.pdf
 </pre></div>
 
 
-<h2>Exiftool Adds pdf Metadata</h2>
+<h3>Exiftool Adds pdf Metadata</h3>
 <p>Easily install <a href="https://exiftool.org/">Exiftool</a> on Ubuntu.</p>
 <div class="highlight"><pre><span></span>sudo apt install libimage-exiftool-perl
 </pre></div>
@@ -143,8 +143,7 @@ convert *.png <span class="se">\</span>
   <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
   <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
     <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
-  </p> 
-  <p>
+
     <div class=social style="font-size: 27px;">
       <ul>
 <a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>

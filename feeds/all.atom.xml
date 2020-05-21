@@ -137,7 +137,7 @@ gedit &amp;lt;name of script&amp;gt;
 &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="c1"&gt;# it does not end in .mp4 so do not process&lt;/span&gt;
     zenity --error --title &lt;span class="s2"&gt;&amp;quot;This is not an .mp4 file&amp;quot;&lt;/span&gt; --text &lt;span class="s2"&gt;&amp;quot;File must end with extension &amp;#39;.mp4&amp;#39;&amp;quot;&lt;/span&gt; --width&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;
 &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="bash"></category></entry><entry><title>ImageMagick Converting png Images to a Custom pdf</title><link href="/imagemagick-converting-png-images-to-a-custom-pdf.html" rel="alternate"></link><published>2020-04-30T00:00:00+05:30</published><updated>2020-04-30T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:None,2020-04-30:/imagemagick-converting-png-images-to-a-custom-pdf.html</id><summary type="html"></summary><content type="html">&lt;h2&gt;Installing ImageMagick on Ubuntu 20.04&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="bash"></category></entry><entry><title>ImageMagick Converting png Images to a Custom pdf</title><link href="/imagemagick-converting-png-images-to-a-custom-pdf.html" rel="alternate"></link><published>2020-04-30T00:00:00+05:30</published><updated>2020-04-30T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:None,2020-04-30:/imagemagick-converting-png-images-to-a-custom-pdf.html</id><summary type="html"></summary><content type="html">&lt;h3&gt;Installing ImageMagick on Ubuntu 20.04&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
 sudo apt build-essential checkinstall &lt;span class="c1"&gt;# provides all the libraris for compiling&lt;/span&gt;
 sudo apt build-dep imagemagick &lt;span class="c1"&gt;# install compilation dependencies&lt;/span&gt;
@@ -188,7 +188,7 @@ display logo.gif
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Converting a Bunch of Images to a pdf&lt;/h2&gt;
+&lt;h3&gt;Converting a Bunch of Images to a pdf&lt;/h3&gt;
 &lt;p&gt;I have a bunch of scan images of an old handwritten recipe book. The originals are in &lt;a href="https://en.wikipedia.org/wiki/Paper_size"&gt;A5 paper size&lt;/a&gt; and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s &lt;code&gt;convert&lt;/code&gt; command. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ImageDir
 convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
@@ -218,14 +218,14 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;p&gt;Note: you can specify the dpi with the &lt;code&gt;-density&lt;/code&gt; option. The &lt;a href="https://imagemagick.org/script/command-line-options.php#density"&gt;default is 72dpi&lt;/a&gt; so I left it as is. &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;### Lower Res/ Smaller File&lt;/p&gt;
+&lt;h4&gt;Lower Res/ Smaller File&lt;/h4&gt;
 &lt;p&gt;You can make a lower resolution and smaller file size for web or email.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;convert *.png -compress jpeg -resize 595x421 -background white &lt;span class="se"&gt;\&lt;/span&gt;
     -gravity North -extent 595x421 output.pdf
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Exiftool Adds pdf Metadata&lt;/h2&gt;
+&lt;h3&gt;Exiftool Adds pdf Metadata&lt;/h3&gt;
 &lt;p&gt;Easily install &lt;a href="https://exiftool.org/"&gt;Exiftool&lt;/a&gt; on Ubuntu.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install libimage-exiftool-perl
 &lt;/pre&gt;&lt;/div&gt;

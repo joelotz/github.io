@@ -1,21 +1,38 @@
 /* general style */
-body    { font: 18px/25px 'Palatino', 'Palatino Linotype', 'Georgia', serif;
-          margin: 0; padding: 0; }
-a       { /*color: #432165;*/ color: #234764; }
+
+/*body    { font: 18px/25px 'Palatino', 'Palatino Linotype', 'Georgia', serif; 
+          margin: 0; padding: 0; } */
+
+body			    {color: #3d3d3d; 
+		             font-family: 'Lato', sans-serif;
+    			     font-size: 16px; font-size: 1rem;
+    			    line-height: 1.6;}
+    
+a       {  color: #234764; } /*color: #432165;*/
+
+
+
+}
 a:hover { color: #3b185f; background: #f9f8fa; }
 
 /* headlines */
-h1, h2, h3, h4, h5, h6      { /*font-family: 'Vollkorn', 'Georgia', serif;*/
-                              font-family: 'Noticia Text', serif;
-                              font-weight: normal; color: #222; /*color: #AF3D04;*/ }
+h1, h2			   { font-family: 'Lato', sans-serif;
+                              font-weight: normal; color: #222; text-decoration: normal; /*color: #AF3D04;*/ }
+h3, h4			   { font-family: 'Lato', sans-serif;
+                              font-weight: normal; color: #222; text-decoration: underline; /*color: #AF3D04;*/ }
+                              
+                              
+                              
 h1 a, h2 a, h3 a, h4 a,
 h5 a, h6 a                  { text-decoration: none; }
 h1 a:hover, h2 a:hover,
 h3 a:hover, h4 a:hover      { color: #432165; text-decoration: underline; }
 h1.title                    { width: 840px; }
 h1, h2                      { margin: 10px 0 25px 0; }
-h1                          { font-size: 48px; line-height: 52px; }
-h2                          { font-size: 36px; line-height: 40px; }
+h1                          { font-size: 40px; line-height: 42px; }
+h2                          { font-size: 32px; line-height: 36px; }
+h3                          { font-size: 28px; line-height: 32px; }
+h3                          { font-size: 24px; line-height: 28px; }
 
 /* colors */
 .muted                      { color: rgb(153, 153, 153); }
@@ -25,11 +42,13 @@ h2                          { font-size: 36px; line-height: 40px; }
 div.container               { width: 840px; margin: 48px auto; padding: 0; }
 div.header                  { float: left; }
 div.navigation              { float: right; }
-div.header a, div.navigation a	{ text-decoration: none; 
-				  font-size: 22px; 
-				  padding: 10px;
-				}
+div.header a		   { text-decoration: none; 
+				  font-size: 32px; 
+				  padding: 10px; }
 
+div.navigation a	   { text-decoration: none; font-size: 22px; padding: 10px;
+			     }
+				  
 div.separator               {border-bottom: 1px dotted #ddd; padding-bottom: 42px;
                               margin-bottom: 42px; font-size: 16px; color: #888;
                               text-align: center;}
@@ -43,10 +62,10 @@ div.footer                  { border-top: 1px dotted #ddd; padding-top: 9px;
 div.footer a                { color: #888; }
 div.footer p                { margin: 0; }
 
-div.social                  { padding-top: 20px; padding-bottom: 10px;}
+div.social                  { padding-top: 0px; padding-bottom: 10px;}
 div.social a                { color: #888; text-decoration: none;}
 div.social ul               { margin: 0; padding: 0; list-style: none; }
-div.social ul li            { display: inline; margin: 0 2px; padding: 0; }
+div.social ul li            { display: inline; margin: 0 0px; padding: 0; }
 
 /* margins and stuff */
 p, div.line-block, ul, ol, pre,
@@ -55,7 +74,8 @@ dt                              { margin: 25px 0 16px 0; padding: 0; }
 dd                              { margin: 16px 0 25px 40px; padding: 0; }
 ul ol, ol ul, ul ul, ol ol      { margin: 10px 0; padding: 0 0 0 40px; }
 li                              { padding: 0; }
-h1 + p.date                     { margin-top: -20px; font-style: italic; }
+h1 + p.date                     { margin-top: -20px; font-style: normal; color: #888; font-style: italic;}
+/*div.entry-overview div.date         { float: left; width: 160px; color: #888;text-align: left; font-style: italic; } */
 
 /* code formatting.  no monospace because of webkit (bug?) */
 pre, code, tt   { font-family: 'Consolas', 'Deja Vu Sans Mono',
@@ -90,7 +110,8 @@ table.footnote td p     { margin: 0; }
 table.footnote td p + p { margin-top: 15px; }
 
 /* blog overview */
-div.entry-overview                  { margin: 25px 122px 25px 102px; }
+/* div.entry-overview                  { margin: 25px 122px 25px 102px; } */
+div.entry-overview                  { margin: 25px 50px 25px 50px; }
 div.entry-overview h1,
 div.entry-overview div.summary,
 div.entry-overview div.summary p    { display: inline; line-height: 25px; }
@@ -99,8 +120,8 @@ div.entry-overview div.summary,
 div.entry-overview div.date,
 div.entry-overview div.summary p    { margin: 0; padding: 0; }
 div.entry-overview div.detail       { margin-left: 140px; }
-div.entry-overview div.date         { float: left; width: 120px; color: #888;
-                                      text-align: right; font-style: italic; }
+div.entry-overview div.date         { float: left; width: 160px; color: #888;
+                                      text-align: left; font-style: italic; }
 /*div.entry-overview h1:after         { content: " —"; }*/
 
 /* other alignment things */
