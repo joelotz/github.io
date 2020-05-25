@@ -5,7 +5,7 @@ Author: Joe Lotz
 Summary:
 Keywords: ubuntu 20.04, nautilus, bash
 
-In a [previous post](fmpeg-converting-mp4-videos-to-mov.html) I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. [AskUbuntu](https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager) had a decent guide that explained how.
+In a [previous post](converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html) I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. [AskUbuntu](https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager) had a decent guide that explained how.
 
 First create a new file in the `/.local/share/nautilus/scripts/` folder using vi, gedit, or your favorite text editor.
 
@@ -61,4 +61,3 @@ else # it does not end in .mp4 so do not process
 	zenity --error --title "This is not an .mp4 file" --text "File must end with extension '.mp4'" --width=600
 fi
 ```
-
