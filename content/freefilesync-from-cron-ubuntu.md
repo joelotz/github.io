@@ -25,8 +25,12 @@ Where:
 - `/usr/bin/FreeFileSync/FreeFileSync` is the location of the program 
 - `/home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch` is my batch file that I created and saved within the FreeFileSync program.
 
-#### Extras
+### Extras
 
 In case you don’t know, `crontab -e` opens the file allowing you to add or edit the cron jobs. Also, you can specify your editor as `EDITOR=gedit crontab -e` if you don’t want to use vi or nano or whatever is your default bash editor. 
 
 I was also successful in putting this command in a shell script and running the shell script from cron - just in case you want to do something more complicated. 
+
+### Update 
+
+When this script ran I received errors about “Unable to find or create trash directory.” Googling it looked like I was missing the trash dir `.Trash-1000` but that wasn’t the case. In the end, for some reason, it seems like only root can delete files from my external NTFS drive….but it worked when I performed the delete manually or from the program. To get around this I moved the above cron job from my user to root crontab via `sudo EDITOR=gedit crontab -e`. I don’t think it’s a good idea to be running this as root…I’ll do more experiments and try to find a better solution.
