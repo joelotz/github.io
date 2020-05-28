@@ -19,22 +19,21 @@ h1, h2			   { font-family: 'Lato', sans-serif;
 h3, h4			   { font-family: 'Lato', sans-serif;
                               font-weight: normal; color: #222; text-decoration: underline; /*color: #AF3D04;*/ }
                               
-                              
-                              
+                                                            
 h1 a, h2 a, h3 a, h4 a,
-h5 a, h6 a                  { text-decoration: none; }
+h5 a, h6 a, li a                  { text-decoration: none; }
 h1 a:hover, h2 a:hover,
 h3 a:hover, h4 a:hover      { color: #432165; text-decoration: underline; }
 h1.title                    { width: 840px; }
 h1, h2                      { margin: 10px 0 25px 0; }
 h1                          { font-size: 40px; line-height: 42px; }
 h2                          { font-size: 32px; line-height: 36px; }
-h3                          { font-size: 28px; line-height: 32px; }
 h3                          { font-size: 24px; line-height: 28px; }
-
+/* h3                          { font-size: 28px; line-height: 32px; } */
+h3.archives		   { margin-top: -10px; margin-bottom: -25px; padding-left: 25px; }
+ul.archives		   { padding-left: 65px; }
 /* colors */
 .muted                      { color: rgb(153, 153, 153); }
-
 
 /* layout elements */
 div.container               { width: 940px; margin: 48px auto; padding: 0; }
@@ -55,15 +54,6 @@ div.navigation ul           { margin: 0; padding: 0; list-style: none; }
 div.navigation ul li        { display: inline; margin: 0 2px; padding: 0;
 				font-family: 'Palatino', serif;} 
 div.body                    { clear: both; font-size: 1.1em; }
-
-/* Experiments gone wrong
-border-radius: 19px 19px 19px 19px;
--moz-border-radius: 19px 19px 19px 19px;
--webkit-border-radius: 19px 19px 19px 19px;
-border: 1px solid #ddd;
-padding-left: 10px; padding-right: 10px;
-} */
-
 div.footer                  { border-top: 1px dotted #ddd; padding-top: 9px;
                               margin-top: 42px; font-size: 16px; color: #888;
                               text-align: center; }
@@ -118,7 +108,6 @@ table.footnote td p     { margin: 0; }
 table.footnote td p + p { margin-top: 15px; }
 
 /* blog overview */
-/* div.entry-overview                  { margin: 25px 122px 25px 102px; } */
 div.entry-overview                  { margin: 15px 50px 15px 50px; }
 div.entry-overview h1,
 div.entry-overview div.summary,
