@@ -30,7 +30,10 @@
 <div class=separator></div>        
         <div class=body>
     <h1 class="title"> Running FreeFileSync Backup from Crontab on Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 26, 2020 </p>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 26, 2020 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span>
+ <a href="/tag/ubuntu.html">Ubuntu</a>
+    </p>
     <p>It took me half a day, maybe 4 hours, to solve this problem and I want to document the solution. I wanted to use <a href="https://www.linux-magazine.com/Online/Features/FreeFileSync/(offset)/3">FreeFileSync</a> to backup all my files to an external hard drive. I looked at <a href="https://www.capterra.com/file-sync-software/">a bunch of other software</a> but what I want to do is pretty basic and everything else was too complicated for me. Regardless, I installed <a href="https://freefilesync.org/">FreeFileSync</a>, setup the configuration, and saved the “batch job”. Everything works smooth when manually run, but of course I want to automate the process and setup a cron job. </p>
 <p>I kept getting error messages. Many solutions suggested to use gnome-schedule but that appears to be defunct and no longer available for Ubuntu 20.04. I went down the path of trying to build it from source and yadda yadda. That wasted some time. Another error message I got was <code>Failed to load module canberra-gtk-module</code> - which was easily fixed.</p>
 <div class="highlight"><pre><span></span>sudo apt install libcanberra-gtk3-module
@@ -54,15 +57,17 @@
 <h3>Update</h3>
 <p>When this script ran I received errors about “Unable to find or create trash directory.” Googling it looked like I was missing the trash dir <code>.Trash-1000</code> but that wasn’t the case. In the end, for some reason, it seems like only root can delete files from my external NTFS drive….but it worked when I performed the delete manually or from the program. To get around this I moved the above cron job from my user to root crontab via <code>sudo EDITOR=gedit crontab -e</code>. I don’t think it’s a good idea to be running this as root…I’ll do more experiments and try to find a better solution.</p>
     
-    <p class=tags></br>This entry was tagged as
+
+
+<!--        <p class=tags></br>This entry was tagged as
       <a href="/tag/ubuntu.html">Ubuntu</a>
     </p>
+-->    
         </div>
         
 <div class=footer>
   <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
-  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
-    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  Modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> Theme
 
     <div class=social style="font-size: 27px;">
       <ul>

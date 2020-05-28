@@ -30,7 +30,11 @@
 <div class=separator></div>        
         <div class=body>
     <h1 class="title"> Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 28, 2020 </p>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 28, 2020 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span>
+ <a href="/tag/ubuntu.html">Ubuntu</a>
+ <a href="/tag/ffmpeg.html">FFmpeg</a>
+    </p>
     <p>I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. </p>
 <p>What I learned from googling around it that you convert the audible .aax audiobook files into other formats with <a href="https://ffmpeg.org/">FFmpeg</a> (<a href="/tag/ffmpeg.html">one of my favorites!</a>), but you have to have your unique “activation bytes” to decode the DRM. <em>That</em> is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried <a href="https://github.com/naueramant/Audiblex">Audiblex</a>, <a href="https://github.com/paladini/aax2mp3-easy">AAXtoMP3-easy</a>, audible-activator, and others, and finally the one that worked for me was <a href="https://github.com/inAudible-NG/tables">inAudible-NG</a>. </p>
 <p>I won’t go into the long and torrid details of the failures, but rather describe the path for success. </p>
@@ -69,16 +73,18 @@ git clone https://github.com/inAudible-NG/tables.git
 <h3>Extras</h3>
 <p>I have an 8-core CPU and there is no use in making it wait for each thread to process. We can call multiple decoding processes at once to each run on a single core…get it? That is what the “&amp;” in the script above is doing. It says ‘start this process thread in the background and move on’, which the script then starts another decoding process, and another, and then loops around to grab a different file then starts another decoding process, until all the CPU cores are full. </p>
     
-    <p class=tags></br>This entry was tagged as
+
+
+<!--        <p class=tags></br>This entry was tagged as
       <a href="/tag/ubuntu.html">Ubuntu</a>
       <a href="/tag/ffmpeg.html">FFmpeg</a>
     </p>
+-->    
         </div>
         
 <div class=footer>
   <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
-  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
-    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  Modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> Theme
 
     <div class=social style="font-size: 27px;">
       <ul>

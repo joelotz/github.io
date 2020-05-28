@@ -30,7 +30,11 @@
 <div class=separator></div>        
         <div class=body>
     <h1 class="title"> Running Shell Scripts on Files from Nautilus</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 03, 2020 </p>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 03, 2020 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span>
+ <a href="/tag/ubuntu.html">Ubuntu</a>
+ <a href="/tag/bash.html">bash</a>
+    </p>
     <p>In a <a href="converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html">previous post</a> I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. <a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager">AskUbuntu</a> had a decent guide that explained how.</p>
 <p>First create a new file in the <code>/.local/share/nautilus/scripts/</code> folder using vi, gedit, or your favorite text editor.</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ~/.local/share/nautilus/scripts/
@@ -82,16 +86,18 @@ gedit &lt;name of script&gt;
 <span class="k">fi</span>
 </pre></div>
     
-    <p class=tags></br>This entry was tagged as
+
+
+<!--        <p class=tags></br>This entry was tagged as
       <a href="/tag/ubuntu.html">Ubuntu</a>
       <a href="/tag/bash.html">bash</a>
     </p>
+-->    
         </div>
         
 <div class=footer>
   <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
-  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
-    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  Modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> Theme
 
     <div class=social style="font-size: 27px;">
       <ul>
