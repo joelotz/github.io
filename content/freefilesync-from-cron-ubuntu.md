@@ -1,4 +1,4 @@
-Title: Running FreeFileSync from Crontab on Ubuntu 20.04
+Title: Running FreeFileSync Backup from Crontab on Ubuntu
 Date: 2020-05-26
 Tags: Ubuntu
 Author: Joe Lotz

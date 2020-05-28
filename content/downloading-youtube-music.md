@@ -1,4 +1,4 @@
-Title: Installing and Using youtube-dl on Ubuntu 20.04
+Title: Installing and Using youtube-dl on Ubuntu
 Date: 2020-05-20
 Category: 
 Tags: Ubuntu, FFmpeg,
