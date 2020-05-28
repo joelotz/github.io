@@ -6,11 +6,11 @@
 &lt;p&gt;First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the &lt;a href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms"&gt;SHA sum&lt;/a&gt; of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg installed.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffprobe &amp;lt;inputfile.aax&amp;gt;
 &lt;span class="c1"&gt;# Example&lt;/span&gt;
-&lt;span class="nb"&gt;cd&lt;/span&gt; AudioBooks/ &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; ffprobe TheGreatGatsby_ep6.aax
+ffprobe TheGrapesofWrath.aax
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="youtube-dl" src="/images/audibleConvert-01.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="audibleConvert-01" src="/images/audibleConvert-01.png"&gt;&lt;/p&gt;
 &lt;p&gt;After all the stupid library declarations you’ll see the line &lt;code&gt;[aax] file checksum&lt;/code&gt; and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. &lt;a href="http://project-rainbowcrack.com/"&gt;RainbowCrack&lt;/a&gt; is a hash cracking program that uses &lt;a href="https://en.wikipedia.org/wiki/Rainbow_table"&gt;rainbow tables&lt;/a&gt; to decrypt… &lt;a href="https://en.wikipedia.org/wiki/Password_cracking"&gt;passwords&lt;/a&gt; and stuff. We will be using it decrypt this hash and tell us our Audible code.&lt;/p&gt;
 &lt;p&gt;Follow the instructions on &lt;a href="https://github.com/inAudible-NG/tables"&gt;inAudible-NG github&lt;/a&gt; and download the zip or clone into a directory. Then go into the tables directory where the script is located and run the crack on the checksum you found using ffprobe &lt;code&gt;./rcrack . h &amp;lt;your checksum here&amp;gt;&lt;/code&gt;. After 2-3secs out pops the magic number.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# For example &lt;/span&gt;
@@ -21,7 +21,7 @@ git clone https://github.com/inAudible-NG/tables.git
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="youtube-dl" src="/images/audibleConvert-02.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="audibleConvert-02" src="/images/audibleConvert-02.png"&gt;&lt;/p&gt;
 &lt;p&gt;It’s all gravy from here now that you have your unique code, you can remove the DRM from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in case.&lt;/p&gt;
 &lt;p&gt;You can use FFmpeg directly or some library front-end. I like the idea of a front-end because they most likely offer a variety of options, ease of use, and efficiency mastery that I would probably not know of. I found &lt;a href="https://github.com/KrumpetPirate/AAXtoMP3"&gt;AAXtoMP3&lt;/a&gt; very robust, easy to use, and useful - ymmv. It is simply a bash script with useful FFmpeg calls. The author has a fun “Do What the Fuck You Want To” &lt;a href="https://github.com/KrumpetPirate/AAXtoMP3/blob/master/LICENSE"&gt;Public License&lt;/a&gt;. I had a bunch of .aax files to decode and I also wanted multiple outputs for archiving (.flac, .mp3, .m4a chapters) so that I wouldn’t have to come back and do it again in the future. The solution was a simply bash script that looped through each .aax file and made multiple calls to AAXtoMP3. Here’s my batch-script:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;

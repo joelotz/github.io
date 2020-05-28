@@ -31,10 +31,8 @@
         <div class=body>
     <h1 class="title"> Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu</h1>
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 28, 2020 &nbsp;&nbsp;&nbsp;
-    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span>
- <a href="/tag/ubuntu.html">Ubuntu</a>
- <a href="/tag/ffmpeg.html">FFmpeg</a>
-    </p>
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/ffmpeg.html">FFmpeg</a>     </p>
     <p>I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. </p>
 <p>What I learned from googling around it that you convert the audible .aax audiobook files into other formats with <a href="https://ffmpeg.org/">FFmpeg</a> (<a href="/tag/ffmpeg.html">one of my favorites!</a>), but you have to have your unique “activation bytes” to decode the DRM. <em>That</em> is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried <a href="https://github.com/naueramant/Audiblex">Audiblex</a>, <a href="https://github.com/paladini/aax2mp3-easy">AAXtoMP3-easy</a>, audible-activator, and others, and finally the one that worked for me was <a href="https://github.com/inAudible-NG/tables">inAudible-NG</a>. </p>
 <p>I won’t go into the long and torrid details of the failures, but rather describe the path for success. </p>
@@ -42,11 +40,11 @@
 <p>First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the <a href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms">SHA sum</a> of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg installed.</p>
 <div class="highlight"><pre><span></span>ffprobe &lt;inputfile.aax&gt;
 <span class="c1"># Example</span>
-<span class="nb">cd</span> AudioBooks/ <span class="p">&amp;</span> ffprobe TheGreatGatsby_ep6.aax
+ffprobe TheGrapesofWrath.aax
 </pre></div>
 
 
-<p><img alt="youtube-dl" src="/images/audibleConvert-01.png"></p>
+<p><img alt="audibleConvert-01" src="/images/audibleConvert-01.png"></p>
 <p>After all the stupid library declarations you’ll see the line <code>[aax] file checksum</code> and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. <a href="http://project-rainbowcrack.com/">RainbowCrack</a> is a hash cracking program that uses <a href="https://en.wikipedia.org/wiki/Rainbow_table">rainbow tables</a> to decrypt… <a href="https://en.wikipedia.org/wiki/Password_cracking">passwords</a> and stuff. We will be using it decrypt this hash and tell us our Audible code.</p>
 <p>Follow the instructions on <a href="https://github.com/inAudible-NG/tables">inAudible-NG github</a> and download the zip or clone into a directory. Then go into the tables directory where the script is located and run the crack on the checksum you found using ffprobe <code>./rcrack . h &lt;your checksum here&gt;</code>. After 2-3secs out pops the magic number.</p>
 <div class="highlight"><pre><span></span><span class="c1"># For example </span>
@@ -57,7 +55,7 @@ git clone https://github.com/inAudible-NG/tables.git
 </pre></div>
 
 
-<p><img alt="youtube-dl" src="/images/audibleConvert-02.png"></p>
+<p><img alt="audibleConvert-02" src="/images/audibleConvert-02.png"></p>
 <p>It’s all gravy from here now that you have your unique code, you can remove the DRM from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in case.</p>
 <p>You can use FFmpeg directly or some library front-end. I like the idea of a front-end because they most likely offer a variety of options, ease of use, and efficiency mastery that I would probably not know of. I found <a href="https://github.com/KrumpetPirate/AAXtoMP3">AAXtoMP3</a> very robust, easy to use, and useful - ymmv. It is simply a bash script with useful FFmpeg calls. The author has a fun “Do What the Fuck You Want To” <a href="https://github.com/KrumpetPirate/AAXtoMP3/blob/master/LICENSE">Public License</a>. I had a bunch of .aax files to decode and I also wanted multiple outputs for archiving (.flac, .mp3, .m4a chapters) so that I wouldn’t have to come back and do it again in the future. The solution was a simply bash script that looped through each .aax file and made multiple calls to AAXtoMP3. Here’s my batch-script:</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
@@ -84,7 +82,7 @@ git clone https://github.com/inAudible-NG/tables.git
         
 <div class=footer>
   <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe</p>
-  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  Modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> Theme
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
 
     <div class=social style="font-size: 27px;">
       <ul>
