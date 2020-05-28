@@ -10,8 +10,6 @@ What I learned from googling around it that you convert the audible .aax audiobo
 
 I won’t go into the long and torrid details of the failures, but rather describe the path for success. 
 
----
-
 First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the [SHA sum](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms) of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg installed.
 
 ```bash
