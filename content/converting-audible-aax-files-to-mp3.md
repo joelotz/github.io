@@ -1,14 +1,16 @@
 Title: Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu
-Date: 2020-05-27
+Date: 2020-05-28
 Tags: Ubuntu, FFmpeg
 Author: Joe Lotz
 Keywords: ubuntu 20.04, audible.com, .aax, convert aax to mp3
 
 I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. 
 
-What I learned from googling around it that you convert the audible .aax audiobook files into other formats with [FFmpeg](https://ffmpeg.org/) ([one of my favorites!](/tag/ffmpeg.html)), but you have to have your unique “activation bytes” to decode the DRM. *That* is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried [Audiblex](https://github.com/naueramant/Audiblex), AAXtoMP3-easy, audible-activator, and others, and finally the one that worked for me was [inAudible-NG](https://github.com/inAudible-NG/tables). 
+What I learned from googling around it that you convert the audible .aax audiobook files into other formats with [FFmpeg](https://ffmpeg.org/) ([one of my favorites!](/tag/ffmpeg.html)), but you have to have your unique “activation bytes” to decode the DRM. *That* is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried [Audiblex](https://github.com/naueramant/Audiblex), [AAXtoMP3-easy](https://github.com/paladini/aax2mp3-easy), audible-activator, and others, and finally the one that worked for me was [inAudible-NG](https://github.com/inAudible-NG/tables). 
 
 I won’t go into the long and torrid details of the failures, but rather describe the path for success. 
+
+---
 
 First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the [SHA sum](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms) of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg installed.
 
