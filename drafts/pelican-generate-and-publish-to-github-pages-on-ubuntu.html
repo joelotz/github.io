@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <! <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />    
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Pelican Generate and Publish to Github Pages on Ubuntu | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Pelican Generate and Publish to Github Pages on Ubuntu</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 29, 2020 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/pelican.html">Pelican</a>     </p>
+    <p>I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes <a href="https://packages.ubuntu.com/focal/zenity">zenity</a> is installed on the system. If not, easily install via:</p>
+<div class="highlight"><pre><span></span>sudo apt update
+sudo apt install zenity
+</pre></div>
+
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># ==============================================</span>
+<span class="c1"># Automated script to build Pelican blog, ask for a commit message, then</span>
+<span class="c1">#   push to github pages.</span>
+<span class="c1">#</span>
+<span class="c1"># Assumes zenity is installed</span>
+<span class="c1"># Assumes github credentials are stored locally</span>
+<span class="c1">#</span>
+<span class="nv">inputStr</span><span class="o">=</span><span class="k">$(</span>zenity --entry --title<span class="o">=</span><span class="s2">&quot;Commit Message&quot;</span><span class="se">\ </span>
+    --text<span class="o">=</span><span class="s2">&quot;What is your commit message?&quot;</span> --width<span class="o">=</span><span class="m">600</span><span class="k">)</span>
+
+pelican content -o output -s publishconf.py
+ghp-import -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span> --no-jekyll -b master output
+git push origin master
+git add content
+git commit -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span>
+git push origin content
+</pre></div>
+</td></tr></table>
+
+<p>Starting on line 10, a zenity input box is used to capture the commit message. </p>
+    
+
+
+<!--        <p class=tags></br>This entry was tagged as
+      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="/tag/pelican.html">Pelican</a>
+    </p>
+-->    
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
