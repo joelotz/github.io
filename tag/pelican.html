@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title> Pelican Generate and Publish to Github Pages on Ubuntu | Delving into Delusion </title>
+    <title>Delving into Delusion-Pelican tag page.</title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
@@ -28,63 +28,19 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> Pelican Generate and Publish to Github Pages on Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 29, 2020 &nbsp;&nbsp;&nbsp;
-    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/pelican.html">Pelican</a>     </p>
-    <p>I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes <a href="https://packages.ubuntu.com/focal/zenity">zenity</a> is installed on the system. If not, easily install via:</p>
-<div class="highlight"><pre><span></span>sudo apt update
-sudo apt install zenity
-</pre></div>
+
+<h1 class="title">TAG:: Pelican </h1>
 
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-
-<span class="c1"># ==============================================</span>
-<span class="c1"># Automated script to build Pelican blog, ask for a commit message, then</span>
-<span class="c1">#   push to github pages.</span>
-<span class="c1">#</span>
-<span class="c1"># Assumes zenity is installed</span>
-<span class="c1"># Assumes github credentials are stored locally</span>
-<span class="c1">#</span>
-<span class="nv">inputStr</span><span class="o">=</span><span class="k">$(</span>zenity --entry --title<span class="o">=</span><span class="s2">&quot;Commit Message&quot;</span><span class="se">\ </span>
-    --text<span class="o">=</span><span class="s2">&quot;What is your commit message?&quot;</span> --width<span class="o">=</span><span class="m">600</span><span class="k">)</span>
-
-pelican content -o output -s publishconf.py
-ghp-import -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span> --no-jekyll -b master output
-git push origin master
-git add content
-git commit -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span>
-git push origin content
-</pre></div>
-</td></tr></table>
-
-<p>Starting on line 10, a zenity input box is used to capture the commit message. </p>
-    
+    <div class=entry-overview>
+      <div class=date>May 29, 2020</div>
+      <div class=detail>
+          <h1><a href="/pelican-generate-and-publish-to-github-pages-on-ubuntu.html">Pelican Generate and Publish to Github Pages on Ubuntu</a></h1>
+          <div class=summary><p> </p></div>
+      </div>
+    </div>
 
 
-<!--        <p class=tags></br>This entry was tagged as
-      <a href="/tag/ubuntu.html">Ubuntu</a>
-      <a href="/tag/pelican.html">Pelican</a>
-    </p>
--->    
         </div>
         
         <div class=footer>

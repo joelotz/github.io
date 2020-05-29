@@ -1,5 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="https://joelotz.github.io/" rel="alternate"></link><link href="https://joelotz.github.io/feeds/all.atom.xml" rel="self"></link><id>https://joelotz.github.io/</id><updated>2020-05-28T00:00:00+05:30</updated><entry><title>Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu</title><link href="https://joelotz.github.io/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html" rel="alternate"></link><published>2020-05-28T00:00:00+05:30</published><updated>2020-05-28T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-28:/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html</id><summary type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="https://joelotz.github.io/" rel="alternate"></link><link href="https://joelotz.github.io/feeds/all.atom.xml" rel="self"></link><id>https://joelotz.github.io/</id><updated>2020-05-29T00:00:00+05:30</updated><entry><title>Pelican Generate and Publish to Github Pages on Ubuntu</title><link href="https://joelotz.github.io/pelican-generate-and-publish-to-github-pages-on-ubuntu.html" rel="alternate"></link><published>2020-05-29T00:00:00+05:30</published><updated>2020-05-29T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-29:/pelican-generate-and-publish-to-github-pages-on-ubuntu.html</id><summary type="html">&lt;p&gt;I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes &lt;a href="https://packages.ubuntu.com/focal/zenity"&gt;zenity&lt;/a&gt; is installed on the system. If not, easily install via:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
+sudo apt install zenity
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I would highly …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes &lt;a href="https://packages.ubuntu.com/focal/zenity"&gt;zenity&lt;/a&gt; is installed on the system. If not, easily install via:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
+sudo apt install zenity
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I would highly recommend setting up &lt;code&gt;ghp-import&lt;/code&gt; and this script assumes you have. Follow &lt;a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python"&gt;these instructions&lt;/a&gt; if you  need to install/configure it. &lt;/p&gt;
+&lt;p&gt;Here’s the script, save it in the root directory of your pelican blog and make it executable.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="c1"&gt;# ========================================================================&lt;/span&gt;
+&lt;span class="c1"&gt;# Automated script to build Pelican blog, ask for a commit message, then&lt;/span&gt;
+&lt;span class="c1"&gt;#   push to github pages.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# Requirement:&lt;/span&gt;
+&lt;span class="c1"&gt;#   Assumes zenity is installed, ghp-import is installed, and&lt;/span&gt;
+&lt;span class="c1"&gt;#       assumes github credentials are stored locally&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Input user commit message&lt;/span&gt;
+&lt;span class="nv"&gt;inputStr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;zenity --entry --title&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Commit Message&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --text&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;What is your commit message?&amp;quot;&lt;/span&gt; --width&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# If the canceled button is pressed, exit script&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Commit message was canceled, abandoning script&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# If the commit message is empty, exit script&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$inputStr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; 
+&lt;span class="k"&gt;then&lt;/span&gt;    
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Commit message is empty, abandoning script&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="c1"&gt;# Else, run &lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Build the blog    &lt;/span&gt;
+    pelican content -o output -s publishconf.py
+    &lt;span class="c1"&gt;# collect and push the blog output folder to github pages&lt;/span&gt;
+    &lt;span class="c1"&gt;#  in a branch called &amp;#39;master&amp;#39;&lt;/span&gt;
+    ghp-import -m &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$inputStr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -b master output
+    git push origin master
+    &lt;span class="c1"&gt;# save the &amp;quot;non-compiled&amp;quot; files of blog and push to a&lt;/span&gt;
+    &lt;span class="c1"&gt;#  branch called &amp;#39;content&amp;#39;&lt;/span&gt;
+    git add content
+    git commit -m &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$inputStr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    git push origin content
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;A zenity input box is used to capture the commit message. 
+&lt;img alt="pelicanGithub-01" src="/images/pelicanGithub-01.png"&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pelican content -o output -s publishconf.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is your &lt;a href="https://docs.getpelican.com/en/stable/publish.html"&gt;standard command&lt;/a&gt; for generating and deploying a pelican blog. This next line is where things get interesting. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ghp-import -m &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$inputStr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; --no-jekyll -b master output
+git push origin master
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box". Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don't need to enter them, &lt;a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git"&gt;[1]&lt;/a&gt; and &lt;a href="https://git-scm.com/docs/git-credential-store"&gt;[2]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelicanGithub-02" src="/images/pelicanGithub-02.png"&gt;&lt;/p&gt;
+&lt;p&gt;In your &lt;name&gt;github.io repository, click the branch button and you will see the ‘master’ which is default and contains the generated html files. You can also click the ‘content’ branch and see your source files.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="Pelican"></category></entry><entry><title>Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu</title><link href="https://joelotz.github.io/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html" rel="alternate"></link><published>2020-05-28T00:00:00+05:30</published><updated>2020-05-28T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-28:/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html</id><summary type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. &lt;/p&gt;
 &lt;p&gt;What I learned from googling around it that you convert the audible .aax audiobook files into other formats with &lt;a href="https://ffmpeg.org/"&gt;FFmpeg&lt;/a&gt; (&lt;a href="/tag/ffmpeg.html"&gt;one of my favorites!&lt;/a&gt;), but you have to have your unique “activation bytes” to decode the DRM. &lt;em&gt;That&lt;/em&gt; is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried &lt;a href="https://github.com/naueramant/Audiblex"&gt;Audiblex&lt;/a&gt;, &lt;a href="https://github.com/paladini/aax2mp3-easy"&gt;AAXtoMP3-easy&lt;/a&gt;, audible-activator, and others, and finally the one that worked for me was &lt;a href="https://github.com/inAudible-NG/tables"&gt;inAudible-NG&lt;/a&gt;. &lt;/p&gt;
 &lt;p&gt;I won’t go into the long and torrid details of the failures, but rather describe the path for success. &lt;/p&gt;
 &lt;p&gt;First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the &lt;a href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms"&gt;SHA sum&lt;/a&gt; of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg installed.&lt;/p&gt;
