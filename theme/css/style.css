@@ -122,8 +122,9 @@ div.entry-overview div.date         { float: left; width: 160px; color: #888;
 /*div.entry-overview h1:after         { content: " —"; }*/
 
 /* other alignment things */
-/*img.align-center        { margin: 15px auto; display: block; } */
-img		        { margin: 0px; display: block; width: 840px; }
+/*img.align-center        { margin: 15px auto; display: block; } width: 840px;*/
+img		        { margin: 0px; display: block; max-width: 940px; }
+img + em        { display: block; color: #eb4034; }
 
 /* pagination */
 div.pagination          { margin: 36px 0 0 0; text-align: center; }
@@ -151,6 +152,8 @@ img.align-left {
     float: left; 
     margin: 0px;
 }
+
+
 
 /* github gists */
 .gist{

@@ -1,59 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion - Uncategorized</title><link href="https://joelotz.github.io/" rel="alternate"></link><link href="https://joelotz.github.io/feeds/uncategorized.atom.xml" rel="self"></link><id>https://joelotz.github.io/</id><updated>2020-05-29T00:00:00+05:30</updated><entry><title>Pelican Generate and Publish to Github Pages on Ubuntu</title><link href="https://joelotz.github.io/pelican-generate-and-publish-to-github-pages-on-ubuntu.html" rel="alternate"></link><published>2020-05-29T00:00:00+05:30</published><updated>2020-05-29T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-29:/pelican-generate-and-publish-to-github-pages-on-ubuntu.html</id><summary type="html">&lt;p&gt;I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes &lt;a href="https://packages.ubuntu.com/focal/zenity"&gt;zenity&lt;/a&gt; is installed on the system. If not, easily install via:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion - Uncategorized</title><link href="https://joelotz.github.io/" rel="alternate"></link><link href="https://joelotz.github.io/feeds/uncategorized.atom.xml" rel="self"></link><id>https://joelotz.github.io/</id><updated>2020-05-29T00:00:00+05:30</updated><entry><title>Pelican Generate and Publish to Github Pages on Ubuntu</title><link href="https://joelotz.github.io/pelican-generate-and-publish-to-github-pages-on-ubuntu.html" rel="alternate"></link><published>2020-05-29T00:00:00+05:30</published><updated>2020-05-29T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-29:/pelican-generate-and-publish-to-github-pages-on-ubuntu.html</id><summary type="html">&lt;p&gt;I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes &lt;a href="https://packages.ubuntu.com/focal/zenity"&gt;zenity&lt;/a&gt; is installed on the system. If not, easily install&amp;nbsp;via:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
 sudo apt install zenity
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;I would highly …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes &lt;a href="https://packages.ubuntu.com/focal/zenity"&gt;zenity&lt;/a&gt; is installed on the system. If not, easily install via:&lt;/p&gt;
+&lt;p&gt;I would highly …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes &lt;a href="https://packages.ubuntu.com/focal/zenity"&gt;zenity&lt;/a&gt; is installed on the system. If not, easily install&amp;nbsp;via:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
 sudo apt install zenity
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;I would highly recommend setting up &lt;code&gt;ghp-import&lt;/code&gt; and this script assumes you have. Follow &lt;a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python"&gt;these instructions&lt;/a&gt; if you  need to install/configure it. &lt;/p&gt;
-&lt;p&gt;Here’s the script, save it in the root directory of your pelican blog and make it executable.&lt;/p&gt;
-&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;p&gt;I would highly recommend setting up &lt;code&gt;ghp-import&lt;/code&gt; and this script assumes you have. Follow &lt;a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python"&gt;these instructions&lt;/a&gt; if you  need to install/configure&amp;nbsp;it. &lt;/p&gt;
+&lt;p&gt;Here’s the script, save it in the root directory of your pelican blog and make it&amp;nbsp;executable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class="c1"&gt;# ========================================================================&lt;/span&gt;
 &lt;span class="c1"&gt;# Automated script to build Pelican blog, ask for a commit message, then&lt;/span&gt;
@@ -95,7 +55,7 @@ sudo apt install zenity
     git push origin content
 &lt;span class="k"&gt;fi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
 
 &lt;p&gt;A zenity input box is used to capture the commit message. 
 &lt;img alt="pelicanGithub-01" src="/images/pelicanGithub-01.png"&gt;&lt;/p&gt;
@@ -103,19 +63,19 @@ sudo apt install zenity
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This is your &lt;a href="https://docs.getpelican.com/en/stable/publish.html"&gt;standard command&lt;/a&gt; for generating and deploying a pelican blog. This next line is where things get interesting. &lt;/p&gt;
+&lt;p&gt;This is your &lt;a href="https://docs.getpelican.com/en/stable/publish.html"&gt;standard command&lt;/a&gt; for generating and deploying a pelican blog. This next line is where things get&amp;nbsp;interesting. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ghp-import -m &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$inputStr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; --no-jekyll -b master output
 git push origin master
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box". Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don't need to enter them, &lt;a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git"&gt;[1]&lt;/a&gt; and &lt;a href="https://git-scm.com/docs/git-credential-store"&gt;[2]&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. &lt;/p&gt;
+&lt;p&gt;This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box&amp;#8221;. Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don&amp;#8217;t need to enter them, &lt;a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git"&gt;[1]&lt;/a&gt; and &lt;a href="https://git-scm.com/docs/git-credential-store"&gt;[2]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the&amp;nbsp;files. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="pelicanGithub-02" src="/images/pelicanGithub-02.png"&gt;&lt;/p&gt;
-&lt;p&gt;In your &lt;name&gt;github.io repository, click the branch button and you will see the ‘master’ which is default and contains the generated html files. You can also click the ‘content’ branch and see your source files.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="Pelican"></category></entry><entry><title>Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu</title><link href="https://joelotz.github.io/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html" rel="alternate"></link><published>2020-05-28T00:00:00+05:30</published><updated>2020-05-28T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-28:/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html</id><summary type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. &lt;/p&gt;
-&lt;p&gt;What I learned from googling around it that you convert the audible .aax audiobook files into other formats with &lt;a href="https://ffmpeg.org/"&gt;FFmpeg&lt;/a&gt; (&lt;a href="/tag/ffmpeg.html"&gt;one of my favorites!&lt;/a&gt;), but you have to have your unique “activation bytes” to decode the DRM. &lt;em&gt;That&lt;/em&gt; is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried &lt;a href="https://github.com/naueramant/Audiblex"&gt;Audiblex&lt;/a&gt;, &lt;a href="https://github.com/paladini/aax2mp3-easy"&gt;AAXtoMP3-easy&lt;/a&gt;, audible-activator, and others, and finally the one that worked for me was &lt;a href="https://github.com/inAudible-NG/tables"&gt;inAudible-NG&lt;/a&gt;. &lt;/p&gt;
-&lt;p&gt;I won’t go into the long and torrid details of the failures, but rather describe the path for success. &lt;/p&gt;
-&lt;p&gt;First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the &lt;a href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms"&gt;SHA sum&lt;/a&gt; of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg installed.&lt;/p&gt;
+&lt;p&gt;In your &lt;name&gt;github.io repository, click the branch button and you will see the ‘master’ which is default and contains the generated html files. You can also click the ‘content’ branch and see your source&amp;nbsp;files.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="Pelican"></category></entry><entry><title>Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu</title><link href="https://joelotz.github.io/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html" rel="alternate"></link><published>2020-05-28T00:00:00+05:30</published><updated>2020-05-28T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-28:/converting-audible-aax-audiobook-files-into-mp3-on-ubuntu.html</id><summary type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and&amp;nbsp;not. &lt;/p&gt;
+&lt;p&gt;What I learned from googling around it that you convert the audible .aax audiobook files into other formats with &lt;a href="https://ffmpeg.org/"&gt;FFmpeg&lt;/a&gt; (&lt;a href="/tag/ffmpeg.html"&gt;one of my favorites!&lt;/a&gt;), but you have to have your unique “activation bytes” to decode the &lt;span class="caps"&gt;DRM&lt;/span&gt;. &lt;em&gt;That&lt;/em&gt; is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried &lt;a href="https://github.com/naueramant/Audiblex"&gt;Audiblex&lt;/a&gt;, &lt;a href="https://github.com/paladini/aax2mp3-easy"&gt;AAXtoMP3-easy&lt;/a&gt;, audible-activator, and others, and finally the one that worked for me was &lt;a href="https://github.com/inAudible-NG/tables"&gt;inAudible-&lt;span class="caps"&gt;NG&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;I won’t go into the long and torrid details of the failures, but rather describe the path for&amp;nbsp;success. &lt;/p&gt;
+&lt;p&gt;First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the &lt;a href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms"&gt;&lt;span class="caps"&gt;SHA&lt;/span&gt; sum&lt;/a&gt; of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg&amp;nbsp;installed.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffprobe &amp;lt;inputfile.aax&amp;gt;
 &lt;span class="c1"&gt;# Example&lt;/span&gt;
 ffprobe TheGrapesofWrath.aax
@@ -123,8 +83,8 @@ ffprobe TheGrapesofWrath.aax
 
 
 &lt;p&gt;&lt;img alt="audibleConvert-01" src="/images/audibleConvert-01.png"&gt;&lt;/p&gt;
-&lt;p&gt;After all the stupid library declarations you’ll see the line &lt;code&gt;[aax] file checksum&lt;/code&gt; and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. &lt;a href="http://project-rainbowcrack.com/"&gt;RainbowCrack&lt;/a&gt; is a hash cracking program that uses &lt;a href="https://en.wikipedia.org/wiki/Rainbow_table"&gt;rainbow tables&lt;/a&gt; to decrypt… &lt;a href="https://en.wikipedia.org/wiki/Password_cracking"&gt;passwords&lt;/a&gt; and stuff. We will be using it decrypt this hash and tell us our Audible code.&lt;/p&gt;
-&lt;p&gt;Follow the instructions on &lt;a href="https://github.com/inAudible-NG/tables"&gt;inAudible-NG github&lt;/a&gt; and download the zip or clone into a directory. Then go into the tables directory where the script is located and run the crack on the checksum you found using ffprobe &lt;code&gt;./rcrack . h &amp;lt;your checksum here&amp;gt;&lt;/code&gt;. After 2-3secs out pops the magic number.&lt;/p&gt;
+&lt;p&gt;After all the stupid library declarations you’ll see the line &lt;code&gt;[aax] file checksum&lt;/code&gt; and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. &lt;a href="http://project-rainbowcrack.com/"&gt;RainbowCrack&lt;/a&gt; is a hash cracking program that uses &lt;a href="https://en.wikipedia.org/wiki/Rainbow_table"&gt;rainbow tables&lt;/a&gt; to decrypt… &lt;a href="https://en.wikipedia.org/wiki/Password_cracking"&gt;passwords&lt;/a&gt; and stuff. We will be using it decrypt this hash and tell us our Audible&amp;nbsp;code.&lt;/p&gt;
+&lt;p&gt;Follow the instructions on &lt;a href="https://github.com/inAudible-NG/tables"&gt;inAudible-&lt;span class="caps"&gt;NG&lt;/span&gt; github&lt;/a&gt; and download the zip or clone into a directory. Then go into the tables directory where the script is located and run the crack on the checksum you found using ffprobe &lt;code&gt;./rcrack . h &amp;lt;your checksum here&amp;gt;&lt;/code&gt;. After 2-3secs out pops the magic&amp;nbsp;number.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# For example &lt;/span&gt;
 &lt;span class="nb"&gt;cd&lt;/span&gt; ~/Downloads/
 git clone https://github.com/inAudible-NG/tables.git
@@ -134,8 +94,8 @@ git clone https://github.com/inAudible-NG/tables.git
 
 
 &lt;p&gt;&lt;img alt="audibleConvert-02" src="/images/audibleConvert-02.png"&gt;&lt;/p&gt;
-&lt;p&gt;It’s all gravy from here now that you have your unique code, you can remove the DRM from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in case.&lt;/p&gt;
-&lt;p&gt;You can use FFmpeg directly or some library front-end. I like the idea of a front-end because they most likely offer a variety of options, ease of use, and efficiency mastery that I would probably not know of. I found &lt;a href="https://github.com/KrumpetPirate/AAXtoMP3"&gt;AAXtoMP3&lt;/a&gt; very robust, easy to use, and useful - ymmv. It is simply a bash script with useful FFmpeg calls. The author has a fun “Do What the Fuck You Want To” &lt;a href="https://github.com/KrumpetPirate/AAXtoMP3/blob/master/LICENSE"&gt;Public License&lt;/a&gt;. I had a bunch of .aax files to decode and I also wanted multiple outputs for archiving (.flac, .mp3, .m4a chapters) so that I wouldn’t have to come back and do it again in the future. The solution was a simply bash script that looped through each .aax file and made multiple calls to AAXtoMP3. Here’s my batch-script:&lt;/p&gt;
+&lt;p&gt;It’s all gravy from here now that you have your unique code, you can remove the &lt;span class="caps"&gt;DRM&lt;/span&gt; from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in&amp;nbsp;case.&lt;/p&gt;
+&lt;p&gt;You can use FFmpeg directly or some library front-end. I like the idea of a front-end because they most likely offer a variety of options, ease of use, and efficiency mastery that I would probably not know of. I found &lt;a href="https://github.com/KrumpetPirate/AAXtoMP3"&gt;AAXtoMP3&lt;/a&gt; very robust, easy to use, and useful - ymmv. It is simply a bash script with useful FFmpeg calls. The author has a fun “Do What the Fuck You Want To” &lt;a href="https://github.com/KrumpetPirate/AAXtoMP3/blob/master/LICENSE"&gt;Public License&lt;/a&gt;. I had a bunch of .aax files to decode and I also wanted multiple outputs for archiving (.flac, .mp3, .m4a chapters) so that I wouldn’t have to come back and do it again in the future. The solution was a simply bash script that looped through each .aax file and made multiple calls to AAXtoMP3. Here’s my&amp;nbsp;batch-script:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class="k"&gt;for&lt;/span&gt; file in *.aax&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
@@ -147,130 +107,120 @@ git clone https://github.com/inAudible-NG/tables.git
 
 
 &lt;h3&gt;Extras&lt;/h3&gt;
-&lt;p&gt;I have an 8-core CPU and there is no use in making it wait for each thread to process. We can call multiple decoding processes at once to each run on a single core…get it? That is what the “&amp;amp;” in the script above is doing. It says ‘start this process thread in the background and move on’, which the script then starts another decoding process, and another, and then loops around to grab a different file then starts another decoding process, until all the CPU cores are full. &lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Running FreeFileSync Backup from Crontab on Ubuntu</title><link href="https://joelotz.github.io/running-freefilesync-backup-from-crontab-on-ubuntu.html" rel="alternate"></link><published>2020-05-26T00:00:00+05:30</published><updated>2020-05-26T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-26:/running-freefilesync-backup-from-crontab-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;It took me half a day, maybe 4 hours, to solve this problem and I want to document the solution. I wanted to use &lt;a href="https://www.linux-magazine.com/Online/Features/FreeFileSync/(offset)/3"&gt;FreeFileSync&lt;/a&gt; to backup all my files to an external hard drive. I looked at &lt;a href="https://www.capterra.com/file-sync-software/"&gt;a bunch of other software&lt;/a&gt; but what I want to do is pretty basic and everything else was too complicated for me. Regardless, I installed &lt;a href="https://freefilesync.org/"&gt;FreeFileSync&lt;/a&gt;, setup the configuration, and saved the “batch job”. Everything works smooth when manually run, but of course I want to automate the process and setup a cron job. &lt;/p&gt;
-&lt;p&gt;I kept getting error messages. Many solutions suggested to use gnome-schedule but that appears to be defunct and no longer available for Ubuntu 20.04. I went down the path of trying to build it from source and yadda yadda. That wasted some time. Another error message I got was &lt;code&gt;Failed to load module canberra-gtk-module&lt;/code&gt; - which was easily fixed.&lt;/p&gt;
+&lt;p&gt;I have an 8-core &lt;span class="caps"&gt;CPU&lt;/span&gt; and there is no use in making it wait for each thread to process. We can call multiple decoding processes at once to each run on a single core…get it? That is what the “&amp;amp;” in the script above is doing. It says ‘start this process thread in the background and move on’, which the script then starts another decoding process, and another, and then loops around to grab a different file then starts another decoding process, until all the &lt;span class="caps"&gt;CPU&lt;/span&gt; cores are&amp;nbsp;full. &lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Running FreeFileSync Backup from Crontab on Ubuntu</title><link href="https://joelotz.github.io/running-freefilesync-backup-from-crontab-on-ubuntu.html" rel="alternate"></link><published>2020-05-26T00:00:00+05:30</published><updated>2020-05-26T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-26:/running-freefilesync-backup-from-crontab-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;It took me half a day, maybe 4 hours, to solve this problem and I want to document the solution. I wanted to use &lt;a href="https://www.linux-magazine.com/Online/Features/FreeFileSync/(offset)/3"&gt;FreeFileSync&lt;/a&gt; to backup all my files to an external hard drive. I looked at &lt;a href="https://www.capterra.com/file-sync-software/"&gt;a bunch of other software&lt;/a&gt; but what I want to do is pretty basic and everything else was too complicated for me. Regardless, I installed &lt;a href="https://freefilesync.org/"&gt;FreeFileSync&lt;/a&gt;, setup the configuration, and saved the “batch job”. Everything works smooth when manually run, but of course I want to automate the process and setup a cron&amp;nbsp;job. &lt;/p&gt;
+&lt;p&gt;I kept getting error messages. Many solutions suggested to use gnome-schedule but that appears to be defunct and no longer available for Ubuntu 20.04. I went down the path of trying to build it from source and yadda yadda. That wasted some time. Another error message I got was &lt;code&gt;Failed to load module canberra-gtk-module&lt;/code&gt; - which was easily&amp;nbsp;fixed.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install libcanberra-gtk3-module
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The error that really stumped me was &lt;code&gt;Error: Unable to initialize GTK+, is DISPLAY set properly?&lt;/code&gt; After much googling the answer always headed into setting the DISPLAY variable but the solution of setting it to 0 or 0.0 wasn’t working. Maybe it was because I have two monitors, I really don’t know. Again, I don’t understand the details or why it works, but setting the DISPLAY to 1.0 worked for me. &lt;/p&gt;
+&lt;p&gt;The error that really stumped me was &lt;code&gt;Error: Unable to initialize GTK+, is DISPLAY set properly?&lt;/code&gt; After much googling the answer always headed into setting the &lt;span class="caps"&gt;DISPLAY&lt;/span&gt; variable but the solution of setting it to 0 or 0.0 wasn’t working. Maybe it was because I have two monitors, I really don’t know. Again, I don’t understand the details or why it works, but setting the &lt;span class="caps"&gt;DISPLAY&lt;/span&gt; to 1.0 worked for&amp;nbsp;me. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; * * * env &lt;span class="nv"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;:1.0 /usr/bin/FreeFileSync/FreeFileSync /home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Where:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;0 2 * * *&lt;/code&gt; is the frequency that I want the cron to run, every night at 2am&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/usr/bin/FreeFileSync/FreeFileSync&lt;/code&gt; is the location of the program &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch&lt;/code&gt; is my batch file that I created and saved within the FreeFileSync program.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0 2 * * *&lt;/code&gt; is the frequency that I want the cron to run, every night at&amp;nbsp;2am&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/usr/bin/FreeFileSync/FreeFileSync&lt;/code&gt; is the location of the&amp;nbsp;program &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch&lt;/code&gt; is my batch file that I created and saved within the FreeFileSync&amp;nbsp;program.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Extras&lt;/h3&gt;
-&lt;p&gt;In case you don’t know, &lt;code&gt;crontab -e&lt;/code&gt; opens the file allowing you to add or edit the cron jobs. Also, you can specify your editor as &lt;code&gt;EDITOR=gedit crontab -e&lt;/code&gt; if you don’t want to use vi or nano or whatever is your default bash editor. &lt;/p&gt;
-&lt;p&gt;I was also successful in putting this command in a shell script and running the shell script from cron - just in case you want to do something more complicated. &lt;/p&gt;
+&lt;p&gt;In case you don’t know, &lt;code&gt;crontab -e&lt;/code&gt; opens the file allowing you to add or edit the cron jobs. Also, you can specify your editor as &lt;code&gt;EDITOR=gedit crontab -e&lt;/code&gt; if you don’t want to use vi or nano or whatever is your default bash&amp;nbsp;editor. &lt;/p&gt;
+&lt;p&gt;I was also successful in putting this command in a shell script and running the shell script from cron - just in case you want to do something more&amp;nbsp;complicated. &lt;/p&gt;
 &lt;h3&gt;Update&lt;/h3&gt;
-&lt;p&gt;When this script ran I received errors about “Unable to find or create trash directory.” Googling it looked like I was missing the trash dir &lt;code&gt;.Trash-1000&lt;/code&gt; but that wasn’t the case. In the end, for some reason, it seems like only root can delete files from my external NTFS drive….but it worked when I performed the delete manually or from the program. To get around this I moved the above cron job from my user to root crontab via &lt;code&gt;sudo EDITOR=gedit crontab -e&lt;/code&gt;. I don’t think it’s a good idea to be running this as root…I’ll do more experiments and try to find a better solution.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category></entry><entry><title>Installing and Using youtube-dl on Ubuntu</title><link href="https://joelotz.github.io/installing-and-using-youtube-dl-on-ubuntu.html" rel="alternate"></link><published>2020-05-20T00:00:00+05:30</published><updated>2020-05-20T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-20:/installing-and-using-youtube-dl-on-ubuntu.html</id><summary type="html">&lt;p&gt;I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - &lt;a href="https://in.jbl.com/JBL+Endurance+DIVE.html"&gt;JBL Endurance Dive&lt;/a&gt;. I currently jog with my phone …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - &lt;a href="https://in.jbl.com/JBL+Endurance+DIVE.html"&gt;JBL Endurance Dive&lt;/a&gt;. I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the &lt;a href="https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r"&gt;SanDisk Clip Sport Plus&lt;/a&gt;. BUT, the JBL headphones have a built-in mp3 player with 1GB storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just running.&lt;/p&gt;
+&lt;p&gt;When this script ran I received errors about “Unable to find or create trash directory.” Googling it looked like I was missing the trash dir &lt;code&gt;.Trash-1000&lt;/code&gt; but that wasn’t the case. In the end, for some reason, it seems like only root can delete files from my external &lt;span class="caps"&gt;NTFS&lt;/span&gt; drive….but it worked when I performed the delete manually or from the program. To get around this I moved the above cron job from my user to root crontab via &lt;code&gt;sudo EDITOR=gedit crontab -e&lt;/code&gt;. I don’t think it’s a good idea to be running this as root…I’ll do more experiments and try to find a better&amp;nbsp;solution.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category></entry><entry><title>Installing and Using youtube-dl on Ubuntu</title><link href="https://joelotz.github.io/installing-and-using-youtube-dl-on-ubuntu.html" rel="alternate"></link><published>2020-05-20T00:00:00+05:30</published><updated>2020-05-20T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-20:/installing-and-using-youtube-dl-on-ubuntu.html</id><summary type="html">&lt;p&gt;I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - &lt;a href="https://in.jbl.com/JBL+Endurance+DIVE.html"&gt;&lt;span class="caps"&gt;JBL&lt;/span&gt; Endurance Dive&lt;/a&gt;. I currently jog with my phone …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - &lt;a href="https://in.jbl.com/JBL+Endurance+DIVE.html"&gt;&lt;span class="caps"&gt;JBL&lt;/span&gt; Endurance Dive&lt;/a&gt;. I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the &lt;a href="https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r"&gt;SanDisk Clip Sport Plus&lt;/a&gt;. &lt;span class="caps"&gt;BUT&lt;/span&gt;, the &lt;span class="caps"&gt;JBL&lt;/span&gt; headphones have a built-in mp3 player with &lt;span class="caps"&gt;1GB&lt;/span&gt; storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just&amp;nbsp;running.&lt;/p&gt;
 &lt;p&gt;The next challenge is getting music for the player. I’m streaming music and don’t really want to get all into torrenting. After a short time searching I see cross-platform utility named &lt;a href="https://github.com/ytdl-org/youtube-dl/blob/master/README.md"&gt;youtube-dl&lt;/a&gt;. &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Source: &lt;a href="https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/"&gt;https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install youtube-dl
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now that it is installed, I recommend installing FFmpeg also. This is pretty simple, as described in this &lt;a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation"&gt;tutorial instructions&lt;/a&gt;. This is just a very useful utility to have and I use a bunch for transcoding video formats.&lt;/p&gt;
+&lt;p&gt;Now that it is installed, I recommend installing FFmpeg also. This is pretty simple, as described in this &lt;a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation"&gt;tutorial instructions&lt;/a&gt;. This is just a very useful utility to have and I use a bunch for transcoding video&amp;nbsp;formats.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install ffmpeg
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Once you have chosen a youtube video, you can list all available audio/video formats and bitrates. Note, replace &lt;id&gt; with the actual ID of the video you want. Better yet, just copy/past the entire URL.&lt;/p&gt;
+&lt;p&gt;Once you have chosen a youtube video, you can list all available audio/video formats and bitrates. Note, replace &lt;id&gt; with the actual &lt;span class="caps"&gt;ID&lt;/span&gt; of the video you want. Better yet, just copy/past the entire &lt;span class="caps"&gt;URL&lt;/span&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -F https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; ID# 249, 250, 251, 140 are audio. The first three are in &lt;a href="https://en.wikipedia.org/wiki/WebM"&gt;webm&lt;/a&gt; format and the last is &lt;a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A"&gt;m4a&lt;/a&gt;, both are optimized for delivering on the web. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="youtube-dl" src="/images/youtube-dl.png"&gt;&lt;/p&gt;
-&lt;p&gt;You can select the specific stream you want and download it.&lt;/p&gt;
+&lt;p&gt;If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; &lt;span class="caps"&gt;ID&lt;/span&gt;# 249, 250, 251, 140 are audio. The first three are in &lt;a href="https://en.wikipedia.org/wiki/WebM"&gt;webm&lt;/a&gt; format and the last is &lt;a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A"&gt;m4a&lt;/a&gt;, both are optimized for delivering on the web. 
+&lt;img alt="youtube-dl" src="/images/youtube-dl.png"&gt;
+You can select the specific stream you want and download&amp;nbsp;it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -f &lt;span class="m"&gt;278&lt;/span&gt; https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;yYzrSGRzttk
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The better method is to let youtube-dl choose the best audio stream and download it. &lt;/p&gt;
+&lt;p&gt;The better method is to let youtube-dl choose the best audio stream and download&amp;nbsp;it. &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Source: &lt;a href="https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl"&gt;https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -f bestaudio https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;You can specify the name of the downloaded file. &lt;/p&gt;
+&lt;p&gt;You can specify the name of the downloaded&amp;nbsp;file. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -f bestaudio https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt; --output &lt;span class="s2"&gt;&amp;quot;outputName.%(ext)s&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;With FFmpeg installed, you can also convert to mp3. I know converting formats probably degrade the audio quality, but my cheap headphone mp3 player doesn’t play the webm file format. &lt;/p&gt;
+&lt;p&gt;With FFmpeg installed, you can also convert to mp3. I know converting formats probably degrade the audio quality, but my cheap headphone mp3 player doesn’t play the webm file&amp;nbsp;format. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;And then finally, you can download, convert to mp3, and rename the file. &lt;/p&gt;
+&lt;p&gt;And then finally, you can download, convert to mp3, and rename the&amp;nbsp;file. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;id&amp;gt; --output &lt;span class="s2"&gt;&amp;quot;outputName.%(ext)s&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Audacity to Clean Up&lt;/h3&gt;
+&lt;h3&gt;Audacity to Clean&amp;nbsp;Up&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install audacity
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;em&gt;Source: &lt;a href="https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files"&gt;https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded folder. &lt;/p&gt;
-&lt;p&gt;Select “Tools &amp;gt; Macros…”&lt;/p&gt;
+&lt;p&gt;The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded&amp;nbsp;folder. &lt;/p&gt;
+&lt;p&gt;Select “Tools &amp;gt;&amp;nbsp;Macros…”&lt;/p&gt;
 &lt;p&gt;&lt;img alt="youtube-dl" src="/images/audacity_macros.png"&gt;&lt;/p&gt;
-&lt;p&gt;Make sure the macro “MP3 Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to normalize. &lt;/p&gt;
+&lt;p&gt;Make sure the macro “&lt;span class="caps"&gt;MP3&lt;/span&gt; Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to&amp;nbsp;normalize. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="youtube-dl" src="/images/audacity_macros2.png"&gt;&lt;/p&gt;
-&lt;p&gt;Then the magic happens! The modified files will be in a new folder named “macro-output”.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="https://joelotz.github.io/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (DR16). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux DR16 doesn’t import AAC audio. I read on the BlackMagic forums that it is a licensing thing. &lt;/p&gt;
+&lt;p&gt;Then the magic happens! The modified files will be in a new folder named&amp;nbsp;“macro-output”.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Importing GoPro Vids into Davinci Resolve 16 on Ubuntu</title><link href="https://joelotz.github.io/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html" rel="alternate"></link><published>2020-05-16T00:00:00+05:30</published><updated>2020-05-16T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-16:/importing-gopro-vids-into-davinci-resolve-16-on-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html"&gt;previous post&lt;/a&gt; I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (&lt;span class="caps"&gt;DR16&lt;/span&gt;). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos &lt;u&gt;but&lt;/u&gt;, the audio still doesn’t work. Linux &lt;span class="caps"&gt;DR16&lt;/span&gt; doesn’t import &lt;span class="caps"&gt;AAC&lt;/span&gt; audio. I read on the BlackMagic forums that it is a licensing&amp;nbsp;thing. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="DR16 Input Codecs" src="/images/DR16_InputAudio.png"&gt;&lt;/p&gt;
-&lt;p&gt;Since we are on Ubuntu and are comfortable with the command line and scripts…right??… we can just use ffmpeg to pop us out a PCM encoded .wav file that can be imported into the DR16 timeline and linked to the clip.&lt;/p&gt;
+&lt;p&gt;Since we are on Ubuntu and are comfortable with the command line and scripts…right??… we can just use ffmpeg to pop us out a &lt;span class="caps"&gt;PCM&lt;/span&gt; encoded .wav file that can be imported into the &lt;span class="caps"&gt;DR16&lt;/span&gt; timeline and linked to the&amp;nbsp;clip.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 -acodec pcm_s16le -ac &lt;span class="m"&gt;1&lt;/span&gt; -ar &lt;span class="m"&gt;16000&lt;/span&gt; input_audio.wav
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;You could also turn this into a Nautilus shell script and run it by right-clicking on an .mp4 file, the &lt;a href="https://joelotz.github.io/running-shell-scripts-on-files-from-nautilus.html"&gt;instructions are here&lt;/a&gt;.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category><category term="GoPro"></category><category term="Davinci Resolve 16"></category></entry><entry><title>Converting Video to Animate Gif with FFmpeg</title><link href="https://joelotz.github.io/converting-video-to-animate-gif-with-ffmpeg.html" rel="alternate"></link><published>2020-05-07T00:00:00+05:30</published><updated>2020-05-07T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-07:/converting-video-to-animate-gif-with-ffmpeg.html</id><summary type="html">&lt;p&gt;Source is from an &lt;a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality"&gt;excellent answer&lt;/a&gt; on SuperUser StackExchange.&lt;/p&gt;
+&lt;p&gt;You could also turn this into a Nautilus shell script and run it by right-clicking on an .mp4 file, the &lt;a href="https://joelotz.github.io/running-shell-scripts-on-files-from-nautilus.html"&gt;instructions are here&lt;/a&gt;.&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category><category term="GoPro"></category><category term="Davinci Resolve 16"></category></entry><entry><title>Converting Video to Animate Gif with FFmpeg</title><link href="https://joelotz.github.io/converting-video-to-animate-gif-with-ffmpeg.html" rel="alternate"></link><published>2020-05-07T00:00:00+05:30</published><updated>2020-05-07T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-07:/converting-video-to-animate-gif-with-ffmpeg.html</id><summary type="html">&lt;p&gt;Source is from an &lt;a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality"&gt;excellent answer&lt;/a&gt; on SuperUser&amp;nbsp;StackExchange.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg input.mp4 -vf &lt;span class="s2"&gt;&amp;quot;fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse&amp;quot;&lt;/span&gt; -loop &lt;span class="m"&gt;0&lt;/span&gt; output.gif
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;You can define the frames per second via the ”fps” argument. The standard for an animated gif is &lt;a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs"&gt;between 15 and 24 …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Source is from an &lt;a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality"&gt;excellent answer&lt;/a&gt; on SuperUser StackExchange.&lt;/p&gt;
+&lt;p&gt;You can define the frames per second via the ”fps” argument. The standard for an animated gif is &lt;a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs"&gt;between 15 and 24 …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Source is from an &lt;a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality"&gt;excellent answer&lt;/a&gt; on SuperUser&amp;nbsp;StackExchange.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg input.mp4 -vf &lt;span class="s2"&gt;&amp;quot;fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse&amp;quot;&lt;/span&gt; -loop &lt;span class="m"&gt;0&lt;/span&gt; output.gif
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;You can define the frames per second via the ”fps” argument. The standard for an animated gif is &lt;a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs"&gt;between 15 and 24&lt;/a&gt;, but the more frames the larger the output file. &lt;/p&gt;
-&lt;p&gt;The split commands splits the video into two streams for generate a color palette and downsampling the incoming video. &lt;/p&gt;
-&lt;p&gt;The loop argument defines how many times you want the gif to loop.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;-1 = no looping&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;1 = loop once&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;n = loop n times&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;0 = loop infinite = “forever”&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Running Shell Scripts on Files from Nautilus</title><link href="https://joelotz.github.io/running-shell-scripts-on-files-from-nautilus.html" rel="alternate"></link><published>2020-05-03T00:00:00+05:30</published><updated>2020-05-03T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-03:/running-shell-scripts-on-files-from-nautilus.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html"&gt;previous post&lt;/a&gt; I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. &lt;a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager"&gt;AskUbuntu&lt;/a&gt; had a decent guide that explained how.&lt;/p&gt;
-&lt;p&gt;First create a new file in the &lt;code&gt;/.local/share/nautilus/scripts/&lt;/code&gt; folder using vi, gedit, or your favorite text editor.&lt;/p&gt;
+&lt;p&gt;You can define the frames per second via the ”fps” argument. The standard for an animated gif is &lt;a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs"&gt;between 15 and 24&lt;/a&gt;, but the more frames the larger the output&amp;nbsp;file. &lt;/p&gt;
+&lt;p&gt;The split commands splits the video into two streams for generate a color palette and downsampling the incoming&amp;nbsp;video. &lt;/p&gt;
+&lt;p&gt;The loop argument defines how many times you want the gif to loop.
+- 1 = no looping
+- 1 = loop once
+- n = loop n times
+- 0 = loop infinite =&amp;nbsp;“forever”&lt;/p&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Running Shell Scripts on Files from Nautilus</title><link href="https://joelotz.github.io/running-shell-scripts-on-files-from-nautilus.html" rel="alternate"></link><published>2020-05-03T00:00:00+05:30</published><updated>2020-05-03T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2020-05-03:/running-shell-scripts-on-files-from-nautilus.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In a &lt;a href="converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html"&gt;previous post&lt;/a&gt; I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. &lt;a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager"&gt;AskUbuntu&lt;/a&gt; had a decent guide that explained&amp;nbsp;how.&lt;/p&gt;
+&lt;p&gt;First create a new file in the &lt;code&gt;/.local/share/nautilus/scripts/&lt;/code&gt; folder using vi, gedit, or your favorite text&amp;nbsp;editor.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/.local/share/nautilus/scripts/
 gedit &amp;lt;name of script&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now, of course, make the script executable.&lt;/p&gt;
+&lt;p&gt;Now, of course, make the script&amp;nbsp;executable.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod +x ~/.local/share/nautilus/scripts/&amp;lt;name of script.
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Writing the Video Transcode Script with FFMpeg&lt;/h3&gt;
-&lt;p&gt;Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (&lt;code&gt;sudo apt install zenity&lt;/code&gt;) or comment out the pop-ups. It may be useful to add an progress-box for the future…&lt;/p&gt;
+&lt;h3&gt;Writing the Video Transcode Script with&amp;nbsp;FFMpeg&lt;/h3&gt;
+&lt;p&gt;Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (&lt;code&gt;sudo apt install zenity&lt;/code&gt;) or comment out the pop-ups. It may be useful to add an progress-box for the&amp;nbsp;future…&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class="c1"&gt;## assumes FFPMEG is installed&lt;/span&gt;
@@ -306,20 +256,20 @@ gedit &amp;lt;name of script&amp;gt;
 &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="c1"&gt;# it does not end in .mp4 so do not process&lt;/span&gt;
     zenity --error --title &lt;span class="s2"&gt;&amp;quot;This is not an .mp4 file&amp;quot;&lt;/span&gt; --text &lt;span class="s2"&gt;&amp;quot;File must end with extension &amp;#39;.mp4&amp;#39;&amp;quot;&lt;/span&gt; --width&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;
 &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="bash"></category></entry><entry><title>ImageMagick Converting png Images to a Custom pdf</title><link href="https://joelotz.github.io/imagemagick-converting-png-images-to-a-custom-pdf.html" rel="alternate"></link><published>2020-04-30T00:00:00+05:30</published><updated>2020-04-30T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:joelotz.github.io,2020-04-30:/imagemagick-converting-png-images-to-a-custom-pdf.html</id><summary type="html"></summary><content type="html">&lt;h3&gt;Installing ImageMagick on Ubuntu 20.04&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="bash"></category></entry><entry><title>ImageMagick Converting png Images to a Custom pdf</title><link href="https://joelotz.github.io/imagemagick-converting-png-images-to-a-custom-pdf.html" rel="alternate"></link><published>2020-04-30T00:00:00+05:30</published><updated>2020-04-30T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:joelotz.github.io,2020-04-30:/imagemagick-converting-png-images-to-a-custom-pdf.html</id><summary type="html"></summary><content type="html">&lt;h3&gt;Installing ImageMagick on Ubuntu&amp;nbsp;20.04&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt update
 sudo apt build-essential checkinstall &lt;span class="c1"&gt;# provides all the libraris for compiling&lt;/span&gt;
 sudo apt build-dep imagemagick &lt;span class="c1"&gt;# install compilation dependencies&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The first time I did this installation the program complained and errored that it was missing &lt;a href="http://www.imagemagick.org/download/delegates/"&gt;delegates&lt;/a&gt; when I tried to manipulate the png images. &lt;a href="https://askubuntu.com/questions/745660/imagemagick-png-delegate-install-problems"&gt;This page&lt;/a&gt; from StackExchange explained how to install the image libraries. I didn’t know which ones were important or how often they are used so I installed them all.&lt;/p&gt;
+&lt;p&gt;The first time I did this installation the program complained and errored that it was missing &lt;a href="http://www.imagemagick.org/download/delegates/"&gt;delegates&lt;/a&gt; when I tried to manipulate the png images. &lt;a href="https://askubuntu.com/questions/745660/imagemagick-png-delegate-install-problems"&gt;This page&lt;/a&gt; from StackExchange explained how to install the image libraries. I didn’t know which ones were important or how often they are used so I installed them&amp;nbsp;all.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build it. &lt;/p&gt;
-&lt;p&gt;First download the binary tar, extract it, and move into the newly extracted directory.&lt;/p&gt;
+&lt;p&gt;This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build&amp;nbsp;it. &lt;/p&gt;
+&lt;p&gt;First download the binary tar, extract it, and move into the newly extracted&amp;nbsp;directory.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget https://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xf ImageMagick.tar.gz
 &lt;span class="nb"&gt;cd&lt;/span&gt; ImageMagick-7*
@@ -336,28 +286,28 @@ tar xf ImageMagick.tar.gz
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Install ImageMagick.&lt;/p&gt;
+&lt;p&gt;Install&amp;nbsp;ImageMagick.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo make install
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This will install the compiled binaries. Now run &lt;code&gt;ldconfig&lt;/code&gt; command to link the static libraries. &lt;/p&gt;
+&lt;p&gt;This will install the compiled binaries. Now run &lt;code&gt;ldconfig&lt;/code&gt; command to link the static&amp;nbsp;libraries. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ldconfig /usr/local/lib
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Confirm installation and final check. Run the &lt;code&gt;identity&lt;/code&gt; command to confirm that “something” is installed. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;indentify -version
+&lt;p&gt;Confirm installation and final check. Run the &lt;code&gt;identity&lt;/code&gt; command to confirm that “something” is&amp;nbsp;installed. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;identify -version
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The I&lt;a href="https://imagemagick.org/script/download.php"&gt;mageMagick website&lt;/a&gt; also has a couple commands to verify installation.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://imagemagick.org/script/download.php"&gt;ImageMagick website&lt;/a&gt; also has a couple commands to verify&amp;nbsp;installation.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;identify logo.gif
 display logo.gif
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Converting a Bunch of Images to a pdf&lt;/h3&gt;
+&lt;h3&gt;Converting a Bunch of Images to a&amp;nbsp;pdf&lt;/h3&gt;
 &lt;p&gt;I have a bunch of scan images of an old handwritten recipe book. The originals are in &lt;a href="https://en.wikipedia.org/wiki/Paper_size"&gt;A5 paper size&lt;/a&gt; and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s &lt;code&gt;convert&lt;/code&gt; command. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ImageDir
 convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
@@ -369,80 +319,81 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;OK, this is complicated and took a couple hours to figure out. So what is going on here?&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OK&lt;/span&gt;, this is complicated and took a couple hours to figure out. So what is going on&amp;nbsp;here?&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them out.&lt;/p&gt;
+&lt;p&gt;It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them&amp;nbsp;out.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The &lt;code&gt;-resize&lt;/code&gt; option is sizing the images to imagemagick 595x421. &lt;a href="https://imagemagick.org/script/command-line-options.php#page"&gt;This is the A5 page size (dots per inch) in landscape.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The &lt;code&gt;-resize&lt;/code&gt; option is sizing the images to imagemagick 595x421. &lt;a href="https://imagemagick.org/script/command-line-options.php#page"&gt;This is the A5 page size (dots per inch) in&amp;nbsp;landscape.&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;-gravity&lt;/code&gt; &lt;a href="https://imagemagick.org/script/command-line-options.php#extent"&gt;must go before &lt;code&gt;-extent&lt;/code&gt;&lt;/a&gt;. You can find all the options for an argument using &lt;code&gt;identify -list &amp;lt;option&amp;gt;&lt;/code&gt;. “North” means center the images on the page horizontally and top-aligned vertically. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-gravity&lt;/code&gt; &lt;a href="https://imagemagick.org/script/command-line-options.php#extent"&gt;must go before &lt;code&gt;-extent&lt;/code&gt;&lt;/a&gt;. You can find all the options for an argument using &lt;code&gt;identify -list &amp;lt;option&amp;gt;&lt;/code&gt;. “North” means center the images on the page horizontally and top-aligned&amp;nbsp;vertically. &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;-extent&lt;/code&gt; sets the image size. At &lt;a href="https://imagemagick.org/script/command-line-options.php#page"&gt;page size is dots per inch for A5&lt;/a&gt; is 421x595.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-extent&lt;/code&gt; sets the image size. At &lt;a href="https://imagemagick.org/script/command-line-options.php#page"&gt;page size is dots per inch for A5&lt;/a&gt; is&amp;nbsp;421x595.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Note: you can specify the dpi with the &lt;code&gt;-density&lt;/code&gt; option. The &lt;a href="https://imagemagick.org/script/command-line-options.php#density"&gt;default is 72dpi&lt;/a&gt; so I left it as is. &lt;/p&gt;
+&lt;p&gt;Note: you can specify the dpi with the &lt;code&gt;-density&lt;/code&gt; option. The &lt;a href="https://imagemagick.org/script/command-line-options.php#density"&gt;default is 72dpi&lt;/a&gt; so I left it as&amp;nbsp;is. &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4&gt;Lower Res/ Smaller File&lt;/h4&gt;
-&lt;p&gt;You can make a lower resolution and smaller file size for web or email.&lt;/p&gt;
+&lt;h4&gt;Lower Res/ Smaller&amp;nbsp;File&lt;/h4&gt;
+&lt;p&gt;You can make a lower resolution and smaller file size for web or&amp;nbsp;email.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;convert *.png -compress jpeg -resize 595x421 -background white &lt;span class="se"&gt;\&lt;/span&gt;
     -gravity North -extent 595x421 output.pdf
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Exiftool Adds pdf Metadata&lt;/h3&gt;
-&lt;p&gt;Easily install &lt;a href="https://exiftool.org/"&gt;Exiftool&lt;/a&gt; on Ubuntu.&lt;/p&gt;
+&lt;h3&gt;Exiftool Adds pdf&amp;nbsp;Metadata&lt;/h3&gt;
+&lt;p&gt;Easily install &lt;a href="https://exiftool.org/"&gt;Exiftool&lt;/a&gt; on&amp;nbsp;Ubuntu.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install libimage-exiftool-perl
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;There are a bunch of &lt;a href="https://linoxide.com/linux-how-to/install-use-exiftool-linux-ubuntu-centos/"&gt;tutorials&lt;/a&gt; on using Exiftool.&lt;/p&gt;
-&lt;p&gt;Changing the exif data within the pdf file to add some fields is quite easy.&lt;/p&gt;
+&lt;p&gt;There are a bunch of &lt;a href="https://linoxide.com/linux-how-to/install-use-exiftool-linux-ubuntu-centos/"&gt;tutorials&lt;/a&gt; on using&amp;nbsp;Exiftool.&lt;/p&gt;
+&lt;p&gt;Changing the exif data within the pdf file to add some fields is quite&amp;nbsp;easy.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;exiftool &lt;span class="se"&gt;\&lt;/span&gt;
-    -Creator&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Joe Lotz&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -Creator&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Joe&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     -keywords&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;recipebook;recipes&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-    -Author&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Grandma&amp;quot;&lt;/span&gt; output.pdf
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="ImageMagick"></category></entry><entry><title>Converting mp4 to mov with FFmpeg in Ubuntu</title><link href="https://joelotz.github.io/converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html" rel="alternate"></link><published>2020-04-25T00:00:00+05:30</published><updated>2020-04-25T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:joelotz.github.io,2020-04-25:/converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;&lt;em&gt;Update:&lt;/em&gt; &lt;a href="running-shell-scripts-on-files-from-nautilus.html"&gt;Please see the post&lt;/a&gt; on how I turned this into a script that can be executed on a file by right-clicking. &lt;/p&gt;
+    -Author&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Grandma&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    output.pdf
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="ImageMagick"></category></entry><entry><title>Converting mp4 to mov with FFmpeg in Ubuntu</title><link href="https://joelotz.github.io/converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html" rel="alternate"></link><published>2020-04-25T00:00:00+05:30</published><updated>2020-04-25T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:joelotz.github.io,2020-04-25:/converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html</id><summary type="html"></summary><content type="html">&lt;p&gt;&lt;em&gt;Update:&lt;/em&gt; &lt;a href="running-shell-scripts-on-files-from-nautilus.html"&gt;Please see the post&lt;/a&gt; on how I turned this into a script that can be executed on a file by&amp;nbsp;right-clicking. &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;GoPro outputs video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 container. This is great because:&lt;/p&gt;
+&lt;p&gt;GoPro outputs video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient &lt;span class="caps"&gt;HVEC&lt;/span&gt; H.265 mp4 container. This is great&amp;nbsp;because:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;nearly everything can read and play H.264 mp4 files&lt;/li&gt;
-&lt;li&gt;since the H.265 mp4 is more space efficient you can save even more video to your memory card.&lt;/li&gt;
+&lt;li&gt;nearly everything can read and play H.264 mp4&amp;nbsp;files&lt;/li&gt;
+&lt;li&gt;since the H.265 mp4 is more space efficient you can save even more video to your memory&amp;nbsp;card.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Yeah! But wait…. Not everything can read/play the new H.265 mp4.&lt;/p&gt;
-&lt;p&gt;FYI, here are some great posts by havecamerawilltravel that you should read:&lt;/p&gt;
+&lt;p&gt;Yeah! But wait…. Not everything can read/play the new H.265&amp;nbsp;mp4.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;FYI&lt;/span&gt;, here are some great posts by havecamerawilltravel that you should&amp;nbsp;read:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/"&gt;Hero7 Black Modes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/"&gt;How to Convert H.265 to H.264 in Handbrake&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/"&gt;Hero7 Black&amp;nbsp;Modes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/"&gt;How to Convert H.265 to H.264 in&amp;nbsp;Handbrake&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in the Linux free version. &lt;/p&gt;
-&lt;p&gt;In the &lt;a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf"&gt;support notes of DR16&lt;/a&gt; it states that :&lt;/p&gt;
+&lt;p&gt;My goal is to edit and color correct my home videos in Davinci Resolve 16 (&lt;span class="caps"&gt;DR16&lt;/span&gt;) but it turns out it doesn’t import these GoPro video files directly, at least not in the Linux free&amp;nbsp;version. &lt;/p&gt;
+&lt;p&gt;In the &lt;a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf"&gt;support notes of &lt;span class="caps"&gt;DR16&lt;/span&gt;&lt;/a&gt; it states that&amp;nbsp;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;macOS will read mp4 in both DR16 (free version) and DR16 Studio (paid version)&lt;/li&gt;
-&lt;li&gt;Windows will read mp4 in DR16 Studio only&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Linux&lt;/strong&gt; will read mp4 in DR16 Studio only&lt;/li&gt;
+&lt;li&gt;macOS will read mp4 in both &lt;span class="caps"&gt;DR16&lt;/span&gt; (free version) and &lt;span class="caps"&gt;DR16&lt;/span&gt; Studio (paid&amp;nbsp;version)&lt;/li&gt;
+&lt;li&gt;Windows will read mp4 in &lt;span class="caps"&gt;DR16&lt;/span&gt; Studio&amp;nbsp;only&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linux&lt;/strong&gt; will read mp4 in &lt;span class="caps"&gt;DR16&lt;/span&gt; Studio&amp;nbsp;only&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img alt="DR16 Input Codecs" src="/images/DR16_InputCodecs.png"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://handbrake.fr/"&gt;Handbrake&lt;/a&gt; is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. &lt;/p&gt;
-&lt;h3&gt;Installing FFmpeg on Ubuntu 20.04&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://handbrake.fr/"&gt;Handbrake&lt;/a&gt; is a &lt;span class="caps"&gt;GUI&lt;/span&gt; front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in &lt;span class="caps"&gt;DR16&lt;/span&gt;. &lt;/p&gt;
+&lt;h3&gt;Installing FFmpeg on Ubuntu&amp;nbsp;20.04&lt;/h3&gt;
 &lt;p&gt;This is pretty simple, as described in this &lt;a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation"&gt;tutorial instructions&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install ffmpeg
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Converting my Video from mp4 to mov&lt;/h3&gt;
-&lt;p&gt;In my research and experimentation I found success in two codecs; Apple &lt;a href="https://en.wikipedia.org/wiki/Apple_ProRes"&gt;ProRes&lt;/a&gt; and &lt;a href="Avid DNxHD"&gt;Avid DNxHD&lt;/a&gt;. You can view all the installed and available codecs on your machine with &lt;code&gt;ffmpeg -codecs&lt;/code&gt;. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the interwebs. &lt;/p&gt;
-&lt;p&gt;As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted &lt;a href="https://en.wikipedia.org/wiki/Advanced_Audio_Coding"&gt;AAC&lt;/a&gt; audio into &lt;a href="https://en.wikipedia.org/wiki/Pulse-code_modulation"&gt;PCM&lt;/a&gt; audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit easier:&lt;/p&gt;
+&lt;h3&gt;Converting my Video from mp4 to&amp;nbsp;mov&lt;/h3&gt;
+&lt;p&gt;In my research and experimentation I found success in two codecs; Apple &lt;a href="https://en.wikipedia.org/wiki/Apple_ProRes"&gt;ProRes&lt;/a&gt; and &lt;a href="Avid DNxHD"&gt;Avid DNxHD&lt;/a&gt;. You can view all the installed and available codecs on your machine with &lt;code&gt;ffmpeg -codecs&lt;/code&gt;. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the&amp;nbsp;interwebs. &lt;/p&gt;
+&lt;p&gt;As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted &lt;a href="https://en.wikipedia.org/wiki/Advanced_Audio_Coding"&gt;&lt;span class="caps"&gt;AAC&lt;/span&gt;&lt;/a&gt; audio into &lt;a href="https://en.wikipedia.org/wiki/Pulse-code_modulation"&gt;&lt;span class="caps"&gt;PCM&lt;/span&gt;&lt;/a&gt; audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit&amp;nbsp;easier:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 -c:v prores -profile:v &lt;span class="m"&gt;3&lt;/span&gt; -c:a pcm_s16le output.mov
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy details. &lt;/p&gt;
-&lt;p&gt;Here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.&lt;/p&gt;
+&lt;p&gt;The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy&amp;nbsp;details. &lt;/p&gt;
+&lt;p&gt;Here is the final command, assuming 4k resolution at 23.967 (aka 24)&amp;nbsp;fps.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ffmpeg -i input.mp4 &lt;span class="se"&gt;\&lt;/span&gt;
     -c:v dnxhd &lt;span class="se"&gt;\&lt;/span&gt;
     -profile:v dnxhr_hqx &lt;span class="se"&gt;\&lt;/span&gt;
@@ -453,77 +404,77 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;Audio Transcoding&lt;/h4&gt;
-&lt;p&gt;Referring back to the &lt;a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf"&gt;Black Magic Support Codecs&lt;/a&gt;, we see that mp3 and AAC are &lt;u&gt;not&lt;/u&gt; supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the video.&lt;/p&gt;
+&lt;h4&gt;Audio&amp;nbsp;Transcoding&lt;/h4&gt;
+&lt;p&gt;Referring back to the &lt;a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf"&gt;Black Magic Support Codecs&lt;/a&gt;, we see that mp3 and &lt;span class="caps"&gt;AAC&lt;/span&gt; are &lt;u&gt;not&lt;/u&gt; supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the&amp;nbsp;video.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="DR16_InputAudio" src="/media/joe/Working/Blog/content/images/DR16_InputAudio.png"&gt;&lt;/p&gt;
-&lt;h4&gt;FFmpeg Options/Arguments&lt;/h4&gt;
+&lt;h4&gt;FFmpeg&amp;nbsp;Options/Arguments&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;-i&lt;/code&gt; defines the input file&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-i&lt;/code&gt; defines the input&amp;nbsp;file&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;-c:v&lt;/code&gt; (or the alias &lt;code&gt;-vcodec&lt;/code&gt;) defines the codec to use for the video&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-c:v&lt;/code&gt; (or the alias &lt;code&gt;-vcodec&lt;/code&gt;) defines the codec to use for the&amp;nbsp;video&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;-profile:v&lt;/code&gt; defines the profile to use for the video.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-profile:v&lt;/code&gt; defines the profile to use for the&amp;nbsp;video.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Accepted values are: &lt;code&gt;dnxhd&lt;/code&gt;, &lt;code&gt;dnxhr_444&lt;/code&gt;, &lt;code&gt;dnxhr_hqx&lt;/code&gt;, &lt;code&gt;dnxhr_hq&lt;/code&gt;, &lt;code&gt;dnxhr_sq&lt;/code&gt;, &lt;code&gt;dnxhr_lb&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;I was able to convert 1920x1080 videos but kept getting an error when attempting 4k 3840x2160 videos. I was stuck at this point for a while until I found a post on &lt;a href="https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format"&gt;askubuntu&lt;/a&gt; explaining that a different profile was needed.&lt;/p&gt;
+&lt;p&gt;I was able to convert 1920x1080 videos but kept getting an error when attempting 4k 3840x2160 videos. I was stuck at this point for a while until I found a post on &lt;a href="https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format"&gt;askubuntu&lt;/a&gt; explaining that a different profile was&amp;nbsp;needed.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;dnxhd&lt;/code&gt;: The lists of available/possible resolutions can be &lt;a href="https://en.wikipedia.org/wiki/List_of_Avid_DNxHD_resolutions"&gt;looked up here&lt;/a&gt;, but they do not go bigger than 1080p.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dnxhd&lt;/code&gt;: The lists of available/possible resolutions can be &lt;a href="https://en.wikipedia.org/wiki/List_of_Avid_DNxHD_resolutions"&gt;looked up here&lt;/a&gt;, but they do not go bigger than&amp;nbsp;1080p.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;h5&gt;DNxHR Profiles&lt;/h5&gt;
+&lt;h5&gt;DNxHR&amp;nbsp;Profiles&lt;/h5&gt;
 &lt;ul&gt;
-&lt;li&gt;DNxHR LB: &lt;code&gt;dnxhr_lb&lt;/code&gt; - Low Bandwidth. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;). Offline Quality.&lt;/li&gt;
-&lt;li&gt;DNxHR SQ: &lt;code&gt;dnxhr_sq&lt;/code&gt; - Standard Quality. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;). Suitable for delivery format.&lt;/li&gt;
-&lt;li&gt;DNxHR HQ: &lt;code&gt;dnxhr_hq&lt;/code&gt; - High Quality. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;DNxHR HQX: &lt;code&gt;dnxhr_hqx&lt;/code&gt; - High Quality. 10-bit 4:2:2 (&lt;code&gt;yuv422p10le&lt;/code&gt;). UHD/4K Broadcast-quality delivery.&lt;/li&gt;
-&lt;li&gt;DNxHR 444: &lt;code&gt;dnxhr_444&lt;/code&gt; - Finishing Quality. 10-bit 4:4:4 (&lt;code&gt;yuv444p10le&lt;/code&gt;). Cinema-quality delivery.&lt;/li&gt;
+&lt;li&gt;DNxHR &lt;span class="caps"&gt;LB&lt;/span&gt;: &lt;code&gt;dnxhr_lb&lt;/code&gt; - Low Bandwidth. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;). Offline&amp;nbsp;Quality.&lt;/li&gt;
+&lt;li&gt;DNxHR &lt;span class="caps"&gt;SQ&lt;/span&gt;: &lt;code&gt;dnxhr_sq&lt;/code&gt; - Standard Quality. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;). Suitable for delivery&amp;nbsp;format.&lt;/li&gt;
+&lt;li&gt;DNxHR &lt;span class="caps"&gt;HQ&lt;/span&gt;: &lt;code&gt;dnxhr_hq&lt;/code&gt; - High Quality. 8-bit 4:2:2 (&lt;code&gt;yuv422p&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;DNxHR &lt;span class="caps"&gt;HQX&lt;/span&gt;: &lt;code&gt;dnxhr_hqx&lt;/code&gt; - High Quality. 10-bit 4:2:2 (&lt;code&gt;yuv422p10le&lt;/code&gt;). &lt;span class="caps"&gt;UHD&lt;/span&gt;/4K Broadcast-quality&amp;nbsp;delivery.&lt;/li&gt;
+&lt;li&gt;DNxHR 444: &lt;code&gt;dnxhr_444&lt;/code&gt; - Finishing Quality. 10-bit 4:4:4 (&lt;code&gt;yuv444p10le&lt;/code&gt;). Cinema-quality&amp;nbsp;delivery.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The above list was adapted from &lt;a href="https://en.wikipedia.org/wiki/DNxHR_codec"&gt;DNxHR codec&lt;/a&gt;. Note that the pix_format must match the profile! &lt;/p&gt;
+&lt;p&gt;The above list was adapted from &lt;a href="https://en.wikipedia.org/wiki/DNxHR_codec"&gt;DNxHR codec&lt;/a&gt;. Note that the pix_format must match the&amp;nbsp;profile! &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;-vf&lt;/code&gt; is as alias for &lt;code&gt;-filter:v&lt;/code&gt; and creates the filtergraph that is used to filter the stream. You can specify each value but this is easier, for example &lt;code&gt;-pix_fmt=yuv422p10le&lt;/code&gt;. &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;scale=&lt;/code&gt;width x height &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;scale=&lt;/code&gt;width x&amp;nbsp;height &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;fps=&lt;/code&gt;&lt;ul&gt;
 &lt;li&gt;23.967 = 24000/1001 (or use the alias &lt;code&gt;ntsc-film&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;29.97 = 30000/1001 (or use the alias &lt;code&gt;ntsc&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;59.94 = 60000/1001&lt;/li&gt;
-&lt;li&gt;119.88 = 120000/1001&lt;/li&gt;
+&lt;li&gt;59.94 =&amp;nbsp;60000/1001&lt;/li&gt;
+&lt;li&gt;119.88 =&amp;nbsp;120000/1001&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;pix_fmts=&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;For &lt;code&gt;dnxhr_lb&lt;/code&gt; , &lt;code&gt;dnxhr_sq&lt;/code&gt;, or &lt;code&gt;dnr_hq&lt;/code&gt; = yuv422p&lt;/li&gt;
-&lt;li&gt;For &lt;code&gt;dnxhr_hqx&lt;/code&gt; or &lt;code&gt;dnxhr_444&lt;/code&gt;=  yuv422p10le&lt;/li&gt;
+&lt;li&gt;For &lt;code&gt;dnxhr_lb&lt;/code&gt; , &lt;code&gt;dnxhr_sq&lt;/code&gt;, or &lt;code&gt;dnr_hq&lt;/code&gt; =&amp;nbsp;yuv422p&lt;/li&gt;
+&lt;li&gt;For &lt;code&gt;dnxhr_hqx&lt;/code&gt; or &lt;code&gt;dnxhr_444&lt;/code&gt;=&amp;nbsp;yuv422p10le&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;-c:a&lt;/code&gt; defines the codec to use for the audio&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-c:a&lt;/code&gt; defines the codec to use for the&amp;nbsp;audio&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Step Functions in Matplotlib</title><link href="https://joelotz.github.io/step-functions-in-matplotlib.html" rel="alternate"></link><published>2014-11-11T00:00:00+05:30</published><updated>2014-11-11T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2014-11-11:/step-functions-in-matplotlib.html</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
+&lt;/ul&gt;</content><category term="Uncategorized"></category><category term="Ubuntu"></category><category term="FFmpeg"></category></entry><entry><title>Step Functions in Matplotlib</title><link href="https://joelotz.github.io/step-functions-in-matplotlib.html" rel="alternate"></link><published>2014-11-11T00:00:00+05:30</published><updated>2014-11-11T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2014-11-11:/step-functions-in-matplotlib.html</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI escape sequences */
+/* &lt;span class="caps"&gt;CSS&lt;/span&gt; font colors for translated &lt;span class="caps"&gt;ANSI&lt;/span&gt; escape sequences */
 /* The color values are a mix of
    http://www.xcolors.net/dl/baskerville-ivorylight and
    http://www.xcolors.net/dl/euphrasia */
 .ansi-black-fg {
-  color: #3E424D;
+  color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;;
 }
 .ansi-black-bg {
-  background-color: #3E424D;
+  background-color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;;
 }
 .ansi-black-intense-fg {
   color: #282C36;
@@ -532,16 +483,16 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
   background-color: #282C36;
 }
 .ansi-red-fg {
-  color: #E75C58;
+  color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;;
 }
 .ansi-red-bg {
-  background-color: #E75C58;
+  background-color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;;
 }
 .ansi-red-intense-fg {
-  color: #B22B31;
+  color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;;
 }
 .ansi-red-intense-bg {
-  background-color: #B22B31;
+  background-color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;;
 }
 .ansi-green-fg {
   color: #00A250;
@@ -556,34 +507,34 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
   background-color: #007427;
 }
 .ansi-yellow-fg {
-  color: #DDB62B;
+  color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;;
 }
 .ansi-yellow-bg {
-  background-color: #DDB62B;
+  background-color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;;
 }
 .ansi-yellow-intense-fg {
-  color: #B27D12;
+  color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;;
 }
 .ansi-yellow-intense-bg {
-  background-color: #B27D12;
+  background-color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;;
 }
 .ansi-blue-fg {
-  color: #208FFB;
+  color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;;
 }
 .ansi-blue-bg {
-  background-color: #208FFB;
+  background-color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;;
 }
 .ansi-blue-intense-fg {
-  color: #0065CA;
+  color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;;
 }
 .ansi-blue-intense-bg {
-  background-color: #0065CA;
+  background-color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;;
 }
 .ansi-magenta-fg {
-  color: #D160C4;
+  color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;;
 }
 .ansi-magenta-bg {
-  background-color: #D160C4;
+  background-color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;;
 }
 .ansi-magenta-intense-fg {
   color: #A03196;
@@ -592,31 +543,31 @@ convert *.png &lt;span class="se"&gt;\&lt;/span&gt;
   background-color: #A03196;
 }
 .ansi-cyan-fg {
-  color: #60C6C8;
+  color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;;
 }
 .ansi-cyan-bg {
-  background-color: #60C6C8;
+  background-color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;;
 }
 .ansi-cyan-intense-fg {
-  color: #258F8F;
+  color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;;
 }
 .ansi-cyan-intense-bg {
-  background-color: #258F8F;
+  background-color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;;
 }
 .ansi-white-fg {
-  color: #C5C1B4;
+  color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;;
 }
 .ansi-white-bg {
-  background-color: #C5C1B4;
+  background-color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;;
 }
 .ansi-white-intense-fg {
-  color: #A1A6B2;
+  color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;;
 }
 .ansi-white-intense-bg {
-  background-color: #A1A6B2;
+  background-color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;;
 }
 .ansi-default-inverse-fg {
-  color: #FFFFFF;
+  color: #&lt;span class="caps"&gt;FFFFFF&lt;/span&gt;;
 }
 .ansi-default-inverse-bg {
   background-color: #000000;
@@ -725,12 +676,12 @@ div.cell:before {
   background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #E3F2FD;
+  border-left-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
   border-left-width: 1px;
   padding-left: 5px;
-  border-right-color: #E3F2FD;
+  border-right-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
   border-right-width: 1px;
-  background: #E3F2FD;
+  background: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
 }
 @media print {
   div.cell.jupyter-soft-selected {
@@ -750,7 +701,7 @@ div.cell.selected.jupyter-soft-selected:before {
   width: 5px;
   height: calc(100% +  2px);
   content: '';
-  background: #42A5F5;
+  background: #&lt;span class="caps"&gt;42A5F5&lt;/span&gt;;
 }
 @media print {
   div.cell.selected,
@@ -759,7 +710,7 @@ div.cell.selected.jupyter-soft-selected:before {
   }
 }
 .edit_mode div.cell.selected {
-  border-color: #66BB6A;
+  border-color: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
 }
 .edit_mode div.cell.selected:before {
   position: absolute;
@@ -769,7 +720,7 @@ div.cell.selected.jupyter-soft-selected:before {
   width: 5px;
   height: calc(100% +  2px);
   content: '';
-  background: #66BB6A;
+  background: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -922,7 +873,7 @@ div.input {
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_prompt {
-  color: #303F9F;
+  color: #&lt;span class="caps"&gt;303F9F&lt;/span&gt;;
   border-top: 1px solid transparent;
 }
 div.input_area &gt; div.highlight {
@@ -963,7 +914,7 @@ div.input_area &gt; div.highlight &gt; pre {
   overflow-x: auto;
 }
 .CodeMirror-lines {
-  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* In &lt;span class="caps"&gt;CM2&lt;/span&gt;, this used to be 0.4em, but in &lt;span class="caps"&gt;CM3&lt;/span&gt; it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
   /* Note that this should set vertical padding only, since CodeMirror assumes
        that horizontal padding will be set on CodeMirror pre */
@@ -977,7 +928,7 @@ div.input_area &gt; div.highlight &gt; pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+  /* In &lt;span class="caps"&gt;CM3&lt;/span&gt; this went to 4px from 0 in &lt;span class="caps"&gt;CM2&lt;/span&gt;. This sets horizontal padding only,
     use .CodeMirror-lines for vertical */
   padding: 0 0.4em;
   border: 0;
@@ -1015,7 +966,7 @@ Adapted from GitHub theme
   color: #333333;
 }
 .highlight-string {
-  color: #BA2121;
+  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
 }
 .highlight-comment {
   color: #408080;
@@ -1038,11 +989,11 @@ Adapted from GitHub theme
   color: #f00;
 }
 .highlight-operator {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
   font-weight: bold;
 }
 .highlight-meta {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
 }
 /* previously not defined, copying from default codemirror */
 .highlight-def {
@@ -1090,7 +1041,7 @@ Adapted from GitHub theme
   color: #000;
 }
 .cm-s-ipython span.cm-operator {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
   font-weight: bold;
 }
 .cm-s-ipython span.cm-variable-2 {
@@ -1104,13 +1055,13 @@ Adapted from GitHub theme
   font-style: italic;
 }
 .cm-s-ipython span.cm-string {
-  color: #BA2121;
+  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
 }
 .cm-s-ipython span.cm-string-2 {
   color: #f50;
 }
 .cm-s-ipython span.cm-meta {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
 }
 .cm-s-ipython span.cm-qualifier {
   color: #555;
@@ -1165,9 +1116,9 @@ div.output_wrapper {
 }
 /* class for the output area when it should be height-limited */
 div.output_scroll {
-  /* ideally, this would be max-height, but FF barfs all over that */
+  /* ideally, this would be max-height, but &lt;span class="caps"&gt;FF&lt;/span&gt; barfs all over that */
   height: 24em;
-  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  /* &lt;span class="caps"&gt;FF&lt;/span&gt; needs this *and the wrapper* to specify full width, or it will shrinkwrap */
   width: 100%;
   overflow: auto;
   border-radius: 2px;
@@ -1201,7 +1152,7 @@ div.out_prompt_overlay {
   border-radius: 2px;
 }
 div.out_prompt_overlay:hover {
-  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  /* use inner shadow to get border that is computed the same on WebKit/&lt;span class="caps"&gt;FF&lt;/span&gt; */
   -webkit-box-shadow: inset 0 0 1px #000;
   box-shadow: inset 0 0 1px #000;
   background: rgba(240, 240, 240, 0.5);
@@ -1556,25 +1507,25 @@ h6:hover .anchor-link {
 &lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
  .highlight pre   { background: #f8f8f8; }
  .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
- .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
  .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
  .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #BC7A00 } /* Comment.Preproc */
+ .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
  .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
  .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
  .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #FF0000 } /* Generic.Error */
+ .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
  .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
  .highlight pre  .go { color: #888888 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
- .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .gt { color: #&lt;span class="caps"&gt;0044DD&lt;/span&gt; } /* Generic.Traceback */
  .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
  .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
  .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
@@ -1582,41 +1533,41 @@ h6:hover .anchor-link {
  .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
- .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
  .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
- .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
- .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
  .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
- .highlight pre  .nf { color: #0000FF } /* Name.Function */
- .highlight pre  .nl { color: #A0A000 } /* Name.Label */
- .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
+ .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
- .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .ow { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;; font-weight: bold } /* Operator.Word */
  .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
  .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
  .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
  .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
  .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
  .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
- .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
- .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
- .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
- .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
- .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
- .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
- .highlight pre  .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
- .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sa { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Char */
+ .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #BB6688 } /* Literal.String.Regex */
- .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
- .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .fm { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function.Magic */
  .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
  .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
  .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
@@ -1624,30 +1575,30 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This week I had to make a "burn chart", essentially a chart showing amount of work per week. Since the weeks are discrete time steps I need a step function. I started playing with horizontal and vertical lines but luckily I quickly found that matplotlib has a &lt;a href="http://matplotlib.org/api/lines_api.html#matplotlib.lines.Line2D.set_drawstyle"&gt;step function&lt;/a&gt;. Unfortunately, it didn't quite act as I thought.&lt;/p&gt;
-&lt;p&gt;There are there options for the drawstyle:&lt;/p&gt;
+&lt;p&gt;This week I had to make a &amp;#8220;burn chart&amp;#8221;, essentially a chart showing amount of work per week. Since the weeks are discrete time steps I need a step function. I started playing with horizontal and vertical lines but luckily I quickly found that matplotlib has a &lt;a href="http://matplotlib.org/api/lines_api.html#matplotlib.lines.Line2D.set_drawstyle"&gt;step function&lt;/a&gt;. Unfortunately, it didn&amp;#8217;t quite act as I&amp;nbsp;thought.&lt;/p&gt;
+&lt;p&gt;There are there options for the&amp;nbsp;drawstyle:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;"steps", which is the same as "steps-pre"&lt;/li&gt;
-&lt;li&gt;"steps-mid"&lt;/li&gt;
-&lt;li&gt;"steps-post"&lt;/li&gt;
+&lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;steps&amp;#8221;, which is the same as&amp;nbsp;&amp;#8220;steps-pre&amp;#8221;&lt;/li&gt;
+&lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;steps-mid&amp;#8221;&lt;/li&gt;
+&lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;steps-post&amp;#8221;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Assume the x-vector and y-vector for plotting is&lt;/p&gt;
+&lt;p&gt;Assume the x-vector and y-vector for plotting&amp;nbsp;is&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;X = [x1, x2, x3, x4]
 Y = [y1, y2, y3, y4]&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;In this option y2 starts at x1, y3 starts at x2, y4 starts at x3 and ends at x4.&lt;/li&gt;
+&lt;li&gt;In this option y2 starts at x1, y3 starts at x2, y4 starts at x3 and ends at&amp;nbsp;x4.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;steps-mid&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;In this option y1 starts at x1, y2 starts at mid-point between x1 and x2, y3 starts at mid-point between x2 and x3, y4 starts at mid-point between x3 and x4.&lt;/li&gt;
+&lt;li&gt;In this option y1 starts at x1, y2 starts at mid-point between x1 and x2, y3 starts at mid-point between x2 and x3, y4 starts at mid-point between x3 and&amp;nbsp;x4.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;steps-post&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;In this option y1 starts at x1, y2 starts at x2, y3 starts at x3, y4 starts at x4.&lt;/li&gt;
+&lt;li&gt;In this option y1 starts at x1, y2 starts at x2, y3 starts at x3, y4 starts at&amp;nbsp;x4.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For me, 'steps-post' makes the most sense to understand. Below is code to illustrate the options.&lt;/p&gt;
+&lt;p&gt;For me, &amp;#8216;steps-post&amp;#8217; makes the most sense to understand. Below is code to illustrate the&amp;nbsp;options.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2085,7 +2036,7 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
 
 
 &lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Software&lt;/th&gt;&lt;th&gt;Version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Python&lt;/td&gt;&lt;td&gt;2.7.5+ (default, Feb 27 2014, 19:39:55) [GCC 4.8.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;IPython&lt;/td&gt;&lt;td&gt;2.0.0-dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;OS&lt;/td&gt;&lt;td&gt;posix [linux2]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ipython&lt;/td&gt;&lt;td&gt;0.13.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;pandas&lt;/td&gt;&lt;td&gt;0.13.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;matplotlib&lt;/td&gt;&lt;td&gt;1.2.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='2'&gt;Tue Nov 11 22:08:24 2014 PST&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Software&lt;/th&gt;&lt;th&gt;Version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Python&lt;/td&gt;&lt;td&gt;2.7.5+ (default, Feb 27 2014, 19:39:55) [&lt;span class="caps"&gt;GCC&lt;/span&gt; 4.8.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;IPython&lt;/td&gt;&lt;td&gt;2.0.0-dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;span class="caps"&gt;OS&lt;/span&gt;&lt;/td&gt;&lt;td&gt;posix [linux2]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ipython&lt;/td&gt;&lt;td&gt;0.13.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;pandas&lt;/td&gt;&lt;td&gt;0.13.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;matplotlib&lt;/td&gt;&lt;td&gt;1.2.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='2'&gt;Tue Nov 11 22:08:24 2014 &lt;span class="caps"&gt;PST&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -2125,20 +2076,20 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Uncategorized"></category><category term="Python"></category></entry><entry><title>Pimp My Plots</title><link href="https://joelotz.github.io/pimp-my-plots.html" rel="alternate"></link><published>2014-10-28T00:00:00+05:30</published><updated>2014-10-28T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2014-10-28:/pimp-my-plots.html</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
+</content><category term="Uncategorized"></category><category term="Python"></category></entry><entry><title>Pimp My Plots</title><link href="https://joelotz.github.io/pimp-my-plots.html" rel="alternate"></link><published>2014-10-28T00:00:00+05:30</published><updated>2014-10-28T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2014-10-28:/pimp-my-plots.html</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI escape sequences */
+/* &lt;span class="caps"&gt;CSS&lt;/span&gt; font colors for translated &lt;span class="caps"&gt;ANSI&lt;/span&gt; escape sequences */
 /* The color values are a mix of
    http://www.xcolors.net/dl/baskerville-ivorylight and
    http://www.xcolors.net/dl/euphrasia */
 .ansi-black-fg {
-  color: #3E424D;
+  color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;;
 }
 .ansi-black-bg {
-  background-color: #3E424D;
+  background-color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;;
 }
 .ansi-black-intense-fg {
   color: #282C36;
@@ -2147,16 +2098,16 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
   background-color: #282C36;
 }
 .ansi-red-fg {
-  color: #E75C58;
+  color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;;
 }
 .ansi-red-bg {
-  background-color: #E75C58;
+  background-color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;;
 }
 .ansi-red-intense-fg {
-  color: #B22B31;
+  color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;;
 }
 .ansi-red-intense-bg {
-  background-color: #B22B31;
+  background-color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;;
 }
 .ansi-green-fg {
   color: #00A250;
@@ -2171,34 +2122,34 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
   background-color: #007427;
 }
 .ansi-yellow-fg {
-  color: #DDB62B;
+  color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;;
 }
 .ansi-yellow-bg {
-  background-color: #DDB62B;
+  background-color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;;
 }
 .ansi-yellow-intense-fg {
-  color: #B27D12;
+  color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;;
 }
 .ansi-yellow-intense-bg {
-  background-color: #B27D12;
+  background-color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;;
 }
 .ansi-blue-fg {
-  color: #208FFB;
+  color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;;
 }
 .ansi-blue-bg {
-  background-color: #208FFB;
+  background-color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;;
 }
 .ansi-blue-intense-fg {
-  color: #0065CA;
+  color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;;
 }
 .ansi-blue-intense-bg {
-  background-color: #0065CA;
+  background-color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;;
 }
 .ansi-magenta-fg {
-  color: #D160C4;
+  color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;;
 }
 .ansi-magenta-bg {
-  background-color: #D160C4;
+  background-color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;;
 }
 .ansi-magenta-intense-fg {
   color: #A03196;
@@ -2207,31 +2158,31 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
   background-color: #A03196;
 }
 .ansi-cyan-fg {
-  color: #60C6C8;
+  color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;;
 }
 .ansi-cyan-bg {
-  background-color: #60C6C8;
+  background-color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;;
 }
 .ansi-cyan-intense-fg {
-  color: #258F8F;
+  color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;;
 }
 .ansi-cyan-intense-bg {
-  background-color: #258F8F;
+  background-color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;;
 }
 .ansi-white-fg {
-  color: #C5C1B4;
+  color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;;
 }
 .ansi-white-bg {
-  background-color: #C5C1B4;
+  background-color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;;
 }
 .ansi-white-intense-fg {
-  color: #A1A6B2;
+  color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;;
 }
 .ansi-white-intense-bg {
-  background-color: #A1A6B2;
+  background-color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;;
 }
 .ansi-default-inverse-fg {
-  color: #FFFFFF;
+  color: #&lt;span class="caps"&gt;FFFFFF&lt;/span&gt;;
 }
 .ansi-default-inverse-bg {
   background-color: #000000;
@@ -2340,12 +2291,12 @@ div.cell:before {
   background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #E3F2FD;
+  border-left-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
   border-left-width: 1px;
   padding-left: 5px;
-  border-right-color: #E3F2FD;
+  border-right-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
   border-right-width: 1px;
-  background: #E3F2FD;
+  background: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
 }
 @media print {
   div.cell.jupyter-soft-selected {
@@ -2365,7 +2316,7 @@ div.cell.selected.jupyter-soft-selected:before {
   width: 5px;
   height: calc(100% +  2px);
   content: '';
-  background: #42A5F5;
+  background: #&lt;span class="caps"&gt;42A5F5&lt;/span&gt;;
 }
 @media print {
   div.cell.selected,
@@ -2374,7 +2325,7 @@ div.cell.selected.jupyter-soft-selected:before {
   }
 }
 .edit_mode div.cell.selected {
-  border-color: #66BB6A;
+  border-color: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
 }
 .edit_mode div.cell.selected:before {
   position: absolute;
@@ -2384,7 +2335,7 @@ div.cell.selected.jupyter-soft-selected:before {
   width: 5px;
   height: calc(100% +  2px);
   content: '';
-  background: #66BB6A;
+  background: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -2537,7 +2488,7 @@ div.input {
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_prompt {
-  color: #303F9F;
+  color: #&lt;span class="caps"&gt;303F9F&lt;/span&gt;;
   border-top: 1px solid transparent;
 }
 div.input_area &gt; div.highlight {
@@ -2578,7 +2529,7 @@ div.input_area &gt; div.highlight &gt; pre {
   overflow-x: auto;
 }
 .CodeMirror-lines {
-  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* In &lt;span class="caps"&gt;CM2&lt;/span&gt;, this used to be 0.4em, but in &lt;span class="caps"&gt;CM3&lt;/span&gt; it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
   /* Note that this should set vertical padding only, since CodeMirror assumes
        that horizontal padding will be set on CodeMirror pre */
@@ -2592,7 +2543,7 @@ div.input_area &gt; div.highlight &gt; pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+  /* In &lt;span class="caps"&gt;CM3&lt;/span&gt; this went to 4px from 0 in &lt;span class="caps"&gt;CM2&lt;/span&gt;. This sets horizontal padding only,
     use .CodeMirror-lines for vertical */
   padding: 0 0.4em;
   border: 0;
@@ -2630,7 +2581,7 @@ Adapted from GitHub theme
   color: #333333;
 }
 .highlight-string {
-  color: #BA2121;
+  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
 }
 .highlight-comment {
   color: #408080;
@@ -2653,11 +2604,11 @@ Adapted from GitHub theme
   color: #f00;
 }
 .highlight-operator {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
   font-weight: bold;
 }
 .highlight-meta {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
 }
 /* previously not defined, copying from default codemirror */
 .highlight-def {
@@ -2705,7 +2656,7 @@ Adapted from GitHub theme
   color: #000;
 }
 .cm-s-ipython span.cm-operator {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
   font-weight: bold;
 }
 .cm-s-ipython span.cm-variable-2 {
@@ -2719,13 +2670,13 @@ Adapted from GitHub theme
   font-style: italic;
 }
 .cm-s-ipython span.cm-string {
-  color: #BA2121;
+  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
 }
 .cm-s-ipython span.cm-string-2 {
   color: #f50;
 }
 .cm-s-ipython span.cm-meta {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
 }
 .cm-s-ipython span.cm-qualifier {
   color: #555;
@@ -2780,9 +2731,9 @@ div.output_wrapper {
 }
 /* class for the output area when it should be height-limited */
 div.output_scroll {
-  /* ideally, this would be max-height, but FF barfs all over that */
+  /* ideally, this would be max-height, but &lt;span class="caps"&gt;FF&lt;/span&gt; barfs all over that */
   height: 24em;
-  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  /* &lt;span class="caps"&gt;FF&lt;/span&gt; needs this *and the wrapper* to specify full width, or it will shrinkwrap */
   width: 100%;
   overflow: auto;
   border-radius: 2px;
@@ -2816,7 +2767,7 @@ div.out_prompt_overlay {
   border-radius: 2px;
 }
 div.out_prompt_overlay:hover {
-  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  /* use inner shadow to get border that is computed the same on WebKit/&lt;span class="caps"&gt;FF&lt;/span&gt; */
   -webkit-box-shadow: inset 0 0 1px #000;
   box-shadow: inset 0 0 1px #000;
   background: rgba(240, 240, 240, 0.5);
@@ -3171,25 +3122,25 @@ h6:hover .anchor-link {
 &lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
  .highlight pre   { background: #f8f8f8; }
  .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
- .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
  .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
  .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #BC7A00 } /* Comment.Preproc */
+ .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
  .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
  .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
  .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #FF0000 } /* Generic.Error */
+ .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
  .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
  .highlight pre  .go { color: #888888 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
- .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .gt { color: #&lt;span class="caps"&gt;0044DD&lt;/span&gt; } /* Generic.Traceback */
  .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
  .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
  .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
@@ -3197,41 +3148,41 @@ h6:hover .anchor-link {
  .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
- .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
  .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
- .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
- .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
  .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
- .highlight pre  .nf { color: #0000FF } /* Name.Function */
- .highlight pre  .nl { color: #A0A000 } /* Name.Label */
- .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
+ .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
- .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .ow { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;; font-weight: bold } /* Operator.Word */
  .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
  .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
  .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
  .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
  .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
  .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
- .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
- .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
- .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
- .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
- .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
- .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
- .highlight pre  .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
- .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sa { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Char */
+ .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #BB6688 } /* Literal.String.Regex */
- .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
- .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .fm { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function.Magic */
  .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
  .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
  .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
@@ -3247,8 +3198,8 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Making-Matplotlib-Look-Decent...-aka-Pimp-my-Plots"&gt;Making Matplotlib Look Decent... aka Pimp my Plots&lt;a class="anchor-link" href="#Making-Matplotlib-Look-Decent...-aka-Pimp-my-Plots"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;hr&gt;
-&lt;p&gt;In this post I will show some matplotlib kung-fu! Most of this was stolen from &lt;a href="http://jakevdp.github.io/"&gt;@jakevdp&lt;/a&gt;, but others from StackExchange. The basic premise is that the default values for any visualization library (Excel, R, Python, Matlab) is ugly. Why do the developers use such horrible defaults?? But this tutorial, amongst many others on the interwebs, will show you how to "pimp my plots"!&lt;/p&gt;
+&lt;h2 id="Making-Matplotlib-Look-Decent...-aka-Pimp-my-Plots"&gt;Making Matplotlib Look Decent&amp;#8230; aka Pimp my Plots&lt;a class="anchor-link" href="#Making-Matplotlib-Look-Decent...-aka-Pimp-my-Plots"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;hr&gt;
+&lt;p&gt;In this post I will show some matplotlib kung-fu! Most of this was stolen from &lt;a href="http://jakevdp.github.io/"&gt;@jakevdp&lt;/a&gt;, but others from StackExchange. The basic premise is that the default values for any visualization library (Excel, R, Python, Matlab) is ugly. Why do the developers use such horrible defaults?? But this tutorial, amongst many others on the interwebs, will show you how to &amp;#8220;pimp my&amp;nbsp;plots&amp;#8221;!&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3270,7 +3221,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Here I plot out some data that I developed in the file above. The contents are not important and are just used as an example to showcase the pplot formatting.&lt;/p&gt;
+&lt;p&gt;Here I plot out some data that I developed in the file above. The contents are not important and are just used as an example to showcase the pplot&amp;nbsp;formatting.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3557,16 +3508,16 @@ AACCoGAAAIAg/x8WSYefe8FdGAAAAABJRU5ErkJggg==
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Figure-1.-&amp;quot;Before&amp;quot;-Plot"&gt;Figure 1. "Before" Plot&lt;a class="anchor-link" href="#Figure-1.-&amp;quot;Before&amp;quot;-Plot"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id="Figure-1.-&amp;quot;Before&amp;quot;-Plot"&gt;Figure 1. &amp;#8220;Before&amp;#8221; Plot&lt;a class="anchor-link" href="#Figure-1.-&amp;quot;Before&amp;quot;-Plot"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The result is a pretty standard plot. The stacked bargraph shows two data series, A and B, across 7 years. The axes are labeled and everything looks like it is there. This isn't a &lt;i&gt;bad&lt;/i&gt; plot, I wouldn't do much more than this if I were plotting a histogram or scatterplot to look at general data distribution. BUT, it isn't "pretty" enough to present to management or a report or a journal. The main point is, if it's a quick and dirty plot I don't polish it, but if someone else will look at it, I make it optimal for the audience.&lt;/p&gt;
-&lt;p&gt;Who is your audience? Is this for a powerpoint slide? Then make sure all the text, ticks, etc. are large enough to be seen from the back of the room. Is this for an internal report? Then I crank up the resolution, throw in color, make it publication ready. Is this for a journal article? Then I consider doing all the plots in greyscale because it probably won't be published in color.&lt;/p&gt;
-&lt;p&gt;OK... you weren't reading this for a lecture. Let's get to the fun stuff.&lt;/p&gt;
+&lt;p&gt;The result is a pretty standard plot. The stacked bargraph shows two data series, A and B, across 7 years. The axes are labeled and everything looks like it is there. This isn&amp;#8217;t a &lt;i&gt;bad&lt;/i&gt; plot, I wouldn&amp;#8217;t do much more than this if I were plotting a histogram or scatterplot to look at general data distribution. &lt;span class="caps"&gt;BUT&lt;/span&gt;, it isn&amp;#8217;t &amp;#8220;pretty&amp;#8221; enough to present to management or a report or a journal. The main point is, if it&amp;#8217;s a quick and dirty plot I don&amp;#8217;t polish it, but if someone else will look at it, I make it optimal for the&amp;nbsp;audience.&lt;/p&gt;
+&lt;p&gt;Who is your audience? Is this for a powerpoint slide? Then make sure all the text, ticks, etc. are large enough to be seen from the back of the room. Is this for an internal report? Then I crank up the resolution, throw in color, make it publication ready. Is this for a journal article? Then I consider doing all the plots in greyscale because it probably won&amp;#8217;t be published in&amp;nbsp;color.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OK&lt;/span&gt;&amp;#8230; you weren&amp;#8217;t reading this for a lecture. Let&amp;#8217;s get to the fun&amp;nbsp;stuff.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3574,8 +3525,8 @@ AACCoGAAAIAg/x8WSYefe8FdGAAAAABJRU5ErkJggg==
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The key is changing your global rcParams to make the "default" better. Here is the guide to all &lt;a href="http://matplotlib.org/1.3.1/users/customizing.html"&gt;matplotlib params&lt;/a&gt;.
-Also, I use the &lt;a href="https://github.com/jiffyclub/brewer2mpl/wiki"&gt;brewer2mpl&lt;/a&gt; library to ensure my colormaps are "correct", this is optional but I recommend it. Either use the library or hardcode your colors from &lt;a href="http://colorbrewer2.org/"&gt;colorbrewer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The key is changing your global rcParams to make the &amp;#8220;default&amp;#8221; better. Here is the guide to all &lt;a href="http://matplotlib.org/1.3.1/users/customizing.html"&gt;matplotlib params&lt;/a&gt;.
+Also, I use the &lt;a href="https://github.com/jiffyclub/brewer2mpl/wiki"&gt;brewer2mpl&lt;/a&gt; library to ensure my colormaps are &amp;#8220;correct&amp;#8221;, this is optional but I recommend it. Either use the library or hardcode your colors from &lt;a href="http://colorbrewer2.org/"&gt;colorbrewer&lt;/a&gt;.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3650,8 +3601,8 @@ Also, I use the &lt;a href="https://github.com/jiffyclub/brewer2mpl/wiki"&gt;bre
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The above code changes the global plot parameters, meaning anything you plot here on out will be affected. I like to put this in my path and import it when I plot, kinda like my own personal config file.&lt;/p&gt;
-&lt;p&gt;Below I plot out the same data as before, but with some additional "local" formatting.&lt;/p&gt;
+&lt;p&gt;The above code changes the global plot parameters, meaning anything you plot here on out will be affected. I like to put this in my path and import it when I plot, kinda like my own personal config&amp;nbsp;file.&lt;/p&gt;
+&lt;p&gt;Below I plot out the same data as before, but with some additional &amp;#8220;local&amp;#8221;&amp;nbsp;formatting.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4113,7 +4064,7 @@ oJEEAAAAAIWgkQQAAAAAhaCRBAAAAACFoJEEAAAAAIX8H7NKrxocDSaqAAAAAElFTkSuQmCC
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Figure-2.--&amp;quot;After&amp;quot;-Plot"&gt;Figure 2.  "After" Plot&lt;a class="anchor-link" href="#Figure-2.--&amp;quot;After&amp;quot;-Plot"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id="Figure-2.--&amp;quot;After&amp;quot;-Plot"&gt;Figure 2.  &amp;#8220;After&amp;#8221; Plot&lt;a class="anchor-link" href="#Figure-2.--&amp;quot;After&amp;quot;-Plot"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4129,7 +4080,7 @@ oJEEAAAAAIWgkQQAAAAAhaCRBAAAAACFoJEEAAAAAIX8H7NKrxocDSaqAAAAAElFTkSuQmCC
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This line of code is interesting, why did I move the x-axis labels over?? The bar chart is columns are defined as:&lt;/p&gt;
+&lt;p&gt;This line of code is interesting, why did I move the x-axis labels over?? The bar chart is columns are defined&amp;nbsp;as:&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4146,7 +4097,7 @@ oJEEAAAAAIWgkQQAAAAAhaCRBAAAAACFoJEEAAAAAIX8H7NKrxocDSaqAAAAAElFTkSuQmCC
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The left side of the columns were defined on the integers {0,1,2,...7} with the default width of 0.8. I wanted the ticks to be right in the middle of the columns. Take the first bar, if starts at 0 with width of 0.8 that means the center is 0.4. The second bar starts at 1 with width 0.8 means the center is 1.4. So...the centers are on {0.4,1.4,...8.4}.&lt;/p&gt;
+&lt;p&gt;The left side of the columns were defined on the integers {0,1,2,&amp;#8230;7} with the default width of 0.8. I wanted the ticks to be right in the middle of the columns. Take the first bar, if starts at 0 with width of 0.8 that means the center is 0.4. The second bar starts at 1 with width 0.8 means the center is 1.4. So&amp;#8230;the centers are on&amp;nbsp;{0.4,1.4,&amp;#8230;8.4}.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4154,7 +4105,7 @@ oJEEAAAAAIWgkQQAAAAAhaCRBAAAAACFoJEEAAAAAIX8H7NKrxocDSaqAAAAAElFTkSuQmCC
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;There are other ways to update the rcParams, like this:&lt;/p&gt;
+&lt;p&gt;There are other ways to update the rcParams, like&amp;nbsp;this:&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4171,7 +4122,7 @@ oJEEAAAAAIWgkQQAAAAAhaCRBAAAAACFoJEEAAAAAIX8H7NKrxocDSaqAAAAAElFTkSuQmCC
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As I said, updating rcParams set the global configuration. You could, of course, change all the formatting locally like below.&lt;/p&gt;
+&lt;p&gt;As I said, updating rcParams set the global configuration. You could, of course, change all the formatting locally like&amp;nbsp;below.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4198,7 +4149,7 @@ for label in (ax.get_xticklabels() + ax.get_yticklabels()):
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The point of this article was to encourage you to create better formatted plots easily by default. I should how to change the formatting parameters for all plots within the script. But wait - there's more! If you really like these changes, you could always change your &lt;a href="http://matplotlib.org/users/customizing.html"&gt;matplotlibrc file&lt;/a&gt; and have your settings implemented everytime the matplotlib is imported.&lt;/p&gt;
+&lt;p&gt;The point of this article was to encourage you to create better formatted plots easily by default. I should how to change the formatting parameters for all plots within the script. But wait - there&amp;#8217;s more! If you really like these changes, you could always change your &lt;a href="http://matplotlib.org/users/customizing.html"&gt;matplotlibrc file&lt;/a&gt; and have your settings implemented everytime the matplotlib is&amp;nbsp;imported.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4251,7 +4202,7 @@ for label in (ax.get_xticklabels() + ax.get_yticklabels()):
 
 
 &lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Software&lt;/th&gt;&lt;th&gt;Version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Python&lt;/td&gt;&lt;td&gt;2.7.5+ (default, Feb 27 2014, 19:39:55) [GCC 4.8.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;IPython&lt;/td&gt;&lt;td&gt;2.0.0-dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;OS&lt;/td&gt;&lt;td&gt;posix [linux2]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ipython&lt;/td&gt;&lt;td&gt;0.13.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;matplotlib&lt;/td&gt;&lt;td&gt;1.2.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;brewer2mpl&lt;/td&gt;&lt;td&gt;1.4.dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='2'&gt;Tue Oct 28 22:26:53 2014 PDT&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Software&lt;/th&gt;&lt;th&gt;Version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Python&lt;/td&gt;&lt;td&gt;2.7.5+ (default, Feb 27 2014, 19:39:55) [&lt;span class="caps"&gt;GCC&lt;/span&gt; 4.8.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;IPython&lt;/td&gt;&lt;td&gt;2.0.0-dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;span class="caps"&gt;OS&lt;/span&gt;&lt;/td&gt;&lt;td&gt;posix [linux2]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ipython&lt;/td&gt;&lt;td&gt;0.13.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;matplotlib&lt;/td&gt;&lt;td&gt;1.2.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;brewer2mpl&lt;/td&gt;&lt;td&gt;1.4.dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='2'&gt;Tue Oct 28 22:26:53 2014 &lt;span class="caps"&gt;PDT&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -4291,20 +4242,20 @@ for label in (ax.get_xticklabels() + ax.get_yticklabels()):
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Uncategorized"></category><category term="Python"></category><category term="Matplotlib"></category></entry><entry><title>Small Multiples in Matplotlib</title><link href="https://joelotz.github.io/small-multiples-in-matplotlib.html" rel="alternate"></link><published>2014-10-18T00:00:00+05:30</published><updated>2014-10-18T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2014-10-18:/small-multiples-in-matplotlib.html</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
+</content><category term="Uncategorized"></category><category term="Python"></category><category term="Matplotlib"></category></entry><entry><title>Small Multiples in Matplotlib</title><link href="https://joelotz.github.io/small-multiples-in-matplotlib.html" rel="alternate"></link><published>2014-10-18T00:00:00+05:30</published><updated>2014-10-18T00:00:00+05:30</updated><author><name>Joe Lotz</name></author><id>tag:joelotz.github.io,2014-10-18:/small-multiples-in-matplotlib.html</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI escape sequences */
+/* &lt;span class="caps"&gt;CSS&lt;/span&gt; font colors for translated &lt;span class="caps"&gt;ANSI&lt;/span&gt; escape sequences */
 /* The color values are a mix of
    http://www.xcolors.net/dl/baskerville-ivorylight and
    http://www.xcolors.net/dl/euphrasia */
 .ansi-black-fg {
-  color: #3E424D;
+  color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;;
 }
 .ansi-black-bg {
-  background-color: #3E424D;
+  background-color: #&lt;span class="caps"&gt;3E424D&lt;/span&gt;;
 }
 .ansi-black-intense-fg {
   color: #282C36;
@@ -4313,16 +4264,16 @@ for label in (ax.get_xticklabels() + ax.get_yticklabels()):
   background-color: #282C36;
 }
 .ansi-red-fg {
-  color: #E75C58;
+  color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;;
 }
 .ansi-red-bg {
-  background-color: #E75C58;
+  background-color: #&lt;span class="caps"&gt;E75C58&lt;/span&gt;;
 }
 .ansi-red-intense-fg {
-  color: #B22B31;
+  color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;;
 }
 .ansi-red-intense-bg {
-  background-color: #B22B31;
+  background-color: #&lt;span class="caps"&gt;B22B31&lt;/span&gt;;
 }
 .ansi-green-fg {
   color: #00A250;
@@ -4337,34 +4288,34 @@ for label in (ax.get_xticklabels() + ax.get_yticklabels()):
   background-color: #007427;
 }
 .ansi-yellow-fg {
-  color: #DDB62B;
+  color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;;
 }
 .ansi-yellow-bg {
-  background-color: #DDB62B;
+  background-color: #&lt;span class="caps"&gt;DDB62B&lt;/span&gt;;
 }
 .ansi-yellow-intense-fg {
-  color: #B27D12;
+  color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;;
 }
 .ansi-yellow-intense-bg {
-  background-color: #B27D12;
+  background-color: #&lt;span class="caps"&gt;B27D12&lt;/span&gt;;
 }
 .ansi-blue-fg {
-  color: #208FFB;
+  color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;;
 }
 .ansi-blue-bg {
-  background-color: #208FFB;
+  background-color: #&lt;span class="caps"&gt;208FFB&lt;/span&gt;;
 }
 .ansi-blue-intense-fg {
-  color: #0065CA;
+  color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;;
 }
 .ansi-blue-intense-bg {
-  background-color: #0065CA;
+  background-color: #&lt;span class="caps"&gt;0065CA&lt;/span&gt;;
 }
 .ansi-magenta-fg {
-  color: #D160C4;
+  color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;;
 }
 .ansi-magenta-bg {
-  background-color: #D160C4;
+  background-color: #&lt;span class="caps"&gt;D160C4&lt;/span&gt;;
 }
 .ansi-magenta-intense-fg {
   color: #A03196;
@@ -4373,31 +4324,31 @@ for label in (ax.get_xticklabels() + ax.get_yticklabels()):
   background-color: #A03196;
 }
 .ansi-cyan-fg {
-  color: #60C6C8;
+  color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;;
 }
 .ansi-cyan-bg {
-  background-color: #60C6C8;
+  background-color: #&lt;span class="caps"&gt;60C6C8&lt;/span&gt;;
 }
 .ansi-cyan-intense-fg {
-  color: #258F8F;
+  color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;;
 }
 .ansi-cyan-intense-bg {
-  background-color: #258F8F;
+  background-color: #&lt;span class="caps"&gt;258F8F&lt;/span&gt;;
 }
 .ansi-white-fg {
-  color: #C5C1B4;
+  color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;;
 }
 .ansi-white-bg {
-  background-color: #C5C1B4;
+  background-color: #&lt;span class="caps"&gt;C5C1B4&lt;/span&gt;;
 }
 .ansi-white-intense-fg {
-  color: #A1A6B2;
+  color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;;
 }
 .ansi-white-intense-bg {
-  background-color: #A1A6B2;
+  background-color: #&lt;span class="caps"&gt;A1A6B2&lt;/span&gt;;
 }
 .ansi-default-inverse-fg {
-  color: #FFFFFF;
+  color: #&lt;span class="caps"&gt;FFFFFF&lt;/span&gt;;
 }
 .ansi-default-inverse-bg {
   background-color: #000000;
@@ -4506,12 +4457,12 @@ div.cell:before {
   background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #E3F2FD;
+  border-left-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
   border-left-width: 1px;
   padding-left: 5px;
-  border-right-color: #E3F2FD;
+  border-right-color: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
   border-right-width: 1px;
-  background: #E3F2FD;
+  background: #&lt;span class="caps"&gt;E3F2FD&lt;/span&gt;;
 }
 @media print {
   div.cell.jupyter-soft-selected {
@@ -4531,7 +4482,7 @@ div.cell.selected.jupyter-soft-selected:before {
   width: 5px;
   height: calc(100% +  2px);
   content: '';
-  background: #42A5F5;
+  background: #&lt;span class="caps"&gt;42A5F5&lt;/span&gt;;
 }
 @media print {
   div.cell.selected,
@@ -4540,7 +4491,7 @@ div.cell.selected.jupyter-soft-selected:before {
   }
 }
 .edit_mode div.cell.selected {
-  border-color: #66BB6A;
+  border-color: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
 }
 .edit_mode div.cell.selected:before {
   position: absolute;
@@ -4550,7 +4501,7 @@ div.cell.selected.jupyter-soft-selected:before {
   width: 5px;
   height: calc(100% +  2px);
   content: '';
-  background: #66BB6A;
+  background: #&lt;span class="caps"&gt;66BB6A&lt;/span&gt;;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -4703,7 +4654,7 @@ div.input {
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_prompt {
-  color: #303F9F;
+  color: #&lt;span class="caps"&gt;303F9F&lt;/span&gt;;
   border-top: 1px solid transparent;
 }
 div.input_area &gt; div.highlight {
@@ -4744,7 +4695,7 @@ div.input_area &gt; div.highlight &gt; pre {
   overflow-x: auto;
 }
 .CodeMirror-lines {
-  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* In &lt;span class="caps"&gt;CM2&lt;/span&gt;, this used to be 0.4em, but in &lt;span class="caps"&gt;CM3&lt;/span&gt; it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
   /* Note that this should set vertical padding only, since CodeMirror assumes
        that horizontal padding will be set on CodeMirror pre */
@@ -4758,7 +4709,7 @@ div.input_area &gt; div.highlight &gt; pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+  /* In &lt;span class="caps"&gt;CM3&lt;/span&gt; this went to 4px from 0 in &lt;span class="caps"&gt;CM2&lt;/span&gt;. This sets horizontal padding only,
     use .CodeMirror-lines for vertical */
   padding: 0 0.4em;
   border: 0;
@@ -4796,7 +4747,7 @@ Adapted from GitHub theme
   color: #333333;
 }
 .highlight-string {
-  color: #BA2121;
+  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
 }
 .highlight-comment {
   color: #408080;
@@ -4819,11 +4770,11 @@ Adapted from GitHub theme
   color: #f00;
 }
 .highlight-operator {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
   font-weight: bold;
 }
 .highlight-meta {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
 }
 /* previously not defined, copying from default codemirror */
 .highlight-def {
@@ -4871,7 +4822,7 @@ Adapted from GitHub theme
   color: #000;
 }
 .cm-s-ipython span.cm-operator {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
   font-weight: bold;
 }
 .cm-s-ipython span.cm-variable-2 {
@@ -4885,13 +4836,13 @@ Adapted from GitHub theme
   font-style: italic;
 }
 .cm-s-ipython span.cm-string {
-  color: #BA2121;
+  color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;;
 }
 .cm-s-ipython span.cm-string-2 {
   color: #f50;
 }
 .cm-s-ipython span.cm-meta {
-  color: #AA22FF;
+  color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;;
 }
 .cm-s-ipython span.cm-qualifier {
   color: #555;
@@ -4946,9 +4897,9 @@ div.output_wrapper {
 }
 /* class for the output area when it should be height-limited */
 div.output_scroll {
-  /* ideally, this would be max-height, but FF barfs all over that */
+  /* ideally, this would be max-height, but &lt;span class="caps"&gt;FF&lt;/span&gt; barfs all over that */
   height: 24em;
-  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  /* &lt;span class="caps"&gt;FF&lt;/span&gt; needs this *and the wrapper* to specify full width, or it will shrinkwrap */
   width: 100%;
   overflow: auto;
   border-radius: 2px;
@@ -4982,7 +4933,7 @@ div.out_prompt_overlay {
   border-radius: 2px;
 }
 div.out_prompt_overlay:hover {
-  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  /* use inner shadow to get border that is computed the same on WebKit/&lt;span class="caps"&gt;FF&lt;/span&gt; */
   -webkit-box-shadow: inset 0 0 1px #000;
   box-shadow: inset 0 0 1px #000;
   background: rgba(240, 240, 240, 0.5);
@@ -5337,25 +5288,25 @@ h6:hover .anchor-link {
 &lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
  .highlight pre   { background: #f8f8f8; }
  .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
- .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
  .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
  .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #BC7A00 } /* Comment.Preproc */
+ .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
  .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
  .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
  .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #FF0000 } /* Generic.Error */
+ .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
  .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
  .highlight pre  .go { color: #888888 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
- .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .gt { color: #&lt;span class="caps"&gt;0044DD&lt;/span&gt; } /* Generic.Traceback */
  .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
  .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
  .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
@@ -5363,41 +5314,41 @@ h6:hover .anchor-link {
  .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
- .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
  .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
- .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
- .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
  .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
- .highlight pre  .nf { color: #0000FF } /* Name.Function */
- .highlight pre  .nl { color: #A0A000 } /* Name.Label */
- .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
+ .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
- .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .ow { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt;; font-weight: bold } /* Operator.Word */
  .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
  .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
  .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
  .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
  .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
  .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
- .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
- .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
- .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
- .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
- .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
- .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
- .highlight pre  .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
- .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sa { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Char */
+ .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #BB6688 } /* Literal.String.Regex */
- .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
- .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .fm { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function.Magic */
  .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
  .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
  .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
@@ -5405,10 +5356,10 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This is my attempt at recreating the small multiples graph from Flowingdata in matplotlib. I realize the point of the flowingdata article was to showcase filtering and linking using D3.js - but wanted to simply create the chart.&lt;/p&gt;
+&lt;p&gt;This is my attempt at recreating the small multiples graph from Flowingdata in matplotlib. I realize the point of the flowingdata article was to showcase filtering and linking using D3.js - but wanted to simply create the&amp;nbsp;chart.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://flowingdata.com/2014/10/15/linked-small-multiples/"&gt;http://flowingdata.com/2014/10/15/linked-small-multiples/&lt;/a&gt;  &lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://flowingdata.com/2013/04/29/small-multiples-in-r/"&gt;Small multiples in R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://flowingdata.com/2013/04/29/small-multiples-in-r/"&gt;Small multiples in&amp;nbsp;R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;You can download the code in this &lt;a href="https://gist.github.com/joelotz/9556db8c1df173decf4b#file-small-multiples"&gt;gist&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -5519,32 +5470,32 @@ h6:hover .anchor-link {
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;th&gt;2004-01-01&lt;/th&gt;
-      &lt;td&gt; clothing, beauty, &amp;amp; fashion&lt;/td&gt;
+      &lt;td&gt; clothing, beauty, &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; fashion&lt;/td&gt;
       &lt;td&gt; 141&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;2005-01-01&lt;/th&gt;
-      &lt;td&gt; clothing, beauty, &amp;amp; fashion&lt;/td&gt;
+      &lt;td&gt; clothing, beauty, &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; fashion&lt;/td&gt;
       &lt;td&gt; 203&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;2006-01-01&lt;/th&gt;
-      &lt;td&gt; clothing, beauty, &amp;amp; fashion&lt;/td&gt;
+      &lt;td&gt; clothing, beauty, &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; fashion&lt;/td&gt;
       &lt;td&gt; 195&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;2007-01-01&lt;/th&gt;
-      &lt;td&gt; clothing, beauty, &amp;amp; fashion&lt;/td&gt;
+      &lt;td&gt; clothing, beauty, &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; fashion&lt;/td&gt;
       &lt;td&gt; 296&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;2008-01-01&lt;/th&gt;
-      &lt;td&gt; clothing, beauty, &amp;amp; fashion&lt;/td&gt;
+      &lt;td&gt; clothing, beauty, &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; fashion&lt;/td&gt;
       &lt;td&gt; 432&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;5 rows × 2 columns&lt;/p&gt;
+&lt;p&gt;5 rows × 2&amp;nbsp;columns&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -6832,7 +6783,7 @@ gUAgEIYZxFEjEAgEAoFAIBAIhGHG/wG/EZq0MarSTAAAAABJRU5ErkJggg==
 
 
 &lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Software&lt;/th&gt;&lt;th&gt;Version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Python&lt;/td&gt;&lt;td&gt;2.7.5+ (default, Feb 27 2014, 19:39:55) [GCC 4.8.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;IPython&lt;/td&gt;&lt;td&gt;2.0.0-dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;OS&lt;/td&gt;&lt;td&gt;posix [linux2]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ipython&lt;/td&gt;&lt;td&gt;0.13.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;pandas&lt;/td&gt;&lt;td&gt;0.13.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;matplotlib&lt;/td&gt;&lt;td&gt;1.2.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='2'&gt;Sat Oct 18 14:25:44 2014 PDT&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Software&lt;/th&gt;&lt;th&gt;Version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Python&lt;/td&gt;&lt;td&gt;2.7.5+ (default, Feb 27 2014, 19:39:55) [&lt;span class="caps"&gt;GCC&lt;/span&gt; 4.8.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;IPython&lt;/td&gt;&lt;td&gt;2.0.0-dev&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;span class="caps"&gt;OS&lt;/span&gt;&lt;/td&gt;&lt;td&gt;posix [linux2]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ipython&lt;/td&gt;&lt;td&gt;0.13.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;pandas&lt;/td&gt;&lt;td&gt;0.13.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;matplotlib&lt;/td&gt;&lt;td&gt;1.2.1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='2'&gt;Sat Oct 18 14:25:44 2014 &lt;span class="caps"&gt;PDT&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title> Converting mp4 to mov with FFmpeg in Ubuntu | Delving into Delusion </title>
+    <title> Converting mp4 to mov with FFmpeg in&nbsp;Ubuntu | Delving into Delusion </title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
@@ -28,47 +28,47 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> Converting mp4 to mov with FFmpeg in Ubuntu</h1>
+    <h1 class="title"> Converting mp4 to mov with FFmpeg in&nbsp;Ubuntu</h1>
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 25, 2020 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/ffmpeg.html">FFmpeg</a>     </p>
-    <p><em>Update:</em> <a href="running-shell-scripts-on-files-from-nautilus.html">Please see the post</a> on how I turned this into a script that can be executed on a file by right-clicking. </p>
+    <p><em>Update:</em> <a href="running-shell-scripts-on-files-from-nautilus.html">Please see the post</a> on how I turned this into a script that can be executed on a file by&nbsp;right-clicking. </p>
 <hr>
-<p>GoPro outputs video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient HVEC H.265 mp4 container. This is great because:</p>
+<p>GoPro outputs video in H.264 mp4 containers and the Hero6 and Hero7 now can output in the more efficient <span class="caps">HVEC</span> H.265 mp4 container. This is great&nbsp;because:</p>
 <ol>
-<li>nearly everything can read and play H.264 mp4 files</li>
-<li>since the H.265 mp4 is more space efficient you can save even more video to your memory card.</li>
+<li>nearly everything can read and play H.264 mp4&nbsp;files</li>
+<li>since the H.265 mp4 is more space efficient you can save even more video to your memory&nbsp;card.</li>
 </ol>
-<p>Yeah! But wait…. Not everything can read/play the new H.265 mp4.</p>
-<p>FYI, here are some great posts by havecamerawilltravel that you should read:</p>
+<p>Yeah! But wait…. Not everything can read/play the new H.265&nbsp;mp4.</p>
+<p><span class="caps">FYI</span>, here are some great posts by havecamerawilltravel that you should&nbsp;read:</p>
 <ul>
-<li><a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/">Hero7 Black Modes</a></li>
-<li><a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/">How to Convert H.265 to H.264 in Handbrake</a></li>
+<li><a href="https://havecamerawilltravel.com/gopro/gopro-hero7-black-video-modes/">Hero7 Black&nbsp;Modes</a></li>
+<li><a href="https://havecamerawilltravel.com/gopro/convert-hevc-h265-video-codec/">How to Convert H.265 to H.264 in&nbsp;Handbrake</a></li>
 </ul>
-<p>My goal is to edit and color correct my home videos in Davinci Resolve 16 (DR16) but it turns out it doesn’t import these GoPro video files directly, at least not in the Linux free version. </p>
-<p>In the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">support notes of DR16</a> it states that :</p>
+<p>My goal is to edit and color correct my home videos in Davinci Resolve 16 (<span class="caps">DR16</span>) but it turns out it doesn’t import these GoPro video files directly, at least not in the Linux free&nbsp;version. </p>
+<p>In the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">support notes of <span class="caps">DR16</span></a> it states that&nbsp;:</p>
 <ul>
-<li>macOS will read mp4 in both DR16 (free version) and DR16 Studio (paid version)</li>
-<li>Windows will read mp4 in DR16 Studio only</li>
-<li><strong>Linux</strong> will read mp4 in DR16 Studio only</li>
+<li>macOS will read mp4 in both <span class="caps">DR16</span> (free version) and <span class="caps">DR16</span> Studio (paid&nbsp;version)</li>
+<li>Windows will read mp4 in <span class="caps">DR16</span> Studio&nbsp;only</li>
+<li><strong>Linux</strong> will read mp4 in <span class="caps">DR16</span> Studio&nbsp;only</li>
 </ul>
 <p><img alt="DR16 Input Codecs" src="/images/DR16_InputCodecs.png"></p>
-<p><a href="https://handbrake.fr/">Handbrake</a> is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. </p>
-<h3>Installing FFmpeg on Ubuntu 20.04</h3>
+<p><a href="https://handbrake.fr/">Handbrake</a> is a <span class="caps">GUI</span> front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in <span class="caps">DR16</span>. </p>
+<h3>Installing FFmpeg on Ubuntu&nbsp;20.04</h3>
 <p>This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>.</p>
 <div class="highlight"><pre><span></span>sudo apt install ffmpeg
 </pre></div>
 
 
-<h3>Converting my Video from mp4 to mov</h3>
-<p>In my research and experimentation I found success in two codecs; Apple <a href="https://en.wikipedia.org/wiki/Apple_ProRes">ProRes</a> and <a href="Avid DNxHD">Avid DNxHD</a>. You can view all the installed and available codecs on your machine with <code>ffmpeg -codecs</code>. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the interwebs. </p>
-<p>As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted <a href="https://en.wikipedia.org/wiki/Advanced_Audio_Coding">AAC</a> audio into <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation">PCM</a> audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit easier:</p>
+<h3>Converting my Video from mp4 to&nbsp;mov</h3>
+<p>In my research and experimentation I found success in two codecs; Apple <a href="https://en.wikipedia.org/wiki/Apple_ProRes">ProRes</a> and <a href="Avid DNxHD">Avid DNxHD</a>. You can view all the installed and available codecs on your machine with <code>ffmpeg -codecs</code>. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the&nbsp;interwebs. </p>
+<p>As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted <a href="https://en.wikipedia.org/wiki/Advanced_Audio_Coding"><span class="caps">AAC</span></a> audio into <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation"><span class="caps">PCM</span></a> audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit&nbsp;easier:</p>
 <div class="highlight"><pre><span></span>ffmpeg -i input.mp4 -c:v prores -profile:v <span class="m">3</span> -c:a pcm_s16le output.mov
 </pre></div>
 
 
-<p>The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy details. </p>
-<p>Here is the final command, assuming 4k resolution at 23.967 (aka 24) fps.</p>
+<p>The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy&nbsp;details. </p>
+<p>Here is the final command, assuming 4k resolution at 23.967 (aka 24)&nbsp;fps.</p>
 <div class="highlight"><pre><span></span>ffmpeg -i input.mp4 <span class="se">\</span>
     -c:v dnxhd <span class="se">\</span>
     -profile:v dnxhr_hqx <span class="se">\</span>
@@ -79,72 +79,78 @@
 </pre></div>
 
 
-<h4>Audio Transcoding</h4>
-<p>Referring back to the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">Black Magic Support Codecs</a>, we see that mp3 and AAC are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the video.</p>
+<h4>Audio&nbsp;Transcoding</h4>
+<p>Referring back to the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">Black Magic Support Codecs</a>, we see that mp3 and <span class="caps">AAC</span> are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the&nbsp;video.</p>
 <p><img alt="DR16_InputAudio" src="/media/joe/Working/Blog/content/images/DR16_InputAudio.png"></p>
-<h4>FFmpeg Options/Arguments</h4>
+<h4>FFmpeg&nbsp;Options/Arguments</h4>
 <ul>
 <li>
-<p><code>-i</code> defines the input file</p>
+<p><code>-i</code> defines the input&nbsp;file</p>
 </li>
 <li>
-<p><code>-c:v</code> (or the alias <code>-vcodec</code>) defines the codec to use for the video</p>
+<p><code>-c:v</code> (or the alias <code>-vcodec</code>) defines the codec to use for the&nbsp;video</p>
 </li>
 </ul>
-<p><code>-profile:v</code> defines the profile to use for the video.</p>
+<p><code>-profile:v</code> defines the profile to use for the&nbsp;video.</p>
 <ul>
 <li>
 <p>Accepted values are: <code>dnxhd</code>, <code>dnxhr_444</code>, <code>dnxhr_hqx</code>, <code>dnxhr_hq</code>, <code>dnxhr_sq</code>, <code>dnxhr_lb</code>.</p>
 </li>
 <li>
-<p>I was able to convert 1920x1080 videos but kept getting an error when attempting 4k 3840x2160 videos. I was stuck at this point for a while until I found a post on <a href="https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format">askubuntu</a> explaining that a different profile was needed.</p>
+<p>I was able to convert 1920x1080 videos but kept getting an error when attempting 4k 3840x2160 videos. I was stuck at this point for a while until I found a post on <a href="https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format">askubuntu</a> explaining that a different profile was&nbsp;needed.</p>
 </li>
 <li>
-<p><code>dnxhd</code>: The lists of available/possible resolutions can be <a href="https://en.wikipedia.org/wiki/List_of_Avid_DNxHD_resolutions">looked up here</a>, but they do not go bigger than 1080p.</p>
+<p><code>dnxhd</code>: The lists of available/possible resolutions can be <a href="https://en.wikipedia.org/wiki/List_of_Avid_DNxHD_resolutions">looked up here</a>, but they do not go bigger than&nbsp;1080p.</p>
 </li>
 <li>
-<h5>DNxHR Profiles</h5>
+<h5>DNxHR&nbsp;Profiles</h5>
 <ul>
-<li>DNxHR LB: <code>dnxhr_lb</code> - Low Bandwidth. 8-bit 4:2:2 (<code>yuv422p</code>). Offline Quality.</li>
-<li>DNxHR SQ: <code>dnxhr_sq</code> - Standard Quality. 8-bit 4:2:2 (<code>yuv422p</code>). Suitable for delivery format.</li>
-<li>DNxHR HQ: <code>dnxhr_hq</code> - High Quality. 8-bit 4:2:2 (<code>yuv422p</code>).</li>
-<li>DNxHR HQX: <code>dnxhr_hqx</code> - High Quality. 10-bit 4:2:2 (<code>yuv422p10le</code>). UHD/4K Broadcast-quality delivery.</li>
-<li>DNxHR 444: <code>dnxhr_444</code> - Finishing Quality. 10-bit 4:4:4 (<code>yuv444p10le</code>). Cinema-quality delivery.</li>
+<li>DNxHR <span class="caps">LB</span>: <code>dnxhr_lb</code> - Low Bandwidth. 8-bit 4:2:2 (<code>yuv422p</code>). Offline&nbsp;Quality.</li>
+<li>DNxHR <span class="caps">SQ</span>: <code>dnxhr_sq</code> - Standard Quality. 8-bit 4:2:2 (<code>yuv422p</code>). Suitable for delivery&nbsp;format.</li>
+<li>DNxHR <span class="caps">HQ</span>: <code>dnxhr_hq</code> - High Quality. 8-bit 4:2:2 (<code>yuv422p</code>).</li>
+<li>DNxHR <span class="caps">HQX</span>: <code>dnxhr_hqx</code> - High Quality. 10-bit 4:2:2 (<code>yuv422p10le</code>). <span class="caps">UHD</span>/4K Broadcast-quality&nbsp;delivery.</li>
+<li>DNxHR 444: <code>dnxhr_444</code> - Finishing Quality. 10-bit 4:4:4 (<code>yuv444p10le</code>). Cinema-quality&nbsp;delivery.</li>
 </ul>
-<p>The above list was adapted from <a href="https://en.wikipedia.org/wiki/DNxHR_codec">DNxHR codec</a>. Note that the pix_format must match the profile! </p>
+<p>The above list was adapted from <a href="https://en.wikipedia.org/wiki/DNxHR_codec">DNxHR codec</a>. Note that the pix_format must match the&nbsp;profile! </p>
 </li>
 <li>
 <p><code>-vf</code> is as alias for <code>-filter:v</code> and creates the filtergraph that is used to filter the stream. You can specify each value but this is easier, for example <code>-pix_fmt=yuv422p10le</code>. </p>
 </li>
 <li>
-<p><code>scale=</code>width x height </p>
+<p><code>scale=</code>width x&nbsp;height </p>
 </li>
 <li><code>fps=</code><ul>
 <li>23.967 = 24000/1001 (or use the alias <code>ntsc-film</code>)</li>
 <li>29.97 = 30000/1001 (or use the alias <code>ntsc</code>)</li>
-<li>59.94 = 60000/1001</li>
-<li>119.88 = 120000/1001</li>
+<li>59.94 =&nbsp;60000/1001</li>
+<li>119.88 =&nbsp;120000/1001</li>
 </ul>
 </li>
 <li>
 <p><code>pix_fmts=</code></p>
 <ul>
-<li>For <code>dnxhr_lb</code> , <code>dnxhr_sq</code>, or <code>dnr_hq</code> = yuv422p</li>
-<li>For <code>dnxhr_hqx</code> or <code>dnxhr_444</code>=  yuv422p10le</li>
+<li>For <code>dnxhr_lb</code> , <code>dnxhr_sq</code>, or <code>dnr_hq</code> =&nbsp;yuv422p</li>
+<li>For <code>dnxhr_hqx</code> or <code>dnxhr_444</code>=&nbsp;yuv422p10le</li>
 </ul>
 </li>
 <li>
-<p><code>-c:a</code> defines the codec to use for the audio</p>
+<p><code>-c:a</code> defines the codec to use for the&nbsp;audio</p>
 </li>
 </ul>
     
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> FFmpeg</td><td>4.2.2-1</td></tr>
+    </table>
+    </code>
+    </div>
 
 
-<!--        <p class=tags></br>This entry was tagged as
-      <a href="/tag/ubuntu.html">Ubuntu</a>
-      <a href="/tag/ffmpeg.html">FFmpeg</a>
-    </p>
--->    
         </div>
         
         <div class=footer>
