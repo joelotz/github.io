@@ -35,8 +35,8 @@ else # Else, run
     git push origin master
     # save the "non-compiled" files of blog and push to a
     #  branch called 'content'
-    git add -u
-    git reset -- output/* plugins/*
+    git add --all
+    git reset -- output/* plugins/* __pycache__/*
     git commit -m "$inputStr"
     git push origin content
 fi
