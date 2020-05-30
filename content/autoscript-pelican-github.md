@@ -44,14 +44,15 @@ then
 else # Else, run 
 
     # Build the blog    
-    pelican content -o output -s publishconf.py
+    pelican content -o output -s pelicanconf.py
     # collect and push the blog output folder to github pages
     #  in a branch called 'master'
     ghp-import -m "$inputStr" -b master output
     git push origin master
     # save the "non-compiled" files of blog and push to a
     #  branch called 'content'
-    git add content
+    git add --all
+    git reset output/* plugins/* __pycache__/*
     git commit -m "$inputStr"
     git push origin content
 fi
@@ -68,7 +69,14 @@ git push origin master
 ```
 This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box". Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don't need to enter them, [[1]](https://help.github.com/en/github/using-git/caching-your-github-password-in-git) and [[2]](https://git-scm.com/docs/git-credential-store).
 
-Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. 
+```shell
+git add --all
+git reset output/* plugins/* __pycache__/*
+git commit -m "$inputStr"
+git push origin content
+```
+
+This last bit is a little tricky. First, I want to add everything in my blog folder then remove from staging the output folder (which I’m already pushing to the master branch), the plugin folder, and the \__pycache__ folder. I believe you can also accomplish this with a .gitignore file. Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. 
 
 ![pelicanGithub-02](/images/pelicanGithub-02.png)
 

@@ -28,7 +28,7 @@ then
 else # Else, run 
 
     # Build the blog    
-    pelican content -o output -s publishconf.py
+    pelican content -o output -s pelicanconf.py
     # collect and push the blog output folder to github pages
     #  in a branch called 'master'
     ghp-import -m "$inputStr" --no-jekyll -b master output
