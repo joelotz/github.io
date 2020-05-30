@@ -1,8 +1,0 @@
-OS_VERS=$(grep -oP '(?<=^PRETTY_NAME=).+' /etc/os-release | tr -d '"')
-PELICAN_VERS=$(pelican --version)
-FFMPEG_VERS=$(ffmpeg -version | sed -n "s/ffmpeg version \([-0-9.]*\).*/\1/p;")
-IMAGEMAGICK_VERS=$(identify -version | sed -n "s/Version: ImageMagick \([-0-9.]*\).*/\1/p;")
-PYTHON_VERS=$(python --version | sed -n "s/Python \([-0-9.]*\).*/\1/p;")
-DAVINCI_VERS=$(apt show davinci-resolve | sed -n "s/Version: \([-0-9.]*\).*/\1/p;")
-
-
