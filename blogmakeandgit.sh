@@ -35,7 +35,8 @@ else # Else, run
     git push origin master
     # save the "non-compiled" files of blog and push to a
     #  branch called 'content'
-    git add content theme/* publishconf.py pelicanconf.py blogmakeandgit.sh
+    git add -u
+    git reset -- output/*
     git commit -m "$inputStr"
     git push origin content
 fi
