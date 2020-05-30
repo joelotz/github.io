@@ -9,7 +9,7 @@ PATH = 'content'
 TIMEZONE = 'Asia/Kolkata'
 DEFAULT_LANG = 'en'
 
-THEME = "theme/flasky"
+THEME = "theme/flaskymod"
 
 ## FLASKY CONFIGURATION #############################################
 # Navigation sections and relative URL:

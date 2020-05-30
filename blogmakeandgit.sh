@@ -36,7 +36,7 @@ else # Else, run
     # save the "non-compiled" files of blog and push to a
     #  branch called 'content'
     git add -u
-    git reset -- output/*
+    git reset -- output/* plugins/*
     git commit -m "$inputStr"
     git push origin content
 fi
