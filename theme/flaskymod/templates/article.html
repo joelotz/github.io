@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} {{ article.title }} | {{ SITENAME }} {% endblock %}
+
+{% block content %}
+    <h1 class="title"> {{ article.title }}</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;{{ article.locale_date }} &nbsp;&nbsp;&nbsp;
+    	{% if article.tags %}
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+           {% for tag in article.tags %} <a href="/{{ tag.url }}">{{ tag }}</a> {% endfor %}
+        {% endif %}
+    </p>
+    {{ article.content }}
+    
+    {% if article.version %}
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    {% set vers = article.version.split(',') %}
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    {% for software in vers|batch(2) %}
+    <tr><td>{{ software[0] }}</td><td>{{ software[1] }}</td></tr>
+    {% endfor %}
+    </table>
+    </code>
+    {% endif %}
+    </div>
+
+
+{% endblock %}
