@@ -4,6 +4,7 @@ Tags: Ubuntu, FFmpeg
 Author: Joe
 Summary:
 Keywords: ubuntu 20.04, ffmpeg, gopro, davinci resolve 16, H.264, mp4, mov
+Version: OS, Ubuntu 20.04 LTS, FFmpeg,4.2.2-1
 
 *Update:* [Please see the post](running-shell-scripts-on-files-from-nautilus.html) on how I turned this into a script that can be executed on a file by right-clicking. 
 

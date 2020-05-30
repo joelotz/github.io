@@ -3,6 +3,7 @@ Date: 2020-05-29
 Tags: Ubuntu, Pelican
 Author: Joe Lotz
 Keywords: pelican, pelican static site generator, ubuntu 20.4, ghp-import, github, github pages
+Version: Version: OS, Ubuntu 20.04 LTS, bash, 5.0.16(1)-release, python, 2.7.4, Pelican, 4.2.0
 
 I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes [zenity](https://packages.ubuntu.com/focal/zenity) is installed on the system. If not, easily install via:
 ```bash
@@ -12,7 +13,7 @@ sudo apt install zenity
 I would highly recommend setting up `ghp-import` and this script assumes you have. Follow [these instructions](https://opensource.com/article/19/5/run-your-blog-github-pages-python) if you  need to install/configure it. 
 
 Here’s the script, save it in the root directory of your pelican blog and make it executable.
-```
+```bash
 #!/bin/bash
 
 # ========================================================================
@@ -57,7 +58,6 @@ fi
 ```
 A zenity input box is used to capture the commit message. 
 ![pelicanGithub-01](/images/pelicanGithub-01.png)
-
 ```bash
 pelican content -o output -s publishconf.py
 ```
@@ -73,4 +73,3 @@ Next, commit and push the ‘source’ files or all my non-generated pages to th
 ![pelicanGithub-02](/images/pelicanGithub-02.png)
 
 In your <name>github.io repository, click the branch button and you will see the ‘master’ which is default and contains the generated html files. You can also click the ‘content’ branch and see your source files.
-

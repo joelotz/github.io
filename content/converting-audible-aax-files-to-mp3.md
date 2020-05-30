@@ -3,6 +3,7 @@ Date: 2020-05-28
 Tags: Ubuntu, FFmpeg
 Author: Joe Lotz
 Keywords: ubuntu 20.04, audible.com, .aax, convert aax to mp3
+Version: OS, Ubuntu 20.04 LTS, bash, 5.0.16(1)-release, python, 2.7.4, FFmpeg,4.2.2-1,
 
 I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. 
 
