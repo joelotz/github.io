@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1 class="title"> {{ article.title }}</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;{{ article.locale_date }} &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;{{ article.locale_date }} &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek-01" style="color: #234764;"></span>&nbsp;Stardate: {{ article.stardate }} &nbsp;&nbsp;&nbsp;
     	{% if article.tags %}
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
            {% for tag in article.tags %} <a href="/{{ tag.url }}">{{ tag }}</a> {% endfor %}
