@@ -119,6 +119,8 @@ div.entry-overview div.summary p    { margin: 0; padding: 0; }
 div.entry-overview div.detail       { margin-left: 140px; }
 div.entry-overview div.date         { float: left; width: 160px; color: #888;
                                       text-align: left; font-style: italic; }
+div.entry-overview div.detail p    { margin: 0; padding: 0; padding-left: 40px;}                              
+                                      
 /*div.entry-overview h1:after         { content: " —"; }*/
 
 /* other alignment things */
