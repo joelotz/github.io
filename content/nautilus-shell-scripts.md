@@ -2,7 +2,7 @@ Title: Running Shell Scripts on Files from Nautilus
 Date: 2020-05-03
 Tags: Ubuntu, bash
 Author: Joe Lotz
-Summary:
+Excerpt: Running bash scripts from the nautilus (file manager) window is just awesome. I have so many little utility scripts now. 
 Keywords: ubuntu 20.04, nautilus, bash
 Version: OS, Ubuntu 20.04 LTS, bash, 5.0.16(1)-release
 

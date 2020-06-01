@@ -1,9 +1,7 @@
 Title: Pimp My Plots
 Author: Joe Lotz
 Date: 2014-10-28
-Category: 
 Tags: Python, Matplotlib
 Keywords: matplotlib, jupyter
-Slug:
-Summary:
+Excerpt: In this post I will show some matplotlib kung-fu! Most of this was stolen from @jakevdp, but others from StackExchange. The basic premise is that the default values for any visualization library (Excel, R, Python, Matlab) is ugly. Why do the developers use such horrible defaults?? But this tutorial, amongst many others on the interwebs, will show you how to “pimp my plots”!
 

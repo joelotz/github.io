@@ -1,8 +1,8 @@
 Title: Converting mp4 to mov with FFmpeg in Ubuntu
 Date: 2020-04-25
 Tags: Ubuntu, FFmpeg
-Author: Joe
-Summary:
+Author: Joe Lotz
+Excerpt: Davinci Resolve 16 for Linux doesn't read the common .mp4 file format, which is crazy. Use FFmpeg to convert high-resolution .mp4 footage to the Apple .mov file format without loss of quality.
 Keywords: ubuntu 20.04, ffmpeg, gopro, davinci resolve 16, H.264, mp4, mov
 Version: OS, Ubuntu 20.04 LTS, FFmpeg,4.2.2-1
 

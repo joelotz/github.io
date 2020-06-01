@@ -2,7 +2,7 @@ Title: Importing GoPro Vids into Davinci Resolve 16 on Ubuntu
 Date: 2020-05-16
 Tags: Ubuntu, FFmpeg, GoPro, Davinci Resolve 16
 Author: Joe Lotz
-Summary:
+Excerpt: This article shows how to save audio from an .mp4 video file into a high-quality audio file. 
 Keywords: ubuntu 20.04, ffmpeg, gopro, davinci resolve 16, mp4, mov, gopro
 Version: OS, Ubuntu 20.04 LTS, FFmpeg,4.2.2-1, DavinciResolve, 16.1.2-1
 

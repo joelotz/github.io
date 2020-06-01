@@ -3,7 +3,7 @@ Date: 2020-05-29
 Tags: Ubuntu, Pelican
 Author: Joe Lotz
 Keywords: pelican, pelican static site generator, ubuntu 20.4, ghp-import, github, github pages
-Excerpt: This is a summary
+Excerpt: I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages.
 Version: OS, Ubuntu 20.04 LTS, git, 2.25.1, Pelican, 4.2.0
 
 I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes [zenity](https://packages.ubuntu.com/focal/zenity) is installed on the system. If not, easily install via:

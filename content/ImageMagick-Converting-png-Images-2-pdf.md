@@ -1,9 +1,8 @@
 Title: ImageMagick Converting png Images to a Custom pdf
 Date: 2020-04-30
-Category: 
 Tags: Ubuntu, ImageMagick
 Author: Joe
-Summary:
+Excerpt: I have a bunch of png scans of my mother-in-law’s recipe book and want to compile them all into a single pdf. ImageMagick lets you input an entire directory of images, manipulate them if desired, and outputs as a pdf file. You can even set the exif data.
 Keywords: ubuntu 20.04, imagemagick
 Version: OS, Ubuntu 20.04 LTS, ImageMagick,7.0.10-10
 

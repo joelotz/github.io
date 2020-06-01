@@ -2,7 +2,7 @@ Title: Running FreeFileSync Backup from Crontab on Ubuntu
 Date: 2020-05-26
 Tags: Ubuntu
 Author: Joe Lotz
-Summary:
+Excerpt: Documenting my solution to running FreeFileSync backup from a crontab. 
 Keywords: ubuntu 20.04, ffs, freefilesync, Error: Unable to initialize GTK+, is DISPLAY set properly?
 
 It took me half a day, maybe 4 hours, to solve this problem and I want to document the solution. I wanted to use [FreeFileSync](https://www.linux-magazine.com/Online/Features/FreeFileSync/(offset)/3) to backup all my files to an external hard drive. I looked at [a bunch of other software](https://www.capterra.com/file-sync-software/) but what I want to do is pretty basic and everything else was too complicated for me. Regardless, I installed [FreeFileSync](https://freefilesync.org/), setup the configuration, and saved the “batch job”. Everything works smooth when manually run, but of course I want to automate the process and setup a cron job. 

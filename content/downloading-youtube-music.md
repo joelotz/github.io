@@ -3,7 +3,8 @@ Date: 2020-05-20
 Category: 
 Tags: Ubuntu, FFmpeg,
 Author: Joe Lotz
-Keywords: ubuntu 20.04, ffmpeg, youtube.dl	
+Keywords: ubuntu 20.04, ffmpeg, youtube.dl
+Excerpt: There are websites that will download music from youtube videos with varying degrees of quality. This article explains how you cna do the same thing via terminal command line and have more control.
 Version: OS, Ubuntu 20.04 LTS, FFmpeg,4.2.2-1, youtube-dl, 2020.03.24, audacity, v2.3.3
 
 I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - [JBL Endurance Dive](https://in.jbl.com/JBL+Endurance+DIVE.html). I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the [SanDisk Clip Sport Plus](https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r). BUT, the JBL headphones have a built-in mp3 player with 1GB storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just running.

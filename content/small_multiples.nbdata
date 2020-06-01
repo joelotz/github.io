@@ -1,9 +1,7 @@
 Title: Small Multiples in Matplotlib
 Author: Joe Lotz
 Date: 2014-10-18
-Category: 
 Tags: Python, Matplotlib
 Keywords: matplotlib, jupyter, multiple plots
-Slug:
-Summary:
+Excerpt: This is my attempt at recreating the small multiples graph from Flowingdata in matplotlib. I realize the point of the flowingdata article was to showcase filtering and linking using D3.js - but wanted to simply recreate the chart on my own.
 

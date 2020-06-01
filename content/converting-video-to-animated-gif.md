@@ -4,6 +4,7 @@ Category:
 Tags: Ubuntu, FFmpeg
 Author: Joe Lotz
 Keywords: ubuntu 20.04, ffmpeg
+Excerpt: FFmpeg command to convert a video file to an animated gif. You can do this online but why? ;-)
 Version: OS, Ubuntu 20.04 LTS, bash, 5.0.16(1)-release, python, 2.7.4, FFmpeg,4.2.2-1,
 
 Source is from an [excellent answer](https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality) on SuperUser StackExchange.
