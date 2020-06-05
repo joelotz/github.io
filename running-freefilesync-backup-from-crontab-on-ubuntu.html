@@ -43,21 +43,21 @@
 
 
 <p>The error that really stumped me was <code>Error: Unable to initialize GTK+, is DISPLAY set properly?</code> After much googling the answer always headed into setting the <span class="caps">DISPLAY</span> variable but the solution of setting it to 0 or 0.0 wasn’t working. Maybe it was because I have two monitors, I really don’t know. Again, I don’t understand the details or why it works, but setting the <span class="caps">DISPLAY</span> to 1.0 worked for&nbsp;me. </p>
-<div class="highlight"><pre><span></span><span class="m">0</span> <span class="m">2</span> * * * env <span class="nv">DISPLAY</span><span class="o">=</span>:1.0 /usr/bin/FreeFileSync/FreeFileSync /home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch
+<div class="highlight"><pre><span></span><span class="m">0</span> <span class="m">3</span> * * * env <span class="nv">DISPLAY</span><span class="o">=</span>:1.0 /usr/bin/FreeFileSync/FreeFileSync /home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch
 </pre></div>
 
 
 <p>Where:</p>
 <ul>
-<li><code>0 2 * * *</code> is the frequency that I want the cron to run, every night at&nbsp;2am</li>
+<li><code>0 3 * * *</code> is the frequency that I want the cron to run, every night at&nbsp;3am</li>
 <li><code>/usr/bin/FreeFileSync/FreeFileSync</code> is the location of the&nbsp;program </li>
-<li><code>/home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch</code> is my batch file that I created and saved within the FreeFileSync&nbsp;program.</li>
+<li><code>/home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch</code> is my batch file that I created and saved within the FreeFileSync&nbsp;program</li>
 </ul>
 <h3>Extras</h3>
-<p>In case you don’t know, <code>crontab -e</code> opens the file allowing you to add or edit the cron jobs. Also, you can specify your editor as <code>EDITOR=gedit crontab -e</code> if you don’t want to use vi or nano or whatever is your default bash&nbsp;editor. </p>
+<p>In case you don’t know, <code>crontab -e</code> opens the file allowing you to add or edit the user-level cron jobs. Also, you can specify your editor as <code>EDITOR=gedit crontab -e</code> if you don’t want to use vi or nano or whatever is your default bash&nbsp;editor. </p>
 <p>I was also successful in putting this command in a shell script and running the shell script from cron - just in case you want to do something more&nbsp;complicated. </p>
 <h3>Update</h3>
-<p>When this script ran I received errors about “Unable to find or create trash directory.” Googling it looked like I was missing the trash dir <code>.Trash-1000</code> but that wasn’t the case. In the end, for some reason, it seems like only root can delete files from my external <span class="caps">NTFS</span> drive….but it worked when I performed the delete manually or from the program. To get around this I moved the above cron job from my user to root crontab via <code>sudo EDITOR=gedit crontab -e</code>. I don’t think it’s a good idea to be running this as root…I’ll do more experiments and try to find a better&nbsp;solution.</p>
+<p>When this script ran I received errors about “Unable to find or create trash directory.” Googling it looked like I was missing the trash dir <code>.Trash-1000</code> but that wasn’t the case. In the end, for some reason, it seems like only root can delete files from my external <span class="caps">NTFS</span> drive….but it worked when I performed the delete manually or from the program. To get around this I moved the above cron job from my user to root crontab via <code>sudo EDITOR=gedit crontab -e</code>. I am not sure if it’s a good idea to be running this as root…I’ll do more experiments and try to find a better&nbsp;solution.</p>
     
     </div>
 
