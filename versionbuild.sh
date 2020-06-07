@@ -7,5 +7,6 @@ echo PYTHON_VERS=$(python --version | sed -n "s/Python \([-0-9.]*\).*/\1/p;")
 echo YOUTUBE-DL_VERS=$(youtube-dl --version)
 echo AUDACITY_VERS=$(audacity --version | sed -n "s/Audacity v \(v[-0-9.]*\).*/\1/p;")
 echo GIT_VERS=$(git --version | sed -n "s/git version \([-0-9.]*\).*/\1/p;")
+echo EXIFTOOL_VER=$(exiftool -ver -v | sed -n "s/ExifTool version \([-0-9.]*\).*/\1/p;")
 echo DAVINCI_VERS=$(apt show davinci-resolve | sed -n "s/Version: \([-0-9.]*\).*/\1/p;")
 

@@ -1,7 +1,7 @@
 Title: Step Functions in Matplotlib
 Author: Joe Lotz
 Date: 2014-11-11
-Tags: Python, matplotib
+Tags: Python, Matplotlib
 Keywords: ubuntu 20.04, matplotlib, jupyter, 
 Excerpt: This week I had to make a “burn chart”, essentially a chart showing amount of work per week. Since the weeks are discrete time steps I need a step function. I started playing with horizontal and vertical lines but luckily I quickly found that matplotlib has a step function. Unfortunately, it didn’t quite act as I thought.
 

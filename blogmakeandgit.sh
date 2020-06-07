@@ -36,7 +36,7 @@ else # Else, run
     # save the "non-compiled" files of blog and push to a
     #  branch called 'content'
     git add --all
-    git reset output/* plugins/* __pycache__/*
+    git reset output/* plugins/* __pycache__/* BlogPostIdeas.md content/photo.jpg
     git commit -m "$inputStr"
     git push origin content
 fi
