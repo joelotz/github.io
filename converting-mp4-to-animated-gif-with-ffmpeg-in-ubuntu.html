@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title> Useful git Commands for Pelican&nbsp;Blog | Delving into Delusion </title>
+    <title> Converting mp4 to Animated gif with FFmpeg in&nbsp;Ubuntu | Delving into Delusion </title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
@@ -32,11 +32,22 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> Useful git Commands for Pelican&nbsp;Blog</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 29, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    <h1 class="title"> Converting mp4 to Animated gif with FFmpeg in&nbsp;Ubuntu</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 17, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73757.7 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/pelican.html">Pelican</a>     </p>
-    <p>This post is to document basic yet useful git commands I need when building my Pelican blog. I want to post these as reference for myself in the future as I don&#8217;t use them often enough to commit to&nbsp;memory.</p>
+ <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/ffmpeg.html">FFmpeg</a>     </p>
+    <p>Source is from an <a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality">excellent answer</a> on SuperUser&nbsp;StackExchange.</p>
+<div class="highlight"><pre><span></span>ffmpeg input.mp4 -vf <span class="s2">&quot;fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse&quot;</span> -loop <span class="m">0</span> output.gif
+</pre></div>
+
+
+<p>You can define the frames per second via the ”fps” argument. The standard for an animated gif is <a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs">between 15 and 24</a>, but the more frames the larger the output&nbsp;file. </p>
+<p>The split commands splits the video into two streams for generate a color palette and downsampling the incoming&nbsp;video. </p>
+<p>The loop argument defines how many times you want the gif to loop.
+- 1 = no looping
+- 1 = loop once
+- n = loop n times
+- 0 = loop infinite =&nbsp;“forever”</p>
     
     <div class="version">
     <h3>Software Versions</h3>
@@ -45,8 +56,10 @@
     <table>
     <tr><th>Software</th><th>Version</th></tr>
     <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
-    <tr><td> Pelican</td><td> 4.2.0</td></tr>
-    <tr><td> git</td><td> 2.25.1</td></tr>
+    <tr><td> bash</td><td> 5.0.16(1)-release</td></tr>
+    <tr><td> python</td><td> 2.7.4</td></tr>
+    <tr><td> FFmpeg</td><td>4.2.2-1</td></tr>
+    <tr><td></td><td></td></tr>
     </table>
     </code>
     </div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Auditing Linux Systems with&nbsp;Lynis | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Auditing Linux Systems with&nbsp;Lynis</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 01, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/pelican.html">Pelican</a>  <a href="/tag/lynis.html">lynis</a>     </p>
+    <p>Linux is not immune to security threats like&nbsp;malware.</p>
+<p>Assuming you are on Ubuntu 20.04, the Lynis package in the repos is nearly guaranteed to be out of date. They always are. So, you can install from repos as <code>sudo apt install lynis</code> but you will receive an audit warning. At the time of this writing, version 2.6.6 was available, released on 2018-07-06, being nearly 2 years old. A better option is to install the latest from&nbsp;github. </p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/local/bin <span class="c1"># this is where all the apps go</span>
+sudo git clone https://github.com/CISOfy/lynis
+</pre></div>
+
+
+<p>On a side-note, my system seemed to want to install the package named <code>menu</code>, I&#8217;m not an expert but you may want to install&nbsp;this </p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> lynis
+sudo ./lynis audit system --use-cwd
+</pre></div>
+
+
+<p>I believe the flag <code>--use-cwd</code>  is equivelant to the older flag <code>--quickstart</code> 
+https://cisofy.com/documentation/lynis/get-started/#first-run</p>
+<p>The results are displayed on screen during the system scan. Additional details are logged in a separate file (default:&nbsp;/var/log/lynis.log).</p>
+<h3>Activating&nbsp;Firewall</h3>
+<p>iptables no rules are active
+Ubunut comes with a software firewall, but the rules or iptables are empty. It seems like they should have a default setting that can be configured during <span class="caps">OS</span>&nbsp;installation</p>
+<p><code>sudo apt install gufw</code>
+https://askubuntu.com/questions/178616/do-i-need-to-activate-the-firewall-i-only-use-ubuntu-for-a-home-desktop-use
+https://help.ubuntu.com/community/DoINeedAFirewall
+https://ubuntuforums.org/showthread.php?t=1876124&nbsp;https://kifarunix.com/install-and-use-clamav-on-ubuntu-20-04/</p>
+<h3>Installing&nbsp;Antivirus</h3>
+<p>https://vitux.com/secure-ubuntu-with-clamav-antivirus/&nbsp;https://kifarunix.com/install-and-use-clamav-on-ubuntu-20-04/</p>
+<div class="highlight"><pre><span></span>sudo apt update
+sudo apt install clamav clamav-daemon clamtk
+</pre></div>
+
+
+<p>Verify installation <code>clamscan --version</code></p>
+<p>Manually update the virus database. First stop the freshclam&nbsp;service;</p>
+<div class="highlight"><pre><span></span>systemctl stop clamav-freshclam
+</pre></div>
+
+
+<p>Then update the&nbsp;database;</p>
+<div class="highlight"><pre><span></span>sudo freshclam
+</pre></div>
+
+
+<p>Then restart it and enable to run on system&nbsp;boot/startup;</p>
+<div class="highlight"><pre><span></span>systemctl start clamav-freshclam
+systemctl is-enabled clamav-freshclam
+</pre></div>
+
+
+<p>By default, ClamAV will do a check for new virus definitions every hour, if you want to change this parameter you can edit the file <code>/etc/clamav/freshclam.conf</code>.</p>
+<p><code>nano /etc/clamav/freshclam.conf</code>
+And change the following&nbsp;line:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Check for new database 24 times a day</span>
+Checks <span class="m">24</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight"><pre><span></span><span class="c1"># Check for new database 1 times a day</span>
+Checks <span class="m">1</span>
+</pre></div>
+
+
+<p>https://askubuntu.com/questions/591964/clamav-cant-read-file-error</p>
+<div class="highlight"><pre><span></span><span class="err">sudo clamscan --infected --remove --exclude-dir=&quot;^/sys&quot; --recursive /</span>
+</pre></div>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> ClamAv</td><td> 0.102.3</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

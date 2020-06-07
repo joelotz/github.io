@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title> Step Functions in&nbsp;Matplotlib | Delving into Delusion </title>
+    <title> Geotagging Photos with&nbsp;Exiftool | Delving into Delusion </title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
@@ -32,10 +32,10 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> Step Functions in&nbsp;Matplotlib</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;November 11, 2014 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 68325.8 &nbsp;&nbsp;&nbsp;
+    <h1 class="title"> Geotagging Photos with&nbsp;Exiftool</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 07, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73897.3 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/tag/python.html">Python</a>  <a href="/tag/matplotlib.html">Matplotlib</a>     </p>
+ <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/exiftool.html">Exiftool</a>     </p>
     <style type="text/css">/*!
 *
 * IPython notebook
@@ -1150,30 +1150,15 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This week I had to make a &#8220;burn chart&#8221;, essentially a chart showing amount of work per week. Since the weeks are discrete time steps I need a step function. I started playing with horizontal and vertical lines but luckily I quickly found that matplotlib has a <a href="http://matplotlib.org/api/lines_api.html#matplotlib.lines.Line2D.set_drawstyle">step function</a>. Unfortunately, it didn&#8217;t quite act as I&nbsp;thought.</p>
-<p>There are there options for the&nbsp;drawstyle:</p>
-<ol>
-<li><span class="dquo">&#8220;</span>steps&#8221;, which is the same as&nbsp;&#8220;steps-pre&#8221;</li>
-<li><span class="dquo">&#8220;</span>steps-mid&#8221;</li>
-<li><span class="dquo">&#8220;</span>steps-post&#8221;</li>
-</ol>
-<p>Assume the x-vector and y-vector for plotting&nbsp;is</p>
+<p>I use the Mapillary android app for taking &#8220;street-level&#8221; images, especially while driving. There is a <a href="https://github.com/mapillary/mapillary_tools">library of <span class="caps">CLI</span>-tools available</a> for processing these images if you want/need to do anything customized or above what the mobile app does. It uses the power of one of my favorite tools, <a href="https://exiftool.org/">Exiftool</a>, and I wanted to dive under the hood to understand Exiftool more. This post is essentially some random information that I want to document for my future use as well as information that the reader can use to build their own photo processing&nbsp;workflow.</p>
+<h3 id="Reading-Tags">Reading Tags<a class="anchor-link" href="#Reading-Tags">&#182;</a></h3><p>You can list all the metadata for a&nbsp;photo:</p>
 
-<pre><code>X = [x1, x2, x3, x4]
-Y = [y1, y2, y3, y4]</code></pre>
-<p><strong>steps</strong></p>
+<pre><code>exiftool -a -s -G file.jpg</code></pre>
 <ul>
-<li>In this option y2 starts at x1, y3 starts at x2, y4 starts at x3 and ends at&nbsp;x4.</li>
+<li><strong>-a</strong> means to show all tags, even if they are duplicated, like in a different&nbsp;group.</li>
+<li><strong>-s</strong> means instead of showing the &#8220;friendly&#8221; names  like &#8220;Create Date&#8221;, show the names you need to use when you write  ExifTool commands. So instead of &#8220;Create Date&#8221; you see&nbsp;&#8220;CreateDate&#8221;. </li>
+<li><strong>-G</strong> means also show the metadata Group to which the metadata tag&nbsp;belongs.</li>
 </ul>
-<p><strong>steps-mid</strong></p>
-<ul>
-<li>In this option y1 starts at x1, y2 starts at mid-point between x1 and x2, y3 starts at mid-point between x2 and x3, y4 starts at mid-point between x3 and&nbsp;x4.</li>
-</ul>
-<p><strong>steps-post</strong></p>
-<ul>
-<li>In this option y1 starts at x1, y2 starts at x2, y3 starts at x3, y4 starts at&nbsp;x4.</li>
-</ul>
-<p>For me, &#8216;steps-post&#8217; makes the most sense to understand. Below is code to illustrate the&nbsp;options.</p>
 
 </div>
 </div>
@@ -1183,34 +1168,7 @@ Y = [y1, y2, y3, y4]</code></pre>
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># make some date</span>
-<span class="n">x</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
-
-<span class="c1"># disregard, this is my personal &quot;make pretty&quot; function</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">myfig</span><span class="p">()</span>
-
-<span class="c1"># plot out the options</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;steps-pre aka steps&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-mid&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;steps-mid&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-post&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;steps-post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">45</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -a -s -G photo.jpg
 </pre></div>
 
     </div>
@@ -1226,353 +1184,92 @@ Y = [y1, y2, y3, y4]</code></pre>
     <div class="prompt"></div>
 
 
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-q1atestrFnwtBQpeXzBlyhQFBAQUe17R5xS1a9cuvfzyy2rfvr3uv/9+PfbYYzp+/PgN1aW2bduq
-ffv2+sc//qEOHTqoSZMmkqT169crJSVFXbt2VVhYmPr376///d//VXZ29k0/X82aNfX6669r7969
-+vbbb7V9+3alpqZq7Nix6ty58w3nV69eXb169dIjjzxyw2O1a9fWyZMn7zin2NhY9ezZs3D2//jH
-P/TRRx/ppZdeuukaAQAwNTr9DkWnvwzt2LFD69at07333qsBAwbolVdeUffu3bV161ZJKnYnW5KC
-goJ09OhRBQQEFP45c+aMkpKSdPHixcLz9u/fX/j3/Px8HThwQI0aNVJubq6WLFmiK1euqGvXrpo0
-aZLi4+N1/PhxZWZmytvbu9i13d3db3rNc+fO6YcfflCjRo1uus577rlHVatW1c8//1zselu2bNHH
-H39801ls3LhRbdq00aRJk/T4448rNDS02B30Ag899JA6deqkVq1a6a233tKVK1ckXXtRbkxMjJ5+
-+ml16dJFjRo10g8//HDL2X/66adKS0tTSEiIBg0apISEBLVp00afffbZTb+mBg0a6Icffij29WRm
-Zmr16tXFzrvVnH766SctXLhQtWrVUs+ePTV16lSNGzdOu3fv1i+//HLLdQIAADhCpbzTf7dycXHR
-+vXr5enpqXbt2un06dPavXt3YaXGzc1N0rUgGRgYqL59++r5559XUlKSHnvsMZ05c0YLFixQnTp1
-itVSNm7cqMDAQDVs2FCpqak6f/68unXrJg8PD+3cuVNZWVkaPHiwXFxctHnzZnl6eqp+/fq3Xevb
-b7+t2rVrq3bt2lq1apW8vb3VoUMHSddqLkW3uHR1dVXv3r31P//zP3J3d9d9992n7du3a926dRo7
-duxNr+/r66vt27crIyND3t7e2rZtmz744ANJ0uXLlwt/e1DgmWee0YQJE7RhwwYNHDhQfn5++uab
-b9S2bVvl5+frgw8+0MGDBwt/MLmZFStWyNPTU/fff79+/PFHHTx4UD179pQkubu7F4Z2Pz8/9e/f
-X3/+858VFBSk9u3b68SJE1q4cKHCwsKK/WblVnO6evWqvvjiC+Xn56tPnz6yWq3aunWrAgICbrm7
-EAAAgKMQ+svQAw88ULjF46pVq+Tu7q6IiAjFxsZKuradZmhoqKZNm6YhQ4aoV69emj59ut5++22l
-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
-g5WTk6N33nnHrs8FAABMgn36HYrQX4YeeOABjRs3TsnJyVq1apXc3d0VERGh2NhYWa1WhYaGatq0
-aRoyZIh69eql6dOn6+2331ZaWpo8PDwUHh6u2NjYYtfs1q2bUlJSdOzYMTVt2lSzZ88urP9MmzZN
-y5cv18yZM3X58mU1adJEs2bNuu1d/ZLstHOrc9zd3fXSSy9pyZIlmjJlimrXrq3o6GglJiaWYkoA
-AACoaJaK3nklKirKmpycfNPHoqOjdavHzKjonv5wDpX9e9zLy0sS70ZpK+ZnH+Znn4SEa/OLi2N+
-tkrYniCJTr+t+HfYPr/Oz+Z90rnTDwAAgPLHPv0ORegHAAAoASPSkMSdapvR6XcoQv9dbMOGDY5e
-AgAAAJzAHUN/dnZ24MKFC1//5ptvulit1irh4eFpI0eOnFSnTp0TkjR27NivMjIy2hV9Ts+ePRMn
-Tpz4THktGgAAAEDJ3Tb0W61Wy4wZM97z8fH5KSEhIdJqtVreeuutN2bOnLlxwYIF7axWqyUzMzPk
-xRdfHNS6deuPC57n5uZ2vvyXDgAAgEqDTr9D3Tb0nz592r9hw4Z7hg8fPtXf3/+IJPXr1+91wzBS
-cnNzvc+cOeObl5fnERIS8rmPj09WxSwZAAAAlQ6dfoe6bej38fH5adq0aYMKPs7Ozg587733RjZr
-1uwrT0/PMzt27Ih0dXW9UPADAQAAAIC7T4lfyBsfH//u559/3rtGjRqnEhISIiXp8OHDzT09PU/P
-nTt39c6dOzvVrFkzp3v37sujo6PnWSyWW74BQME+rYAZOcP3vzN8DY7E/OzD/OzD/GxnpBvX/vnr
-Lj6wDd+DjlGlpCcOGzZsxptvvtm+efPmn77wwgv/ycnJqZeZmRmSl5fnER4envaXv/ylW+/evd9a
-uXLlS6tWrYq/3bWioqIK/6xcudL+rwIAAAB3N8P4reKDClfiO/2NGjXaLUnTp0//w6BBg45++OGH
-Q6dOnTr44sWLnu7u7uckKTg4eE9ubq73mjVrpsfGxhq3utb170hqhv1u8/PztWnTJvXq1cvRSylX
-R48eVVZWlsLCwhy9lLtWZf5+590U7cP87MP87MX8ygoztI3Xr4Gf+dnG3t+Q3PZO/6lTp/w3b978
-h6LHXF1dL9SrV+9ATk5OPYvFYi0I/AWCg4N3X7hwwSs3N7emXStzMlu3blVSUpKjl1Hu/vKXv+jA
-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
-"
->
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ExifTool]      ExifToolVersion                 : 11.88
+[File]          FileName                        : photo.jpg
+[File]          Directory                       : .
+[File]          FileSize                        : 1789 kB
+[File]          FileModifyDate                  : 2020:06:07 22:15:00+05:30
+[File]          FileAccessDate                  : 2020:06:07 22:15:05+05:30
+[File]          FileInodeChangeDate             : 2020:06:07 22:15:00+05:30
+[File]          FilePermissions                 : rwxr-----
+[File]          FileType                        : JPEG
+[File]          FileTypeExtension               : jpg
+[File]          MIMEType                        : image/jpeg
+[File]          ExifByteOrder                   : Big-endian (Motorola, MM)
+[File]          ImageWidth                      : 4032
+[File]          ImageHeight                     : 2268
+[File]          EncodingProcess                 : Baseline DCT, Huffman coding
+[File]          BitsPerSample                   : 8
+[File]          ColorComponents                 : 3
+[File]          YCbCrSubSampling                : YCbCr4:2:0 (2 2)
+[EXIF]          Make                            : samsung
+[EXIF]          Model                           : SM-G955U
+[EXIF]          Orientation                     : Rotate 180
+[EXIF]          XResolution                     : 72
+[EXIF]          YResolution                     : 72
+[EXIF]          ResolutionUnit                  : inches
+[EXIF]          Software                        : G955USQS6DSG4
+[EXIF]          ModifyDate                      : 2020:06:06 14:06:41
+[EXIF]          YCbCrPositioning                : Centered
+[EXIF]          ExposureTime                    : 1/1723
+[EXIF]          FNumber                         : 1.7
+[EXIF]          ExposureProgram                 : Not Defined
+[EXIF]          ISO                             : 56
+[EXIF]          ExifVersion                     : 0220
+[EXIF]          DateTimeOriginal                : 2020:06:06 14:06:41
+[EXIF]          CreateDate                      : 2020:06:06 14:06:41
+[EXIF]          ComponentsConfiguration         : Y, Cb, Cr, -
+[EXIF]          ShutterSpeedValue               : 1/1722
+[EXIF]          ApertureValue                   : 1.7
+[EXIF]          BrightnessValue                 : 0
+[EXIF]          ExposureCompensation            : 0
+[EXIF]          MaxApertureValue                : 1.7
+[EXIF]          MeteringMode                    : Unknown
+[EXIF]          Flash                           : No Flash
+[EXIF]          FocalLength                     : 4.2 mm
+[EXIF]          SubSecTime                      : 907093
+[EXIF]          SubSecTimeOriginal              : 907093
+[EXIF]          SubSecTimeDigitized             : 907093
+[EXIF]          FlashpixVersion                 : 0100
+[EXIF]          ColorSpace                      : sRGB
+[EXIF]          ExifImageWidth                  : 4032
+[EXIF]          ExifImageHeight                 : 2268
+[EXIF]          InteropIndex                    : R98 - DCF basic file (sRGB)
+[EXIF]          InteropVersion                  : 0100
+[EXIF]          SensingMethod                   : Unknown (0)
+[EXIF]          SceneType                       : Unknown (0)
+[EXIF]          ExposureMode                    : Auto
+[EXIF]          WhiteBalance                    : Manual
+[EXIF]          SceneCaptureType                : Standard
+[EXIF]          GPSLatitudeRef                  : North
+[EXIF]          GPSLatitude                     : 18 deg 33&#39; 53.03&#34;
+[EXIF]          GPSLongitudeRef                 : East
+[EXIF]          GPSLongitude                    : 73 deg 46&#39; 31.66&#34;
+[EXIF]          GPSAltitudeRef                  : Above Sea Level
+[EXIF]          GPSAltitude                     : 508.1000061 m
+[EXIF]          GPSTimeStamp                    : 08:36:41.90709
+[EXIF]          GPSImgDirection                 : 76
+[EXIF]          GPSDateStamp                    : 2020:06:06
+[XMP]           XMPToolkit                      : Image::ExifTool 11.88
+[XMP]           Creator                         : Joe
+[XMP]           Description                     : This is a sunset taken on lookout hill
+[Composite]     Aperture                        : 1.7
+[Composite]     ImageSize                       : 4032x2268
+[Composite]     Megapixels                      : 9.1
+[Composite]     ShutterSpeed                    : 1/1723
+[Composite]     SubSecCreateDate                : 2020:06:06 14:06:41.907093
+[Composite]     SubSecDateTimeOriginal          : 2020:06:06 14:06:41.907093
+[Composite]     SubSecModifyDate                : 2020:06:06 14:06:41.907093
+[Composite]     GPSAltitude                     : 508.1 m Above Sea Level
+[Composite]     GPSDateTime                     : 2020:06:06 08:36:41.90708999Z
+[Composite]     GPSLatitude                     : 18 deg 33&#39; 53.03&#34; N
+[Composite]     GPSLongitude                    : 73 deg 46&#39; 31.66&#34; E
+[Composite]     FocalLength35efl                : 4.2 mm
+[Composite]     GPSPosition                     : 18 deg 33&#39; 53.03&#34; N, 73 deg 46&#39; 31.66&#34; E
+[Composite]     LightValue                      : 13.1
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -1582,18 +1279,17 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr>
+<p>Using the <code>-G</code> flag is useful for seeing groups. One use is if you what to view all tags for a group. For&nbsp;example,</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> version_information
-<span class="o">%</span><span class="k">version_information</span> ipython, pandas, matplotlib
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G -Composite:all photo.jpg
 </pre></div>
 
     </div>
@@ -1606,12 +1302,450 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[Composite]     Aperture                        : 1.7
+[Composite]     ImageSize                       : 4032x2268
+[Composite]     Megapixels                      : 9.1
+[Composite]     ShutterSpeed                    : 1/1723
+[Composite]     SubSecCreateDate                : 2020:06:06 14:06:41.907093
+[Composite]     SubSecDateTimeOriginal          : 2020:06:06 14:06:41.907093
+[Composite]     SubSecModifyDate                : 2020:06:06 14:06:41.907093
+[Composite]     GPSAltitude                     : 508.1 m Above Sea Level
+[Composite]     GPSDateTime                     : 2020:06:06 08:36:41.90708999Z
+[Composite]     GPSLatitude                     : 18 deg 33&#39; 53.03&#34; N
+[Composite]     GPSLongitude                    : 73 deg 46&#39; 31.66&#34; E
+[Composite]     FocalLength35efl                : 4.2 mm
+[Composite]     GPSPosition                     : 18 deg 33&#39; 53.03&#34; N, 73 deg 46&#39; 31.66&#34; E
+[Composite]     LightValue                      : 13.1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>-s</code> flag is useful because it shows the real names of the fields and not the &#8220;pretty&#8221; or &#8220;friendly&#8221; name. If you want to show a single tag you can call the&nbsp;name.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G -CreateDate photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[EXIF]          CreateDate                      : 2020:06:06 14:06:41
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If there are duplicates and any doubt about which tag you are reading/writing, you can define the&nbsp;group.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G -EXIF:CreateDate photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[EXIF]          CreateDate                      : 2020:06:06 14:06:41
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can also read multiple&nbsp;tags.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -File:FileName -EXIF:CreateDate -Composite:SubSecCreateDate photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>File Name                       : photo.jpg
+Create Date                     : 2020:06:06 14:06:41
+Create Date                     : 2020:06:06 14:06:41.907093
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -File:FileName -EXIF:CreateDate -Composite:SubSecCreateDate photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>FileName                        : photo.jpg
+CreateDate                      : 2020:06:06 14:06:41
+SubSecCreateDate                : 2020:06:06 14:06:41.907093
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G -File:FileName -EXIF:CreateDate -Composite:SubSecCreateDate photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[File]          FileName                        : photo.jpg
+[EXIF]          CreateDate                      : 2020:06:06 14:06:41
+[Composite]     SubSecCreateDate                : 2020:06:06 14:06:41.907093
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Writing-Tags">Writing Tags<a class="anchor-link" href="#Writing-Tags">&#182;</a></h3><p>You can also write tags, or overwrite tags. Let&#8217;s say I want to create a new metadata tag named &#8220;Creator&#8221; and add my name to it. I can also write multiple tags at&nbsp;once.</p>
+
+<pre><code>exiftool -Creator="Joe" -Description="This is a sunset taken on lookout hill" photo.jpg</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G -XMP:all photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[XMP]           XMPToolkit                      : Image::ExifTool 11.88
+[XMP]           Creator                         : Joe
+[XMP]           Description                     : This is a sunset taken on lookout hill
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Geotag">Geotag<a class="anchor-link" href="#Geotag">&#182;</a></h3><p>When you geotag, Exiftool will take the date/time of a photo, find the nearest gps points within a provided log, and then interpolate the position based on the photo&#8217;s date/time. If you have a hihg-quality gps receiver and can save a log I think geotagging photo coordinates will improve the location accuracy of the&nbsp;photos.</p>
+
+<pre><code>exiftool -geotag log.gpx *jpg</code></pre>
+<p>The above command is telling the tool to perform this position interpolation on all the files mathcing &#8220;<em>jpg</em>&#8221; in the current directory, using the gps trace &#8220;log.gpx&#8221; also in the current&nbsp;directory.</p>
+<p>From <a href="https://exiftool.org/forum/index.php?topic=11292.0">this post</a> it was clarified that the subsecond date/time should be use (if available) for more accurate&nbsp;results.</p>
+<p>How to find an appropriate tag? Do a&nbsp;search!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G -SubSec* photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[EXIF]          SubSecTime                      : 907093
+[EXIF]          SubSecTimeOriginal              : 907093
+[EXIF]          SubSecTimeDigitized             : 907093
+[Composite]     SubSecCreateDate                : 2020:06:06 14:06:41.907093
+[Composite]     SubSecDateTimeOriginal          : 2020:06:06 14:06:41.907093
+[Composite]     SubSecModifyDate                : 2020:06:06 14:06:41.907093
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For this photo it looks like we can use several of composite group&nbsp;tags.</p>
+
+<pre><code>exiftool -geotag log.gpx "-GeoTime&lt;Composite:SubSecCreateDate" *jpg</code></pre>
+<p>The tool will update the latitude and longitude positions as well as add a handful of other <span class="caps">EXIF</span> and Composite&nbsp;tags.</p>
+<p>For&nbsp;example:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G1 -GPS:all photo.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[GPS]           GPSLatitudeRef                  : North
+[GPS]           GPSLongitudeRef                 : East
+[GPS]           GPSAltitudeRef                  : Above Sea Level
+[GPS]           GPSTimeStamp                    : 08:36:41.90709
+[GPS]           GPSImgDirection                 : 76
+[GPS]           GPSDateStamp                    : 2020:06:06
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Inverse-Geotag">Inverse Geotag<a class="anchor-link" href="#Inverse-Geotag">&#182;</a></h3><p>If the photos have <span class="caps">GPS</span> information, you can create a gps track from a series of photos. This is as simple&nbsp;as:</p>
+
+<pre><code>exiftool -p ./gpx.fmt *jpg &gt; phototrace.gpx</code></pre>
+<p>The above command is telling the tool to go through all files matching &#8220;*jpg&#8221; in the current directory and pull out the gps data for each one. Then write that data in the output file &#8220;phototrace.gpx&#8221; using the format &#8220;gpx.fmt&#8221;. The format is completely customizable and is just a template for how to parse the data. The format files are <a href="https://github.com/exiftool/exiftool/tree/master/fmt_files">located here</a> or you can make your own. Note that in this example the location of the file is in the current&nbsp;directory.</p>
+<p>If you want to export a Google Earth friendy kml&nbsp;file:</p>
+
+<pre><code>exiftool -p ./kml.fmt *jpg &gt; phototrace.kml</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Mapillary-Notes">Mapillary Notes<a class="anchor-link" href="#Mapillary-Notes">&#182;</a></h3><p>On an Android the photos taken from the Mapillary app are stored in the app data directory. Most likely you are storing the photos on an external <span class="caps">SD</span> Card, if so the storage location&nbsp;is:</p>
+<p><code>SAMSUNG Android/Card/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
+<p>Otherwise the storage location&nbsp;is:</p>
+<p><code>SAMSUNG Android/Phone/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
+<p>Another interesting note is that a <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">gpx file</a> is also created and stored in the corresponding directory. Photos are named by Mapillary in this&nbsp;format:</p>
+<p><code>2020_06_06_14_06_41_856_+0530.jpg</code> which translates to
+<code>YYY\_MM\_DD\_HH\_MM\_SS\_xxx\_UTCOffset</code></p>
+<p>I&#8217;m not sure what &#8220;xxx&#8221; is. I thought it was the subseconds but it doesn&#8217;t look like it. Another theory is that it was the subseconds at time of initial file creation and then the field <code>SubSecTime</code> is at the time the metadata was created. The difference is the processing delay or time it took to write the file. At least that is my&nbsp;theory&#8230;</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>exiftool -s -G <span class="err">\</span>
+    <span class="o">-</span><span class="n">File</span><span class="p">:</span><span class="n">FileName</span> <span class="o">-</span><span class="n">EXIF</span><span class="p">:</span><span class="n">CreateDate</span> <span class="o">-</span><span class="n">EXIF</span><span class="p">:</span><span class="n">DateTimeOriginal</span> \
+    <span class="o">-</span><span class="n">EXIF</span><span class="p">:</span><span class="n">SubSecTime</span> <span class="o">-</span><span class="n">EXIF</span><span class="p">:</span><span class="n">SubSecTimeOriginal</span> <span class="o">-</span><span class="n">Composite</span><span class="p">:</span><span class="n">SubSecCreateDate</span> \
+    <span class="n">photo</span><span class="o">.</span><span class="n">jpg</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[File]          FileName                        : photo.jpg
+[EXIF]          CreateDate                      : 2020:06:06 14:06:41
+[EXIF]          DateTimeOriginal                : 2020:06:06 14:06:41
+[EXIF]          SubSecTime                      : 907093
+[EXIF]          SubSecTimeOriginal              : 907093
+[Composite]     SubSecCreateDate                : 2020:06:06 14:06:41.907093
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> version_information
+<span class="o">%</span><span class="k">version_information</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<table><tr><th>Software</th><th>Version</th></tr><tr><td>Python</td><td>2.7.5+ (default, Feb 27 2014, 19:39:55) [<span class="caps">GCC</span> 4.8.1]</td></tr><tr><td>IPython</td><td>2.0.0-dev</td></tr><tr><td><span class="caps">OS</span></td><td>posix [linux2]</td></tr><tr><td>ipython</td><td>0.13.2</td></tr><tr><td>pandas</td><td>0.13.1</td></tr><tr><td>matplotlib</td><td>1.2.1</td></tr><tr><td colspan='2'>Tue Nov 11 22:08:24 2014 <span class="caps">PST</span></td></tr></table>
+<table><tr><th>Software</th><th>Version</th></tr><tr><td>Python</td><td>3.7.4 64bit [<span class="caps">GCC</span> 7.3.0]</td></tr><tr><td>IPython</td><td>7.11.1</td></tr><tr><td><span class="caps">OS</span></td><td>Linux 5.4.0 33 generic x86_64 with debian bullseye sid</td></tr><tr><td colspan='2'>Sun Jun 07 21:56:58 2020 <span class="caps">IST</span></td></tr></table>
 </div>
 
 </div>
@@ -1653,6 +1787,16 @@ AAAAgCkOm34AAAAAgCkOm34AAAAAgCkOm34AAAAAgCnu/972uanNNhQfAAAAAElFTkSuQmCC
 </script>
 
     
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> Exiftool</td><td> 11.88</td></tr>
+    </table>
+    </code>
     </div>
 
 
