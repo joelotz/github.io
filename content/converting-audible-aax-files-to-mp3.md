@@ -1,7 +1,7 @@
 Title: Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu
 Date: 2020-05-15
 Tags: Ubuntu, FFmpeg
-Author: Joe Lotz
+Author: Joe
 Keywords: ubuntu 20.04, audible.com, .aax, convert aax to mp3
 Excerpt: Audible lets you download your audiobooks but they are DRM'd. Crack the SHA hash with your authentication code and save the .aax files into other formats like .mp3 or even .ogg.
 Version: OS, Ubuntu 20.04 LTS, bash, 5.0.16(1)-release, python, 2.7.4, FFmpeg,4.2.2-1
