@@ -105,7 +105,7 @@ convert *.png <span class="se">\</span>
 <p>It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them&nbsp;out.</p>
 </li>
 <li>
-<p>The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The <code>-resize</code> option is sizing the images to imagemagick 595x421. <a href="https://imagemagick.org/script/command-line-options.php#page">This is the A5 page size (dots per inch) in&nbsp;landscape.</a></p>
+<p>The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The <code>-resize</code> option is sizing the images to imagemagick 595x421dpi. <a href="https://imagemagick.org/script/command-line-options.php#page">This is the A5 page size (dots per inch) in&nbsp;landscape.</a></p>
 </li>
 <li>
 <p><code>-gravity</code> <a href="https://imagemagick.org/script/command-line-options.php#extent">must go before <code>-extent</code></a>. You can find all the options for an argument using <code>identify -list &lt;option&gt;</code>. “North” means center the images on the page horizontally and top-aligned&nbsp;vertically. </p>
@@ -124,7 +124,10 @@ convert *.png <span class="se">\</span>
 </pre></div>
 
 
-<h3>Exiftool Adds pdf&nbsp;Metadata</h3>
+<h3>Additional Output&nbsp;Sizes</h3>
+<p>This is an update to the original post. I realized that my family in the <span class="caps">US</span> may want a version that can be printed in standard <span class="caps">US</span> Letter&nbsp;sizes.</p>
+<p>612 x&nbsp;792</p>
+<h3>Using Exiftool to Add pdf&nbsp;Metadata</h3>
 <p>Easily install <a href="https://exiftool.org/">Exiftool</a> on&nbsp;Ubuntu.</p>
 <div class="highlight"><pre><span></span>sudo apt install libimage-exiftool-perl
 </pre></div>
