@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> N-Queens Puzzle, Part&nbsp;1-Introduction | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> N-Queens Puzzle, Part&nbsp;1-Introduction</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 13, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/python.html">Python</a>     </p>
+    <p>The N-Queens puzzle is the popular problem of placing N number of chess queens on an NxN grid board such that no queens cannot attack each other; i.e no two queens share the same row, column, or diagonal. The puzzle is often generalized to the “8 Queens Puzzle” to match a standard size chess board and is a good example of a simple but nontrivial algorithm&nbsp;problem. </p>
+<p>It is known that a solution exists for all N&gt;3
+It gets <em>very</em> difficult to do by hand for N&gt;7
+Good candidate for computer (programmatic)&nbsp;solution</p>
+<h4>Encoding</h4>
+<p>In the example solution below, a 4x4 board has 4 queens placed on it, denoted by red X&#8217;s. The indices are <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero indexed</a>, meaning they start at zero. For a generalized NxN grid(aka. board) the indices go from 0 to N-1. For the time being, it doesn’t matter where the queens are placed as we will be learning some background&nbsp;needed.</p>
+<p><img alt="NQueens_1_00" src="/mnt/DataDrive/Blog/content/N-queens-problem-part1/NQueens_1_00.png"></p>
+<p>One way of encoding the queen locations are  to use a list of ordered pairs representing the row and column&nbsp;positions.</p>
+<p>$$[ (row_0,col_0), (row_1,col_1), (row_{N-1},&#8230;,col_{N-1})&nbsp;]$$</p>
+<p>The above example can be encoded as $[&nbsp;(1,0),(3,1),(0,2),(2,3)]$.</p>
+<p><img alt="NQueens_1_02" src="/mnt/DataDrive/Blog/content/N-queens-problem-part1/NQueens_1_02.png"></p>
+<p>We can reduce the dimensionality by recognizing the column value is already represented by the location within the&nbsp;list.</p>
+<p><img alt="NQueens_1_03" src="/mnt/DataDrive/Blog/content/N-queens-problem-part1/NQueens_1_03.png"></p>
+<p>Therefore, the example can be encoded as&nbsp;$[1,3,0,2]$. </p>
+<h4>Combinations and&nbsp;Permutations</h4>
+<p><a href="https://en.wikipedia.org/wiki/Combination">Combinations</a> and <a href="https://en.wikipedia.org/wiki/Permutation">permutations</a> are often confused; for our purposes I will simply say that one cares about order while the other does not, and this makes a difference. In combinations the pair $(0,1)$ is the same as $(1,0)$. This is good for relationships or interactions because the interaction between John and Bill is the same and between Bill and John, we don’t care about&nbsp;order. </p>
+<p>On the other hand, let’s say… for example… I want to calculate all the possible locations of queens without duplication of rows. 
+$$ P_N = N! $$
+$$ P_4 = 4!= 4 \cdot 3 \cdot 2 \cdot 1 =&nbsp;24$$</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">perms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">[(0, 1, 2, 3),</span>
+<span class="err"> (0, 1, 3, 2),</span>
+<span class="err"> (0, 2, 1, 3),</span>
+<span class="err"> (0, 2, 3, 1),</span>
+<span class="err"> (0, 3, 1, 2),</span>
+<span class="err"> (0, 3, 2, 1),</span>
+<span class="err"> (1, 0, 2, 3),</span>
+<span class="err"> (1, 0, 3, 2),</span>
+<span class="err"> (1, 2, 0, 3),</span>
+<span class="err"> (1, 2, 3, 0),</span>
+<span class="err"> (1, 3, 0, 2),</span>
+<span class="err"> (1, 3, 2, 0),</span>
+<span class="err"> (2, 0, 1, 3),</span>
+<span class="err"> (2, 0, 3, 1),</span>
+<span class="err"> (2, 1, 0, 3),</span>
+<span class="err"> (2, 1, 3, 0),</span>
+<span class="err"> (2, 3, 0, 1),</span>
+<span class="err"> (2, 3, 1, 0),</span>
+<span class="err"> (3, 0, 1, 2),</span>
+<span class="err"> (3, 0, 2, 1),</span>
+<span class="err"> (3, 1, 0, 2),</span>
+<span class="err"> (3, 1, 2, 0),</span>
+<span class="err"> (3, 2, 0, 1),</span>
+<span class="err"> (3, 2, 1, 0)]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">24</span>
+</pre></div>
+
+
+<p>Finally, the Brute-Force&nbsp;Algorithm</p>
+<p>The Brute-Force Algorithm involves finding all possible combination of queen positions and then evaluating each to determine if it is a valid&nbsp;solution. </p>
+<h4>Relationships =&nbsp;Combinations</h4>
+<p>Now that we have defined our queen placement as an ordered list,  $Queens=[1,3,0,2]$, we can discuss the interaction or relationship between each of them. Mathematically these are called <a href="https://en.wikipedia.org/wiki/Combination">combinations</a>. Given a collection of queens, we can show each possible interaction between any two queens as $\binom&nbsp;{Queens}k$. </p>
+<p><img src="/mnt/DataDrive/Blog/content/N-queens-problem-part1/NQueens_1_01.png" alt="NQueens_1_01" style="zoom:90%;" /></p>
+<p>The combination $A=(0,1)$ is the interaction between the queen in row 0 and the queen in row 1, as so on.
+$A = (0,1)$
+$B = (0,2)$
+$C = (0,3)$
+$D = (1,2)$
+$E = (1,3)$
+$F = (2,3)&nbsp;$</p>
+<h4></h4>
+<p>https://en.wikipedia.org/wiki/Eight_queens_puzzle</p>
+<p>https://en.wikipedia.org/wiki/Recursionpython n&nbsp;queens </p>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td></td><td></td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

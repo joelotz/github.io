@@ -24,7 +24,7 @@ h1 a, h2 a, h3 a, h4 a,
 h5 a, h6 a, li a                  { text-decoration: none; }
 h1 a:hover, h2 a:hover,
 h3 a:hover, h4 a:hover      { color: #432165; text-decoration: underline; }
-h1.title                    { width: 840px; }
+h1.title                    { width: 940px; }
 h1, h2                      { margin: 10px 0 25px 0; }
 h1                          { font-size: 40px; line-height: 42px; }
 h2                          { font-size: 32px; line-height: 36px; }
