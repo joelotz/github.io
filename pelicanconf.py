@@ -68,7 +68,9 @@ RELATIVE_URLS = False
 ## IPYNB PLUGIN CONFIGURATION ##################################
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup', 'stardate']
+PLUGINS = ['ipynb.markup', 'stardate', 'render_math']
+
+MATH_JAX = {'align':'left','indent':'2em'}
 
 # if you create jupyter files in the content dir, snapshots are saved with the same
 # metadata. These need to be ignored. 
