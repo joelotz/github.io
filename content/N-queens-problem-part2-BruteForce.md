@@ -1,5 +1,5 @@
 Title: N-Queens Puzzle, Part 2-Brute Force Algorithm
-Date: 2020-06-15
+Date: 2020-06-17
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, brute-force search, alogrithms, python 3

@@ -1,5 +1,5 @@
 Title: N-Queens Puzzle, Part 1-Introduction
-Date: 2020-06-13
+Date: 2020-06-15
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, backtracking, python 3

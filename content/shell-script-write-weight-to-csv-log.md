@@ -16,27 +16,31 @@ Usage:
   logweight input [option]
 
 Input:
-        -w, --weight      Weight value desired to log in pounds (lbs)
+        -w, --weight      Weight value desired to log. Default in pounds (lbs)
+                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.
+                           Use optional -k,--kilograms flag to log in kilograms.
 
 Simple Examples:
-        logweight --weight=200
-        logweight -w=200
+        logweight --weight=200                  Creates a log entry for 200lbs for the current date
+        logweight -w=200                        Creates a log entry for 200lbs for the current date
+        logweight --weight=90.7 --convert       Creates a log entry for 200lbs for the current date
 
 Options:
         -d, --date        Log date in valid 'YYYY-MM-DD' format. If not specified the current UTC date is used.
         -f, --file        Log file path and name. The default is /mnt/DataDrive/Documents/WeightLog.txt.
+        -n, --note        Adds a note string to the log entry. The default is blank.
         -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.
-        -c, --convert     Assumes the input weight is in kilograms but converst the value and logs in pounds.
+        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.
         -l, --pounds      Save weight value as standard pound units. This is the default.
-        -p, --print       Prints to the terminal the data that is written into log file.
+        -p, --noprint     Supresses the printing to the terminal the data that is written into log file.
         -v, --version     Prints the version of this shell script.
         -h, --help        Displays this help message.
         -b, --debug       Does not write to file - but prints the data that would be written
 
 Examples:
-        logweight --weight=200.6 --date=2020-01-01     Creates a log entry on a specific day
-        logweight --weight=200.6 --kilograms           Creates a log entry in kilograms on the current date
-        logweight -w=200.6 -p                          Creates a log entry on the current date and prints the values in terminal
+        logweight --weight=200.6 --date=2020-01-01            Creates a log entry for the specified day
+        logweight --weight=200.6 --note="Taken after run"     Creates a log entry on the current date with a user note
+        logweight --weight=200.6 --kilograms                  Creates a log entry in kilograms on the current date
 ```
 
 Here is the raw file that you can use.
@@ -45,19 +49,20 @@ Here is the raw file that you can use.
 
 # A shell script to log personal body weights into /mnt/DataDrive/Documents/WeightLog.txt file
 # Written by: Joe Lotz
-# License: MIT 
-# Last updated: 2020/June/11
 #
-# logweight --help
+# Version 0.1 (2020/June/11) = Initial Release
+# Version 0.2 (2020/June/15) = switched the print flag to a no-print flag, added note field
 # --------------------------------------------------------------
 
-# Set vars
-VERS="0.1"
+#### Set variables
+VERS="0.2"
 UNITS="lbs"
 NOW=$( date -u '+%F' )
 FILE="/mnt/DataDrive/Documents/WeightLog.txt"
+VERBOSE=1
+NOTE=""
 
-# Parse input arguments
+#### Parse input arguments
 for i in "$@"
 do
 case $i in
@@ -74,6 +79,9 @@ case $i in
     ;;
     -f=*|--file=*)
     FILE="${i#*=}"
+    ;;
+    -n=*|--note=*)
+    NOTE="${i#*=}"
     ;;
     -l|--pounds)
     UNITS=lbs
@@ -98,11 +106,11 @@ case $i in
     -b|--debug)
     DEBUG=1
     ;;
-    -p|--print)
-    VERBOSE=1
+    -np|--noprint)
+    VERBOSE=0
     ;;
     -h|--help)
-    printf "\nUsage:\n\n  logweight input [option]\n\nInput:\n        -w, --weight      Weight value desired to log in pounds (lbs)\n\nSimple Examples:\n        logweight --weight=200\n        logweight -w=200\n\nOptions:\n        -d, --date        Log date in valid 'YYYY-MM-DD' format. If not specified the current UTC date is used.\n        -f, --file        Log file path and name. The default is ${FILE}.\n        -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.\n        -c, --convert     Assumes the input weight is in kilograms but converst the value and logs in pounds.\n        -l, --pounds      Save weight value as standard pound units. This is the default.\n        -p, --print       Prints to the terminal the data that is written into log file.\n        -v, --version     Prints the version of this shell script.\n        -h, --help        Displays this help message.\n        -b, --debug       Does not write to file - but prints the data that would be written\n\nExamples:\n        logweight --weight=200.6 --date=2020-01-01     Creates a log entry on a specific day\n        logweight --weight=200.6 --kilograms           Creates a log entry in kilograms on the current date\n        logweight -w=200.6 -p                          Creates a log entry on the current date and prints the values in terminal\n\n"
+    printf "\nUsage:\n\n  logweight input [option]\n\nInput:\n        -w, --weight      Weight value desired to log. Default in pounds (lbs)\n                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.\n                           Use optional -k,--kilograms flag to log in kilograms.\n\nSimple Examples:\n        logweight --weight=200                  Creates a log entry for 200lbs for the current date\n        logweight -w=200                        Creates a log entry for 200lbs for the current date\n        logweight --weight=90.7 --convert       Creates a log entry for 200lbs for the current date\n\nOptions:\n        -d, --date        Log date in valid 'YYYY-MM-DD' format. If not specified the current UTC date is used.\n        -f, --file        Log file path and name. The default is ${FILE}.\n        -n, --note        Adds a note string to the log entry. The default is blank.\n        -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.\n        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.\n        -l, --pounds      Save weight value as standard pound units. This is the default.\n        -p, --noprint     Supresses the printing to the terminal the data that is written into log file.\n        -v, --version     Prints the version of this shell script.\n        -h, --help        Displays this help message.\n        -b, --debug       Does not write to file - but prints the data that would be written\n\nExamples:\n        logweight --weight=200.6 --date=2020-01-01            Creates a log entry for the specified day\n        logweight --weight=200.6 --note=\"Taken after run\"     Creates a log entry on the current date with a user note\n        logweight --weight=200.6 --kilograms                  Creates a log entry in kilograms on the current date\n"
     
     exit 0
     ;;
@@ -118,7 +126,7 @@ then
     printf "\n\e[91m-------ERROR-------\e[0m\nWEIGHT value is empty, specify as:\n    'logweight 200' or\n    'logweight --weight=200' or\n    'logweight -w 200'\n"
     exit 1
 else
-    OUTPUT="${NOW}, ${WEIGHT}, ${UNITS}"
+    OUTPUT="${NOW}, ${WEIGHT}, ${UNITS}, ${NOTE}"
     if [ "$VERBOSE" ]; then echo "Log file: ${FILE}\nEntry: ${OUTPUT}"; fi
     if [ -z "$DEBUG" ]; then echo $OUTPUT >>$FILE; fi
 fi
