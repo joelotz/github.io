@@ -44,27 +44,31 @@
   logweight input <span class="o">[</span>option<span class="o">]</span>
 
 Input:
-        -w, --weight      Weight value desired to log in pounds <span class="o">(</span>lbs<span class="o">)</span>
+        -w, --weight      Weight value desired to log. Default in pounds <span class="o">(</span>lbs<span class="o">)</span>
+                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.
+                           Use optional -k,--kilograms flag to log in kilograms.
 
 Simple Examples:
-        logweight --weight<span class="o">=</span><span class="m">200</span>
-        logweight -w<span class="o">=</span><span class="m">200</span>
+        logweight --weight<span class="o">=</span><span class="m">200</span>                  Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
+        logweight -w<span class="o">=</span><span class="m">200</span>                        Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
+        logweight --weight<span class="o">=</span><span class="m">90</span>.7 --convert       Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
 
 Options:
         -d, --date        Log date in valid <span class="s1">&#39;YYYY-MM-DD&#39;</span> format. If not specified the current UTC date is used.
         -f, --file        Log file path and name. The default is /mnt/DataDrive/Documents/WeightLog.txt.
+        -n, --note        Adds a note string to the log entry. The default is blank.
         -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.
-        -c, --convert     Assumes the input weight is in kilograms but converst the value and logs in pounds.
+        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.
         -l, --pounds      Save weight value as standard pound units. This is the default.
-        -p, --print       Prints to the terminal the data that is written into log file.
+        -p, --noprint     Supresses the printing to the terminal the data that is written into log file.
         -v, --version     Prints the version of this shell script.
         -h, --help        Displays this <span class="nb">help</span> message.
         -b, --debug       Does not write to file - but prints the data that would be written
 
 Examples:
-        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --date<span class="o">=</span><span class="m">2020</span>-01-01     Creates a log entry on a specific day
-        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --kilograms           Creates a log entry in kilograms on the current date
-        logweight -w<span class="o">=</span><span class="m">200</span>.6 -p                          Creates a log entry on the current date and prints the values in terminal
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --date<span class="o">=</span><span class="m">2020</span>-01-01            Creates a log entry <span class="k">for</span> the specified day
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --note<span class="o">=</span><span class="s2">&quot;Taken after run&quot;</span>     Creates a log entry on the current date with a user note
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --kilograms                  Creates a log entry in kilograms on the current date
 </pre></div>
 
 
@@ -73,19 +77,20 @@ Examples:
 
 <span class="c1"># A shell script to log personal body weights into /mnt/DataDrive/Documents/WeightLog.txt file</span>
 <span class="c1"># Written by: Joe Lotz</span>
-<span class="c1"># License: MIT </span>
-<span class="c1"># Last updated: 2020/June/11</span>
 <span class="c1">#</span>
-<span class="c1"># logweight --help</span>
+<span class="c1"># Version 0.1 (2020/June/11) = Initial Release</span>
+<span class="c1"># Version 0.2 (2020/June/15) = switched the print flag to a no-print flag, added note field</span>
 <span class="c1"># --------------------------------------------------------------</span>
 
-<span class="c1"># Set vars</span>
-<span class="nv">VERS</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span>
+<span class="c1">#### Set variables</span>
+<span class="nv">VERS</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span>
 <span class="nv">UNITS</span><span class="o">=</span><span class="s2">&quot;lbs&quot;</span>
 <span class="nv">NOW</span><span class="o">=</span><span class="k">$(</span> date -u <span class="s1">&#39;+%F&#39;</span> <span class="k">)</span>
 <span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;/mnt/DataDrive/Documents/WeightLog.txt&quot;</span>
+<span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">NOTE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
-<span class="c1"># Parse input arguments</span>
+<span class="c1">#### Parse input arguments</span>
 <span class="k">for</span> i in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">do</span>
 <span class="k">case</span> <span class="nv">$i</span> in
@@ -102,6 +107,9 @@ Examples:
     <span class="p">;;</span>
     -f<span class="o">=</span>*<span class="p">|</span>--file<span class="o">=</span>*<span class="o">)</span>
     <span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">;;</span>
+    -n<span class="o">=</span>*<span class="p">|</span>--note<span class="o">=</span>*<span class="o">)</span>
+    <span class="nv">NOTE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="p">;;</span>
     -l<span class="p">|</span>--pounds<span class="o">)</span>
     <span class="nv">UNITS</span><span class="o">=</span>lbs
@@ -126,11 +134,11 @@ Examples:
     -b<span class="p">|</span>--debug<span class="o">)</span>
     <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span>
     <span class="p">;;</span>
-    -p<span class="p">|</span>--print<span class="o">)</span>
-    <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+    -np<span class="p">|</span>--noprint<span class="o">)</span>
+    <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">0</span>
     <span class="p">;;</span>
     -h<span class="p">|</span>--help<span class="o">)</span>
-    <span class="nb">printf</span> <span class="s2">&quot;\nUsage:\n\n  logweight input [option]\n\nInput:\n        -w, --weight      Weight value desired to log in pounds (lbs)\n\nSimple Examples:\n        logweight --weight=200\n        logweight -w=200\n\nOptions:\n        -d, --date        Log date in valid &#39;YYYY-MM-DD&#39; format. If not specified the current UTC date is used.\n        -f, --file        Log file path and name. The default is </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">.\n        -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.\n        -c, --convert     Assumes the input weight is in kilograms but converst the value and logs in pounds.\n        -l, --pounds      Save weight value as standard pound units. This is the default.\n        -p, --print       Prints to the terminal the data that is written into log file.\n        -v, --version     Prints the version of this shell script.\n        -h, --help        Displays this help message.\n        -b, --debug       Does not write to file - but prints the data that would be written\n\nExamples:\n        logweight --weight=200.6 --date=2020-01-01     Creates a log entry on a specific day\n        logweight --weight=200.6 --kilograms           Creates a log entry in kilograms on the current date\n        logweight -w=200.6 -p                          Creates a log entry on the current date and prints the values in terminal\n\n&quot;</span>
+    <span class="nb">printf</span> <span class="s2">&quot;\nUsage:\n\n  logweight input [option]\n\nInput:\n        -w, --weight      Weight value desired to log. Default in pounds (lbs)\n                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.\n                           Use optional -k,--kilograms flag to log in kilograms.\n\nSimple Examples:\n        logweight --weight=200                  Creates a log entry for 200lbs for the current date\n        logweight -w=200                        Creates a log entry for 200lbs for the current date\n        logweight --weight=90.7 --convert       Creates a log entry for 200lbs for the current date\n\nOptions:\n        -d, --date        Log date in valid &#39;YYYY-MM-DD&#39; format. If not specified the current UTC date is used.\n        -f, --file        Log file path and name. The default is </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">.\n        -n, --note        Adds a note string to the log entry. The default is blank.\n        -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.\n        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.\n        -l, --pounds      Save weight value as standard pound units. This is the default.\n        -p, --noprint     Supresses the printing to the terminal the data that is written into log file.\n        -v, --version     Prints the version of this shell script.\n        -h, --help        Displays this help message.\n        -b, --debug       Does not write to file - but prints the data that would be written\n\nExamples:\n        logweight --weight=200.6 --date=2020-01-01            Creates a log entry for the specified day\n        logweight --weight=200.6 --note=\&quot;Taken after run\&quot;     Creates a log entry on the current date with a user note\n        logweight --weight=200.6 --kilograms                  Creates a log entry in kilograms on the current date\n&quot;</span>
 
     <span class="nb">exit</span> <span class="m">0</span>
     <span class="p">;;</span>
@@ -146,7 +154,7 @@ Examples:
     <span class="nb">printf</span> <span class="s2">&quot;\n\e[91m-------ERROR-------\e[0m\nWEIGHT value is empty, specify as:\n    &#39;logweight 200&#39; or\n    &#39;logweight --weight=200&#39; or\n    &#39;logweight -w 200&#39;\n&quot;</span>
     <span class="nb">exit</span> <span class="m">1</span>
 <span class="k">else</span>
-    <span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">WEIGHT</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">UNITS</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">WEIGHT</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">UNITS</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">NOTE</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$VERBOSE</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s2">&quot;Log file: </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">\nEntry: </span><span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">fi</span>
     <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$DEBUG</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="nv">$OUTPUT</span> &gt;&gt;<span class="nv">$FILE</span><span class="p">;</span> <span class="k">fi</span>
 <span class="k">fi</span>
