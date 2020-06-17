@@ -5,6 +5,8 @@ Author: Joe
 Keywords: ubuntu 20.4, weight logging shell script, log from terminal
 Version: OS, Ubuntu 20.04 LTS, Bash, 5.0.16(1)-release
 
+**<u>(2020/06/17)</u>**: Updated post with the script version 0.2.
+
 I've been exercising lately and I wanted to see the progress of my weight loss; so I write a stupid little script to log my weight from the terminal. I'm posting it because I learned a couple tricks in the writing of the shell script and thought someone else may as well. 
 
 First, it can be placed anywhere but I recommend somewhere in your PATH so that you can execute it from anywhere. A good place is `/usr/local/bin/`. 
