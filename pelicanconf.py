@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Joe'
 SITENAME = 'Delving into Delusion'
-SITEURL = 'https://joelotz.github.io'
+SITEURL = 'http://www.joelotz.com'
 PATH = 'content'
 TIMEZONE = 'Asia/Kolkata'
 DEFAULT_LANG = 'en'
