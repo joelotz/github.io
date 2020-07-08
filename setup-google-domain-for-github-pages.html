@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Setup Google Domain for Github&nbsp;Pages | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Setup Google Domain for Github&nbsp;Pages</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 11, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73990.4 &nbsp;&nbsp;&nbsp;
+    </p>
+    <p>So you are using github pages and want a custom domain name? This article will explain how to configure the <span class="caps">DNS</span> records to make that&nbsp;possible. </p>
+<h3>Github&nbsp;Settings</h3>
+<p>First, go into your github pages repository and select the Settings. Note that your github pages is probably something like <code>&lt;yourname&gt;/&lt;yourname&gt;.github.io</code>.</p>
+<p><img alt="customdomain-00" src="/images/2020/customdomain-00.png"></p>
+<p>Scroll down until you see “custom domain” and then enter the domain you purchased from Google Domain and Save. Be sure to enter “www” before the domain name as shown, I’ll explain why&nbsp;later.</p>
+<p><img alt="customdomain-01" src="/images/2020/customdomain-01.png"></p>
+<h3>Google Domain <span class="caps">DNS</span>&nbsp;Settings</h3>
+<p>Now go to <a href="https://domains.google.com/m/registrar/">Google Domain</a> and select “Manage” next to the domain&nbsp;name. </p>
+<p><img alt="customdomain-08" src="/images/2020/customdomain-08.png"></p>
+<p>Next click the “<span class="caps">DNS</span>” option on the left-hand menu and we are ready to make some entries. The first is a <span class="caps">DNS</span> ‘A’ record or ‘address’. This is the most fundamental record and indicates the <span class="caps">IP</span> address of the domain, in this example, of&nbsp;joelotz.com. </p>
+<p>Scroll down the page until you see the section “Custom resource records”. Most likely it is already set to ‘A’, if not, just click the drop-down and set it. To begin with you won’t see the <span class="caps">IP</span> addresses, you need to add those. What we are doing here is telling all the <span class="caps">DNS</span> servers, “if someone comes looking for joelotz.com go to one of these four server addresses <em>(which are at github)</em>.” These <span class="caps">IP</span> address come from the <a href="https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-a-records-with-your-dns-provider">github docs</a>. Enter an address and click the + sign to get another row. Once all four are entered hit the ‘Add’&nbsp;button.</p>
+<p><img alt="customdomain-02" src="/images/2020/customdomain-02.png"></p>
+<p>Next, I don’t just want to forward traffic from joelotz.com to joelotz.github.io, I want the address to actually be joelotz.com. For this, we need to create a <span class="caps">CNAME</span> Record. This creates an alias from one domain name (joelotz.github.io) to another&nbsp;(joelotz.com).</p>
+<p>In the same section as before, change the drop-down from an “A” to “<span class="caps">CNAME</span>”. Then add “www” to the far left field and your github pages address to the far&nbsp;right.</p>
+<p><img alt="customdomain-03" src="/images/2020/customdomain-03.png"></p>
+<p>This is what it should look like when&nbsp;completed.</p>
+<p><img alt="customdomain-04" src="/images/2020/customdomain-04.png"></p>
+<p>I found it takes about 5 minutes for this information to propagate, so go grab an iced tea, you deserve it. For those extra-nerdy, you can verify that records are set by&nbsp;typing:</p>
+<div class="highlight"><pre><span></span>dig &lt;domain&gt; +nostats +nocomments +nocmd
+</pre></div>
+
+
+<p>This command will perform a <span class="caps">DNS</span> lookup and display the answers that are returned from the name server(s). There is a bunch of fluff that is hidden with all the +no&nbsp;flags. </p>
+<p><img alt="customdomain-06" src="/images/2020/customdomain-06.png"></p>
+<h3>Encrypted&nbsp;Traffic</h3>
+<p>And now a statement on security and privacy, which are related but not the same… it is ridiculously easy to “see” what you are doing on the internet. This is currently used by all types of people, governments and large companies, to collect your data and information. The most easiest method of keeping your traffic private is to <a href="https://www.eff.org/deeplinks/2018/12/how-https-everywhere-keeps-protecting-users-increasingly-encrypted-web">encrypt it</a>. To do that you must browse the <u>https</u> version of a site, but first you must have an https encrypted&nbsp;version. </p>
+<p>Now that the <span class="caps">DNS</span> records are entered and propogated, go back to github pages repository. Scroll down until you see and then select “Enforce <span class="caps">HTTPS</span>”. According to Monarch&nbsp;Wadia, </p>
+<blockquote>
+<p>Your github repo settings’ “Custom Domain” field <strong>*<span class="caps">HAS</span> to have “www” in it,*</strong> and it <span class="caps">HAS</span> to have “Enforce <span class="caps">HTTPS</span>”&nbsp;checked!</p>
+</blockquote>
+<p><a href="https://medium.com/@monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6">https://medium.com/@monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6</a></p>
+<p><img alt="customdomain-07" src="/images/2020/customdomain-07.png"></p>
+<p>This is why I had you use “www” in front of your domain name way back in step 1. If I didn&#8217;t then <code>https://joelotz.com</code> would work but <code>https://www.joelotz.com</code> would result in a Certificate Invalid&nbsp;error. </p>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

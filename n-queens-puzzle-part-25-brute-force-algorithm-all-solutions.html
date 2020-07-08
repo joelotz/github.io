@@ -19,7 +19,7 @@
   <body>
     <div class=container>
         <div class="header">
-            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
         </div>
 
         <div class=navigation>
@@ -33,16 +33,17 @@
                 
         <div class=body>
     <h1 class="title"> N-Queens Puzzle, Part 2.5-Brute Force Algorithm (All&nbsp;Solutions)</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 16, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73922.0 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 10, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73987.7 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/python.html">Python</a>     </p>
-    <p>This article is number 2.5 in a series implementing different alogrithms to solve the N-Queens problem. I named it 2.5 because it is an extension of <a href="n-queens-puzzle-part-2-brute-force-algorithm.html">Part 2</a> where I implemented the Brute Force Search Algorithm. In that algorithm I stopped evaluating the candidates once a solution was found. While it involves much more computation, in this implementation I continue to evaluate all the candidates to provide all&nbsp;solutions. </p>
+    <p>This article is Part 2.5 in a series implementing different algorithms to solve the N-Queens problem. I named it 2.5 because it is an extension of <a href="n-queens-puzzle-part-2-brute-force-algorithm.html">Part 2</a> where I implemented the Brute Force Search Algorithm. In that algorithm I stopped evaluating the candidates once a solution was found. While it involves much more computation, in this implementation I continue to evaluate the candidates to provide <em>all</em>&nbsp;solutions. </p>
 <p>See the first article <a href="n-queens-puzzle-part-1-introduction.html">&#8220;Part 1-Introduction&#8221;</a> for an overview of the puzzle and some background&nbsp;information.</p>
 <h3>Solution&nbsp;Set</h3>
-<p>There can be more than one solution to the puzzle, in&nbsp;fact, </p>
+<p>For a given number of queens there can be many solutions that satisfy the problem. Not surprisingly, as the size of the board (NxN) and number of queens (N) increases so does the number of solutions. Here is a table from <a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle#Counting_solutions">Wikipedia</a> that show number of fundamental solutions per number of&nbsp;queens. </p>
+<p><img alt="NQueens_Solution_Table" src="/mnt/DataDrive/Blog/content/images/2020/NQueens_2-01.png"></p>
 <h3>Code</h3>
+<p>As in Part2 I used an optimized Python library called <code>itertools</code> to calculate the combinations and&nbsp;permutations. </p>
 <div class="highlight"><pre><span></span><span class="c1">#### IMPORTS</span>
-
 <span class="kn">import</span> <span class="nn">itertools</span>
 
 <span class="c1">#### FUNCTIONS ####</span>
@@ -124,7 +125,7 @@
             <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
             <div class=social>
               <ul>
-<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
               </ul>
             </div>
             </p>
