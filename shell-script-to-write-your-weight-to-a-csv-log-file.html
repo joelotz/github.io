@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Shell Script to Write Your Weight to a csv Log&nbsp;File | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Shell Script to Write Your Weight to a csv Log&nbsp;File</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 19, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73930.2 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/bash.html">Bash</a>     </p>
+    <p><strong><u>(2020/06/17)</u></strong>: Updated post with the script version&nbsp;0.2.</p>
+<p>I&#8217;ve been exercising lately and I wanted to see the progress of my weight loss; so I write a stupid little script to log my weight from the terminal. I&#8217;m posting it because I learned a couple tricks in the writing of the shell script and thought someone else may as&nbsp;well. </p>
+<p>First, it can be placed anywhere but I recommend somewhere in your <span class="caps">PATH</span> so that you can execute it from anywhere. A good place is <code>/usr/local/bin/</code>. </p>
+<p>Type <code>logweight --help</code> to see the usage syntax and&nbsp;examples.</p>
+<div class="highlight"><pre><span></span>Usage:
+
+  logweight input <span class="o">[</span>option<span class="o">]</span>
+
+Input:
+        -w, --weight      Weight value desired to log. Default in pounds <span class="o">(</span>lbs<span class="o">)</span>
+                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.
+                           Use optional -k,--kilograms flag to log in kilograms.
+
+Simple Examples:
+        logweight --weight<span class="o">=</span><span class="m">200</span>                  Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
+        logweight -w<span class="o">=</span><span class="m">200</span>                        Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
+        logweight --weight<span class="o">=</span><span class="m">90</span>.7 --convert       Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
+
+Options:
+        -d, --date        Log date in valid <span class="s1">&#39;YYYY-MM-DD&#39;</span> format. If not specified the current UTC date is used.
+        -f, --file        Log file path and name. The default is /mnt/DataDrive/Documents/WeightLog.txt.
+        -n, --note        Adds a note string to the log entry. The default is blank.
+        -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.
+        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.
+        -l, --pounds      Save weight value as standard pound units. This is the default.
+        -p, --noprint     Supresses the printing to the terminal the data that is written into log file.
+        -v, --version     Prints the version of this shell script.
+        -h, --help        Displays this <span class="nb">help</span> message.
+        -b, --debug       Does not write to file - but prints the data that would be written
+
+Examples:
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --date<span class="o">=</span><span class="m">2020</span>-01-01            Creates a log entry <span class="k">for</span> the specified day
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --note<span class="o">=</span><span class="s2">&quot;Taken after run&quot;</span>     Creates a log entry on the current date with a user note
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --kilograms                  Creates a log entry in kilograms on the current date
+</pre></div>
+
+
+<p>Here is the raw file that you can&nbsp;use.</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># A shell script to log personal body weights into /mnt/DataDrive/Documents/WeightLog.txt file</span>
+<span class="c1"># Written by: Joe Lotz</span>
+<span class="c1">#</span>
+<span class="c1"># Version 0.1 (2020/June/11) = Initial Release</span>
+<span class="c1"># Version 0.2 (2020/June/15) = switched the print flag to a no-print flag, added note field</span>
+<span class="c1"># --------------------------------------------------------------</span>
+
+<span class="c1">#### Set variables</span>
+<span class="nv">VERS</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span>
+<span class="nv">UNITS</span><span class="o">=</span><span class="s2">&quot;lbs&quot;</span>
+<span class="nv">NOW</span><span class="o">=</span><span class="k">$(</span> date -u <span class="s1">&#39;+%F&#39;</span> <span class="k">)</span>
+<span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;/mnt/DataDrive/Documents/WeightLog.txt&quot;</span>
+<span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">NOTE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+<span class="c1">#### Parse input arguments</span>
+<span class="k">for</span> i in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">do</span>
+<span class="k">case</span> <span class="nv">$i</span> in
+    -w<span class="o">=</span>*<span class="p">|</span>--weight<span class="o">=</span>*<span class="o">)</span>
+    <span class="nv">WEIGHT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">;;</span>
+    -d<span class="o">=</span>*<span class="p">|</span>--date<span class="o">=</span>*<span class="o">)</span>
+    <span class="nv">DATE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="c1"># Check if valid date input</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;`date &#39;+%Y-%m-%d&#39; -d </span><span class="nv">$DATE</span><span class="s2"> 2&gt;/dev/null`&quot;</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="nv">$DATE</span><span class="s2">&quot;</span> <span class="o">]</span>
+    <span class="k">then</span> <span class="nv">NOW</span><span class="o">=</span><span class="nv">$DATE</span>
+    <span class="k">else</span> <span class="nb">printf</span> <span class="s2">&quot;\n\e[91m-------ERROR-------\e[0m\nInput date </span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2"> is not valid, specify as: &#39;YYYY-MM-DD&#39;\n&quot;</span><span class="p">;</span> <span class="nb">exit</span> <span class="m">1</span>
+    <span class="k">fi</span>
+    <span class="p">;;</span>
+    -f<span class="o">=</span>*<span class="p">|</span>--file<span class="o">=</span>*<span class="o">)</span>
+    <span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">;;</span>
+    -n<span class="o">=</span>*<span class="p">|</span>--note<span class="o">=</span>*<span class="o">)</span>
+    <span class="nv">NOTE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">;;</span>
+    -l<span class="p">|</span>--pounds<span class="o">)</span>
+    <span class="nv">UNITS</span><span class="o">=</span>lbs
+    <span class="p">;;</span>
+    -k<span class="p">|</span>--kilograms<span class="o">)</span>
+    <span class="nv">UNITS</span><span class="o">=</span>kgs
+    <span class="p">;;</span>
+    -c<span class="p">|</span>--convert<span class="o">)</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$WEIGHT</span><span class="s2">&quot;</span> <span class="p">&amp;</span> <span class="s2">&quot;</span><span class="nv">$UNITS</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;kgs&quot;</span> <span class="o">]</span> 
+    <span class="k">then</span> :
+    <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$WEIGHT</span><span class="s2">&quot;</span> <span class="o">]</span>
+    <span class="k">then</span> 
+        <span class="nv">WEIGHT</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$WEIGHT</span><span class="s2"> * 2.20462&quot;</span><span class="p">|</span>bc -l <span class="p">|</span> xargs <span class="nb">printf</span> <span class="s2">&quot;%.1f&quot;</span><span class="k">)</span>
+    <span class="nv">UNITS</span><span class="o">=</span>kgs
+    <span class="k">else</span> <span class="nb">printf</span> <span class="s2">&quot;\n\e[91m-------ERROR-------\e[0m\nWEIGHT value is empty, specify as:\n    &#39;logweight 200 -c&#39; or\n    &#39;logweight --weight=200 --convert&#39; or\n    &#39;logweight -w 200 -c&#39;\n&quot;</span><span class="p">;</span> <span class="nb">exit</span> <span class="m">1</span>
+    <span class="k">fi</span>
+    <span class="p">;;</span>    
+    -v<span class="p">|</span>--version<span class="o">)</span>                                   
+    <span class="nb">printf</span> <span class="s2">&quot;Version: </span><span class="si">${</span><span class="nv">VERS</span><span class="si">}</span><span class="s2">\n&quot;</span>
+    <span class="nb">exit</span> <span class="m">0</span>         
+    <span class="p">;;</span>
+    -b<span class="p">|</span>--debug<span class="o">)</span>
+    <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span>
+    <span class="p">;;</span>
+    -np<span class="p">|</span>--noprint<span class="o">)</span>
+    <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">0</span>
+    <span class="p">;;</span>
+    -h<span class="p">|</span>--help<span class="o">)</span>
+    <span class="nb">printf</span> <span class="s2">&quot;\nUsage:\n\n  logweight input [option]\n\nInput:\n        -w, --weight      Weight value desired to log. Default in pounds (lbs)\n                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.\n                           Use optional -k,--kilograms flag to log in kilograms.\n\nSimple Examples:\n        logweight --weight=200                  Creates a log entry for 200lbs for the current date\n        logweight -w=200                        Creates a log entry for 200lbs for the current date\n        logweight --weight=90.7 --convert       Creates a log entry for 200lbs for the current date\n\nOptions:\n        -d, --date        Log date in valid &#39;YYYY-MM-DD&#39; format. If not specified the current UTC date is used.\n        -f, --file        Log file path and name. The default is </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">.\n        -n, --note        Adds a note string to the log entry. The default is blank.\n        -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.\n        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.\n        -l, --pounds      Save weight value as standard pound units. This is the default.\n        -p, --noprint     Supresses the printing to the terminal the data that is written into log file.\n        -v, --version     Prints the version of this shell script.\n        -h, --help        Displays this help message.\n        -b, --debug       Does not write to file - but prints the data that would be written\n\nExamples:\n        logweight --weight=200.6 --date=2020-01-01            Creates a log entry for the specified day\n        logweight --weight=200.6 --note=\&quot;Taken after run\&quot;     Creates a log entry on the current date with a user note\n        logweight --weight=200.6 --kilograms                  Creates a log entry in kilograms on the current date\n&quot;</span>
+
+    <span class="nb">exit</span> <span class="m">0</span>
+    <span class="p">;;</span>
+    *<span class="o">)</span>
+    <span class="nb">printf</span> <span class="s2">&quot;\n\e[91m-------ERROR-------\e[0m\nUnknown input argument, check your syntax.\nSee help file by typing  &#39;logweight --help&#39;\n&quot;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+    <span class="p">;;</span>
+<span class="k">esac</span>
+<span class="k">done</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$WEIGHT</span><span class="s2">&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="nb">printf</span> <span class="s2">&quot;\n\e[91m-------ERROR-------\e[0m\nWEIGHT value is empty, specify as:\n    &#39;logweight 200&#39; or\n    &#39;logweight --weight=200&#39; or\n    &#39;logweight -w 200&#39;\n&quot;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">else</span>
+    <span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">WEIGHT</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">UNITS</span><span class="si">}</span><span class="s2">, </span><span class="si">${</span><span class="nv">NOTE</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$VERBOSE</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s2">&quot;Log file: </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">\nEntry: </span><span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">fi</span>
+    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$DEBUG</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="nv">$OUTPUT</span> &gt;&gt;<span class="nv">$FILE</span><span class="p">;</span> <span class="k">fi</span>
+<span class="k">fi</span>
+</pre></div>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> Bash</td><td> 5.0.16(1)-release</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

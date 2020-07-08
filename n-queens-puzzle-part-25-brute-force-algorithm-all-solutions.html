@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> N-Queens Puzzle, Part 2.5-Brute Force Algorithm (All&nbsp;Solutions) | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> N-Queens Puzzle, Part 2.5-Brute Force Algorithm (All&nbsp;Solutions)</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 16, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73922.0 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/python.html">Python</a>     </p>
+    <p>This article is number 2.5 in a series implementing different alogrithms to solve the N-Queens problem. I named it 2.5 because it is an extension of <a href="n-queens-puzzle-part-2-brute-force-algorithm.html">Part 2</a> where I implemented the Brute Force Search Algorithm. In that algorithm I stopped evaluating the candidates once a solution was found. While it involves much more computation, in this implementation I continue to evaluate all the candidates to provide all&nbsp;solutions. </p>
+<p>See the first article <a href="n-queens-puzzle-part-1-introduction.html">&#8220;Part 1-Introduction&#8221;</a> for an overview of the puzzle and some background&nbsp;information.</p>
+<h3>Solution&nbsp;Set</h3>
+<p>There can be more than one solution to the puzzle, in&nbsp;fact, </p>
+<h3>Code</h3>
+<div class="highlight"><pre><span></span><span class="c1">#### IMPORTS</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="c1">#### FUNCTIONS ####</span>
+
+<span class="k">def</span> <span class="nf">create_empty_board</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="s2">&quot;Create an NxN board of zeros&quot;</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span> 
+
+<span class="k">def</span> <span class="nf">perm_to_board</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>
+    <span class="s2">&quot;Makes a board from a given permutation&quot;</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="n">create_empty_board</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">ndx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)):</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">perm</span><span class="p">[</span><span class="n">ndx</span><span class="p">]][</span><span class="n">ndx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">board</span>
+
+<span class="k">def</span> <span class="nf">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="s2">&quot;Pretty print the board.&quot;</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">is_solution</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>
+    <span class="s2">&quot;Check if input array contains queens on the same diagonal&quot;</span>
+    <span class="c1"># Given two queens, they are on the same diagonal if the horizontal</span>
+    <span class="c1">#  distance between them is equal to the vertical distance between</span>
+    <span class="c1">#  them.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Cells (row1,col1) and (row2,col2) are on the same diagonal, </span>
+    <span class="c1">#  if and only if, |row1-row2|=|col1-col2|. </span>
+    <span class="c1">#</span>
+    <span class="c1"># Remember, permutations care about order whereas combinations do not</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)),</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="nb">abs</span><span class="p">(</span><span class="n">perm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">perm</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">):</span> <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span> <span class="nf">find_permutations</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="s2">&quot;Find all possible permuations of 0-(N-1)&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">find_solutions</span><span class="p">(</span><span class="n">all_permutations</span><span class="p">):</span>
+    <span class="s2">&quot;Utility function that checks validity of each solution&quot;</span>
+    <span class="n">solutions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">all_permutations</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_solution</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span> <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">perm</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">solutions</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># input size of board = number of queens</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How many queens to place?&quot;</span><span class="p">)</span>
+    <span class="c1"># convert input string to a number</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span> 
+
+    <span class="n">all_permuations</span> <span class="o">=</span> <span class="n">find_permutations</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">solutions</span> <span class="o">=</span> <span class="n">find_solutions</span><span class="p">(</span><span class="n">all_permuations</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">solutions</span><span class="p">),</span><span class="s2">&quot;solutions found.&quot;</span><span class="p">)</span>
+    <span class="n">print_board</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span>
+</pre></div>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> python</td><td> 3.7.4</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
