@@ -13,9 +13,11 @@ In this article I'm going to implement a Brute-Force algorithm in python to find
 
 The [Brute-Force Algorithm](https://en.wikipedia.org/wiki/Brute-force_search) involves finding all possible permutations of the queen positions and then evaluating each to determine if it is a valid solution. This is typically one of the easier search algorithms to implement and it will always find a solution if it exists, however, the computational cost is proportional to the number of candidates and increases to be impractical very quickly. This is known as “combinatorial explosion” and limits the use of this algorithm as the computational cost of finding a solution grows exponentially as the search space increases.
 
+In this “brute force” algorithm we find the solution by looking at every position on an NxN board, N times, for N queens. Assuming the reader understands [Big O Notation](https://en.wikipedia.org/wiki/Big_O_notation), this means $O(N^N)$  time complexity!! Wow.
+
 ### Dimensionality Reduction via Encoding
 
-One method of reducing the search space is by reducing dimensionality. For the N-Queens problem we can do that heuristically by recognizing  we can have only one queen in the row or column. 
+One method of time complexity is to reduce the computations, we reduce computations by reducing the search space, we reduce the search space by reducing dimensionality. For the N-Queens problem we can do that heuristically by recognizing  we can have only one queen in the row or column. 
 
 For the remainder of this article, I’ll be using an N=4 example.  In the particular solution below, a 4x4 board has 4 queens placed on it, denoted by red X's. The indices are [zero indexed](https://en.wikipedia.org/wiki/Zero-based_numbering), meaning they start at zero. For a generalized NxN grid (aka. board) the indices go from 0 to N-1. For the time being, it doesn’t matter where the queens are placed, assume this example is a random solution.
 

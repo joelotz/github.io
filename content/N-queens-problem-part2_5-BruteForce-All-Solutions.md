@@ -1,24 +1,26 @@
 Title: N-Queens Puzzle, Part 2.5-Brute Force Algorithm (All Solutions)
-Date: 2020-07-03
+Date: 2020-07-10
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, brute-force search, alogrithms, python 3
 Version: OS, Ubuntu 20.04 LTS, python, 3.7.4
-Status: Draft
 
-This article is number 2.5 in a series implementing different alogrithms to solve the N-Queens problem. I named it 2.5 because it is an extension of [Part 2](n-queens-puzzle-part-2-brute-force-algorithm.html) where I implemented the Brute Force Search Algorithm. In that algorithm I stopped evaluating the candidates once a solution was found. While it involves much more computation, in this implementation I continue to evaluate all the candidates to provide all solutions. 
+This article is Part 2.5 in a series implementing different algorithms to solve the N-Queens problem. I named it 2.5 because it is an extension of [Part 2](n-queens-puzzle-part-2-brute-force-algorithm.html) where I implemented the Brute Force Search Algorithm. In that algorithm I stopped evaluating the candidates once a solution was found. While it involves much more computation, in this implementation I continue to evaluate the candidates to provide *all* solutions. 
 
 See the first article ["Part 1-Introduction"](n-queens-puzzle-part-1-introduction.html) for an overview of the puzzle and some background information.
 
 ### Solution Set
 
-There can be more than one solution to the puzzle, in fact, 
+For a given number of queens there can be many solutions that satisfy the problem. Not surprisingly, as the size of the board (NxN) and number of queens (N) increases so does the number of solutions. Here is a table from [Wikipedia](https://en.wikipedia.org/wiki/Eight_queens_puzzle#Counting_solutions) that show number of fundamental solutions per number of queens. 
+
+![NQueens_Solution_Table](/mnt/DataDrive/Blog/content/images/2020/NQueens_2-01.png)
 
 ### Code
 
+As in Part2 I used an optimized Python library called `itertools` to calculate the combinations and permutations. 
+
 ```python
 #### IMPORTS
-
 import itertools
 
 #### FUNCTIONS ####
@@ -79,4 +81,3 @@ if __name__ == '__main__':
     print("There are",len(solutions),"solutions found.")
     print_board(solutions)
 ```
-
