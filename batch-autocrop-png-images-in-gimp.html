@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Batch Autocrop png Images in&nbsp;Gimp | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Batch Autocrop png Images in&nbsp;Gimp</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 10, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73987.7 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/gimp.html">Gimp</a>     </p>
+    <p>This article is to document the solution I found for batch auto-cropping a bunch of images within <a href="https://www.gimp.org/">Gimp</a>. Keep in mind that this runs the “Crop to Content” command within the Image menu, so if you can’t achieve what you want <em>within</em> the program than this isn’t going to give you different&nbsp;results. </p>
+<p>To start, credit where credit is due. I didn’t want to learn how to write Gimp scripts so I found one from a Swede named Greg Hildström <a href="http://www.hildstrom.com/projects/gimpscript/index.html">here</a>, thanks&nbsp;Greg!</p>
+<p><strong>batch-autocrop.scm</strong></p>
+<div class="highlight"><pre><span></span>  <span class="p">(</span><span class="n">define</span> <span class="p">(</span><span class="n">batch</span><span class="o">-</span><span class="n">autocrop</span> <span class="n">pattern</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">let</span><span class="o">*</span> <span class="p">((</span><span class="n">filelist</span> <span class="p">(</span><span class="n">cadr</span> <span class="p">(</span><span class="n">file</span><span class="o">-</span><span class="n">glob</span> <span class="n">pattern</span> <span class="mi">1</span><span class="p">))))</span>
+    <span class="p">(</span><span class="n">while</span> <span class="p">(</span><span class="k">not</span> <span class="p">(</span><span class="k">null</span><span class="o">?</span> <span class="n">filelist</span><span class="p">))</span>
+           <span class="p">(</span><span class="n">let</span><span class="o">*</span> <span class="p">((</span><span class="n">filename</span> <span class="p">(</span><span class="n">car</span> <span class="n">filelist</span><span class="p">))</span>
+                  <span class="p">(</span><span class="n">image</span> <span class="p">(</span><span class="n">car</span> <span class="p">(</span><span class="n">gimp</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="k">load</span> <span class="n">RUN</span><span class="o">-</span><span class="n">NONINTERACTIVE</span>
+                                              <span class="n">filename</span> <span class="n">filename</span><span class="p">)))</span>
+                  <span class="p">(</span><span class="n">drawable</span> <span class="p">(</span><span class="n">car</span> <span class="p">(</span><span class="n">gimp</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="k">get</span><span class="o">-</span><span class="n">active</span><span class="o">-</span><span class="n">layer</span> <span class="n">image</span><span class="p">))))</span>
+
+             <span class="p">(</span><span class="n">plug</span><span class="o">-</span><span class="k">in</span><span class="o">-</span><span class="n">autocrop</span> <span class="n">RUN</span><span class="o">-</span><span class="n">NONINTERACTIVE</span>
+                                   <span class="n">image</span> <span class="n">drawable</span><span class="p">)</span>
+
+             <span class="p">(</span><span class="n">gimp</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">save</span> <span class="n">RUN</span><span class="o">-</span><span class="n">NONINTERACTIVE</span>
+                             <span class="n">image</span> <span class="n">drawable</span> <span class="n">filename</span> <span class="n">filename</span><span class="p">)</span>
+             <span class="p">(</span><span class="n">gimp</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="k">delete</span> <span class="n">image</span><span class="p">))</span>
+           <span class="p">(</span><span class="k">set</span><span class="o">!</span> <span class="n">filelist</span> <span class="p">(</span><span class="n">cdr</span> <span class="n">filelist</span><span class="p">)))))</span>
+</pre></div>
+
+
+<ol>
+<li>Copy the <code>batch-autocrop.scm</code> into the scripts&nbsp;folder </li>
+</ol>
+<p>Where do Gimp scripts and plugin live? It’s easy to find out. Open Gimp and within the top menu bar select <code>Edit\Preferences\Folders</code>, expand Folders out and Select “Scripts”. It is recommended to put your personal scripts into your configuration folder as circled in red&nbsp;below. </p>
+<p><img alt="image of Gimp menu items" src="/images/2020/GimpCrop-00.png"></p>
+<ol>
+<li>Within a terminal change into the directory of images you want to crop and run the&nbsp;script </li>
+</ol>
+<div class="highlight"><pre><span></span>gimp -i -b <span class="s1">&#39;(batch-autocrop &quot;*.PNG&quot;)&#39;</span> -b <span class="s1">&#39;(gimp-quit 0)&#39;</span>
+</pre></div>
+
+
+<p><img alt="terminal view of batch command" src="/images/2020/GimpCrop-01.png"></p>
+<p>If you are interested in what you just did continue&nbsp;reading. </p>
+<ul>
+<li><code>gimp</code> is the command, you can run <code>gimp -h</code> to view the help&nbsp;page </li>
+<li>The flag <code>-i</code> means run without a user&nbsp;interface</li>
+<li><code>-b</code> means run a batch&nbsp;command</li>
+</ul>
+<p>Look up at the first line of the .scm script and you will see the definition of the batch command = “batch-autocrop pattern”. <code>batch-autocrop</code> is the command name and <code>pattern</code> is the input pattern of files you want to operate on. I don’t know why you need to wrap the batch command in both quotes and paranthesis, it seems to me that either one would be enough to differentiate the input, but regardless… the first batch command is <code>gimp -i -b '(batch-autocrop “*.PNG”)'</code> because I want to operate on everything in the current folder that ends with “.<span class="caps">PNG</span>”. For my particular configuration, capitalization was important; e.g. “.png” vs “.<span class="caps">PNG</span>” made a&nbsp;difference. </p>
+<p>Lastly we need to close out the session because we don’t have an interface. This is another batch command <code>-b  '(gimp-quit 0)'</code> meaning quite Gimp&nbsp;now. </p>
+<p>And there you have&nbsp;it!</p>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> Gimp</td><td> 2.10.18</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

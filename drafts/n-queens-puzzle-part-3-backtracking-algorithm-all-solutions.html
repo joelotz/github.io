@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title> Delving into Delusion </title>
+    <title> N-Queens Puzzle, Part 3-Backtracking Algorithm (All&nbsp;Solutions) | Delving into Delusion </title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
@@ -32,23 +32,28 @@
         <div class=separator></div>
                 
         <div class=body>
-<h1 class="title"> Article Tags </h1>
-<p class=date>Click a tag to see a list of related articles.</p>
-<ul>
-    <li><a href="http://www.joelotz.com/tag/gimp.html">Gimp</a></li>
-    <li><a href="http://www.joelotz.com/tag/python.html">Python</a></li>
-    <li><a href="http://www.joelotz.com/tag/bash.html">Bash</a></li>
-    <li><a href="http://www.joelotz.com/tag/ubuntu.html">Ubuntu</a></li>
-    <li><a href="http://www.joelotz.com/tag/exiftool.html">Exiftool</a></li>
-    <li><a href="http://www.joelotz.com/tag/clamav.html">ClamAV</a></li>
-    <li><a href="http://www.joelotz.com/tag/pelican.html">Pelican</a></li>
-    <li><a href="http://www.joelotz.com/tag/fontawesome.html">FontAwesome</a></li>
-    <li><a href="http://www.joelotz.com/tag/ffmpeg.html">FFmpeg</a></li>
-    <li><a href="http://www.joelotz.com/tag/gopro.html">GoPro</a></li>
-    <li><a href="http://www.joelotz.com/tag/davinci-resolve-16.html">Davinci Resolve 16</a></li>
-    <li><a href="http://www.joelotz.com/tag/imagemagick.html">ImageMagick</a></li>
-    <li><a href="http://www.joelotz.com/tag/matplotlib.html">Matplotlib</a></li>
-</ul>
+    <h1 class="title"> N-Queens Puzzle, Part 3-Backtracking Algorithm (All&nbsp;Solutions)</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 17, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/python.html">Python</a>     </p>
+    <p>This article is Part 3 in a series implementing different algorithms to solve the N-Queens problem. In this article I’ll be exploring the <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking</a> search algorithm. See the first article <a href="n-queens-puzzle-part-1-introduction.html">&#8220;Part 1-Introduction&#8221;</a> for an overview of the puzzle and some background&nbsp;information.</p>
+<h3>Backtracking</h3>
+<p>This is a common algorithm that is intuitive to human thinking; a candidate is iteratively built up and then &#8220;backtracks&#8221; when it is determined that it cannot be a solution. Think of how a child goes through a maze, he comes upon a right/left decision and choses right. That leads to a deadend so he comes back to the decision point and re-selects left. That path comes to another right/left decision and so&nbsp;on. </p>
+<p>Abandoning a path that we know is fruitless can save a lot of computation time. Clearly there is no sense in continuing looking for a solution if we know one does not&nbsp;exist.</p>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+    <tr><td> python</td><td> 3.7.4</td></tr>
+    </table>
+    </code>
+    </div>
+
+
         </div>
         
         <div class=footer>
