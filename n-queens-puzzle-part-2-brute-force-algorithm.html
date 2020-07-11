@@ -68,10 +68,12 @@
 <h3>Code</h3>
 <p>I used python3 language for the code to implement this algorithm. It could have been written in nearly anything, but I like python. It also has a great library named <code>itertools</code> which provides very optimized functions for iterative functionality. I took advantage of this library, specifically, the optimized permutation and combination&nbsp;functions. </p>
 <div class="highlight"><pre><span></span><span class="c1">#### IMPORTS</span>
-
 <span class="kn">import</span> <span class="nn">itertools</span>
 
 <span class="c1">#### FUNCTIONS ####</span>
+<span class="k">def</span> <span class="nf">create_empty_board</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="s2">&quot;Create an NxN board of zeros&quot;</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span> 
 
 <span class="k">def</span> <span class="nf">perm_to_board</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>
     <span class="s2">&quot;Makes a full board board from a given permutation&quot;</span>

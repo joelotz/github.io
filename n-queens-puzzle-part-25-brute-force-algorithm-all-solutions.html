@@ -42,12 +42,11 @@
 <p>For a given number of queens there can be many solutions that satisfy the problem. Not surprisingly, as the size of the board (NxN) and number of queens (N) increases so does the number of solutions. Here is a table from <a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle#Counting_solutions">Wikipedia</a> that show number of fundamental solutions per number of&nbsp;queens. </p>
 <p><img alt="NQueens_Solution_Table" src="/images/2020/NQueens_2-01.png"></p>
 <h3>Code</h3>
-<p>As in Part2 I used an optimized Python library called <code>itertools</code> to calculate the combinations and&nbsp;permutations. </p>
+<p>As in <a href="n-queens-puzzle-part-2-brute-force-algorithm.html">Part2</a> I used an optimized Python library called <code>itertools</code> to calculate the combinations and permutations. The only big difference is that this code evaluates all the permutations as a solution whereas Part2 code loops through each permutation and stops when it finds a&nbsp;solution.</p>
 <div class="highlight"><pre><span></span><span class="c1">#### IMPORTS</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
 <span class="c1">#### FUNCTIONS ####</span>
-
 <span class="k">def</span> <span class="nf">create_empty_board</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
     <span class="s2">&quot;Create an NxN board of zeros&quot;</span>
     <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span> 
