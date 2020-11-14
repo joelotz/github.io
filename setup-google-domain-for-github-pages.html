@@ -19,7 +19,7 @@
   <body>
     <div class=container>
         <div class="header">
-            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
         </div>
 
         <div class=navigation>
@@ -68,6 +68,19 @@
 <p><a href="https://medium.com/@monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6">https://medium.com/@monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6</a></p>
 <p><img alt="customdomain-07" src="/images/2020/customdomain-07.png"></p>
 <p>This is why I had you use “www” in front of your domain name way back in step 1. If I didn&#8217;t then <code>https://joelotz.com</code> would work but <code>https://www.joelotz.com</code> would result in a Certificate Invalid&nbsp;error. </p>
+<h3>Update&nbsp;2020/11/14</h3>
+<p>This may be obvious to some of you, but I wanted to point something out that gave a friend some hassle. In your typical personal blogging flow you create content on your local machine and push to the remote machine (aka github). In a more traditional setting, like a software job, you would have multiple developers all working on the same branch. The flow would be to pull the branch before editing in order to get the latest files and versions. 
+When you follow the instructions above, remember I said you are creating a <span class="caps">CNAME</span> record on the github server. Just look at your repository and you will see it. This means you have to pull that file and merge it into your local&nbsp;repo. </p>
+<div class="highlight"><pre><span></span>git pull origin master
+</pre></div>
+
+
+<p>Make sure this file is in the “output” directory like it’s supposed to be, then push it&nbsp;back. </p>
+<div class="highlight"><pre><span></span>git push origin master
+</pre></div>
+
+
+<p>Now everything is sync&#8217;d up. If you don&#8217;t do this, everytime you create a blog post and push it to github you will lose connection to your custom domain&nbsp;name. </p>
     
     <div class="version">
     <h3>Software Versions</h3>
@@ -88,7 +101,7 @@
             <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
             <div class=social>
               <ul>
-<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
               </ul>
             </div>
             </p>
