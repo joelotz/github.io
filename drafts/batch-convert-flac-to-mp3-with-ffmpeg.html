@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title> N-Queens Puzzle, Part 3-Backtracking Algorithm (All&nbsp;Solutions) | Delving into Delusion </title>
+    <title> Batch Convert .flac to .mp3 with&nbsp;FFMpeg | Delving into Delusion </title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
@@ -19,7 +19,7 @@
   <body>
     <div class=container>
         <div class="header">
-            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
         </div>
 
         <div class=navigation>
@@ -32,14 +32,16 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> N-Queens Puzzle, Part 3-Backtracking Algorithm (All&nbsp;Solutions)</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 17, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74006.9 &nbsp;&nbsp;&nbsp;
+    <h1 class="title"> Batch Convert .flac to .mp3 with&nbsp;FFMpeg</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 16, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/python.html">Python</a>     </p>
-    <p>This article is Part 3 in a series implementing different algorithms to solve the N-Queens problem. In this article I’ll be exploring the <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking</a> search algorithm. See the first article <a href="n-queens-puzzle-part-1-introduction.html">&#8220;Part 1-Introduction&#8221;</a> for an overview of the puzzle and some background&nbsp;information.</p>
-<h3>Backtracking</h3>
-<p>This is a common algorithm that is intuitive to human thinking; a candidate is iteratively built up and then &#8220;backtracks&#8221; when it is determined that it cannot be a solution. Think of how a child goes through a maze, he comes upon a right/left decision and choses right. That leads to a deadend so he comes back to the decision point and re-selects left. That path comes to another right/left decision and so&nbsp;on. </p>
-<p>Abandoning a path that we know is fruitless can save a lot of computation time. Clearly there is no sense in continuing looking for a solution if we know one does not&nbsp;exist.</p>
+    <div class="highlight"><pre><span></span><span class="err">ffmpeg -i input.flac -ab 320k -map_metadata 0 -id3v2_version 3 output.mp3</span>
+</pre></div>
+
+
+<p><span class="dquo">&#8220;</span>`
+find -name &#8220;*.flac&#8221; -exec ffmpeg -i {} -acodec libmp3lame -ab 128k {}.mp3 \;&nbsp;&#8220;&#8220;</p>
     
     <div class="version">
     <h3>Software Versions</h3>
@@ -61,7 +63,7 @@
             <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
             <div class=social>
               <ul>
-<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
               </ul>
             </div>
             </p>
