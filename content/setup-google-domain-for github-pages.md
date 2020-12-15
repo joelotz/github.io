@@ -62,4 +62,18 @@ Now that the DNS records are entered and propogated, go back to github pages rep
 
 This is why I had you use “www” in front of your domain name way back in step 1. If I didn't then `https://joelotz.com` would work but `https://www.joelotz.com` would result in a Certificate Invalid error. 
 
+### Update  - 2020/11/14
 
+This may be obvious to some of you, but I wanted to point something  out that gave a friend some hassle. In your typical personal blogging  flow you create content on your local machine and push to the remote  machine (aka github). In a more traditional setting, like a software  job, you would have multiple developers all working on the same branch.  The flow would be to pull the branch before editing in order to get the  latest files and versions.  When you follow the instructions above, remember I said you are creating a CNAME record on the github server. Just  look at your repository and you will see it. This means you have to pull that file and merge it into your local repo. 
+
+```bash
+git pull origin master
+```
+
+Make sure this file is in the “output” directory like it’s supposed to be, then push it back. 
+
+```bash
+git push origin master
+```
+
+Now everything is sync’d up. If you don’t do this, everytime you  create a blog post and push it to github you will lose connection to  your custom domain name. 

@@ -58,10 +58,12 @@ I used python3 language for the code to implement this algorithm. It could have 
 
 ```python
 #### IMPORTS
-
 import itertools
 
 #### FUNCTIONS ####
+def create_empty_board(N):
+    "Create an NxN board of zeros"
+    return [[0]*N for _ in range(N)] 
 
 def perm_to_board(perm):
     "Makes a full board board from a given permutation"

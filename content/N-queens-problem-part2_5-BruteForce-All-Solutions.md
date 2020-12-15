@@ -1,5 +1,5 @@
 Title: N-Queens Puzzle, Part 2.5-Brute Force Algorithm (All Solutions)
-Date: 2020-07-10
+Date: 2020-07-06
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, brute-force search, alogrithms, python 3
@@ -13,18 +13,17 @@ See the first article ["Part 1-Introduction"](n-queens-puzzle-part-1-introductio
 
 For a given number of queens there can be many solutions that satisfy the problem. Not surprisingly, as the size of the board (NxN) and number of queens (N) increases so does the number of solutions. Here is a table from [Wikipedia](https://en.wikipedia.org/wiki/Eight_queens_puzzle#Counting_solutions) that show number of fundamental solutions per number of queens. 
 
-![NQueens_Solution_Table](/mnt/DataDrive/Blog/content/images/2020/NQueens_2-01.png)
+![NQueens_Solution_Table](/images/2020/NQueens_2-01.png)
 
 ### Code
 
-As in Part2 I used an optimized Python library called `itertools` to calculate the combinations and permutations. 
+As in [Part2](n-queens-puzzle-part-2-brute-force-algorithm.html) I used an optimized Python library called `itertools` to calculate the combinations and permutations. The only big difference is that this code evaluates all the permutations as a solution whereas Part2 code loops through each permutation and stops when it finds a solution.
 
 ```python
 #### IMPORTS
 import itertools
 
 #### FUNCTIONS ####
-
 def create_empty_board(N):
     "Create an NxN board of zeros"
     return [[0]*N for _ in range(N)] 

@@ -3,7 +3,7 @@ Date: 2020-06-26
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, backtracking, python 3
-Version: OS, Ubuntu 20.04 LTS, 
+Version: OS, Ubuntu 20.04 LTS, python, 3.7.4
 
 The N-Queens puzzle is the popular problem of placing N number of chess queens on an NxN grid board such that no queens cannot attack each other; i.e no two queens share the same row, column, or diagonal. The puzzle is often generalized to the “[8 Queens Puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle)” to match a standard size chess board and is a good example of a simple but nontrivial algorithm problem. 
 
@@ -53,17 +53,17 @@ print(perms)
 Above are all the possible locations of our queens. Since this is a python list we can view the length of it. For a 4x4 grid there are 24 possible locations of 4 queens on different rows.
 ```python
 len(perms)
-
 24
 ```
 ### Solutions
+
 Now the part we've all been waiting for...how do we find the solution(s) to our puzzle? The different methods and algorithms of finding the solution is the fun part and the entire point of this series of articles. I will look at the popular algorithms as a exercise in my python coding skills and an opportunity to learn something new. 
 
 See the next articles were I find solutions using the following algorithms:
 
 - [Part 2 - Brute Force](n-queens-puzzle-part-2-brute-force-algorithm.html)
-- Part 2.5 - [Brute Force, All Solutions](n-queens-puzzle-part-25-brute-force-algorithm-all-solutions.html)
-- Backtracking
-- Backtracking with Vectorization
+- [Part 2.5 - Brute Force (All Solutions)](n-queens-puzzle-part-25-brute-force-algorithm-all-solutions.html)
+- [Part 3 - Backtracking](n-queens-puzzle-part-3-backtracking-algorithm-all-solutions.html)
+- Part 3.5 - Backtracking with Threading
 - Branch and Bound
 - Genetic Algorithms
