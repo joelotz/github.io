@@ -20,22 +20,32 @@ SECTIONS = [('Blog', 'index.html'),
 #        ('Talks', 'pages/talks.html'),
 #        ('About', 'pages/about-me.html')]
 
-DEFAULT_CATEGORY = 'Uncategorized'
 DATE_FORMAT = { 'en': '%B %d, %Y' }
+
+# DEFAULT CONFIGS
+DEFAULT_CATEGORY = 'Uncategorized'
 DEFAULT_DATE_FORMAT = '%B %d, %Y'
 DEFAULT_PAGINATION = 15
+#DEFAULT_METADATA = {'AUTHOR': 'Joe'} # global metadata to all the contents 
+
 PDF_GENERATOR = False
 REVERSE_CATEGORY_ORDER = True
 
 FEED_RSS = 'feeds/all.rss.xml'
 CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 
+RELATIVE_URLS = False
 OUTPUT_PATH = 'output/'
+
 # static paths will be copied under the same name
 STATIC_PATHS = ['images', 'extra/CNAME', 'extra/.nojekyll']
 EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},'extra/.nojekyll': {'path': '.nojekyll'}}
 
 TYPOGRIFY = True
+WITH_FUTURE_DATES = True #If disabled, content with dates in the future will get a default status of draft.
+
+LOAD_CONTENT_CACHE = False
+CACHE_CONTENT = False
 
 # Optional social media links
 # =============================
@@ -56,20 +66,16 @@ GOOGLE_ANALYTICS_ACCOUNT = 'UA-48351953-1 '
 #PIWIK_SSL_URL = 'myurl.com/piwik'
 #PIWIK_SITE_ID = '1'
 
-# A list of files to copy from the source to the destination
-#FILES_TO_COPY = (('extra/robots.txt', 'robots.txt'),)
 
-LOAD_CONTENT_CACHE = False
-CACHE_CONTENT = False
-
-RELATIVE_URLS = False
 ## FLASKY CONFIG END ###########################################
 
 
 ## IPYNB PLUGIN CONFIGURATION ##################################
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup', 'stardate', 'render_math']
+#PLUGINS = ['ipynb.markup', 'stardate', 'render_math']
+from pelican_jupyter import markup as nb_markup
+PLUGINS = [nb_markup, 'stardate', 'render_math']
 
 MATH_JAX = {'align':'left','indent':'2em'}
 
