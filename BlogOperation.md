@@ -1,3 +1,33 @@
+#### My Build Workflow
+```bash
+pelican content -o output -s pelicanconf.py
+
+cd output
+git add .
+git status 
+git commit -m ""
+git push origin master
+
+cd ..
+git add .
+git status
+git commmit -m ""
+git push origin content
+```
+
+#### Other useful commands
+```bash
+git reset FILE #pulls file out of staging
+git rm FILE #deletes file locally and from repo
+git rm -r DIR #deletes dir and contents locally/repo
+git rm --cached FILE #deletes file only from repo
+git rm -r --cached DIR #deletes dir only from repo
+
+ls -a #lists hidden files in dir
+```
+
+
+
 ```bash
 joe@Praimfaya:/mnt/DataDrive$ git clone -b content https://github.com/joelotz/joelotz.github.io.git Blog
 joe@Praimfaya:/mnt/DataDrive$ cd Blog
@@ -32,27 +62,3 @@ git reset --hard
 # Write both the index and working directory from git's database.
 ```
 
-#### My Build Workflow
-
-```bash
-pelican content -o output -s pelicanconf.py
-cd output
-git add .
-git status 
-git commit -m ""
-git push origin master
-
-cd ..
-git add .
-git status
-git commmit -m ""
-git push origin content
-```
-
-
-
-
-
-ghp-import -m "I have no clue what I’m doing…" --no-jekyll -b master output
-
-git push origin master
