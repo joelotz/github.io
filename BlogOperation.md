@@ -11,7 +11,7 @@ joe@Praimfaya:/mnt/DataDrive/Blog/output$ git pull origin master
 <<Move new files into folder>>
 
 <<Stage new files>>
-joe@Praimfaya:/mnt/DataDrive/Blog$ git add --all
+joe@Praimfaya:/mnt/DataDrive/Blog$ git add .
 
 <<Check what is staged>>
 git diff --name-only --cached
@@ -32,7 +32,26 @@ git reset --hard
 # Write both the index and working directory from git's database.
 ```
 
+#### My Build Workflow
+
+```bash
 pelican content -o output -s pelicanconf.py
+cd output
+git add .
+git status 
+git commit -m ""
+git push origin master
+
+cd ..
+git add .
+git status
+git commmit -m ""
+git push origin content
+```
+
+
+
+
 
 ghp-import -m "I have no clue what I’m doing…" --no-jekyll -b master output
 
