@@ -1,5 +1,5 @@
 output
-cached
+cache
 .git/
 __pycache__
 plugins/ipynb/__pycache__
