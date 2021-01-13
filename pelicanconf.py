@@ -32,9 +32,8 @@ CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 
 OUTPUT_PATH = 'output/'
 # static paths will be copied under the same name
-#STATIC_PATHS = ['images', 'extra/CNAME']
-STATIC_PATHS = ['images']
-#EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
+STATIC_PATHS = ['images', 'extra/CNAME']
+EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
 
 TYPOGRIFY = True
 
