@@ -64,16 +64,17 @@ This is why I had you use “www” in front of your domain name way back in ste
 
 ### Update  - 2020/11/14
 
-This may be obvious to some of you, but I wanted to point something  out that gave a friend some hassle. In your typical personal blogging  flow you create content on your local machine and push to the remote  machine (aka github). In a more traditional setting, like a software  job, you would have multiple developers all working on the same branch.  The flow would be to pull the branch before editing in order to get the  latest files and versions.  When you follow the instructions above, remember I said you are creating a CNAME record on the github server. Just  look at your repository and you will see it. This means you have to pull that file and merge it into your local repo. 
+This may be obvious to some of you, but I wanted to point something out that gave me some hassle. I use [Pelican](https://pypi.org/project/pelican/) static-site generator to create my blog. When I generate the html files from markdown it completely erases the "output" folder and re-builds the blog. From there, I push the output folder to the github master branch to be served. The problem is... was... that I was blasting away the CNAME file that was created in github. I *assume* this problem exists with Jekyll or other static-site platforms. The solution I found was to either have Pelican create this file as a static page when generating the blog. There are probably other solutinos, but this worked for me.
 
+First, tell Pelican where to find the static file "CNAME". Add these options to `pelicanconf.py` file:
 ```bash
-git pull origin master
+STATIC_PATHS = ['extra/CNAME']
+EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
 ```
-
-Make sure this file is in the “output” directory like it’s supposed to be, then push it back. 
-
+Or if you already have STATIC_PATHS, like an image folder, it would look something like this:
 ```bash
-git push origin master
+STATIC_PATHS = ['images', 'extra/CNAME']
 ```
+Now create a directory in the blog's root folder names `extra` and a file named `CNAME` as described above. When you generate the blog, i.e. `pelican content -o output -s pelicanconf.py` the file `CNAME` will be copied into the output folder. 
 
-Now everything is sync’d up. If you don’t do this, everytime you  create a blog post and push it to github you will lose connection to  your custom domain name. 
+
