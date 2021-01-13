@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
-    <title>Delving into Delusion - Articles by Joe Lotz</title>
+    <title> Useful git&nbsp;Commands | Delving into Delusion </title>
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
@@ -19,7 +19,7 @@
   <body>
     <div class=container>
         <div class="header">
-            <a href="https://joelotz.github.io">Delving into Delusion</a> <span class="muted"></span>
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
         </div>
 
         <div class=navigation>
@@ -32,29 +32,32 @@
         <div class=separator></div>
                 
         <div class=body>
+    <h1 class="title"> Useful git&nbsp;Commands</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;September 13, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/ubuntu.html">Ubuntu</a>     </p>
+    <div class="highlight"><pre><span></span>ghp-import -m <span class="s2">&quot;&lt;MESSAGE&gt;&quot;</span> --cname<span class="o">==</span><span class="s2">&quot;www.joelotz.com&quot;</span> -b master output
+</pre></div>
 
 
+<p>List of staged&nbsp;files</p>
+<div class="highlight"><pre><span></span><span class="err">git diff --name-only --cached</span>
+</pre></div>
 
-    <div class=entry-overview>
-      <div class=date>Nov 11, 2014</div>
-      <div class=detail>
-          <h1><a href="/step-functions-in-matplotlib.html">Step Functions in&nbsp;Matplotlib</a></h1>
-<!--          <p>This week I had to make a “burn chart”, essentially a chart showing amount of work per week. Since the weeks are discrete time steps I need a step function. I started playing with horizontal and vertical lines but luckily I quickly found that matplotlib has a step function. Unfortunately, it didn’t quite act as I thought.</p> -->
-      </div>
-    </div>
-    <div class=entry-overview>
-      <div class=date>Oct 28, 2014</div>
-      <div class=detail>
-          <h1><a href="/pimp-my-plots.html">Pimp My&nbsp;Plots</a></h1>
-<!--          <p>In this post I will show some matplotlib kung-fu! Most of this was stolen from @jakevdp, but others from StackExchange. The basic premise is that the default values for any visualization library (Excel, R, Python, Matlab) is ugly. Why do the developers use such horrible defaults?? But this tutorial, amongst many others on the interwebs, will show you how to “pimp my plots”!</p> -->
-      </div>
-    </div>
-    <div class=entry-overview>
-      <div class=date>Oct 18, 2014</div>
-      <div class=detail>
-          <h1><a href="/small-multiples-in-matplotlib.html">Small Multiples in&nbsp;Matplotlib</a></h1>
-<!--          <p>This is my attempt at recreating the small multiples graph from Flowingdata in matplotlib. I realize the point of the flowingdata article was to showcase filtering and linking using D3.js - but wanted to simply recreate the chart on my own.</p> -->
-      </div>
+
+<p>Unstage - remove files from git staging&nbsp;area</p>
+<div class="highlight"><pre><span></span><span class="err">git reset</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">git status</span>
+</pre></div>
+
+
+<p>https://stackoverflow.com/questions/6612630/git-add-all-except-ignoring-files-in-gitignore-file
+<code>git add .</code> adds all files except those in&nbsp;.gitignore</p>
+<p>If you want to add a directory in .gitignore file, <code>DIRECTORY/*</code> does not work, use <code>DIRECTORY</code></p>
+    
     </div>
 
 
@@ -65,7 +68,7 @@
             <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
             <div class=social>
               <ul>
-<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="https://joelotz.github.io/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
               </ul>
             </div>
             </p>
