@@ -40,7 +40,7 @@
 <p>I&#8217;ve been exercising lately and I wanted to see the progress of my weight loss; so I write a stupid little script to log my weight from the terminal. I&#8217;m posting it because I learned a couple tricks in the writing of the shell script and thought someone else may as&nbsp;well. </p>
 <p>First, it can be placed anywhere but I recommend somewhere in your <span class="caps">PATH</span> so that you can execute it from anywhere. A good place is <code>/usr/local/bin/</code>. </p>
 <p>Type <code>logweight --help</code> to see the usage syntax and&nbsp;examples.</p>
-<div class="highlight"><pre><span></span>Usage:
+<div class="highlight"><pre><span></span><code>Usage:
 
   logweight input <span class="o">[</span>option<span class="o">]</span>
 
@@ -70,11 +70,10 @@ Examples:
         logweight --weight<span class="o">=</span><span class="m">200</span>.6 --date<span class="o">=</span><span class="m">2020</span>-01-01            Creates a log entry <span class="k">for</span> the specified day
         logweight --weight<span class="o">=</span><span class="m">200</span>.6 --note<span class="o">=</span><span class="s2">&quot;Taken after run&quot;</span>     Creates a log entry on the current date with a user note
         logweight --weight<span class="o">=</span><span class="m">200</span>.6 --kilograms                  Creates a log entry in kilograms on the current date
-</pre></div>
-
+</code></pre></div>
 
 <p>Here is the raw file that you can&nbsp;use.</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/sh</span>
 
 <span class="c1"># A shell script to log personal body weights into /mnt/DataDrive/Documents/WeightLog.txt file</span>
 <span class="c1"># Written by: Joe Lotz</span>
@@ -159,7 +158,7 @@ Examples:
     <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$VERBOSE</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s2">&quot;Log file: </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">\nEntry: </span><span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">fi</span>
     <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$DEBUG</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="nv">$OUTPUT</span> &gt;&gt;<span class="nv">$FILE</span><span class="p">;</span> <span class="k">fi</span>
 <span class="k">fi</span>
-</pre></div>
+</code></pre></div>
     
     <div class="version">
     <h3>Software Versions</h3>

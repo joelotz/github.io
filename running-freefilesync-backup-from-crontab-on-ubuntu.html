@@ -38,14 +38,12 @@
  <a href="/tag/ubuntu.html">Ubuntu</a>     </p>
     <p>It took me half a day, maybe 4 hours, to solve this problem and I want to document the solution. I wanted to use <a href="https://www.linux-magazine.com/Online/Features/FreeFileSync/(offset)/3">FreeFileSync</a> to backup all my files to an external hard drive. I looked at <a href="https://www.capterra.com/file-sync-software/">a bunch of other software</a> but what I want to do is pretty basic and everything else was too complicated for me. Regardless, I installed <a href="https://freefilesync.org/">FreeFileSync</a>, setup the configuration, and saved the “batch job”. Everything works smooth when manually run, but of course I want to automate the process and setup a cron&nbsp;job. </p>
 <p>I kept getting error messages. Many solutions suggested to use gnome-schedule but that appears to be defunct and no longer available for Ubuntu 20.04. I went down the path of trying to build it from source and yadda yadda. That wasted some time. Another error message I got was <code>Failed to load module canberra-gtk-module</code> - which was easily&nbsp;fixed.</p>
-<div class="highlight"><pre><span></span>sudo apt install libcanberra-gtk3-module
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install libcanberra-gtk3-module
+</code></pre></div>
 
 <p>The error that really stumped me was <code>Error: Unable to initialize GTK+, is DISPLAY set properly?</code> After much googling the answer always headed into setting the <span class="caps">DISPLAY</span> variable but the solution of setting it to 0 or 0.0 wasn’t working. Maybe it was because I have two monitors, I really don’t know. Again, I don’t understand the details or why it works, but setting the <span class="caps">DISPLAY</span> to 1.0 worked for&nbsp;me. </p>
-<div class="highlight"><pre><span></span><span class="m">0</span> <span class="m">3</span> * * * env <span class="nv">DISPLAY</span><span class="o">=</span>:1.0 /usr/bin/FreeFileSync/FreeFileSync /home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="m">0</span> <span class="m">3</span> * * * env <span class="nv">DISPLAY</span><span class="o">=</span>:1.0 /usr/bin/FreeFileSync/FreeFileSync /home/joe/FreeFileSyncBackup/SyncSettings.ffs_batch
+</code></pre></div>
 
 <p>Where:</p>
 <ul>

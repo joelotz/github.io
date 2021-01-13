@@ -36,36 +36,31 @@
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;September 13, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/ubuntu.html">Ubuntu</a>     </p>
-    <div class="highlight"><pre><span></span>ghp-import -m <span class="s2">&quot;&lt;MESSAGE&gt;&quot;</span> --cname<span class="o">==</span><span class="s2">&quot;www.joelotz.com&quot;</span> -b master output
-</pre></div>
-
+    <div class="highlight"><pre><span></span><code>ghp-import -m <span class="s2">&quot;&lt;MESSAGE&gt;&quot;</span> --cname<span class="o">==</span><span class="s2">&quot;www.joelotz.com&quot;</span> -b master output
+</code></pre></div>
 
 <p>List of staged&nbsp;files</p>
-<div class="highlight"><pre><span></span><span class="err">git diff --name-only --cached</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">git diff --name-only --cached</span>
+</code></pre></div>
 
 <p>Unstage - remove files from git staging&nbsp;area</p>
-<div class="highlight"><pre><span></span><span class="err">git reset</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">git reset</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="err">git status</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">git status</span>
+</code></pre></div>
 
 <p>https://stackoverflow.com/questions/6612630/git-add-all-except-ignoring-files-in-gitignore-file
 <code>git add .</code> adds all files except those in&nbsp;.gitignore</p>
 <p>If you want to add a directory in .gitignore file, <code>DIRECTORY/*</code> does not work, use <code>DIRECTORY</code></p>
 <p>delete file and remove from&nbsp;git</p>
-<div class="highlight"><pre><span></span><span class="err">git rm FILE</span>
+<div class="highlight"><pre><span></span><code><span class="err">git rm FILE</span>
 <span class="err">git remove -r DIR</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>do not delete locally, just remove from&nbsp;git</p>
-<div class="highlight"><pre><span></span><span class="err">git rm --cached FILE</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">git rm --cached FILE</span>
+</code></pre></div>
     
     </div>
 

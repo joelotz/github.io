@@ -37,67 +37,57 @@
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/imagemagick.html">ImageMagick</a>     </p>
     <h3>Installing ImageMagick on Ubuntu&nbsp;20.04</h3>
-<div class="highlight"><pre><span></span>sudo apt update
+<div class="highlight"><pre><span></span><code>sudo apt update
 sudo apt build-essential checkinstall <span class="c1"># provides all the libraris for compiling</span>
 sudo apt build-dep imagemagick <span class="c1"># install compilation dependencies</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The first time I did this installation the program complained and errored that it was missing <a href="http://www.imagemagick.org/download/delegates/">delegates</a> when I tried to manipulate the png images. <a href="https://askubuntu.com/questions/745660/imagemagick-png-delegate-install-problems">This page</a> from StackExchange explained how to install the image libraries. I didn’t know which ones were important or how often they are used so I installed them&nbsp;all.</p>
-<div class="highlight"><pre><span></span>sudo apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
+</code></pre></div>
 
 <p>This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build&nbsp;it. </p>
 <p>First download the binary tar, extract it, and move into the newly extracted&nbsp;directory.</p>
-<div class="highlight"><pre><span></span>wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+<div class="highlight"><pre><span></span><code>wget https://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xf ImageMagick.tar.gz
 <span class="nb">cd</span> ImageMagick-7*
-</pre></div>
-
+</code></pre></div>
 
 <p>While in the source code directory execute the <code>configure</code> command. </p>
-<div class="highlight"><pre><span></span><span class="err">./configure</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">./configure</span>
+</code></pre></div>
 
 <p>Next compile with the <code>make</code> command.</p>
-<div class="highlight"><pre><span></span>make
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>make
+</code></pre></div>
 
 <p>Install&nbsp;ImageMagick.</p>
-<div class="highlight"><pre><span></span>sudo make install
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo make install
+</code></pre></div>
 
 <p>This will install the compiled binaries. Now run <code>ldconfig</code> command to link the static&nbsp;libraries. </p>
-<div class="highlight"><pre><span></span>sudo ldconfig /usr/local/lib
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo ldconfig /usr/local/lib
+</code></pre></div>
 
 <p>Confirm installation and final check. Run the <code>identity</code> command to confirm that “something” is&nbsp;installed. </p>
-<div class="highlight"><pre><span></span>identify -version
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>identify -version
+</code></pre></div>
 
 <p>The <a href="https://imagemagick.org/script/download.php">ImageMagick website</a> also has a couple commands to verify&nbsp;installation.</p>
-<div class="highlight"><pre><span></span>identify logo.gif
+<div class="highlight"><pre><span></span><code>identify logo.gif
 display logo.gif
-</pre></div>
-
+</code></pre></div>
 
 <h3>Converting a Bunch of Images to a&nbsp;pdf</h3>
 <p>I have a bunch of scan images of an old handwritten recipe book. The originals are in <a href="https://en.wikipedia.org/wiki/Paper_size">A5 paper size</a> and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s <code>convert</code> command. </p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ImageDir
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ImageDir
 convert *.png <span class="se">\</span>
     -resize 595x421 <span class="se">\</span>
     -background white <span class="se">\</span>
     -gravity North <span class="se">\</span>
     -extent 595x421 <span class="se">\</span>
     output.pdf
-</pre></div>
-
+</code></pre></div>
 
 <p><span class="caps">OK</span>, this is complicated and took a couple hours to figure out. So what is going on&nbsp;here?</p>
 <ol>
@@ -119,28 +109,26 @@ convert *.png <span class="se">\</span>
 </ol>
 <h4>Lower Res/ Smaller&nbsp;File</h4>
 <p>You can make a lower resolution and smaller file size for web or&nbsp;email.</p>
-<div class="highlight"><pre><span></span>convert *.png -compress jpeg -resize 595x421 -background white <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>convert *.png -compress jpeg -resize 595x421 -background white <span class="se">\</span>
     -gravity North -extent 595x421 output.pdf
-</pre></div>
-
+</code></pre></div>
 
 <h3>Additional Output&nbsp;Sizes</h3>
 <p>This is an update to the original post. I realized that my family in the <span class="caps">US</span> may want a version that can be printed in standard <span class="caps">US</span> Letter&nbsp;sizes.</p>
 <p>612 x&nbsp;792</p>
 <h3>Using Exiftool to Add pdf&nbsp;Metadata</h3>
 <p>Easily install <a href="https://exiftool.org/">Exiftool</a> on&nbsp;Ubuntu.</p>
-<div class="highlight"><pre><span></span>sudo apt install libimage-exiftool-perl
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install libimage-exiftool-perl
+</code></pre></div>
 
 <p>There are a bunch of <a href="https://linoxide.com/linux-how-to/install-use-exiftool-linux-ubuntu-centos/">tutorials</a> on using&nbsp;Exiftool.</p>
 <p>Changing the exif data within the pdf file to add some fields is quite&nbsp;easy.</p>
-<div class="highlight"><pre><span></span>exiftool <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>exiftool <span class="se">\</span>
     -Creator<span class="o">=</span><span class="s2">&quot;Joe&quot;</span> <span class="se">\</span>
     -keywords<span class="o">=</span><span class="s2">&quot;recipebook;recipes&quot;</span> <span class="se">\</span>
     -Author<span class="o">=</span><span class="s2">&quot;Grandma&quot;</span> <span class="se">\</span>
     output.pdf
-</pre></div>
+</code></pre></div>
     
     <div class="version">
     <h3>Software Versions</h3>

@@ -38,19 +38,17 @@
  <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/bash.html">bash</a>     </p>
     <p>In a <a href="converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html">previous post</a> I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. <a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager">AskUbuntu</a> had a decent guide that explained&nbsp;how.</p>
 <p>First create a new file in the <code>/.local/share/nautilus/scripts/</code> folder using vi, gedit, or your favorite text&nbsp;editor.</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/.local/share/nautilus/scripts/
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/.local/share/nautilus/scripts/
 gedit &lt;name of script&gt;
-</pre></div>
-
+</code></pre></div>
 
 <p>Now, of course, make the script&nbsp;executable.</p>
-<div class="highlight"><pre><span></span>chmod +x ~/.local/share/nautilus/scripts/&lt;name of script.
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>chmod +x ~/.local/share/nautilus/scripts/&lt;name of script.
+</code></pre></div>
 
 <h3>Writing the Video Transcode Script with&nbsp;FFMpeg</h3>
 <p>Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (<code>sudo apt install zenity</code>) or comment out the pop-ups. It may be useful to add an progress-box for the&nbsp;future…</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1">## assumes FFPMEG is installed</span>
 <span class="c1">## converts a mp4 vidoe file to mov container in order ot use in DVR</span>
@@ -85,7 +83,7 @@ gedit &lt;name of script&gt;
 <span class="k">else</span> <span class="c1"># it does not end in .mp4 so do not process</span>
     zenity --error --title <span class="s2">&quot;This is not an .mp4 file&quot;</span> --text <span class="s2">&quot;File must end with extension &#39;.mp4&#39;&quot;</span> --width<span class="o">=</span><span class="m">600</span>
 <span class="k">fi</span>
-</pre></div>
+</code></pre></div>
     
     <div class="version">
     <h3>Software Versions</h3>

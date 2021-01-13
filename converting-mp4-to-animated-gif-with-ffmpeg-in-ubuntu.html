@@ -37,9 +37,8 @@
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/ffmpeg.html">FFmpeg</a>     </p>
     <p>Source is from an <a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality">excellent answer</a> on SuperUser&nbsp;StackExchange.</p>
-<div class="highlight"><pre><span></span>ffmpeg input.mp4 -vf <span class="s2">&quot;fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse&quot;</span> -loop <span class="m">0</span> output.gif
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>ffmpeg input.mp4 -vf <span class="s2">&quot;fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse&quot;</span> -loop <span class="m">0</span> output.gif
+</code></pre></div>
 
 <p>You can define the frames per second via the ”fps” argument. The standard for an animated gif is <a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs">between 15 and 24</a>, but the more frames the larger the output&nbsp;file. </p>
 <p>The split commands splits the video into two streams for generate a color palette and downsampling the incoming&nbsp;video. </p>

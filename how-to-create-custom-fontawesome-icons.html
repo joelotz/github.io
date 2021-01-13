@@ -64,14 +64,12 @@ Once the image is imported you must select <code>Path &gt; Trace Bitmap…</code
 <p>When I was first getting this work, I discovered that I could not get both FontAwesome and IcoMoon working at the same time. I had to comment out one or the other&#8230;which implied they were stepping on each other. After an hour of debugging I realized they both are trying to claim the same <span class="caps">CSS</span> class. The simply solution was to change the IcoMoon to something that didn&#8217;t start with <code>icon-</code>. I took the easy road and simply changed <code>icon</code> to <code>staricon</code>
 <img alt="fontawesome-14" src="/images/fontawesome-14.png"></p>
 <p>Lastly, add the icon to your html. This is accomplished by adding the class name you defined in the css stylesheet. In my example above, this was <code>staricon-star_trek</code>. Add this to the&nbsp;code:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;staricon-star_trek&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;staricon-star_trek&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
 
 <p>You can also do all sorts of <a href="https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use">neat styling</a> to change the size, color, rotation, and other properties. In my case, I’m just adjusting the&nbsp;color.</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;staricon-star_trek&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color: #234764;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;staricon-star_trek&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color: #234764;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
 
 <p>Here is the final result!
 <img alt="fontawesome-15" src="/images/fontawesome-15.png"></p>

@@ -43,18 +43,16 @@
 — from <a href="https://unix.stackexchange.com/questions/127076/into-which-directory-should-i-install-programs-in-linux">https://unix.stackexchange.com/questions/127076/into-which-directory-should-i-install-programs-in-linux</a></p>
 </blockquote>
 <p>For me, I “install” in <code>/opt/</code> so these instructions assume that&nbsp;location. </p>
-<div class="highlight"><pre><span></span>sudo tar -zxvf ~/Downloads/FreeFileSync_*_Linux.tar.gz -C /opt
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo tar -zxvf ~/Downloads/FreeFileSync_*_Linux.tar.gz -C /opt
+</code></pre></div>
 
 <p>This command extracts the compressed tar and puts the contents in the <code>/opt/</code> directory. The contents are already contained within a directory named <code>FreeFileSync</code>, so need to create&nbsp;one. </p>
 <p>Next we need to create a shortcut. There is an example shortcut file provided as <code>/opt/FreeFileSync/FreeFileSync.Example.desktop</code> that you can copy and then edit, but I find it easier just to create a blank file and copy/paste text. Type this command to create a file and open it in an&nbsp;editor.</p>
-<div class="highlight"><pre><span></span>gedit ~/.local/share/applications/FreeFileSync.desktop
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>gedit ~/.local/share/applications/FreeFileSync.desktop
+</code></pre></div>
 
 <p>Copy the text below into the empty file, save, and&nbsp;close.</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[Desktop Entry]</span>
 <span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
 <span class="na">Name</span><span class="o">=</span><span class="s">FreeFileSync</span>
 <span class="na">Comment</span><span class="o">=</span><span class="s">Keep files and folders synchronized</span>
@@ -65,16 +63,14 @@
 <span class="na">Terminal</span><span class="o">=</span><span class="s">false</span>
 <span class="na">Categories</span><span class="o">=</span><span class="s">Utility;FileTools;</span>
 <span class="na">StartupNotify</span><span class="o">=</span><span class="s">true</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>You can do the same for RealTimeSync if you&nbsp;want.</p>
-<div class="highlight"><pre><span></span>gedit ~/.local/share/applications/RealTimeSync.desktop
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>gedit ~/.local/share/applications/RealTimeSync.desktop
+</code></pre></div>
 
 <p>Copy the text below, save, and&nbsp;close.</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[Desktop Entry]</span>
 <span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
 <span class="na">Name</span><span class="o">=</span><span class="s">RealTimeSync</span>
 <span class="na">Exec</span><span class="o">=</span><span class="s">/opt/FreeFileSync/RealTimeSync %f</span>
@@ -83,8 +79,7 @@
 <span class="na">Terminal</span><span class="o">=</span><span class="s">false</span>
 <span class="na">Categories</span><span class="o">=</span><span class="s">Utility;FileTools;</span>
 <span class="na">StartupNotify</span><span class="o">=</span><span class="s">true</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Updating&nbsp;FreeFileSync</h3>
 <p>When you want to update versions, simply “install” the latest version into your installation directory per the instructions above. For example, let’s say you have version 11.1 and want to update to the latest version which happens to be 11.5. In this example, I assume you have previously put the package in <code>\opt\FreeFileSync\</code>. </p>

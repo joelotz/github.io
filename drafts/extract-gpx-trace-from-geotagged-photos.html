@@ -56,9 +56,8 @@ I thought xxx would be the subseconds but it does not match the subseconds data&
 <li>d allows formatting the datatime&nbsp;string.</li>
 </ul>
 <p>For&nbsp;example:</p>
-<div class="highlight"><pre><span></span>exiftool -if <span class="s1">&#39;$gpsdatetime&#39;</span> -fileOrder gpsdatetime -p ./gpx.fmt -d %Y-%m-%dT%H:%M:%SZ *JPG &gt; output.gpx
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>exiftool -if <span class="s1">&#39;$gpsdatetime&#39;</span> -fileOrder gpsdatetime -p ./gpx.fmt -d %Y-%m-%dT%H:%M:%SZ *JPG &gt; output.gpx
+</code></pre></div>
 
 <p><code>exiftool -s -G -a file.jpg</code></p>
 <ul>

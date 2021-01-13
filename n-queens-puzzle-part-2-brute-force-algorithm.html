@@ -56,18 +56,17 @@
 <p>I showed how we can encode our queen placement as an ordered list,  <span class="math">\(Queens=[1,3,0,2]\)</span>, now we can discuss the interaction or relationship between each of them. Mathematically these are called <a href="https://en.wikipedia.org/wiki/Combination">combinations</a>. Given a collection of queens, we can show each possible interaction between any two queens as <span class="math">\(\binom {Queens}k\)</span>. </p>
 <p><img alt="NQueens_1_02" src="/images/NQueens_1_01.png"></p>
 <p>The combination <span class="math">\(A=(0,1)\)</span> is the interaction between the queen in row 0 and the queen in row 1, as so&nbsp;on.</p>
-<div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">E</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">F</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Code</h3>
 <p>I used python3 language for the code to implement this algorithm. It could have been written in nearly anything, but I like python. It also has a great library named <code>itertools</code> which provides very optimized functions for iterative functionality. I took advantage of this library, specifically, the optimized permutation and combination&nbsp;functions. </p>
-<div class="highlight"><pre><span></span><span class="c1">#### IMPORTS</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#### IMPORTS</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
 <span class="c1">#### FUNCTIONS ####</span>
@@ -117,8 +116,7 @@
 
     <span class="c1"># pretty print the perm and board</span>
     <span class="n">print_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>So what is going on here? First I ask the user how many queens to place on an NxN board. Then find all permutations of 0-N as possible candidates. I then evaluate each one until a solution is found. As explained in a previous section, the problem is constrained such that there is only one queen in each column. By looking for permutations of only <span class="math">\([0,1,2,...,N]\)</span> I further constrained the problem to only one queen in each row in my permutation definition. This leaves the validation to only having to evaluate whether the candidate location is blocked by an existing queen on the diagonal. A tricky solution to this is recognizing that given two queens, they are on the same diagonal if and only if the horizontal distance between them is equal to the vertical distance between&nbsp;them. </p>
 <p><img alt="NQueens_1_02" src="/images/NQueens_1_04.png"></p>

@@ -49,7 +49,7 @@
 <div class="math">$$ P_N = N! $$</div>
 <div class="math">$$ P_4 = 4!= 4 \cdot 3 \cdot 2 \cdot 1 = 24$$</div>
 <p>Now is a good time to finally break out <code>python</code> and the standard library <a href="https://docs.python.org/2/library/itertools.html">itertools</a>. Here we can just ask itertools to create all the permutations of [0,1,2,3] for us. Note the result from itertools is an <a href="https://www.geeksforgeeks.org/iterators-in-python/">iterator</a> so to view it (i.e. print it) we must turn the iterator into a&nbsp;list.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">itertools</span>
 <span class="n">perms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
 
@@ -77,14 +77,12 @@
  <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
  <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
  <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Above are all the possible locations of our queens. Since this is a python list we can view the length of it. For a 4x4 grid there are 24 possible locations of 4 queens on different&nbsp;rows.</p>
-<div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
 <span class="mi">24</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Solutions</h3>
 <p>Now the part we&#8217;ve all been waiting for&#8230;how do we find the solution(s) to our puzzle? The different methods and algorithms of finding the solution is the fun part and the entire point of this series of articles. I will look at the popular algorithms as a exercise in my python coding skills and an opportunity to learn something&nbsp;new. </p>

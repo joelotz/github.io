@@ -40,35 +40,32 @@
 <p>What I learned from googling around it that you convert the audible .aax audiobook files into other formats with <a href="https://ffmpeg.org/">FFmpeg</a> (<a href="/tag/ffmpeg.html">one of my favorites!</a>), but you have to have your unique “activation bytes” to decode the <span class="caps">DRM</span>. <em>That</em> is the tricky part. I found a couple of solutions that work great for other people but didn’t work for me with my unique hardware, configuration, situation, etc. I believe people when they say it works, it just didn’t work for me. I spent all day coming up with a solution. I tried <a href="https://github.com/naueramant/Audiblex">Audiblex</a>, <a href="https://github.com/paladini/aax2mp3-easy">AAXtoMP3-easy</a>, audible-activator, and others, and finally the one that worked for me was <a href="https://github.com/inAudible-NG/tables">inAudible-<span class="caps">NG</span></a>. </p>
 <p>I won’t go into the long and torrid details of the failures, but rather describe the path for&nbsp;success. </p>
 <p>First, log into www.audible.com and download one of your audio-books. Login, go to Library, click Download, save the file. Next, you will need to determine the <a href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms"><span class="caps">SHA</span> sum</a> of one of your .aax files that you downloaded. Of course, you will need to have FFMpeg&nbsp;installed.</p>
-<div class="highlight"><pre><span></span>ffprobe &lt;inputfile.aax&gt;
+<div class="highlight"><pre><span></span><code>ffprobe &lt;inputfile.aax&gt;
 <span class="c1"># Example</span>
 ffprobe TheGrapesofWrath.aax
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="audibleConvert-01" src="/images/audibleConvert-01.png"></p>
 <p>After all the stupid library declarations you’ll see the line <code>[aax] file checksum</code> and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. <a href="http://project-rainbowcrack.com/">RainbowCrack</a> is a hash cracking program that uses <a href="https://en.wikipedia.org/wiki/Rainbow_table">rainbow tables</a> to decrypt… <a href="https://en.wikipedia.org/wiki/Password_cracking">passwords</a> and stuff. We will be using it decrypt this hash and tell us our Audible&nbsp;code.</p>
 <p>Follow the instructions on <a href="https://github.com/inAudible-NG/tables">inAudible-<span class="caps">NG</span> github</a> and download the zip or clone into a directory. Then go into the tables directory where the script is located and run the crack on the checksum you found using ffprobe <code>./rcrack . h &lt;your checksum here&gt;</code>. After 2-3secs out pops the magic&nbsp;number.</p>
-<div class="highlight"><pre><span></span><span class="c1"># For example </span>
+<div class="highlight"><pre><span></span><code><span class="c1"># For example </span>
 <span class="nb">cd</span> ~/Downloads/
 git clone https://github.com/inAudible-NG/tables.git
 <span class="nb">cd</span> tables/
 ./rcrack . h 123456789abcdef123456789abcdef
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="audibleConvert-02" src="/images/audibleConvert-02.png"></p>
 <p>It’s all gravy from here now that you have your unique code, you can remove the <span class="caps">DRM</span> from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in&nbsp;case.</p>
 <p>You can use FFmpeg directly or some library front-end. I like the idea of a front-end because they most likely offer a variety of options, ease of use, and efficiency mastery that I would probably not know of. I found <a href="https://github.com/KrumpetPirate/AAXtoMP3">AAXtoMP3</a> very robust, easy to use, and useful - ymmv. It is simply a bash script with useful FFmpeg calls. The author has a fun “Do What the Fuck You Want To” <a href="https://github.com/KrumpetPirate/AAXtoMP3/blob/master/LICENSE">Public License</a>. I had a bunch of .aax files to decode and I also wanted multiple outputs for archiving (.flac, .mp3, .m4a chapters) so that I wouldn’t have to come back and do it again in the future. The solution was a simply bash script that looped through each .aax file and made multiple calls to AAXtoMP3. Here’s my&nbsp;batch-script:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="k">for</span> file in *.aax<span class="p">;</span> <span class="k">do</span>
     bash AAXtoMP3 -e:mp3 <span class="nv">$file</span> <span class="p">&amp;</span> 
     bash AAXtoMP3 --flac <span class="nv">$file</span> <span class="p">&amp;</span> 
     bash AAXtoMP3 -e:m4a --chaptered <span class="nv">$file</span>
 <span class="k">done</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Extras</h3>
 <p>I have an 8-core <span class="caps">CPU</span> and there is no use in making it wait for each thread to process. We can call multiple decoding processes at once to each run on a single core…get it? That is what the “&amp;” in the script above is doing. It says ‘start this process thread in the background and move on’, which the script then starts another decoding process, and another, and then loops around to grab a different file then starts another decoding process, until all the <span class="caps">CPU</span> cores are&nbsp;full. </p>

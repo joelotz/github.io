@@ -39,52 +39,43 @@
     <p>I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - <a href="https://in.jbl.com/JBL+Endurance+DIVE.html"><span class="caps">JBL</span> Endurance Dive</a>. I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the <a href="https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r">SanDisk Clip Sport Plus</a>. <span class="caps">BUT</span>, the <span class="caps">JBL</span> headphones have a built-in mp3 player with <span class="caps">1GB</span> storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just&nbsp;running.</p>
 <p>The next challenge is getting music for the player. I’m streaming music and don’t <em>necessarily</em> want to torrent. After a short time searching I found a cross-platform utility named <a href="https://github.com/ytdl-org/youtube-dl/blob/master/README.md">youtube-dl</a>. </p>
 <p><em>Source: <a href="https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/">https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/</a></em></p>
-<div class="highlight"><pre><span></span>sudo apt install youtube-dl
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install youtube-dl
+</code></pre></div>
 
 <p>Now that it is installed, I recommend installing FFmpeg also. This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>. This is just a very useful utility to have and I use a bunch for transcoding video&nbsp;formats.</p>
-<div class="highlight"><pre><span></span>sudo apt install ffmpeg
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install ffmpeg
+</code></pre></div>
 
 <p>Once you have chosen a youtube video, you can list all available audio/video formats and bitrates. Note, replace <id> with the actual <span class="caps">ID</span> of the video you want. Better yet, just copy/past the entire <span class="caps">URL</span>.</p>
-<div class="highlight"><pre><span></span>youtube-dl -F https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>youtube-dl -F https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
+</code></pre></div>
 
 <p>If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; <span class="caps">ID</span># 249, 250, 251, 140 are audio. The first three are in <a href="https://en.wikipedia.org/wiki/WebM">webm</a> format and the last is <a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A">m4a</a>, both are optimized for delivering on the web. 
 <img alt="youtube-dl" src="/images/youtube-dl.png">
 You can select the specific stream you want and download&nbsp;it.</p>
-<div class="highlight"><pre><span></span>youtube-dl -f <span class="m">278</span> https://www.youtube.com/watch?v<span class="o">=</span>yYzrSGRzttk
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>youtube-dl -f <span class="m">278</span> https://www.youtube.com/watch?v<span class="o">=</span>yYzrSGRzttk
+</code></pre></div>
 
 <p>The better method is to let youtube-dl choose the best audio stream and download&nbsp;it. </p>
 <p><em>Source: <a href="https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl">https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl</a></em></p>
-<div class="highlight"><pre><span></span>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
+</code></pre></div>
 
 <p>You can specify the name of the downloaded&nbsp;file. </p>
-<div class="highlight"><pre><span></span>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt; --output <span class="s2">&quot;outputName.%(ext)s&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt; --output <span class="s2">&quot;outputName.%(ext)s&quot;</span>
+</code></pre></div>
 
 <p>With FFmpeg installed, you can also convert to mp3. I know converting formats probably degrade the audio quality, but my cheap headphone mp3 player doesn’t play the webm file&nbsp;format. </p>
-<div class="highlight"><pre><span></span>youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
+</code></pre></div>
 
 <p>And then finally, you can download, convert to mp3, and rename the&nbsp;file. </p>
-<div class="highlight"><pre><span></span>youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt; --output <span class="s2">&quot;outputName.%(ext)s&quot;</span><span class="o">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt; --output <span class="s2">&quot;outputName.%(ext)s&quot;</span><span class="o">]</span>
+</code></pre></div>
 
 <h3>Audacity to Clean&nbsp;Up</h3>
-<div class="highlight"><pre><span></span>sudo apt install audacity
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install audacity
+</code></pre></div>
 
 <p><em>Source: <a href="https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files">https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files</a></em></p>
 <p>The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded&nbsp;folder. </p>

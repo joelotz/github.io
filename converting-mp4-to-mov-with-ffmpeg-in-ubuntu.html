@@ -60,28 +60,25 @@
 <p><a href="https://handbrake.fr/">Handbrake</a> is a <span class="caps">GUI</span> front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in <span class="caps">DR16</span>. </p>
 <h3>Installing FFmpeg on Ubuntu&nbsp;20.04</h3>
 <p>This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>.</p>
-<div class="highlight"><pre><span></span>sudo apt install ffmpeg
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt install ffmpeg
+</code></pre></div>
 
 <h3>Converting my Video from mp4 to&nbsp;mov</h3>
 <p>In my research and experimentation I found success in two codecs; Apple <a href="https://en.wikipedia.org/wiki/Apple_ProRes">ProRes</a> and <a href="Avid DNxHD">Avid DNxHD</a>. You can view all the installed and available codecs on your machine with <code>ffmpeg -codecs</code>. If you search through the long list you will see a bunch of H.264 decoders. I don’t know which ones are better or if they are, but I’ve seen these two used and recommended on the&nbsp;interwebs. </p>
 <p>As I said, I tried both codecs and didn’t find any difference between the two. They both decoded high-res 4k video and converted <a href="https://en.wikipedia.org/wiki/Advanced_Audio_Coding"><span class="caps">AAC</span></a> audio into <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation"><span class="caps">PCM</span></a> audio. I’ll tell you later why that’s important. The advantage of using ProRes is that the command line is a bit&nbsp;easier:</p>
-<div class="highlight"><pre><span></span>ffmpeg -i input.mp4 -c:v prores -profile:v <span class="m">3</span> -c:a pcm_s16le output.mov
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>ffmpeg -i input.mp4 -c:v prores -profile:v <span class="m">3</span> -c:a pcm_s16le output.mov
+</code></pre></div>
 
 <p>The advantage of using DNxHD is that you can specify all the nerdy details if you want to, but that’s a double edge sword because you can’t leave them out and still work. You must specify all the nerdy&nbsp;details. </p>
 <p>Here is the final command, assuming 4k resolution at 23.967 (aka 24)&nbsp;fps.</p>
-<div class="highlight"><pre><span></span>ffmpeg -i input.mp4 <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>ffmpeg -i input.mp4 <span class="se">\</span>
     -c:v dnxhd <span class="se">\</span>
     -profile:v dnxhr_hqx <span class="se">\</span>
     -vf <span class="s2">&quot;scale=3840:2160,fps=24000/1001,format=yuv422p10le&quot;</span> <span class="se">\</span>
     -b:v 110M <span class="se">\</span>
     -c:a pcm_s16le <span class="se">\</span>
     output.mov
-</pre></div>
-
+</code></pre></div>
 
 <h4>Audio&nbsp;Transcoding</h4>
 <p>Referring back to the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">Black Magic Support Codecs</a>, we see that mp3 and <span class="caps">AAC</span> are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the&nbsp;video.</p>

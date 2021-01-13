@@ -53,9 +53,8 @@
 <p>This is what it should look like when&nbsp;completed.</p>
 <p><img alt="customdomain-04" src="/images/2020/customdomain-04.png"></p>
 <p>I found it takes about 5 minutes for this information to propagate, so go grab an iced tea, you deserve it. For those extra-nerdy, you can verify that records are set by&nbsp;typing:</p>
-<div class="highlight"><pre><span></span>dig &lt;domain&gt; +nostats +nocomments +nocmd
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>dig &lt;domain&gt; +nostats +nocomments +nocmd
+</code></pre></div>
 
 <p>This command will perform a <span class="caps">DNS</span> lookup and display the answers that are returned from the name server(s). There is a bunch of fluff that is hidden with all the +no&nbsp;flags. </p>
 <p><img alt="customdomain-06" src="/images/2020/customdomain-06.png"></p>
@@ -71,15 +70,13 @@
 <h3>Update  -&nbsp;2020/11/14</h3>
 <p>This may be obvious to some of you, but I wanted to point something out that gave me some hassle. I use <a href="https://pypi.org/project/pelican/">Pelican</a> static-site generator to create my blog. When I generate the html files from markdown it completely erases the &#8220;output&#8221; folder and re-builds the blog. From there, I push the output folder to the github master branch to be served. The problem is&#8230; was&#8230; that I was blasting away the <span class="caps">CNAME</span> file that was created in github. I <em>assume</em> this problem exists with Jekyll or other static-site platforms. The solution I found was to either have Pelican create this file as a static page when generating the blog. There are probably other solutions, but this worked for&nbsp;me.</p>
 <p>First, tell Pelican where to find the static file &#8220;<span class="caps">CNAME</span>&#8221;. Add these options to <code>pelicanconf.py</code> file:</p>
-<div class="highlight"><pre><span></span><span class="nv">STATIC_PATHS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;extra/CNAME&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><span class="nv">STATIC_PATHS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;extra/CNAME&#39;</span><span class="o">]</span>
 <span class="nv">EXTRA_PATH_METADATA</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;extra/CNAME&#39;</span>: <span class="o">{</span><span class="s1">&#39;path&#39;</span>: <span class="s1">&#39;CNAME&#39;</span><span class="o">}</span>,<span class="o">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Or if you already have STATIC_PATHS, like an image folder, it would look something like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><span class="nv">STATIC_PATHS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;images&#39;</span>, <span class="s1">&#39;extra/CNAME&#39;</span><span class="o">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nv">STATIC_PATHS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;images&#39;</span>, <span class="s1">&#39;extra/CNAME&#39;</span><span class="o">]</span>
+</code></pre></div>
 
 <p>Now create a directory in the blog&#8217;s content folder named <code>extra</code> and in that folder a file named <code>CNAME</code> as described above. When you generate the blog, i.e. <code>pelican content -o output -s pelicanconf.py</code> the file <code>CNAME</code> will be copied into the output folder. And more importantly when you push the output folder to github it won&#8217;t blast your <span class="caps">CNAME</span>&nbsp;file. </p>
 <p>Source: <a href="https://docs.getpelican.com/en/latest/tips.html?highlight=static%20files#copy-static-files-to-the-root-of-your-site">https://docs.getpelican.com/en/latest/tips.html?highlight=static%20files#copy-static-files-to-the-root-of-your-site</a></p>
