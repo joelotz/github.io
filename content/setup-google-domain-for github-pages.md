@@ -75,6 +75,4 @@ Or if you already have STATIC_PATHS, like an image folder, it would look somethi
 ```bash
 STATIC_PATHS = ['images', 'extra/CNAME']
 ```
-Now create a directory in the blog's root folder names `extra` and a file named `CNAME` as described above. When you generate the blog, i.e. `pelican content -o output -s pelicanconf.py` the file `CNAME` will be copied into the output folder. 
-
-
+Now create a directory in the blog's root folder names `extra` and a file named `CNAME` as described above. When you generate the blog, i.e. `pelican content -o output -s pelicanconf.py` the file `CNAME` will be copied into the output folder. And more importantly when you push the output folder to github it won't blast your CNAME file. 
