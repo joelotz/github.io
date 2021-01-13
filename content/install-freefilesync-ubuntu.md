@@ -6,13 +6,12 @@ Keywords: ubuntu 20.4, FreeFileSync installation,
 Version: OS, Ubuntu 20.04 LTS, FreeFileSync, 11.5
 
 
-Go to https://freefilesync.org/download.php and download the latest version for Ubuntu. For most browsers, the default download location is the directory `~/Downloads`. 
+Go to [https://freefilesync.org/download.php](https://freefilesync.org/download.php) and download the latest version for Ubuntu. For most browsers, the default download location is the directory `~/Downloads`. 
 
 Where do you install your personal software? This is something you may or may not have an opinion about, either way you need to make a decision. When you install software through Software Updater or `apt-get` the location is `/bin/<package>` but it’s generally accepted that you don’t put manually-installed packages there. 
 
-> The [Linux Standard Base](http://en.wikipedia.org/wiki/Linux_Standard_Base) and the [Filesystem Hierarchy Standard](http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) are arguably the standards of where and how you should install software on a Linux system and would suggest placing software that isn't included in your distribution either in /opt or /usr/local/ or rather subdirectories therein (/opt/<package>  /opt/<provider>  /usr/local/bin).
->
-> — from https://unix.stackexchange.com/questions/127076/into-which-directory-should-i-install-programs-in-linux
+> The [Linux Standard Base](http://en.wikipedia.org/wiki/Linux_Standard_Base) and the [Filesystem Hierarchy Standard](http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) are arguably the standards of where and how you should install software on a Linux system and would suggest placing software that isn't included in your distribution either in /opt or /usr/local/ or rather subdirectories therein (/opt/<package>  /opt/<provider>  /usr/local/bin).  <br><br>
+— from [https://unix.stackexchange.com/questions/127076/into-which-directory-should-i-install-programs-in-linux](https://unix.stackexchange.com/questions/127076/into-which-directory-should-i-install-programs-in-linux)
 
 For me, I “install” in `/opt/` so these instructions assume that location. 
 
