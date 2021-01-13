@@ -64,7 +64,7 @@ This is why I had you use “www” in front of your domain name way back in ste
 
 ### Update  - 2020/11/14
 
-This may be obvious to some of you, but I wanted to point something out that gave me some hassle. I use [Pelican](https://pypi.org/project/pelican/) static-site generator to create my blog. When I generate the html files from markdown it completely erases the "output" folder and re-builds the blog. From there, I push the output folder to the github master branch to be served. The problem is... was... that I was blasting away the CNAME file that was created in github. I *assume* this problem exists with Jekyll or other static-site platforms. The solution I found was to either have Pelican create this file as a static page when generating the blog. There are probably other solutinos, but this worked for me.
+This may be obvious to some of you, but I wanted to point something out that gave me some hassle. I use [Pelican](https://pypi.org/project/pelican/) static-site generator to create my blog. When I generate the html files from markdown it completely erases the "output" folder and re-builds the blog. From there, I push the output folder to the github master branch to be served. The problem is... was... that I was blasting away the CNAME file that was created in github. I *assume* this problem exists with Jekyll or other static-site platforms. The solution I found was to either have Pelican create this file as a static page when generating the blog. There are probably other solutions, but this worked for me.
 
 First, tell Pelican where to find the static file "CNAME". Add these options to `pelicanconf.py` file:
 ```bash
@@ -75,4 +75,6 @@ Or if you already have STATIC_PATHS, like an image folder, it would look somethi
 ```bash
 STATIC_PATHS = ['images', 'extra/CNAME']
 ```
-Now create a directory in the blog's root folder names `extra` and a file named `CNAME` as described above. When you generate the blog, i.e. `pelican content -o output -s pelicanconf.py` the file `CNAME` will be copied into the output folder. And more importantly when you push the output folder to github it won't blast your CNAME file. 
+Now create a directory in the blog's content folder named `extra` and in that folder a file named `CNAME` as described above. When you generate the blog, i.e. `pelican content -o output -s pelicanconf.py` the file `CNAME` will be copied into the output folder. And more importantly when you push the output folder to github it won't blast your CNAME file. 
+
+Source: [https://docs.getpelican.com/en/latest/tips.html?highlight=static%20files#copy-static-files-to-the-root-of-your-site](https://docs.getpelican.com/en/latest/tips.html?highlight=static%20files#copy-static-files-to-the-root-of-your-site)
