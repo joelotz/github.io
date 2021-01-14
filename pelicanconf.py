@@ -42,7 +42,7 @@ STATIC_PATHS = ['images', 'extra/CNAME', 'extra/.nojekyll']
 EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},'extra/.nojekyll': {'path': '.nojekyll'}}
 
 TYPOGRIFY = True
-WITH_FUTURE_DATES = True #If disabled, content with dates in the future will get a default status of draft.
+WITH_FUTURE_DATES = False #If disabled, content with dates in the future will get a default status of draft.
 
 LOAD_CONTENT_CACHE = False
 CACHE_CONTENT = False
