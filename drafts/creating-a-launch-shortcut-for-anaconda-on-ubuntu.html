@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Creating a Launch Shortcut for Anaconda on&nbsp;Ubuntu | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Creating a Launch Shortcut for Anaconda on&nbsp;Ubuntu</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 18, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/anaconda.html">Anaconda</a>     </p>
+    <p>When you install Anaconda on Ubuntu, for some reason, it doesn’t create a launching shortcut. First, install per instructions: <a href="https://linuxize.com/post/how-to-install-anaconda-on-ubuntu-20-04/">https://linuxize.com/post/how-to-install-anaconda-on-ubuntu-20-04/</a></p>
+<p>Next, create a desktop file in your applications&nbsp;directory.</p>
+<div class="highlight"><pre><span></span><code>gedit ~/.local/share/applications/anaconda.desktop
+</code></pre></div>
+
+<p>Enter this data, it&#8217;s pretty straight&nbsp;forward.</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<span class="nv">Version</span><span class="o">=</span><span class="m">1</span>.0
+<span class="nv">Type</span><span class="o">=</span>Application
+<span class="nv">Name</span><span class="o">=</span>Anaconda
+<span class="nv">Exec</span><span class="o">=</span>/home/joe/anaconda3/bin/anaconda-navigator
+<span class="nv">Icon</span><span class="o">=</span>/home/joe/anaconda3/lib/python3.7/site-packages/anaconda_navigator/app/icons/Icon1024.png
+<span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+
+<p>The two important items are <code>Exec</code> and <code>Icon</code> paths. <code>Exec</code> is where anaconda was installed. More than likely you will only need to replace &#8220;joe&#8221; with your userpath. I recommend verifying the <code>Icons</code> path, for example you may be more up to date and are using python3.8. In which case your path would be slightly&nbsp;different. </p>
+<p>That&#8217;s it! Now you can press Windows Key and activate the Application Launcher and start typing anaconda. You should see your shortcut there.
+<img alt="anaconda-launcher" src="/images/2021/anaconda-launcher.png"></p>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>OS</td><td> Ubuntu 20.04.01</td></tr>
+    <tr><td> Anaconda</td><td> 4.9.2</td></tr>
+    <tr><td> Python</td><td> 3.7</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
