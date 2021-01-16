@@ -1,6 +1,9 @@
 #### My Build Workflow
+
 ```bash
 pelican content -o output -s pelicanconf.py
+<OR>
+make html
 
 cd output
 git add .
