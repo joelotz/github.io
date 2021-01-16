@@ -24,7 +24,7 @@ Once you have chosen a youtube video, you can list all available audio/video for
 youtube-dl -F https://www.youtube.com/watch?v=<id>
 ```
 If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; ID# 249, 250, 251, 140 are audio. The first three are in [webm](https://en.wikipedia.org/wiki/WebM) format and the last is [m4a](https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A), both are optimized for delivering on the web. 
-![youtube-dl](/images/youtube-dl.png)
+![youtube-dl](/images/2020/youtube-dl.png)
 You can select the specific stream you want and download it.
 ```bash
 youtube-dl -f 278 https://www.youtube.com/watch?v=yYzrSGRzttk
@@ -58,10 +58,10 @@ The audio files downloaded from the web probably have different loudness levels 
 
 Select “Tools > Macros…”
 
-![youtube-dl](/images/audacity_macros.png)
+![youtube-dl](/images/2020/audacity_macros.png)
 
 Make sure the macro “MP3 Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to normalize. 
 
-![youtube-dl](/images/audacity_macros2.png)
+![youtube-dl](/images/2020/audacity_macros2.png)
 
 Then the magic happens! The modified files will be in a new folder named “macro-output”.
