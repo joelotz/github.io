@@ -30,7 +30,7 @@ In the [support notes of DR16](https://documents.blackmagicdesign.com/SupportNot
 - Windows will read mp4 in DR16 Studio only
 - **Linux** will read mp4 in DR16 Studio only
 
-![DR16 Input Codecs](/images/DR16_InputCodecs.png)
+![DR16 Input Codecs](/images/2020/DR16_InputCodecs.png)
 
 [Handbrake](https://handbrake.fr/) is a GUI front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in DR16. 
 
@@ -70,7 +70,7 @@ ffmpeg -i input.mp4 \
 
 Referring back to the [Black Magic Support Codecs](https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf), we see that mp3 and AAC are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the video.
 
-![DR16_InputAudio](/media/joe/Working/Blog/content/images/DR16_InputAudio.png)
+![DR16_InputAudio](/media/joe/Working/Blog/content/images/2020/DR16_InputAudio.png)
 
 #### FFmpeg Options/Arguments
 
