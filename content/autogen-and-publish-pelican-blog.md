@@ -59,7 +59,7 @@ else # Else, run
 fi
 ```
 A zenity input box is used to capture the commit message. 
-![pelicanGithub-01](/images/pelicanGithub-01.png)
+![pelicanGithub-01](/images/2020/pelicanGithub-01.png)
 
 ```bash
 pelican content -o output -s publishconf.py
@@ -80,7 +80,7 @@ git push origin content
 
 This last bit is a little tricky. First, I want to add everything in my blog folder then remove from staging the output folder (which I’m already pushing to the master branch), the plugin folder, and the \__pycache__ folder. You can also accomplish this with a .gitignore file. Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. 
 
-![pelicanGithub-02](/images/pelicanGithub-02.png)
+![pelicanGithub-02](/images/2020/pelicanGithub-02.png)
 
 In your <name>github.io repository, click the branch button and you will see the ‘master’ which is default and contains the generated html files. You can also click the ‘content’ branch and see your source files.
 
