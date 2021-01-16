@@ -21,7 +21,7 @@ One method of time complexity is to reduce the computations, we reduce computati
 
 For the remainder of this article, I’ll be using an N=4 example.  In the particular solution below, a 4x4 board has 4 queens placed on it, denoted by red X's. The indices are [zero indexed](https://en.wikipedia.org/wiki/Zero-based_numbering), meaning they start at zero. For a generalized NxN grid (aka. board) the indices go from 0 to N-1. For the time being, it doesn’t matter where the queens are placed, assume this example is a random solution.
 
-![NQueens_1_00](/images/NQueens_1_00.png)
+![NQueens_1_00](/images/2020/NQueens_1_00.png)
 
 One way of encoding the queen locations are  to use a list of ordered pairs representing the row and column positions.
 
@@ -29,11 +29,11 @@ $$[ (row_0,col_0), (row_1,col_1), (row_{N-1},...,col_{N-1}) ]$$
 
 The above example can be encoded as [ (1,0),(3,1),(0,2),(2,3)], that is a queen is located at position (1,0), position (3,1), and so on as shown in the image below.
 
-![NQueens_1_02](/images/NQueens_1_02.png)
+![NQueens_1_02](/images/2020/NQueens_1_02.png)
 
 We can reduce the dimensionality by recognizing the column value is already represented by the location within the list.
 
-![NQueens_1_03](/images/NQueens_1_03.png)
+![NQueens_1_03](/images/2020/NQueens_1_03.png)
 
 Therefore, this example can be encoded as $[1,3,0,2]$ - where by definition, there can only be a single queen in each column, thus eliminating one dimension that needs to be searched.
 
@@ -41,7 +41,7 @@ Therefore, this example can be encoded as $[1,3,0,2]$ - where by definition, the
 
 I showed how we can encode our queen placement as an ordered list,  $Queens=[1,3,0,2]$, now we can discuss the interaction or relationship between each of them. Mathematically these are called [combinations](https://en.wikipedia.org/wiki/Combination). Given a collection of queens, we can show each possible interaction between any two queens as $\binom {Queens}k$. 
 
-![NQueens_1_02](/images/NQueens_1_01.png)
+![NQueens_1_02](/images/2020/NQueens_1_01.png)
 
 The combination $A=(0,1)$ is the interaction between the queen in row 0 and the queen in row 1, as so on.
 ```python
@@ -111,6 +111,6 @@ if __name__ == '__main__':
 
 So what is going on here? First I ask the user how many queens to place on an NxN board. Then find all permutations of 0-N as possible candidates. I then evaluate each one until a solution is found. As explained in a previous section, the problem is constrained such that there is only one queen in each column. By looking for permutations of only $[0,1,2,...,N]$ I further constrained the problem to only one queen in each row in my permutation definition. This leaves the validation to only having to evaluate whether the candidate location is blocked by an existing queen on the diagonal. A tricky solution to this is recognizing that given two queens, they are on the same diagonal if and only if the horizontal distance between them is equal to the vertical distance between them. 
 
-![NQueens_1_02](/images/NQueens_1_04.png)
+![NQueens_1_02](/images/2020/NQueens_1_04.png)
 
 Referring to the above image, the horizontal distance (*h*) between the two points is $\lvert 2-0 \rvert$, and the vertical distance (*v*) between the two points is $\lvert 0-2 \rvert$. Those values are equal to each other so the two points are on a diagonal from each other and are not valid placements. 
