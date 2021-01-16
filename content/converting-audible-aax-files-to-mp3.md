@@ -20,7 +20,7 @@ ffprobe <inputfile.aax>
 ffprobe TheGrapesofWrath.aax
 ```
 
-![audibleConvert-01](/images/audibleConvert-01.png)
+![audibleConvert-01](/images/2020/audibleConvert-01.png)
 
 After all the stupid library declarations you’ll see the line `[aax] file checksum` and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. [RainbowCrack](http://project-rainbowcrack.com/) is a hash cracking program that uses [rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table) to decrypt… [passwords](https://en.wikipedia.org/wiki/Password_cracking) and stuff. We will be using it decrypt this hash and tell us our Audible code.
 
@@ -34,7 +34,7 @@ cd tables/
 ./rcrack . h 123456789abcdef123456789abcdef
 ```
 
-![audibleConvert-02](/images/audibleConvert-02.png)
+![audibleConvert-02](/images/2020/audibleConvert-02.png)
 
 It’s all gravy from here now that you have your unique code, you can remove the DRM from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in case.
 
