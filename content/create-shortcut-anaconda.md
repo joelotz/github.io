@@ -1,5 +1,5 @@
 Title: Creating a Launch Shortcut for Anaconda on Ubuntu
-Date: 2021-01-18
+Date: 2021-01-16
 Tags: Ubuntu, Anaconda
 Keywords: ubuntu 20.4, Anaconda, shortcut, launch
 Version: OS, Ubuntu 20.04.01, Anaconda, 4.9.2, Python, 3.7
