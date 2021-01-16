@@ -56,7 +56,7 @@
 <li>Windows will read mp4 in <span class="caps">DR16</span> Studio&nbsp;only</li>
 <li><strong>Linux</strong> will read mp4 in <span class="caps">DR16</span> Studio&nbsp;only</li>
 </ul>
-<p><img alt="DR16 Input Codecs" src="/images/DR16_InputCodecs.png"></p>
+<p><img alt="DR16 Input Codecs" src="/images/2020/DR16_InputCodecs.png"></p>
 <p><a href="https://handbrake.fr/">Handbrake</a> is a <span class="caps">GUI</span> front-end to ffpmeg and is awesome, I’m sure it could do it but I wanted something that I could run from a shell script and I wasn’t exactly sure what it was doing under the hood. My goal was to preserve the highest resolution and quality during the conversion or “transcode” to work with in <span class="caps">DR16</span>. </p>
 <h3>Installing FFmpeg on Ubuntu&nbsp;20.04</h3>
 <p>This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>.</p>
@@ -82,7 +82,7 @@
 
 <h4>Audio&nbsp;Transcoding</h4>
 <p>Referring back to the <a href="https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_16_Supported_Codec_List.pdf">Black Magic Support Codecs</a>, we see that mp3 and <span class="caps">AAC</span> are <u>not</u> supported in either free nor Studio Linux version. That sucks…So this is why we have to convert the audio when we convert the&nbsp;video.</p>
-<p><img alt="DR16_InputAudio" src="/media/joe/Working/Blog/content/images/DR16_InputAudio.png"></p>
+<p><img alt="DR16_InputAudio" src="/media/joe/Working/Blog/content/images/2020/DR16_InputAudio.png"></p>
 <h4>FFmpeg&nbsp;Options/Arguments</h4>
 <ul>
 <li>
