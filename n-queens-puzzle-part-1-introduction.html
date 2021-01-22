@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
@@ -44,9 +44,11 @@
 </ul>
 <h3>Combinations and&nbsp;Permutations</h3>
 <p><a href="https://en.wikipedia.org/wiki/Combination">Combinations</a> and <a href="https://en.wikipedia.org/wiki/Permutation">permutations</a> are often confused; for our purposes I will simply say that one cares about order while the other does not, and this makes a difference. In combinations the pair <span class="math">\((0,1)\)</span> is the same as <span class="math">\((1,0)\)</span>. This is good for relationships or interactions because the interaction between John and Bill is the same and between Bill and John, we don’t care about&nbsp;order. </p>
-<p>On the other hand, let’s say… for example… I want to calculate all the possible locations of queens without duplication of rows. So given a list of objects <span class="math">\([A,B,C,D]\)</span> or, in our example case, the four possible rows <span class="math">\([0,1,2,3]\)</span>, how many different ways can we arrange the queens with one on each&nbsp;row?
+<p>On the other hand, let’s say… for example… I want to calculate all the possible locations of queens without duplication of rows. So given a list of objects <span class="math">\([A,B,C,D]\)</span> or, in our example case, the four possible rows <span class="math">\([0,1,2,3]\)</span>, how many different ways can we arrange the queens with one on each row?<br>
 </p>
 <div class="math">$$ P_N = N! $$</div>
+<p><br>
+</p>
 <div class="math">$$ P_4 = 4!= 4 \cdot 3 \cdot 2 \cdot 1 = 24$$</div>
 <p>Now is a good time to finally break out <code>python</code> and the standard library <a href="https://docs.python.org/2/library/itertools.html">itertools</a>. Here we can just ask itertools to create all the permutations of [0,1,2,3] for us. Note the result from itertools is an <a href="https://www.geeksforgeeks.org/iterators-in-python/">iterator</a> so to view it (i.e. print it) we must turn the iterator into a&nbsp;list.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">itertools</span>
@@ -85,7 +87,7 @@
 </code></pre></div>
 
 <h3>Solutions</h3>
-<p>Now the part we&#8217;ve all been waiting for&#8230;how do we find the solution(s) to our puzzle? The different methods and algorithms of finding the solution is the fun part and the entire point of this series of articles. I will look at the popular algorithms as a exercise in my python coding skills and an opportunity to learn something&nbsp;new. </p>
+<p>Now the part we&rsquo;ve all been waiting for&hellip;how do we find the solution(s) to our puzzle? The different methods and algorithms of finding the solution is the fun part and the entire point of this series of articles. I will look at the popular algorithms as a exercise in my python coding skills and an opportunity to learn something&nbsp;new. </p>
 <p>See the next articles were I find solutions using the following&nbsp;algorithms:</p>
 <ul>
 <li><a href="n-queens-puzzle-part-2-brute-force-algorithm.html">Part 2 - Brute&nbsp;Force</a></li>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
@@ -43,7 +43,7 @@
 <div class="highlight"><pre><span></span><code>exiftool -time:all -a -G0:1 -s filename.mp4
 </code></pre></div>
 
-<p>As you would expect there are multiple date fields set by GoPro in the mp4 container.
+<p>As you would expect there are multiple date fields set by GoPro in the mp4 container.<br>
 <img alt="Image1" src="/images/2020/ChangingMp4Date_01.png"></p>
 <p>There are multiple solutions… we could set each field individually and&nbsp;explicitly. </p>
 <div class="highlight"><pre><span></span><code>exiftool -CreateDate<span class="o">=</span><span class="s2">&quot;2020:08:20 00:46:59&quot;</span> -ModifyDate<span class="o">=</span><span class="s2">&quot;2020:08:20 00:46:59&quot;</span> -Track*Date<span class="o">=</span><span class="s2">&quot;2020:08:20 00:46:59&quot;</span> -Media*Date<span class="o">=</span><span class="s2">&quot;2020:08:20 00:46:59&quot;</span> test.MP4

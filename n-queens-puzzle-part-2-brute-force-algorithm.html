@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
@@ -36,14 +36,14 @@
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 03, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73968.5 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/python.html">Python</a>     </p>
-    <p>This article is number 2 in a series implementing different alogrithms to solve the N-Queens problem. See the first article <a href="n-queens-puzzle-part-1-introduction.html">&#8220;Part 1-Introduction&#8221;</a> for an overview of the puzzle and some background&nbsp;information.</p>
-<p>In this article I&#8217;m going to implement a Brute-Force algorithm in python to find solutions to the N-Queens&nbsp;puzzle. </p>
+    <p>This article is number 2 in a series implementing different alogrithms to solve the N-Queens problem. See the first article <a href="n-queens-puzzle-part-1-introduction.html">&ldquo;Part 1-Introduction&rdquo;</a> for an overview of the puzzle and some background&nbsp;information.</p>
+<p>In this article I&rsquo;m going to implement a Brute-Force algorithm in python to find solutions to the N-Queens&nbsp;puzzle. </p>
 <h3>Brute-Force Search&nbsp;Algorithm</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Brute-force_search">Brute-Force Algorithm</a> involves finding all possible permutations of the queen positions and then evaluating each to determine if it is a valid solution. This is typically one of the easier search algorithms to implement and it will always find a solution if it exists, however, the computational cost is proportional to the number of candidates and increases to be impractical very quickly. This is known as “combinatorial explosion” and limits the use of this algorithm as the computational cost of finding a solution grows exponentially as the search space&nbsp;increases.</p>
 <p>In this “brute force” algorithm we find the solution by looking at every position on an NxN board, N times, for N queens. Assuming the reader understands <a href="https://en.wikipedia.org/wiki/Big_O_notation">Big O Notation</a>, this means <span class="math">\(O(N^N)\)</span>  time complexity!!&nbsp;Wow.</p>
 <h3>Dimensionality Reduction via&nbsp;Encoding</h3>
 <p>One method of time complexity is to reduce the computations, we reduce computations by reducing the search space, we reduce the search space by reducing dimensionality. For the N-Queens problem we can do that heuristically by recognizing  we can have only one queen in the row or&nbsp;column. </p>
-<p>For the remainder of this article, I’ll be using an N=4 example.  In the particular solution below, a 4x4 board has 4 queens placed on it, denoted by red X&#8217;s. The indices are <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero indexed</a>, meaning they start at zero. For a generalized NxN grid (aka. board) the indices go from 0 to N-1. For the time being, it doesn’t matter where the queens are placed, assume this example is a random&nbsp;solution.</p>
+<p>For the remainder of this article, I’ll be using an N=4 example.  In the particular solution below, a 4x4 board has 4 queens placed on it, denoted by red X&rsquo;s. The indices are <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero indexed</a>, meaning they start at zero. For a generalized NxN grid (aka. board) the indices go from 0 to N-1. For the time being, it doesn’t matter where the queens are placed, assume this example is a random&nbsp;solution.</p>
 <p><img alt="NQueens_1_00" src="/images/2020/NQueens_1_00.png"></p>
 <p>One way of encoding the queen locations are  to use a list of ordered pairs representing the row and column&nbsp;positions.</p>
 <div class="math">$$[ (row_0,col_0), (row_1,col_1), (row_{N-1},...,col_{N-1}) ]$$</div>

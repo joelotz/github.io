@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
@@ -40,9 +40,9 @@
 <p>Most likely you are storing the photos on an external <span class="caps">SD</span> Card, if so the storage location is: <code>SAMSUNG Android/Card/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
 <p>Otherwise :<code>SAMSUNG Android/Phone/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
 <p>A gpx file is automatically created by the Mapillary app and is stored in the directory under file&nbsp;name </p>
-<p>Photos are names in this format:
-<code>2020_06_06_14_06_41_856_+0530.jpg</code>
-YYY_MM_DD_HH_MM_SS_xxx_UTCOffset
+<p>Photos are names in this format:<br>
+<code>2020_06_06_14_06_41_856_+0530.jpg</code><br>
+YYY_MM_DD_HH_MM_SS_xxx_UTCOffset<br>
 I thought xxx would be the subseconds but it does not match the subseconds data&nbsp;field.</p>
 <p>Adding geotags to&nbsp;images </p>
 <ul>
@@ -61,16 +61,16 @@ I thought xxx would be the subseconds but it does not match the subseconds data&
 
 <p><code>exiftool -s -G -a file.jpg</code></p>
 <ul>
-<li><strong>-s</strong> means instead of showing the &#8220;friendly&#8221; names  like &#8220;Create Date&#8221;, show the names you need to use when you write  ExifTool commands. So instead of &#8220;Create Date&#8221; you see&nbsp;&#8220;CreateDate&#8221;. </li>
+<li><strong>-s</strong> means instead of showing the &ldquo;friendly&rdquo; names  like &ldquo;Create Date&rdquo;, show the names you need to use when you write  ExifTool commands. So instead of &ldquo;Create Date&rdquo; you see&nbsp;&ldquo;CreateDate&rdquo;. </li>
 <li><strong>-G</strong> means also show the metadata Group to which the metadata tag&nbsp;belongs.</li>
 <li><strong>-a</strong> means to show all tags, even if they are&nbsp;duplicates. </li>
 </ul>
-<p>This uses a custom format to create a csv of the subsecond creation date, latitude, and longitude of all photos.
+<p>This uses a custom format to create a csv of the subsecond creation date, latitude, and longitude of all photos.<br>
 <code>exiftool -p ./csv_original.fmt *.jpg &gt; original.csv</code></p>
 <p><code>exiftool -csv -filename -imagesize -gps:GPSLatitude -gps:GPSLongitude ./ &gt; long.csv</code></p>
 <p><code>exiftool -ee -n -p "$gpslatitude,$gpslongitude,$gpsdatestamp,$gpstimestamp,$gpsspeed" FILE &gt; out.csv</code></p>
-<p>This uses a gps logfile (.gpx) and interpolates photos based on CreateDate or SubSecCreateDate?
-<code>exiftool -geotag log.gpx *jpg</code> 
+<p>This uses a gps logfile (.gpx) and interpolates photos based on CreateDate or SubSecCreateDate?<br>
+<code>exiftool -geotag log.gpx *jpg</code> <br>
 <code>exiftool -geotag log.gpx "-GeoTime&lt;SubSecDateTimeOriginal" *jpg</code></p>
     
     <div class="version">

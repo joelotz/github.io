@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
@@ -87,7 +87,7 @@ sudo apt install zenity
 <span class="k">fi</span>
 </code></pre></div>
 
-<p>A zenity input box is used to capture the commit message. 
+<p>A zenity input box is used to capture the commit message. <br>
 <img alt="pelicanGithub-01" src="/images/2020/pelicanGithub-01.png"></p>
 <div class="highlight"><pre><span></span><code>pelican content -o output -s publishconf.py
 </code></pre></div>
@@ -97,7 +97,7 @@ sudo apt install zenity
 git push origin master
 </code></pre></div>
 
-<p>This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box&#8221;. Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don&#8217;t need to enter them, <a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git">[1]</a> and <a href="https://git-scm.com/docs/git-credential-store">[2]</a>.</p>
+<p>This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box&rdquo;. Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don&rsquo;t need to enter them, <a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git">[1]</a> and <a href="https://git-scm.com/docs/git-credential-store">[2]</a>.</p>
 <div class="highlight"><pre><span></span><code>git add .
 git reset output/* plugins/* __pycache__/*
 git commit -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-<!--    <script src="https://kit.fontawesome.com/faf5b93f71.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
@@ -50,8 +50,8 @@
 <div class="highlight"><pre><span></span><code>youtube-dl -F https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
 </code></pre></div>
 
-<p>If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; <span class="caps">ID</span># 249, 250, 251, 140 are audio. The first three are in <a href="https://en.wikipedia.org/wiki/WebM">webm</a> format and the last is <a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A">m4a</a>, both are optimized for delivering on the web. 
-<img alt="youtube-dl" src="/images/2020/youtube-dl.png">
+<p>If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; <span class="caps">ID</span># 249, 250, 251, 140 are audio. The first three are in <a href="https://en.wikipedia.org/wiki/WebM">webm</a> format and the last is <a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A">m4a</a>, both are optimized for delivering on the web. <br>
+<img alt="youtube-dl" src="/images/2020/youtube-dl.png"><br>
 You can select the specific stream you want and download&nbsp;it.</p>
 <div class="highlight"><pre><span></span><code>youtube-dl -f <span class="m">278</span> https://www.youtube.com/watch?v<span class="o">=</span>yYzrSGRzttk
 </code></pre></div>
