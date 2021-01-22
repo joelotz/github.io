@@ -26,3 +26,4 @@ The two important items are `Exec` and `Icon` paths. `Exec` is where anaconda wa
 
 That's it! Now you can press Windows Key and activate the Application Launcher and start typing anaconda. You should see your shortcut there.
 ![anaconda-launcher](/images/2021/anaconda-launcher.png)
+
