@@ -1,13 +1,13 @@
 /* general style */
 
 body {
-  color: #ff0000; /* 3d3d3d; */
+  color: #3d3d3d; 
   font-family: 'Lato', sans-serif;
-  font-size: 4px; /* no affect ?!! */
+  font-size: 16px; 
   line-height: 1.6;
 }
 
-a {
+a {  
   color: #234764;
 } 
 
@@ -187,26 +187,30 @@ p, div.line-block, ul, ol, pre,
 }
 
 
+/* https://www.the-art-of-web.com/css/format-dl/  */
 
-  dl {
+dl {
     border: 3px double #ccc;
     padding: 0.5em;
   }
 
+  dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+  }
 
-/*
-dt {
-  margin: 25px 0 0 0;
-  padding: 0;
-  font-weight: bold;
-  color: #FF0000;
-}
+  dt::after {
+    content: ":";
+  }
 
-dd {
-  margin: 0 0 25px 40px;
-  padding: 0;
-}
-*/
+  dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+  }
+
 
 ul ol, ol ul, ul ul, ol ol {
   margin: 10px 0;
@@ -244,7 +248,7 @@ pre {
   line-height: 1.3;
   border: 1px solid #ddd;
   padding: 10px;
-/*  background: #fafafa;  /*NO AFFECT */
+  background: #fafafa; 
   background-color: ghostWhite;*/
   -moz-border-radius-bottomleft: 10px;
   -webkit-border-bottom-left-radius: 10px;
@@ -257,15 +261,14 @@ pre {
 }
 
 code, tt {
-/*  background: #FF0000; NO AFFECT */
+/*  background: #FF0000; */
 }
 
 /* tables */
 table {
   border: 1px solid #ddd;
   border-collapse: collapse;
-/*   background: #fafafa;  DOESN"T DO ANYTHING! 
-  background: #fc4103;*/
+   background: #fafafa;  
 }
 
 td, th {
@@ -463,7 +466,7 @@ blockquote {
   border-left: 10px solid #ccc;
   margin: 1.5em 10px;
   padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019""<br>""<br>;
+  quotes: "\201C""\201D""\2018""\2019";
 }
 
 blockquote:before {
