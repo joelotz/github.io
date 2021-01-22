@@ -1,13 +1,13 @@
-Title: Testing Markdown Features of Pelican 
+Title: Adding Python-Markdown Extensions in Pelican 
 Date: 2021-01-21
 Tags: Pelican, Markdown
-Keywords: 
-Version: 
+Keywords: python-markdown, pelican, markdown, definition list, admonitions
+Version: Pelican, 4.5.4, Python-Markdown, 3.3.3
 
 
 
 ### Definition List
-
+This first extension I implemented are definitions. They were not critical but thought would be interesting. Here is the markdown syntax to implement within your post.
 ```reStructuredText
 Apple 
 :  Pomaceous fruit of plants of the genus Malus in the family Rosaceae.
@@ -15,16 +15,16 @@ Apple
 Orange
 :   The fruit of an evergreen tree of the genus Citrus.
 ```
-
+Once Python-Markdown does it's thing, it shoudl render out html that looks like this.
 ```html
 <dl>
 <dt>Apple</dt>
-<dd>Pomaceous fruit of plants of the genus Malus in the family&nbsp;Rosaceae.</dd>
+<dd>Pomaceous fruit of plants of the genus Malus in the family Rosaceae.</dd>
 <dt>Orange</dt>
-<dd>The fruit of an evergreen tree of the genus&nbsp;Citrus.</dd>
+<dd>The fruit of an evergreen tree of the genus Citrus.</dd>
 </dl>
 ```
-
+At which point you style it however you want. This is how I styled mine.
 ```css
 dl {
   border: 3px double #ccc;
@@ -48,7 +48,7 @@ dd {
   padding: 0 0 0.5em 0;
 }
 ```
-Here is what it looks like rendered:
+And finally, here is what it looks like rendered out.
 
 Apple 
 :  Pomaceous fruit of plants of the genus Malus in the family Rosaceae.
@@ -64,7 +64,7 @@ One really cool built-in feature of reStructuredText are directives called [Admo
 
 [Pelican](https://docs.getpelican.com/en/latest/) uses [Python-Markdown](https://python-markdown.github.io/) for it's markdown parsing and Python-Markdown has these [extensions](https://python-markdown.github.io/extensions/) that include [admonitions](https://python-markdown.github.io/extensions/admonition/). All these extensions can be activated by adding the `MARKDOWN` variable to your `pelicanconf.py` configuration file as defined in the [pelican setting docs](https://docs.getpelican.com/en/latest/settings.html?highlight=MARKDOWN#basic-settings):
 
-The reStructuredText documents says --
+The reStructuredText documents says:
 
 > The following admonition directives have been implemented:
 > - attention
@@ -152,13 +152,14 @@ Finally, here is the implementation of [SmartyPants](https://daringfireball.net/
 |-----------------|---------------|
 |`'test'` | 'test'|
 |`"test"` | "test"|
-|`<<test>>` | << test >>|
-|`...` | ...  (ellipse)|
-|`--` | -- (endash)|
-|`---` | --- (emdash)|
+|`<<test>>` | << test >> ([guillemets](https://en.wikipedia.org/wiki/Guillemet)) |
+|`...` | ...  ([ellipse](https://en.wikipedia.org/wiki/Ellipsis)) |
+|`--` | -- ([en dash](https://en.wikipedia.org/wiki/Dash#En_dash)) |
+|`---` | --- ([em dash](https://en.wikipedia.org/wiki/Dash#Em_dash)) |
 
 ### Configuration File
-To "activate" these extensions you have to set the variable in your `peliconconf.py` file. Here is the settings I used.
+
+To "activate" these extensions you have to set the variable in your `peliconconf.py` file. Here are the settings I used.
 
 ```
 :::python
