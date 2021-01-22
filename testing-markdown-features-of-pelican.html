@@ -36,23 +36,7 @@
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 21, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74521.6 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/pelican.html">Pelican</a>  <a href="/tag/markdown.html">Markdown</a>     </p>
-    <p>I&rsquo;ll start by sharing the items that I tried to activate/implement but couldn&rsquo;t and gave up&nbsp;trying. </p>
-<h3>Abbreviations</h3>
-<p>The way it&rsquo;s supposed to work&hellip; is the following&nbsp;Markdown</p>
-<div class="highlight"><pre><span></span><code>The HTML specification is maintained by the W3C.
-
-*[HTML]: Hyper Text Markup Language
-*[W3C]:  World Wide Web Consortium
-</code></pre></div>
-
-<p>is converted into this <span class="caps">HTML</span>:</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>The <span class="p">&lt;</span><span class="nt">abbr</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Hyper Text Markup Language&quot;</span><span class="p">&gt;</span>HTML<span class="p">&lt;/</span><span class="nt">abbr</span><span class="p">&gt;</span> specification
-is maintained by the <span class="p">&lt;</span><span class="nt">abbr</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;World Wide Web Consortium&quot;</span><span class="p">&gt;</span>W3C<span class="p">&lt;/</span><span class="nt">abbr</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>For me, I keep getting errors during the pelican html build step and the markdown article fails to render. Here is&nbsp;my</p>
-<p>The <span class="caps">HTML</span> specification is maintained by the <span class="caps">W3C</span>.</p>
-<h3>Definition&nbsp;List</h3>
+    <h3>Definition&nbsp;List</h3>
 <div class="highlight"><pre><span></span><code>Apple 
 :  Pomaceous fruit of plants of the genus Malus in the family Rosaceae.
 
@@ -68,23 +52,40 @@ Orange
 <span class="p">&lt;/</span><span class="nt">dl</span><span class="p">&gt;</span>
 </code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="nt">dl</span> <span class="p">{</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">double</span> <span class="mh">#ccc</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mf">0.5</span><span class="kt">em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">dt</span> <span class="p">{</span>
+  <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+  <span class="k">clear</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">text-align</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span>
+  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">dt</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;:&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">dd</span> <span class="p">{</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">110</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.5</span><span class="kt">em</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Here is what it looks like&nbsp;rendered:</p>
 <dl>
 <dt>Apple</dt>
 <dd>Pomaceous fruit of plants of the genus Malus in the family&nbsp;Rosaceae.</dd>
 <dt>Orange</dt>
 <dd>The fruit of an evergreen tree of the genus&nbsp;Citrus.</dd>
 </dl>
-<p>I&rsquo;d like to do some <span class="caps">CSS</span>&nbsp;formatting&hellip;</p>
+<p>I&rsquo;m not sold on the border, but it&rsquo;s still a good&nbsp;example. </p>
 <h3>Admonition</h3>
 <p>One really cool built-in feature of reStructuredText are directives called <a href="https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html">Admonitions</a>. These are like pop-ups that you see in <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>&nbsp;documentation.</p>
 <p><a href="https://docs.getpelican.com/en/latest/">Pelican</a> uses <a href="https://python-markdown.github.io/">Python-Markdown</a> for it&rsquo;s markdown parsing and Python-Markdown has these <a href="https://python-markdown.github.io/extensions/">extensions</a> that include <a href="https://python-markdown.github.io/extensions/admonition/">admonitions</a>. All these extensions can be activated by adding the <code>MARKDOWN</code> variable to your <code>pelicanconf.py</code> configuration file as defined in the <a href="https://docs.getpelican.com/en/latest/settings.html?highlight=MARKDOWN#basic-settings">pelican setting docs</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">MARKDOWN</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;extension_configs&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;markdown.extensions.admonition&#39;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
 <p>The reStructuredText documents says&nbsp;&ndash;</p>
 <blockquote>
 <p>The following admonition directives have been implemented:<br>
@@ -110,7 +111,7 @@ Orange
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 
-<p>Which you can style using <span class="caps">CSS</span> to look like anything you want. I made mine look like&nbsp;this.</p>
+<p>Once you have the <span class="caps">HTML</span> output you can style them hoever you want with <span class="caps">CSS</span>. Here is my <a href="https://gist.github.com/joelotz/ab3ca713bc353d6f31e8a8fae186a705"><span class="caps">CSS</span> stylesheet</a> that styles the&nbsp;following.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Here is a note you should&nbsp;know.</p>
@@ -152,6 +153,7 @@ Orange
     This is really dangerous!
 </code></pre></div>
 
+<p>Follow the pattern and you can make the more like&nbsp;this.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>This is really&nbsp;dangerous!</p>
@@ -169,6 +171,7 @@ Orange
 <p>This is a&nbsp;hint</p>
 </div>
 <h3>SmartyPants</h3>
+<p>Finally, here is the implementation of <a href="https://daringfireball.net/projects/smartypants/">SmartyPants</a> which intelligently turns <span class="caps">ASCII</span> typography into &ldquo;pretty&rdquo; <span class="caps">HTML</span>&nbsp;entities.</p>
 <table>
 <thead>
 <tr>
@@ -195,14 +198,28 @@ Orange
 </tr>
 <tr>
 <td><code>--</code></td>
-<td>&ndash; (ndash)</td>
+<td>&ndash; (endash)</td>
 </tr>
 <tr>
 <td><code>---</code></td>
-<td>&mdash; (mdash)</td>
+<td>&mdash; (emdash)</td>
 </tr>
 </tbody>
 </table>
+<h3>Configuration&nbsp;File</h3>
+<p>To &ldquo;activate&rdquo; these extensions you have to set the variable in your <code>peliconconf.py</code> file. Here is the settings I&nbsp;used.</p>
+<div class="highlight"><pre><span></span><code><span class="n">MARKDOWN</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;extension_configs&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;markdown.extensions.extra&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;markdown.extensions.admonition&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;smarty&#39;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;smart_angled_quotes&#39;</span> <span class="p">:</span> <span class="s1">&#39;true&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;markdown.extensions.codehilite&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;css_class&#39;</span><span class="p">:</span> <span class="s1">&#39;highlight&#39;</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output_format&#39;</span><span class="p">:</span> <span class="s1">&#39;html5&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
     
     </div>
 

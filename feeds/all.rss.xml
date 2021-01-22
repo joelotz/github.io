@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Delving into Delusion</title><link>http://www.joelotz.com/</link><description></description><lastBuildDate>Thu, 21 Jan 2021 00:00:00 +0530</lastBuildDate><item><title>Testing Markdown Features of Pelican</title><link>http://www.joelotz.com/testing-markdown-features-of-pelican.html</link><description>&lt;p&gt;I&amp;rsquo;ll start by sharing the items that I tried to activate/implement but couldn&amp;rsquo;t and gave up&amp;nbsp;trying. &lt;/p&gt;
-&lt;h3&gt;Abbreviations&lt;/h3&gt;
-&lt;p&gt;The way it&amp;rsquo;s supposed to work&amp;hellip; is the following&amp;nbsp;Markdown&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The HTML specification is maintained by the W3C.
+<rss version="2.0"><channel><title>Delving into Delusion</title><link>http://www.joelotz.com/</link><description></description><lastBuildDate>Thu, 21 Jan 2021 00:00:00 +0530</lastBuildDate><item><title>Testing Markdown Features of Pelican</title><link>http://www.joelotz.com/testing-markdown-features-of-pelican.html</link><description>&lt;h3&gt;Definition&amp;nbsp;List&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Apple 
+:  Pomaceous fruit of plants of the genus Malus in the family Rosaceae.
 
-*[HTML]: Hyper Text Markup Language
-*[W3C]:  World Wide Web Consortium …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joe</dc:creator><pubDate>Thu, 21 Jan 2021 00:00:00 +0530</pubDate><guid isPermaLink="false">tag:www.joelotz.com,2021-01-21:/testing-markdown-features-of-pelican.html</guid><category>Uncategorized</category><category>Pelican</category><category>Markdown</category></item><item><title>Python One-Liners</title><link>http://www.joelotz.com/python-one-liners.html</link><description>&lt;p&gt;As a bonus, here are two of my favorite python&amp;nbsp;one-liners:&lt;/p&gt;
+Orange
+:   The fruit of an evergreen tree of the genus Citrus.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;dl&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Apple&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Pomaceous fruit of plants of the genus Malus in the family&lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt;Rosaceae.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Orange&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;The …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joe</dc:creator><pubDate>Thu, 21 Jan 2021 00:00:00 +0530</pubDate><guid isPermaLink="false">tag:www.joelotz.com,2021-01-21:/testing-markdown-features-of-pelican.html</guid><category>Uncategorized</category><category>Pelican</category><category>Markdown</category></item><item><title>Python One-Liners</title><link>http://www.joelotz.com/python-one-liners.html</link><description>&lt;p&gt;As a bonus, here are two of my favorite python&amp;nbsp;one-liners:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;u&gt;Swapping Variables&lt;/u&gt;&lt;/strong&gt; - no need to use temp variables. In some other languages, like C, you would need a temporary variable to hold a value while you swap them around. Something like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
