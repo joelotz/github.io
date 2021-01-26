@@ -45,9 +45,9 @@
   logweight input <span class="o">[</span>option<span class="o">]</span>
 
 Input:
-        -w, --weight      Weight value desired to log. Default in pounds <span class="o">(</span>lbs<span class="o">)</span>
-                           Use optional -c,--convert flag to convert kgs to lbs and log in lbs.
-                           Use optional -k,--kilograms flag to log in kilograms.
+        -w, --weight      Weight value desired to log. Default <span class="k">in</span> pounds <span class="o">(</span>lbs<span class="o">)</span>
+                           Use optional -c,--convert flag to convert kgs to lbs and log <span class="k">in</span> lbs.
+                           Use optional -k,--kilograms flag to log <span class="k">in</span> kilograms.
 
 Simple Examples:
         logweight --weight<span class="o">=</span><span class="m">200</span>                  Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
@@ -55,11 +55,11 @@ Simple Examples:
         logweight --weight<span class="o">=</span><span class="m">90</span>.7 --convert       Creates a log entry <span class="k">for</span> 200lbs <span class="k">for</span> the current date
 
 Options:
-        -d, --date        Log date in valid <span class="s1">&#39;YYYY-MM-DD&#39;</span> format. If not specified the current UTC date is used.
+        -d, --date        Log date <span class="k">in</span> valid <span class="s1">&#39;YYYY-MM-DD&#39;</span> format. If not specified the current UTC date is used.
         -f, --file        Log file path and name. The default is /mnt/DataDrive/Documents/WeightLog.txt.
         -n, --note        Adds a note string to the log entry. The default is blank.
         -k, --kilograms   Save weight value as kilogram units. Default is standard pounds.
-        -c, --convert     Assumes the input weight is in kilograms but converts the value and logs in pounds.
+        -c, --convert     Assumes the input weight is <span class="k">in</span> kilograms but converts the value and logs <span class="k">in</span> pounds.
         -l, --pounds      Save weight value as standard pound units. This is the default.
         -p, --noprint     Supresses the printing to the terminal the data that is written into log file.
         -v, --version     Prints the version of this shell script.
@@ -69,7 +69,7 @@ Options:
 Examples:
         logweight --weight<span class="o">=</span><span class="m">200</span>.6 --date<span class="o">=</span><span class="m">2020</span>-01-01            Creates a log entry <span class="k">for</span> the specified day
         logweight --weight<span class="o">=</span><span class="m">200</span>.6 --note<span class="o">=</span><span class="s2">&quot;Taken after run&quot;</span>     Creates a log entry on the current date with a user note
-        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --kilograms                  Creates a log entry in kilograms on the current date
+        logweight --weight<span class="o">=</span><span class="m">200</span>.6 --kilograms                  Creates a log entry <span class="k">in</span> kilograms on the current date
 </code></pre></div>
 
 <p>Here is the raw file that you can&nbsp;use.</p>
@@ -91,9 +91,9 @@ Examples:
 <span class="nv">NOTE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
 <span class="c1">#### Parse input arguments</span>
-<span class="k">for</span> i in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">for</span> i <span class="k">in</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">do</span>
-<span class="k">case</span> <span class="nv">$i</span> in
+<span class="k">case</span> <span class="nv">$i</span> <span class="k">in</span>
     -w<span class="o">=</span>*<span class="p">|</span>--weight<span class="o">=</span>*<span class="o">)</span>
     <span class="nv">WEIGHT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="p">;;</span>

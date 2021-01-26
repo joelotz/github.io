@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Splitting Audio Files into Tracks Based on .cue&nbsp;File | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Splitting Audio Files into Tracks Based on .cue&nbsp;File</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 26, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74535.3 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/audacity.html">Audacity</a>  <a href="/tag/python.html">Python</a>     </p>
+    <p>Here&rsquo;s a problem that I come across once in a while. Let’s say you’ve downloaded an album from torrent and the entire album is in a single file. Sure, you can load the .cue file into your favorite music player and play the different tracks but you really would like this album split into individual files for each&nbsp;track. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It&rsquo;s assumed that you are downloading <strong><em>legally</em></strong> obtained torrents. Don&rsquo;t sue me <span class="caps">RIAA</span>!!</p>
+</div>
+<p>You can, of course, load the flac/mp3 into <a href="https://www.audacityteam.org/">Audacity</a>, manually insert labels (for example at the arrow locations), and export tracks. But I&rsquo;m going to show you a semi-automated&nbsp;method. </p>
+<p><img alt="audacity_05" src="/images/2021/audacity_05.png"></p>
+<p>Audacity has the ability to import label files. These are basically text files that tells the program at what starting/ending point to add the label and what the label’s… um… label should be. That’s great, but I don’t know where you get this label file from. This is not included with your (legally obtained!) torrent. But you do typically get a .cue file. If you got this file we are in the&nbsp;game.</p>
+<p><img src="/images/2021/audacity_01.png" alt="audacity_01" style="zoom:80%;" /></p>
+<p>There is a site online that someone wrote that will convert for you here <a href="http://grimblefritz.com/audacity/cue2lbl.php">http://grimblefritz.com/audacity/cue2lbl.php</a>. </p>
+<p>Of course, being a geek I wrote my own Python script to do it for me!  Download the gist <a href="https://gist.github.com/joelotz/49d99e6c464825a0e551146bd92369a3">here</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Convert a music .cue file into a label file.</span>
+
+<span class="sd">This module will accept an optional string attribute that specifies the input</span>
+<span class="sd">.cue file. If this file is not provided in the call then file-select box will</span>
+<span class="sd">be presented to the user. Output is a .txt file of labels that can be input</span>
+<span class="sd">into Audacity.</span>
+
+<span class="sd">Examples:</span>
+<span class="sd">        $ python cue2labels.py</span>
+<span class="sd">        $ python cue2labels.py &quot;InputFile.cue&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">stringtime_to_millisec</span><span class="p">(</span><span class="n">stringtime</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stringtime : STRING</span>
+<span class="sd">        A string in the form of &quot;HH:MM:SS:MS&quot;, where MS are millisecs.</span>
+<span class="sd">        Hours(HH) and Minutes(MM) are optional.</span>
+<span class="sd">        Seconds(SS) and Millisecs(MS) are mandatory.</span>
+<span class="sd">        Example: 10:05:12 = 10hrs, 5mins, 12ms</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FLOAT</span>
+<span class="sd">        Returns a the input stringtime as decimal seconds</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">milliseconds</span> <span class="o">=</span> <span class="p">([</span><span class="s2">&quot;00&quot;</span><span class="p">,</span> <span class="s2">&quot;00&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">stringtime</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">))[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+    <span class="n">hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span><span class="o">*</span><span class="mi">360</span>
+    <span class="n">minutes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">minutes</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span><span class="o">*</span><span class="mi">60</span> 
+    <span class="n">seconds</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seconds</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+    <span class="n">milliseconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">milliseconds</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span><span class="o">/</span><span class="mi">60</span>
+    <span class="k">return</span> <span class="n">hours</span> <span class="o">+</span> <span class="n">minutes</span> <span class="o">+</span> <span class="n">seconds</span> <span class="o">+</span> <span class="n">milliseconds</span>
+
+
+<span class="k">def</span> <span class="nf">parse_cue</span><span class="p">(</span><span class="n">cue_filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cue_filename : STRING</span>
+<span class="sd">        The name of the .cue file to be read and parsed.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    track_times : LIST</span>
+<span class="sd">        The time that the audio track starts, as given in the .cue file, </span>
+<span class="sd">        in decimal seconds</span>
+<span class="sd">    titles : LIST</span>
+<span class="sd">        The title of the track, as given in the .cue file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">findall</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cue_filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> 
+    <span class="n">track_times</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> 
+        <span class="c1"># Get next line from file </span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> 
+
+        <span class="c1"># if line is empty end of file is reached </span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span> 
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;INDEX&#39;</span><span class="p">:</span>
+            <span class="n">stringtime</span> <span class="o">=</span> <span class="n">stringtime_to_millisec</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">stringtime</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">track_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stringtime</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;TITLE&#39;</span><span class="p">:</span>
+            <span class="n">track</span> <span class="o">=</span> <span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&quot;([^&quot;]*)&quot;&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="n">titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>                
+
+    <span class="c1"># I&#39;ve had trouble in the past         </span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">titles</span> <span class="ow">or</span> <span class="n">track_times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+         <span class="n">warning_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;There is someting wrong with the .cue file, it</span><span class="se">\&#39;</span><span class="s1">s not formatted properly.</span>
+<span class="s1">         Unable to continue processing!&#39;&#39;&#39;</span>
+         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">warning_string</span><span class="p">)</span>     
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> 
+    <span class="k">return</span> <span class="n">track_times</span><span class="p">,</span> <span class="n">titles</span>
+
+
+<span class="k">def</span> <span class="nf">write_labels</span><span class="p">(</span><span class="n">label_filename</span><span class="p">,</span> <span class="n">track_times</span><span class="p">,</span> <span class="n">titles</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    label_filename : STRING</span>
+<span class="sd">        The desired path/name of the output label file.</span>
+<span class="sd">    track_times : LIST        </span>
+<span class="sd">        The time that the audio track starts, as given in the .cue file, </span>
+<span class="sd">        in decimal seconds</span>
+<span class="sd">    titles : LIST</span>
+<span class="sd">        The title of the track, as given in the .cue file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Due to the format of the .cue file, the first track title may be the album title</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">track_times</span><span class="p">):</span>
+        <span class="n">titles</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">label_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="c1"># Write out in tab delimited format</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">)):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">track_times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">track_times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="c1"># Check if .cue file was given in the python call</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cue_filename</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># If not, ask user to select        </span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">tkinter.filedialog</span> <span class="kn">import</span> <span class="n">askopenfilename</span>
+        <span class="n">cue_filename</span> <span class="o">=</span> <span class="n">askopenfilename</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Select a cue file&quot;</span><span class="p">,</span> <span class="n">filetypes</span><span class="o">=</span><span class="p">((</span><span class="s2">&quot;cue files&quot;</span><span class="p">,</span><span class="s1">&#39;*.cue&#39;</span><span class="p">),))</span>
+        <span class="c1">## EXIT if user selects cancel</span>
+
+    <span class="c1"># Read cue file and parse out the times and titles</span>
+    <span class="n">track_times</span><span class="p">,</span> <span class="n">titles</span> <span class="o">=</span> <span class="n">parse_cue</span><span class="p">(</span><span class="n">cue_filename</span><span class="p">)</span>
+    <span class="c1"># Make a label file name</span>
+    <span class="n">label_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">cue_filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_labels.txt&#39;</span>
+    <span class="c1"># Write times and tracks to label file in proper format</span>
+    <span class="n">write_labels</span><span class="p">(</span><span class="n">label_filename</span><span class="p">,</span> <span class="n">track_times</span><span class="p">,</span> <span class="n">titles</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File created&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You can run this script with or without specifying the optional cue file string attribute. If you don’t specify it the script will present a popup for you to select&nbsp;it:</p>
+<div class="highlight"><pre><span></span><code>$ python cue2labels.py
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code>$ python cue2labels.py <span class="s2">&quot;inputfile.cue&quot;</span>
+</code></pre></div>
+
+<p>Your cue file contains the albums information, like album title, metadata, track titles, starting position, etc. It will look something like this:<br>
+<img src="/images/2021/audacity_03.png" alt="audacity_03" style="zoom:80%;" /></p>
+<p>At this point you can convert the cue to a label file, either online or with the Python script. If you ran the Python script you will have a new file in the same directory as the cue file. Like&nbsp;this:</p>
+<p><img src="/images/2021/audacity_02.png" alt="audacity_02" style="zoom:80%;" /></p>
+<p>The label file will be pretty simple with the track starting times and title names and will look like&nbsp;this:</p>
+<p><img src="/images/2021/audacity_04.png" alt="audacity_04" style="zoom:80%;" /></p>
+<p>Now we are on the home stretch! Open Audacity and import your music flac/mp3 file. Now go to <code>File &gt; Import &gt; Labels...</code>, select the label&nbsp;file.</p>
+<p>The labels are now magically inserted at the track start times with the title filled&nbsp;in!</p>
+<p><img alt="audacity_06" src="/images/2021/audacity_06.png"></p>
+<p>From here go to <code>File &gt; Export &gt; Export Multiple...</code> yadda, yadda. The result are individual files for each track as shown&nbsp;here:</p>
+<p><img src="/images/2021/audacity_07.png" alt="audacity_07" style="zoom:80%;" /></p>
+<p>On a final and unrelated note, if you&rsquo;ve never heard of <a href="https://en.wikipedia.org/wiki/Tower_of_Power">Tower of Power</a> you are missing out. It&rsquo;s an R&amp;B band started in the 70&rsquo;s that has a <em>killer</em> horn&nbsp;section.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oAatPPEaZDA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>Audacity</td><td> 2.3.3</td></tr>
+    <tr><td> Python</td><td> 3.7.9</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
