@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="Joe">
@@ -45,7 +47,7 @@ Orange
 :   The fruit of an evergreen tree of the genus Citrus.
 </code></pre></div>
 
-<p>Once Python-Markdown does it&rsquo;s thing, it shoudl render out html that looks like&nbsp;this.</p>
+<p>Once Python-Markdown does it&rsquo;s thing, it should render out html that looks something like&nbsp;this.</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">dl</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">dt</span><span class="p">&gt;</span>Apple<span class="p">&lt;/</span><span class="nt">dt</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">dd</span><span class="p">&gt;</span>Pomaceous fruit of plants of the genus Malus in the family Rosaceae.<span class="p">&lt;/</span><span class="nt">dd</span><span class="p">&gt;</span>
@@ -56,25 +58,28 @@ Orange
 
 <p>At which point you style it however you want. This is how I styled&nbsp;mine.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">dl</span> <span class="p">{</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">double</span> <span class="mh">#ccc</span><span class="p">;</span>
-  <span class="k">padding</span><span class="p">:</span> <span class="mf">0.5</span><span class="kt">em</span><span class="p">;</span>
+  <span class="k">background</span><span class="p">:</span> <span class="mh">#f9f9f9</span><span class="p">;</span>
+  <span class="k">border-left</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#ccc</span><span class="p">;</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="mf">1.5</span><span class="kt">em</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mf">0.5</span><span class="kt">em</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nt">dt</span> <span class="p">{</span>
-  <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
-  <span class="k">clear</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">text-align</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span>
-  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+    <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+    <span class="k">clear</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span>
+    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+    <span class="k">font-variant</span><span class="p">:</span> <span class="kc">small-caps</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nt">dt</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
-  <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;:&quot;</span><span class="p">;</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;:&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nt">dd</span> <span class="p">{</span>
-  <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">110</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.5</span><span class="kt">em</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">110</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.5</span><span class="kt">em</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
