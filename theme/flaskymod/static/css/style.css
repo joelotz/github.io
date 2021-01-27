@@ -20,6 +20,7 @@ a:hover {
 /* headlines */
 h1, h2 {
   font-family: 'Lato', sans-serif;
+/*  font-family: 'Alegreya Sans SC', sans-serif;*/
   font-weight: normal;
   color: #222;
   text-decoration: normal;
@@ -27,7 +28,9 @@ h1, h2 {
 
 h3, h4 {
   font-family: 'Lato', sans-serif;
+/*  font-family: 'Alegreya Sans SC', sans-serif;*/
   font-weight: normal;
+  font-variant: small-caps;
   color: #222;
   text-decoration: underline;
 }
