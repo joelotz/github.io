@@ -90,7 +90,6 @@ Orange
 <dt>Orange</dt>
 <dd>The fruit of an evergreen tree of the genus&nbsp;Citrus.</dd>
 </dl>
-<p>I&rsquo;m not sold on the border, but it&rsquo;s still a good&nbsp;example. </p>
 <h3>Admonition</h3>
 <p>One really cool built-in feature of reStructuredText are directives called <a href="https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html">Admonitions</a>. These are like pop-ups that you see in <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>&nbsp;documentation.</p>
 <p><a href="https://docs.getpelican.com/en/latest/">Pelican</a> uses <a href="https://python-markdown.github.io/">Python-Markdown</a> for it&rsquo;s markdown parsing and Python-Markdown has these <a href="https://python-markdown.github.io/extensions/">extensions</a> that include <a href="https://python-markdown.github.io/extensions/admonition/">admonitions</a>. All these extensions can be activated by adding the <code>MARKDOWN</code> variable to your <code>pelicanconf.py</code> configuration file as defined in the <a href="https://docs.getpelican.com/en/latest/settings.html?highlight=MARKDOWN#basic-settings">pelican setting docs</a>:</p>
@@ -107,12 +106,12 @@ Orange
 - tip<br>
 -&nbsp;warning</p>
 </blockquote>
-<p>Withing your pelican blog, type the following code in Markdown&nbsp;syntax</p>
+<p>Within your pelican markdown file, type the following code in Markdown&nbsp;syntax–</p>
 <div class="highlight"><pre><span></span><code>!!! note
     Here is a note you should know.
 </code></pre></div>
 
-<p>And the Python-Markdown parser turns the Markdown into the following <span class="caps">HTML</span></p>
+<p>And the Python-Markdown parser turns the Markdown into the following <span class="caps">HTML</span>–</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admonition note&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admonition-title&quot;</span><span class="p">&gt;</span>Note<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Here is a note you should know.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
