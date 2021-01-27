@@ -7,6 +7,7 @@ Version: Pelican, 4.5.4, Python-Markdown, 3.3.3
 
 
 ### Definition List
+
 This first extension I implemented are definitions. They were not critical but thought would be interesting. Here is the markdown syntax to implement within your post.
 ```reStructuredText
 Apple 
@@ -15,7 +16,7 @@ Apple
 Orange
 :   The fruit of an evergreen tree of the genus Citrus.
 ```
-Once Python-Markdown does it's thing, it shoudl render out html that looks like this.
+Once Python-Markdown does it's thing, it should render out html that looks something like this.
 ```html
 <dl>
 <dt>Apple</dt>
@@ -26,26 +27,30 @@ Once Python-Markdown does it's thing, it shoudl render out html that looks like 
 ```
 At which point you style it however you want. This is how I styled mine.
 ```css
+
 dl {
-  border: 3px double #ccc;
-  padding: 0.5em;
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
 }
 
 dt {
-  float: left;
-  clear: left;
-  width: 100px;
-  text-align: right;
-  font-weight: bold;
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+    font-variant: small-caps;
 }
 
 dt::after {
-  content: ":";
+    content: ":";
 }
 
 dd {
-  margin: 0 0 0 110px;
-  padding: 0 0 0.5em 0;
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
 }
 ```
 And finally, here is what it looks like rendered out.
