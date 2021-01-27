@@ -61,8 +61,6 @@ Apple
 Orange
 :   The fruit of an evergreen tree of the genus Citrus.
 
-I'm not sold on the border, but it's still a good example. 
-
 ### Admonition
 
 One really cool built-in feature of reStructuredText are directives called [Admonitions](https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html). These are like pop-ups that you see in [Sphinx](https://www.sphinx-doc.org/en/master/) documentation.
@@ -82,14 +80,14 @@ The reStructuredText documents says:
 > - tip
 > - warning
 
-Withing your pelican blog, type the following code in Markdown syntax
+Within your pelican markdown file, type the following code in Markdown syntax–
 
 ```reStructuredText
 !!! note
 	Here is a note you should know.
 ```
 
-And the Python-Markdown parser turns the Markdown into the following HTML
+And the Python-Markdown parser turns the Markdown into the following HTML–
 ```html
 <div class="admonition note">
 <p class="admonition-title">Note</p>
