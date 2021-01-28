@@ -278,7 +278,14 @@ pre {
 
 /* this is just the inline code */
 p code {
-  border: 1px solid #ededed;
+/*  border: 1px solid #ededed; */
+/* New shit */
+	padding: 2px 4px;
+	font-size: 90%;
+	color: #c7254e;
+	background-color: #f9f2f4;
+	border-radius: 4px;
+	font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
 /* tables */
