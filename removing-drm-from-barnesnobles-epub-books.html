@@ -37,7 +37,11 @@
     <h1 class="title"> Removing <span class="caps">DRM</span> from Barnes&Nobles .epub&nbsp;Books</h1>
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 30, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74546.2 &nbsp;&nbsp;&nbsp;
     </p>
-    <p>These instructions are completely taken from Aric.Renzo at https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/ and are intended to fill in the gaps and/or clarify some steps for total noobs like&nbsp;myself.</p>
+    <div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These instructions are intended to be used with books that you <em>legally</em> purchased from B&amp;N and are trying to backup. Don&rsquo;t get me in&nbsp;trouble!</p>
+</div>
+<p>Another note, these instructions are adopted from Aric Renzo at <a href="https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/">https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/</a> and are intended to fill in the gaps and/or clarify some steps for total noobs like myself. I am not smart enough to figure these out and all thanks and appreciation go to&nbsp;him. </p>
 <p>I’ve rearranged the order of operations from Aric to put the most difficult (<span class="caps">IMO</span>) steps in the beginning. This way, if you fail there is no sense in doing the other easier&nbsp;steps.</p>
 <ol>
 <li>Install Android Studio and Android Studio <span class="caps">SDK</span>.</li>
@@ -52,51 +56,40 @@
 </ol>
 <h3>Step 1. Install Android Studio and Android Studio <span class="caps">SDK</span></h3>
 <ol>
-<li>Go to https://developer.android.com/studio/, download the <code>.zip</code> package for Android Studio for Linux. Save it somewhere like in your Downloads&nbsp;directory.</li>
-</ol>
-<p>At the time of writing I downloaded version&nbsp;201.7042882.</p>
-<p><img src="/images/2021/DRM_01.png" style="zoom:80%;" /></p>
-<ol>
-<li>It’s generally a good practice to verify the checksum. Scroll down to the download area to find it. This was&nbsp;mine.</li>
-</ol>
-<p><img src="/images/2021/DRM_02.png" style="zoom:100%;" /></p>
-<p>I usually just look at the last 4-5 digits to&nbsp;verify.</p>
-<ul>
+<li>Go to https://developer.android.com/studio/, download the <code>.zip</code> package for Android Studio for Linux. Save it somewhere like in your Downloads directory. At the time of writing I downloaded version 201.7042882.<br>
+<img src="/images/2021/DRM_01.png" style="zoom:80%; border:1.5px solid black" /></li>
+<li>It’s generally a good practice to verify the checksum. Scroll down to the download area to find it. This was mine.<br>
+<img src="/images/2021/DRM_02.png" style="zoom:100%; border:1px solid black" /><br>
+I usually just look at the last 4-5 digits to verify.<ul>
 <li>cd into directory where the download&nbsp;is</li>
 <li><code>sha256sum &lt;filename&gt;</code></li>
-<li>compare the last 4-5 digits against the sha provided from the&nbsp;source</li>
+<li>compare the last 4-5 digits against the sha provided from the source<br>
+<img src="/images/2021/DRM_03.png" style="zoom:100%;" /></li>
 </ul>
-<p><img src="/images/2021/DRM_03.png" style="zoom:100%;" /></p>
-<ol>
-<li>You can follow the installation instructions here &ndash;&nbsp;https://developer.android.com/studio/install#Linux.</li>
-<li>copy the .tar.gz file into <code>/usr/local/</code> directory</li>
-<li>uncompress&nbsp;it</li>
-</ol>
-<p>Remember you will need root access to be messing around in <code>/usr/local</code></p>
-<p><img src="/images/2021/DRM_04.png" style="zoom:100%;" /></p>
-<ol>
+</li>
+<li>You can follow the installation instructions here &ndash; https://developer.android.com/studio/install#Linux.<ul>
+<li>Copy the .tar.gz file into <code>/usr/local/</code> directory</li>
+<li>Uncompress it<br>
+Remember you will need root access to be messing around in <code>/usr/local</code><br>
+<img src="/images/2021/DRM_04.png" style="zoom:100%;" /></li>
+</ul>
+</li>
 <li>If you are running 64-bit linux you will need some 32-bit&nbsp;libraries</li>
 </ol>
 <div class="highlight"><pre><span></span><code>sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 </code></pre></div>
 
-<ul>
-<li>
-<p>How do you know if you are running 64-bit? Type <code>uname -i</code> and if you see <code>x86-64</code> you&nbsp;are.</p>
-</li>
-<li>
-<p>Let&rsquo;s fire it&nbsp;up!</p>
-</li>
-</ul>
-<p><img src="/images/2021/DRM_05.png" style="zoom:80%;" /></p>
+<ol>
+<li>How do you know if you are running 64-bit? Type <code>uname -i</code> and if you see <code>x86-64</code> you&nbsp;are.</li>
+<li>Let&rsquo;s fire it up!<br>
+<img src="/images/2021/DRM_05.png" style="zoom:80%;" /></li>
+</ol>
 <h3>Step 2. Spin up a virtual android&nbsp;device</h3>
 <ol>
 <li>Start <span class="caps">AVD</span> Manager by clicking on the little phone icon in the far upper-right.<br>
 <img src="/images/2021/DRM_06.png" style="zoom:100%;" /></li>
-<li>
-<p>Next you need a virtual device. I am a total idiot in this area. I have no experience with Android development. But I can tell you that you must have root-access on the device you create, and in order to allow root access you must not use a Google Play image. So what does that mean? That means do not use an image that has the Google Play icon, like this <strong>(A)</strong>.<br>
-<img src="/images/2021/DRM_07.png" style="zoom:100%;" /></p>
-<ul>
+<li>Next you need a virtual device. I am a total idiot in this area. I have no experience with Android development. But I can tell you that you must have root-access on the device you create, and in order to allow root access you must not use a Google Play image. So what does that mean? That means do not use an image that has the Google Play icon, like this <strong>(A)</strong>.<br>
+<img src="/images/2021/DRM_07.png" style="zoom:100%;" /><ul>
 <li>You can create your own image as others have done, but I just used the <code>Pixel_3a_API_30_x86</code> that was present when I started <span class="caps">AVD</span>&nbsp;Manager. </li>
 <li>To start the image click the green &ldquo;play&rdquo; triangle <strong>(B)</strong>.</li>
 </ul>
