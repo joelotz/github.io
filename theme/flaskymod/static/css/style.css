@@ -277,7 +277,7 @@ pre {
 }
 
 /* this is just the inline code */
-p code {
+p code, li code {
 /*  border: 1px solid #ededed; */
 /* New shit */
 	padding: 2px 4px;
