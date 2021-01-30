@@ -4,7 +4,13 @@ Keywords: DRM, Removing DRM from epub, Barnes&Noble, B&N epub DRB, DeDRM, Calibr
 Version: Ubuntu, 20.04.1, Calibre, 5.10.1, Android Studio, 4.1.2
 
 
-These instructions are completely taken from Aric.Renzo at https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/ and are intended to fill in the gaps and/or clarify some steps for total noobs like myself.
+
+!!! Important
+	These instructions are intended to be used with books that you *legally* purchased from B&N and are trying to backup. Don't get me in trouble!
+
+
+
+Another note, these instructions are adopted from Aric Renzo at [https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/](https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/) and are intended to fill in the gaps and/or clarify some steps for total noobs like myself. I am not smart enough to figure these out and all thanks and appreciation go to him. 
 
 I’ve rearranged the order of operations from Aric to put the most difficult (IMO) steps in the beginning. This way, if you fail there is no sense in doing the other easier steps.
 
@@ -21,42 +27,26 @@ I’ve rearranged the order of operations from Aric to put the most difficult (I
 
 ### Step 1. Install Android Studio and Android Studio SDK
 
-1. Go to https://developer.android.com/studio/, download the `.zip` package for Android Studio for Linux. Save it somewhere like in your Downloads directory.
-
-   At the time of writing I downloaded version 201.7042882.
-
-<img src="/images/2021/DRM_01.png" style="zoom:80%;" />
-
+1. Go to https://developer.android.com/studio/, download the `.zip` package for Android Studio for Linux. Save it somewhere like in your Downloads directory. At the time of writing I downloaded version 201.7042882.
+<img src="/images/2021/DRM_01.png" style="zoom:80%; border:1.5px solid black" />
 2. It’s generally a good practice to verify the checksum. Scroll down to the download area to find it. This was mine.
-
-<img src="/images/2021/DRM_02.png" style="zoom:100%;" />
-
+<img src="/images/2021/DRM_02.png" style="zoom:100%; border:1px solid black" />
 I usually just look at the last 4-5 digits to verify.
-
-- cd into directory where the download is
-- `sha256sum <filename>`
-- compare the last 4-5 digits against the sha provided from the source
-
+	- cd into directory where the download is
+	- `sha256sum <filename>`
+	- compare the last 4-5 digits against the sha provided from the source
 <img src="/images/2021/DRM_03.png" style="zoom:100%;" />
-
 3. You can follow the installation instructions here -- https://developer.android.com/studio/install#Linux.
-- copy the .tar.gz file into `/usr/local/` directory
-- uncompress it
-
+	- Copy the .tar.gz file into `/usr/local/` directory
+	- Uncompress it
 Remember you will need root access to be messing around in `/usr/local`
-
 <img src="/images/2021/DRM_04.png" style="zoom:100%;" />
-
 4. If you are running 64-bit linux you will need some 32-bit libraries
-
 ```bash
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 ```
-
-- How do you know if you are running 64-bit? Type `uname -i` and if you see `x86-64` you are.
-
-5. Let's fire it up!
-
+5. How do you know if you are running 64-bit? Type `uname -i` and if you see `x86-64` you are.
+6. Let's fire it up!
 <img src="/images/2021/DRM_05.png" style="zoom:80%;" />
 
 ### Step 2. Spin up a virtual android device
@@ -65,7 +55,6 @@ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-
 <img src="/images/2021/DRM_06.png" style="zoom:100%;" />
 2. Next you need a virtual device. I am a total idiot in this area. I have no experience with Android development. But I can tell you that you must have root-access on the device you create, and in order to allow root access you must not use a Google Play image. So what does that mean? That means do not use an image that has the Google Play icon, like this **(A)**.
 <img src="/images/2021/DRM_07.png" style="zoom:100%;" />
-
 	- You can create your own image as others have done, but I just used the `Pixel_3a_API_30_x86` that was present when I started AVD Manager. 
 	- To start the image click the green "play" triangle **(B)**.
 
