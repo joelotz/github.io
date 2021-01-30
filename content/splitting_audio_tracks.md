@@ -5,6 +5,7 @@ Keywords: Python, Audacity, label file, splitting tracks, cue file
 Version: Audacity, 2.3.3, Python, 3.7.9
 
 
+
 Here's a problem that I come across once in a while. Let’s say you’ve downloaded an album from torrent and the entire album is in a single file. Sure, you can load the .cue file into your favorite music player and play the different tracks but you really would like this album split into individual files for each track. 
 
 !!! warning
@@ -93,7 +94,7 @@ def parse_cue(cue_filename):
         # if line is empty end of file is reached 
         if not line: 
             break
-        if line.strip()[:5] == 'INDEX':
+        if line.strip()[:5] == 'INDEX 01':
             stringtime = stringtime_to_millisec(line.strip())
             if stringtime != float(0):
                 track_times.append(stringtime)
