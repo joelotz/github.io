@@ -46,7 +46,7 @@ a, *b = [1, 2, 3, 4, 5]
 print(a, b)
 ```
 
-```
+```reStructuredText
 > 1 [2, 3, 4, 5]
 ```
 
@@ -57,7 +57,7 @@ In the above code, `a` is assigned the first element in the list while `b` is as
 print(a, b)
 ```
 
-```
+```reStructuredText
 > [1, 2, 3, 4] 5
 ```
 
@@ -68,7 +68,7 @@ a, *b, c = [1, 2, 3, 4, 5]
 print(a, b, c)
 ```
 
-```
+```reStructuredText
 > 1 [2, 3, 4] 5
 ```
 
@@ -108,7 +108,7 @@ my_list = ["Hello" if i else "Goodbye" for i in some_array]
 print(my_list)
 ```
 
-```
+```reStructuredText
 > ['Hello', 'Goodbye', 'Hello']
 ```
 

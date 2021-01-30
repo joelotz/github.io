@@ -41,7 +41,7 @@ I usually just look at the last 4-5 digits to verify.
 	- Uncompress it
 Remember you will need root access to be messing around in `/usr/local`
 <img src="/images/2021/DRM_04.png" style="zoom:100%;" />
-4. If you are running 64-bit linux you will need some 32-bit libraries
+4. If you are running 64-bit linux you will need to install some 32-bit libraries to make it work well. At least according to the instructions.
 ```bash
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 ```
