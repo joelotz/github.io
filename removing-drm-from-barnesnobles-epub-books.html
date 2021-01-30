@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Removing <span class="caps">DRM</span> from Barnes&Nobles .epub&nbsp;Books | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Removing <span class="caps">DRM</span> from Barnes&Nobles .epub&nbsp;Books</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 30, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74546.2 &nbsp;&nbsp;&nbsp;
+    </p>
+    <p>These instructions are completely taken from Aric.Renzo at https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/ and are intended to fill in the gaps and/or clarify some steps for total noobs like&nbsp;myself.</p>
+<p>I’ve rearranged the order of operations from Aric to put the most difficult (<span class="caps">IMO</span>) steps in the beginning. This way, if you fail there is no sense in doing the other easier&nbsp;steps.</p>
+<ol>
+<li>Install Android Studio and Android Studio <span class="caps">SDK</span>.</li>
+<li>Spin up a virtual android&nbsp;device</li>
+<li>Check if you have root&nbsp;access!</li>
+<li>Install B&amp;N eReader app on the virtual&nbsp;device</li>
+<li>Log-in to the eReader and download your desired&nbsp;book</li>
+<li>Go into root shell and pull out the book and encryption&nbsp;hash</li>
+<li>Install&nbsp;Calibre</li>
+<li>Install DeDRM plug-in for&nbsp;Calibre</li>
+<li>Remove <span class="caps">DRM</span> from&nbsp;book</li>
+</ol>
+<h3>Step 1. Install Android Studio and Android Studio <span class="caps">SDK</span></h3>
+<ol>
+<li>Go to https://developer.android.com/studio/, download the <code>.zip</code> package for Android Studio for Linux. Save it somewhere like in your Downloads&nbsp;directory.</li>
+</ol>
+<p>At the time of writing I downloaded version&nbsp;201.7042882.</p>
+<p><img src="/images/2021/DRM_01.png" style="zoom:80%;" /></p>
+<ol>
+<li>It’s generally a good practice to verify the checksum. Scroll down to the download area to find it. This was&nbsp;mine.</li>
+</ol>
+<p><img src="/images/2021/DRM_02.png" style="zoom:100%;" /></p>
+<p>I usually just look at the last 4-5 digits to&nbsp;verify.</p>
+<ul>
+<li>cd into directory where the download&nbsp;is</li>
+<li><code>sha256sum &lt;filename&gt;</code></li>
+<li>compare the last 4-5 digits against the sha provided from the&nbsp;source</li>
+</ul>
+<p><img src="/images/2021/DRM_03.png" style="zoom:100%;" /></p>
+<ol>
+<li>You can follow the installation instructions here &ndash;&nbsp;https://developer.android.com/studio/install#Linux.</li>
+<li>copy the .tar.gz file into <code>/usr/local/</code> directory</li>
+<li>uncompress&nbsp;it</li>
+</ol>
+<p>Remember you will need root access to be messing around in <code>/usr/local</code></p>
+<p><img src="/images/2021/DRM_04.png" style="zoom:100%;" /></p>
+<ol>
+<li>If you are running 64-bit linux you will need some 32-bit&nbsp;libraries</li>
+</ol>
+<div class="highlight"><pre><span></span><code>sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
+</code></pre></div>
+
+<ul>
+<li>
+<p>How do you know if you are running 64-bit? Type <code>uname -i</code> and if you see <code>x86-64</code> you&nbsp;are.</p>
+</li>
+<li>
+<p>Let&rsquo;s fire it&nbsp;up!</p>
+</li>
+</ul>
+<p><img src="/images/2021/DRM_05.png" style="zoom:80%;" /></p>
+<h3>Step 2. Spin up a virtual android&nbsp;device</h3>
+<ol>
+<li>Start <span class="caps">AVD</span> Manager by clicking on the little phone icon in the far upper-right.<br>
+<img src="/images/2021/DRM_06.png" style="zoom:100%;" /></li>
+<li>
+<p>Next you need a virtual device. I am a total idiot in this area. I have no experience with Android development. But I can tell you that you must have root-access on the device you create, and in order to allow root access you must not use a Google Play image. So what does that mean? That means do not use an image that has the Google Play icon, like this <strong>(A)</strong>.<br>
+<img src="/images/2021/DRM_07.png" style="zoom:100%;" /></p>
+<ul>
+<li>You can create your own image as others have done, but I just used the <code>Pixel_3a_API_30_x86</code> that was present when I started <span class="caps">AVD</span>&nbsp;Manager. </li>
+<li>To start the image click the green &ldquo;play&rdquo; triangle <strong>(B)</strong>.</li>
+</ul>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You a need a virtual device that is <u>not</u> a Google Play image so that you can access root. This is&nbsp;critical.</p>
+</div>
+<p>A phone will appear and after a couple seconds it will &ldquo;boot up&rdquo;. Here&rsquo;s mine:<br>
+<img src="/images/2021/DRM_08.png" style="zoom:80%;" /></p>
+<h3>Step 3. Check if you have root&nbsp;access</h3>
+<p>If you don&rsquo;t have root access you did something wrong and there is no point in continuing, so let&rsquo;s check&nbsp;now.</p>
+<ol>
+<li>Open a terminal screen. When you install Android Studio it created an &ldquo;Android&rdquo; directory in your home folder. Go there and browser in <code>~/Android/Sdk/platform-tools</code>.</li>
+<li>You should see a command named <code>adb</code>.</li>
+<li>Type <code>./adb root</code> and you should see something like <code>restarting adbd as root</code>. If you do not, you are screwed. Go back and figure out what you did wrong. The primary source is that whole “Not a Google Play image&nbsp;thing”.</li>
+<li>Now we can get inside the virtual device, <code>./adb shell</code>. Your cursor should be a pound &ldquo;#&rdquo; indicating you are&nbsp;root. </li>
+<li>If you are not root, you can&rsquo;t go into all the necessary directory folders.<br>
+<img src="/images/2021/DRM_15.png" style="zoom:100%;" /></li>
+<li>Keep this terminal around, we’ll need it&nbsp;later. </li>
+</ol>
+<h3>Step 4. Install B&amp;N eReader app on the virtual&nbsp;device</h3>
+<ol>
+<li>In your virtual device, open the Chrome browser. Just navigate with your&nbsp;mouse.</li>
+<li>Copy this url <code>https://apkpure.com/nook-read-ebooks-magazines/bn.ereader/versions</code> and paste into the Chrome browser.<ul>
+<li>Left-click in the web address&nbsp;box</li>
+<li>Press and hold left mouse for a second, just like you would do on your mobile&nbsp;phone</li>
+<li>Select the &ldquo;paste&rdquo;&nbsp;option</li>
+<li>Press enter on your desktop&nbsp;keyboard</li>
+</ul>
+</li>
+<li>Download an .apk of the B&amp;N Reader app <ul>
+<li>Again honesty&hellip; I don&rsquo;t know the difference of capabilities or restrictions between all the different versions. I can say that I used <code>V5.2.0.18</code> so you might as well do the same.<br>
+<img src="/images/2021/DRM_09.png" style="zoom:80%;" /></li>
+<li>I got an ad, so close the ad by pressing the &ldquo;X&rdquo;. You typically get warnings when installing apps outside of the Google Store, so you will probably get a warning like this:<br>
+<img src="/images/2021/DRM_10.png" style="zoom:80%;" /></li>
+</ul>
+</li>
+<li>Install the app<br>
+<img src="/images/2021/DRM_11.png" style="zoom:100%;" /></li>
+<li>Open the&nbsp;app</li>
+</ol>
+<h3>Step 5. Log-in to the eReader and download your desired&nbsp;book</h3>
+<ol>
+<li>It will ask you to log-in with your username/password. I didn&rsquo;t take any screenshots of these steps, but it is typical app setup&nbsp;junk.</li>
+<li>Then it may ask for credit card information if you don&rsquo;t already have it setup in your B&amp;N account &ndash;like I did not. you can skip this section by scrolling to the bottom of the screen and hitting&nbsp;&ldquo;Skip&rdquo;. </li>
+<li>Give it a minute and it will download your library. Somewhere it said you can also pull-up on the screen to make it refresh. Here&rsquo;s what mine looked like. It included the purchased book (upper left) and 5 other free books that I didn&rsquo;t ask for.<br>
+<img src="/images/2021/DRM_12.png" style="zoom:80%;" /></li>
+<li>Now you have to download your book onto your virtual device. I found this tricky and not intuitive. I suspect B&amp;N does this on purpose. <ul>
+<li>Left-click on the&nbsp;book</li>
+<li>When it opens, click on the page. The &ldquo;header&rdquo; and &ldquo;footer&rdquo; will appear. Click on the three dots.<br>
+<img src="/images/2021/DRM_13.png" style="zoom:80%;" /></li>
+<li>Click <code>View Details</code></li>
+<li>A summary/details view will appear. Click the three dots again in the header again.<br>
+<img src="/images/2021/DRM_14.png" style="zoom:80%;" /></li>
+<li>Click <code>Move to SD Card</code></li>
+</ul>
+</li>
+<li><span class="caps">OK</span>, we should be done with the virtual device now. But don&rsquo;t shut it down because we need to go inside the shell and pull out the book you just&nbsp;downloaded.</li>
+</ol>
+<h3>Step 6. Go into root shell and pull out the book and encryption&nbsp;hash</h3>
+<ol>
+<li>Go back to the terminal screen where you opened the&nbsp;shell.</li>
+<li>Now we need to find that book file we just downloaded. I noticed that the B&amp;N books appear to be in the format <code>123456789_epub.Vx.epub</code>. That is, a bunch of numbers +\ _epub+a version number+.epub&nbsp;extension.</li>
+<li>I found the downloaded book at `/data/data/bn.ereader/files/B&amp;N Downloads/Books/<br>
+<img src="/images/2021/DRM_17.png" style="zoom:80%;" /></li>
+<li>To copy a file from the virtual device to desktop you have to &ldquo;pull&rdquo; it from back in the terminal - not the <span class="caps">ADB</span> shell.<ul>
+<li>Since you are not in the shell you cannot tab-complete the file dirs/filename so I suggest copy/pasting the directory path and then copy/pasting the file&nbsp;name.</li>
+<li>Also, don&rsquo;t forget to escape the &ldquo;&amp;&rdquo; and space characters.<br>
+<img src="/images/2021/DRM_18.png" style="zoom:100%;" /></li>
+</ul>
+</li>
+<li>Now let&rsquo;s go get the encryption hash. It&rsquo;s stored in a database named <code>cchashdata.db</code>. Search for it inside the <span class="caps">ADB</span> shell but I would bet it&rsquo;s in the same directory as where you found the file = <code>./adb pull /data/data/bn.ereader/databases/cchashdata.db</code><ul>
+<li>Files will be in the current directory<br>
+<img src="/images/2021/DRM_19.png" style="zoom:100%;" /></li>
+</ul>
+</li>
+<li>Find the hash and save it as a keyfile. <ul>
+<li>Type <code>sqlite3 cchashdata.db</code></li>
+<li>This opens a SQLite shell. Look inside a specific table, type <code>select hash from cc_hash_data;</code></li>
+<li>You&rsquo;ll get a HashKey, copy that <span class="caps">INCLUDING</span> <span class="caps">THE</span> <span class="caps">TRAILING</span> <span class="caps">EQUAL</span> <span class="caps">SIGN</span>. Here&rsquo;s mine, don&rsquo;t worry, I obfuscated a bunch of the letters.<br>
+<img src="/images/2021/DRM_20.png" style="zoom:80%;" /></li>
+<li>Open a new file and save it somewhere with a .b64 extension, like&nbsp;&ldquo;MyHash.b64&rdquo;.</li>
+<li>To exit the SQLite shell press&nbsp;Ctrl-Z</li>
+<li>To exit the <span class="caps">ADB</span> shell press&nbsp;Crtl-D</li>
+</ul>
+</li>
+</ol>
+<h3>Step 7. Install&nbsp;Calibre</h3>
+<ol>
+<li>This is pretty straight forward so I&rsquo;ll breeze through this part. I installed version 4.99.4 as that what was in the repository. At the time of writing version 5.10.1 was <a href="https://calibre-ebook.com/download_linux">available as binary install</a>. <ul>
+<li>Note that the plugin DeDRM version must be applicable for the correct Calibre version. DeDRM v6.x = Calibre 4.x and DeDRM v7.x = Calibre 5.x so keep that in mind and look at the release&nbsp;notes. </li>
+</ul>
+</li>
+<li>Install the latest directly from&nbsp;Calibre</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">libfontconfig</span> <span class="n">libgl1</span><span class="o">-</span><span class="n">mesa</span><span class="o">-</span><span class="n">glx</span>
+<span class="n">bash</span> <span class="n">sudo</span> <span class="o">-</span><span class="n">v</span> <span class="o">&amp;&amp;</span> <span class="n">wget</span> <span class="o">-</span><span class="n">nv</span> <span class="o">-</span><span class="n">O</span><span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">calibre</span><span class="o">-</span><span class="n">ebook</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="n">sh</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">sh</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">stdin</span>
+</code></pre></div>
+
+<ol>
+<li>Install via Software&nbsp;Center</li>
+<li>Install via&nbsp;apt-get</li>
+</ol>
+<div class="highlight"><pre><span></span><code>sudo apt-get update
+sudo apt-get install calibre
+</code></pre></div>
+
+<ol>
+<li>I chose the first option and installed directly from Calibre. So if you do something other than that &ldquo;buyer&nbsp;beware&rdquo;.</li>
+</ol>
+<h3>Step 8. Install DeDRM plug-in for&nbsp;Calibre</h3>
+<ol>
+<li>Open browser and go to DeDRM github page at&nbsp;https://github.com/apprenticeharper/DeDRM_tools/releases</li>
+<li>Download the plugin .zip package. I chose to download the latest pre-release at the time (v7.0.3).  Just click the zip link in the &ldquo;Assets&rdquo; subsection and save. <ul>
+<li>You need the zip package named&nbsp;&ldquo;DeDRM_plugin_x.x.x.zip&rdquo;</li>
+<li>It appears that if you download a pre-release it is just that plugin folder, so don&rsquo;t unzip&nbsp;it.</li>
+<li>If you download a normal release it will say something like &ldquo;DeDRM_tools_x.x.x.zip&rdquo;. In which case unzip it and you will find the &ldquo;DeDRM_plugin.zip&rdquo;&nbsp;inside</li>
+</ul>
+</li>
+<li>Open&nbsp;Calibre</li>
+<li>Click the Preference icon in the tool&nbsp;bar</li>
+<li>Scroll down to Advanced and click Plugins<br>
+<img src="/images/2021/DRM_21.png" style="zoom:80%;" /></li>
+<li>Click &ldquo;Load plugin from&nbsp;file&rdquo;</li>
+<li>Select the <code>DeDRM_plugin.zip</code> zip package you saved. Click yes and ok to&nbsp;everything.</li>
+<li>Back in the Plugins dialog, select &ldquo;File type&rdquo; and select &ldquo;DeDRM&rdquo;, click the button &ldquo;Customize plugin&rdquo;<br>
+<img src="/images/2021/DRM_23.png" style="zoom:80%;" /></li>
+<li>Select &ldquo;Barnes and Noble&nbsp;ebooks&rdquo;</li>
+<li>Select &ldquo;Import Existing&nbsp;Keyfiles&rdquo;</li>
+<li>Browse and select the keyfile you saved, something like <code>MyHash.b64</code><br>
+<img src="/images/2021/DRM_24.png" style="zoom:80%;" /></li>
+</ol>
+<h3>Step 9. Remove <span class="caps">DRM</span> from&nbsp;book</h3>
+<ol>
+<li>At this point, you can add your book that you downloaded from the virtual device. Remember in my example it was <code>9780133489293_epub.v2.epub</code>. WIthin Calibre select &ldquo;Add&nbsp;books&rdquo;</li>
+<li>Browse to - and select the epub. Select <span class="caps">OK</span></li>
+<li>If you double-click the book to open it and get an error message stating you have <span class="caps">DRM</span> then something went&nbsp;wrong.</li>
+<li>You can go post a message to the <a href="https://github.com/apprenticeharper/DeDRM_tools/issues/814">DeDRM forum</a> along with a log file. They are very helpful. <a href="https://github.com/apprenticeharper/DeDRM_tools/blob/master/FAQs.md#i-cannot-solve-my-problem-with-the-dedrm-plugin-and-now-i-need-to-post-a-log-how-do-i-do-that">Here are instructions</a> on creating a debug&nbsp;log. </li>
+</ol>
+<h3>Conclusion</h3>
+<p>The goal of this post was to add clarifications to <a href="https://www.aricrenzo.com/2019-12-13-Liberate-Your-Nook-Ebooks/">Aric Renzo&rsquo;s excellent instructions</a> based on what worked for me. These instructions are not for Windows but could probably be adjusted to make work. I&rsquo;m positive there are other methods of making this work. If there are any mistakes to these instructions feel free to hit me up on&nbsp;twitter.</p>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>Ubuntu</td><td> 20.04.1</td></tr>
+    <tr><td> Calibre</td><td> 5.10.1</td></tr>
+    <tr><td> Android Studio</td><td> 4.1.2</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
