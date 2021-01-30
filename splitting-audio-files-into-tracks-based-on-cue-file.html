@@ -119,7 +119,7 @@
         <span class="c1"># if line is empty end of file is reached </span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span> 
             <span class="k">break</span>
-        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;INDEX&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;INDEX 01&#39;</span><span class="p">:</span>
             <span class="n">stringtime</span> <span class="o">=</span> <span class="n">stringtime_to_millisec</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
             <span class="k">if</span> <span class="n">stringtime</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
                 <span class="n">track_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stringtime</span><span class="p">)</span>
