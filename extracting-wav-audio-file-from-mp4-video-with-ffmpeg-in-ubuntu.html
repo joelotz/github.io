@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
     <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
   </head>
   <body>
     <div class=container>
@@ -38,12 +40,12 @@
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 24, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73776.9 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/ffmpeg.html">FFmpeg</a>  <a href="/tag/gopro.html">GoPro</a>  <a href="/tag/davinci-resolve-16.html">Davinci Resolve 16</a>     </p>
-    <p>In a <a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html">previous post</a> I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (<span class="caps">DR16</span>). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos <u>but</u>, the audio still doesn’t work. Linux <span class="caps">DR16</span> doesn’t import <span class="caps">AAC</span> audio. I read on the BlackMagic forums that it is a licensing&nbsp;thing. </p>
-<p><img alt="DR16 Input Codecs" src="/images/2020/DR16_InputAudio.png"></p>
+    <p>In a <a href="https://joelotz.github.io/converting-mp4-videos-to-mov-with-ffmpeg.html">previous post</a> I showed a work-around for importing H.264 mp4 files into the free Linux version of Davinci Resolve 16 (<span class="caps">DR16</span>). For many reasons, I made the decision to purchase the full Studio version. This lets me directly import mp4 videos <u>but</u>, the audio still doesn’t work. Linux <span class="caps">DR16</span> doesn’t import <span class="caps">AAC</span> audio. I read on the BlackMagic forums that it is a licensing&nbsp;thing.</p>
+<figure>
+<img alt="DR16 Input Codecs" src="/images/2020/DR16_InputAudio.png"/><figcaption aria-hidden="true"><span class="caps">DR16</span> Input Codecs</figcaption>
+</figure>
 <p>Since we are on Ubuntu and are comfortable with the command line and scripts…right??… we can just use ffmpeg to pop us out a <span class="caps">PCM</span> encoded .wav file that can be imported into the <span class="caps">DR16</span> timeline and linked to the&nbsp;clip.</p>
-<div class="highlight"><pre><span></span><code>ffmpeg -i input.mp4 -acodec pcm_s16le -ac <span class="m">1</span> -ar <span class="m">16000</span> input_audio.wav
-</code></pre></div>
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">ffmpeg</span> -i input.mp4 -acodec pcm_s16le -ac 1 -ar 16000 input_audio.wav</span></code></pre></div>
 <p>You could also turn this into a Nautilus shell script and run it by right-clicking on an .mp4 file, the <a href="https://joelotz.github.io/running-shell-scripts-on-files-from-nautilus.html">instructions are here</a>.</p>
     
     <div class="version">

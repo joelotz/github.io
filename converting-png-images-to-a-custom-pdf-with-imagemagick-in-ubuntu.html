@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
     <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
   </head>
   <body>
     <div class=container>
@@ -38,99 +40,64 @@
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 03, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73719.4 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/ubuntu.html">Ubuntu</a>  <a href="/tag/imagemagick.html">ImageMagick</a>     </p>
-    <h3>Installing ImageMagick on Ubuntu&nbsp;20.04</h3>
-<div class="highlight"><pre><span></span><code>sudo apt update
-sudo apt build-essential checkinstall <span class="c1"># provides all the libraris for compiling</span>
-sudo apt build-dep imagemagick <span class="c1"># install compilation dependencies</span>
-</code></pre></div>
-
+    <h3 id="installing-imagemagick-on-ubuntu-20.04">Installing ImageMagick on Ubuntu&nbsp;20.04</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">sudo</span> apt build-essential checkinstall <span class="co"># provides all the libraris for compiling</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="fu">sudo</span> apt build-dep imagemagick <span class="co"># install compilation dependencies</span></span></code></pre></div>
 <p>The first time I did this installation the program complained and errored that it was missing <a href="http://www.imagemagick.org/download/delegates/">delegates</a> when I tried to manipulate the png images. <a href="https://askubuntu.com/questions/745660/imagemagick-png-delegate-install-problems">This page</a> from StackExchange explained how to install the image libraries. I didn’t know which ones were important or how often they are used so I installed them&nbsp;all.</p>
-<div class="highlight"><pre><span></span><code>sudo apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
-</code></pre></div>
-
-<p>This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build&nbsp;it. </p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">sudo</span> apt install libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev</span></code></pre></div>
+<p>This should install all the needed image libraries. Unfortunately, ImageMagick itself can’t be installed the same way. We need to build&nbsp;it.</p>
 <p>First download the binary tar, extract it, and move into the newly extracted&nbsp;directory.</p>
-<div class="highlight"><pre><span></span><code>wget https://www.imagemagick.org/download/ImageMagick.tar.gz
-tar xf ImageMagick.tar.gz
-<span class="nb">cd</span> ImageMagick-7*
-</code></pre></div>
-
-<p>While in the source code directory execute the <code>configure</code> command. </p>
-<div class="highlight"><pre><span></span><code><span class="err">./configure</span>
-</code></pre></div>
-
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">wget</span> https://www.imagemagick.org/download/ImageMagick.tar.gz</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">tar</span> xf ImageMagick.tar.gz</span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="bu">cd</span> ImageMagick-7*</span></code></pre></div>
+<p>While in the source code directory execute the <code>configure</code> command.</p>
+<pre><code>./configure</code></pre>
 <p>Next compile with the <code>make</code> command.</p>
-<div class="highlight"><pre><span></span><code>make
-</code></pre></div>
-
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
 <p>Install&nbsp;ImageMagick.</p>
-<div class="highlight"><pre><span></span><code>sudo make install
-</code></pre></div>
-
-<p>This will install the compiled binaries. Now run <code>ldconfig</code> command to link the static&nbsp;libraries. </p>
-<div class="highlight"><pre><span></span><code>sudo ldconfig /usr/local/lib
-</code></pre></div>
-
-<p>Confirm installation and final check. Run the <code>identity</code> command to confirm that “something” is&nbsp;installed. </p>
-<div class="highlight"><pre><span></span><code>identify -version
-</code></pre></div>
-
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code></pre></div>
+<p>This will install the compiled binaries. Now run <code>ldconfig</code> command to link the static&nbsp;libraries.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">sudo</span> ldconfig /usr/local/lib</span></code></pre></div>
+<p>Confirm installation and final check. Run the <code>identity</code> command to confirm that “something” is&nbsp;installed.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="ex">identify</span> -version</span></code></pre></div>
 <p>The <a href="https://imagemagick.org/script/download.php">ImageMagick website</a> also has a couple commands to verify&nbsp;installation.</p>
-<div class="highlight"><pre><span></span><code>identify logo.gif
-display logo.gif
-</code></pre></div>
-
-<h3>Converting a Bunch of Images to a&nbsp;pdf</h3>
-<p>I have a bunch of scan images of an old handwritten recipe book. The originals are in <a href="https://en.wikipedia.org/wiki/Paper_size">A5 paper size</a> and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s <code>convert</code> command. </p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ImageDir
-convert *.png <span class="se">\</span>
-    -resize 595x421 <span class="se">\</span>
-    -background white <span class="se">\</span>
-    -gravity North <span class="se">\</span>
-    -extent 595x421 <span class="se">\</span>
-    output.pdf
-</code></pre></div>
-
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="ex">identify</span> logo.gif</span>
+<span id="cb9-2"><a aria-hidden="true" href="#cb9-2" tabindex="-1"></a><span class="ex">display</span> logo.gif</span></code></pre></div>
+<h3 id="converting-a-bunch-of-images-to-a-pdf">Converting a Bunch of Images to a&nbsp;pdf</h3>
+<p>I have a bunch of scan images of an old handwritten recipe book. The originals are in <a href="https://en.wikipedia.org/wiki/Paper_size">A5 paper size</a> and I’d like each page of the pdf to be the same size. This is pretty simple with ImageMagick’s <code>convert</code> command.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" href="#cb10-1" tabindex="-1"></a><span class="bu">cd</span> ImageDir</span>
+<span id="cb10-2"><a aria-hidden="true" href="#cb10-2" tabindex="-1"></a><span class="ex">convert</span> *.png <span class="kw">\</span></span>
+<span id="cb10-3"><a aria-hidden="true" href="#cb10-3" tabindex="-1"></a>    <span class="ex">-resize</span> 595x421 <span class="kw">\</span></span>
+<span id="cb10-4"><a aria-hidden="true" href="#cb10-4" tabindex="-1"></a>    <span class="ex">-background</span> white <span class="kw">\</span></span>
+<span id="cb10-5"><a aria-hidden="true" href="#cb10-5" tabindex="-1"></a>    <span class="ex">-gravity</span> North <span class="kw">\</span></span>
+<span id="cb10-6"><a aria-hidden="true" href="#cb10-6" tabindex="-1"></a>    <span class="ex">-extent</span> 595x421 <span class="kw">\</span></span>
+<span id="cb10-7"><a aria-hidden="true" href="#cb10-7" tabindex="-1"></a>    <span class="ex">output.pdf</span></span></code></pre></div>
 <p><span class="caps">OK</span>, this is complicated and took a couple hours to figure out. So what is going on&nbsp;here?</p>
-<ol>
-<li>
-<p>It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them&nbsp;out.</p>
-</li>
-<li>
-<p>The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The <code>-resize</code> option is sizing the images to imagemagick 595x421dpi. <a href="https://imagemagick.org/script/command-line-options.php#page">This is the A5 page size (dots per inch) in&nbsp;landscape.</a></p>
-</li>
-<li>
-<p><code>-gravity</code> <a href="https://imagemagick.org/script/command-line-options.php#extent">must go before <code>-extent</code></a>. You can find all the options for an argument using <code>identify -list &lt;option&gt;</code>. “North” means center the images on the page horizontally and top-aligned&nbsp;vertically. </p>
-</li>
-<li>
-<p><code>-extent</code> sets the image size. At <a href="https://imagemagick.org/script/command-line-options.php#page">page size is dots per inch for A5</a> is&nbsp;421x595.</p>
-</li>
-<li>
-<p>Note: you can specify the dpi with the <code>-density</code> option. The <a href="https://imagemagick.org/script/command-line-options.php#density">default is 72dpi</a> so I left it as&nbsp;is. </p>
-</li>
+<ol type="1">
+<li><p>It’s converting all files in the current directory with the file type .png, so be careful. You can also specify the images explicitly by just listing them&nbsp;out.</p></li>
+<li><p>The scanned images are high resolution and pretty big, something around 1200x900. I want to save and keep these but the size is too big. The <code>-resize</code> option is sizing the images to imagemagick 595x421dpi. <a href="https://imagemagick.org/script/command-line-options.php#page">This is the A5 page size (dots per inch) in&nbsp;landscape.</a></p></li>
+<li><p><code>-gravity</code> <a href="https://imagemagick.org/script/command-line-options.php#extent">must go before <code>-extent</code></a>. You can find all the options for an argument using <code>identify -list &lt;option&gt;</code>. “North” means center the images on the page horizontally and top-aligned&nbsp;vertically.</p></li>
+<li><p><code>-extent</code> sets the image size. At <a href="https://imagemagick.org/script/command-line-options.php#page">page size is dots per inch for A5</a> is&nbsp;421x595.</p></li>
+<li><p>Note: you can specify the dpi with the <code>-density</code> option. The <a href="https://imagemagick.org/script/command-line-options.php#density">default is 72dpi</a> so I left it as&nbsp;is.</p></li>
 </ol>
-<h4>Lower Res/ Smaller&nbsp;File</h4>
+<h4 id="lower-res-smaller-file">Lower Res/ Smaller&nbsp;File</h4>
 <p>You can make a lower resolution and smaller file size for web or&nbsp;email.</p>
-<div class="highlight"><pre><span></span><code>convert *.png -compress jpeg -resize 595x421 -background white <span class="se">\</span>
-    -gravity North -extent 595x421 output.pdf
-</code></pre></div>
-
-<h3>Additional Output&nbsp;Sizes</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" href="#cb11-1" tabindex="-1"></a><span class="ex">convert</span> *.png -compress jpeg -resize 595x421 -background white <span class="kw">\</span></span>
+<span id="cb11-2"><a aria-hidden="true" href="#cb11-2" tabindex="-1"></a>    <span class="ex">-gravity</span> North -extent 595x421 output.pdf</span></code></pre></div>
+<h3 id="additional-output-sizes">Additional Output&nbsp;Sizes</h3>
 <p>This is an update to the original post. I realized that my family in the <span class="caps">US</span> may want a version that can be printed in standard <span class="caps">US</span> Letter&nbsp;sizes.</p>
 <p>612 x&nbsp;792</p>
-<h3>Using Exiftool to Add pdf&nbsp;Metadata</h3>
+<h3 id="using-exiftool-to-add-pdf-metadata">Using Exiftool to Add pdf&nbsp;Metadata</h3>
 <p>Easily install <a href="https://exiftool.org/">Exiftool</a> on&nbsp;Ubuntu.</p>
-<div class="highlight"><pre><span></span><code>sudo apt install libimage-exiftool-perl
-</code></pre></div>
-
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" href="#cb12-1" tabindex="-1"></a><span class="fu">sudo</span> apt install libimage-exiftool-perl</span></code></pre></div>
 <p>There are a bunch of <a href="https://linoxide.com/linux-how-to/install-use-exiftool-linux-ubuntu-centos/">tutorials</a> on using&nbsp;Exiftool.</p>
 <p>Changing the exif data within the pdf file to add some fields is quite&nbsp;easy.</p>
-<div class="highlight"><pre><span></span><code>exiftool <span class="se">\</span>
-    -Creator<span class="o">=</span><span class="s2">&quot;Joe&quot;</span> <span class="se">\</span>
-    -keywords<span class="o">=</span><span class="s2">&quot;recipebook;recipes&quot;</span> <span class="se">\</span>
-    -Author<span class="o">=</span><span class="s2">&quot;Grandma&quot;</span> <span class="se">\</span>
-    output.pdf
-</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" href="#cb13-1" tabindex="-1"></a><span class="ex">exiftool</span> <span class="kw">\</span></span>
+<span id="cb13-2"><a aria-hidden="true" href="#cb13-2" tabindex="-1"></a>    <span class="ex">-Creator</span>=<span class="st">"Joe"</span> <span class="kw">\</span></span>
+<span id="cb13-3"><a aria-hidden="true" href="#cb13-3" tabindex="-1"></a>    <span class="ex">-keywords</span>=<span class="st">"recipebook;recipes"</span> <span class="kw">\</span></span>
+<span id="cb13-4"><a aria-hidden="true" href="#cb13-4" tabindex="-1"></a>    <span class="ex">-Author</span>=<span class="st">"Grandma"</span> <span class="kw">\</span></span>
+<span id="cb13-5"><a aria-hidden="true" href="#cb13-5" tabindex="-1"></a>    <span class="ex">output.pdf</span></span></code></pre></div>
     
     <div class="version">
     <h3>Software Versions</h3>

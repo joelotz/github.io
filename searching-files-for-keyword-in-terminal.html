@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/admonition.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
     <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
     <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
   </head>
   <body>
     <div class=container>
@@ -38,9 +40,8 @@
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;September 13, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74165.6 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/tag/terminal.html">Terminal</a>     </p>
-    <p>This is a simple post to document a recent learning. I realized my blog had multiple authors listed due to me being inconsistent with how I wrote it. Sometimes I used &ldquo;Joe&rdquo; or other times &ldquo;Joe Lotz&rdquo;. I <em>googled</em> and found a terminal command to search a directory for&nbsp;keywords.</p>
-<div class="highlight"><pre><span></span><code>find /DIR_TO_SEARCH/ -type  f -exec grep --color -HIi <span class="s1">&#39;KEYWORD_OR_PHRASE&#39;</span> <span class="o">{}</span> +
-</code></pre></div>
+    <p>This is a simple post to document a recent learning. I realized my blog had multiple authors listed due to me being inconsistent with how I wrote it. Sometimes I used “Joe” or other times “Joe Lotz”. I <em>googled</em> and found a terminal command to search a directory for&nbsp;keywords.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">find</span> /DIR_TO_SEARCH/ -type  f -exec grep --color -HIi <span class="st">'KEYWORD_OR_PHRASE'</span> {} <span class="ex">+</span></span></code></pre></div>
     
     </div>
 
