@@ -1,6 +1,6 @@
 ---
 Title: Use Pandoc Markdown in Pelican
-Date: 2021-01-31
+Date: 2021-02-02
 Tags: Pandoc, Pelican
 Keywords: pandoc-reader, pandoc on pelican, converting markdown with pelican
 Version: Pelican, 4.5.4, Pandoc, 2.11, Pandoc-Reader, 1.0.0, Python, 3.7.9
@@ -64,7 +64,7 @@ Here are some examples of the cool features built-in Pandoc Markdown.
 
 Note
 ~ I've applied styling to the figure and figure captions within my CSS Stylesheets.
- 
+
 ### Footnotes
 MARKDOWN:
 ```plaintext
@@ -92,7 +92,7 @@ MARKDOWN:
  :smiley:
  :cow:
 ```
- 
+
  HTML RESULT:
 
  - :smiley:
