@@ -1,9 +1,11 @@
+---
 Title: N-Queens Puzzle, Part 1-Introduction
 Date: 2020-06-26
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, backtracking, python 3
 Version: OS, Ubuntu 20.04 LTS, python, 3.7.4
+---
 
 The N-Queens puzzle is the popular problem of placing N number of chess queens on an NxN grid board such that no queens cannot attack each other; i.e no two queens share the same row, column, or diagonal. The puzzle is often generalized to the “[8 Queens Puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle)” to match a standard size chess board and is a good example of a simple but nontrivial algorithm problem. 
 
@@ -20,7 +22,7 @@ $$ P_N = N! $$
 $$ P_4 = 4!= 4 \cdot 3 \cdot 2 \cdot 1 = 24$$
 
 Now is a good time to finally break out `python` and the standard library [itertools](https://docs.python.org/2/library/itertools.html). Here we can just ask itertools to create all the permutations of [0,1,2,3] for us. Note the result from itertools is an [iterator](https://www.geeksforgeeks.org/iterators-in-python/) so to view it (i.e. print it) we must turn the iterator into a list.
-```python
+```{.python}
 import itertools
 perms = list(itertools.permutations([0,1,2,3]))
 print(perms)

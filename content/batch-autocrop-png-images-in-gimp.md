@@ -1,9 +1,11 @@
+---
 Title: Batch Autocrop png Images in Gimp
 Date: 2020-07-10
 Tags: Gimp
 Author: Joe
 Keywords: ubuntu 20.4, ffmpeg, gimp, batch autocropping
 Version: OS, Ubuntu 20.04 LTS, Gimp, 2.10.18
+---
 
 This article is to document the solution I found for batch auto-cropping a bunch of images within [Gimp](https://www.gimp.org/). Keep in mind that this runs the “Crop to Content” command within the Image menu, so if you can’t achieve what you want *within* the program than this isn’t going to give you different results. 
 

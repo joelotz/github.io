@@ -1,9 +1,11 @@
+---
 Title: N-Queens Puzzle, Part 2.5-Brute Force Algorithm (All Solutions)
 Date: 2020-07-06
 Tags: Python
 Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, brute-force search, alogrithms, python 3
 Version: OS, Ubuntu 20.04 LTS, python, 3.7.4
+---
 
 This article is Part 2.5 in a series implementing different algorithms to solve the N-Queens problem. I named it 2.5 because it is an extension of [Part 2](n-queens-puzzle-part-2-brute-force-algorithm.html) where I implemented the Brute Force Search Algorithm. In that algorithm I stopped evaluating the candidates once a solution was found. While it involves much more computation, in this implementation I continue to evaluate the candidates to provide *all* solutions. 
 

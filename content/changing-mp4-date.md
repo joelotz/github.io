@@ -1,9 +1,11 @@
+---
 Title: Changing mp4 CreationDates with Exiftool
 Date: 2020-11-14
 Tags: Exiftool
 Author: Joe
 Keywords: ubuntu 20.4, mp4, ffmpeg, exiftool, changing dates, exif, GoPro
 Version: OS, Ubuntu 20.04 LTS, Exiftool, 11.88
+---
 
 I assume there is a tiny cell battery inside my GoPro that keeps the settings and such for a short period while the main battery is removed or charging. I had removed the battery and let the GoPro set for a while and the date setting reset. I hadn’t noticed when I inserted a battery and started filming all the videos had a creation date of 2016-04-23 which was exactly 1600 days before the real date. I don’t know why… I’m sure there is a [real-time clock](https://en.wikipedia.org/wiki/Real-time_clock) inside and the reset date has to do with some default value. 
 
@@ -17,6 +19,7 @@ I [really like](/tag/exiftool.html) [exiftool](https://exiftool.org/), it is an 
 exiftool -time:all -a -G0:1 -s filename.mp4
 ```
 As you would expect there are multiple date fields set by GoPro in the mp4 container.
+
 ![Image1](/images/2020/ChangingMp4Date_01.png)
 
  There are multiple solutions… we could set each field individually and explicitly. 

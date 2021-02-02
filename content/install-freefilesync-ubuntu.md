@@ -1,9 +1,11 @@
+---
 Title: Installing FreeFileSync in Ubuntu
 Date: 2021-01-13
 Tags: Ubuntu, FreeFileSync
 Author: Joe
 Keywords: ubuntu 20.4, FreeFileSync installation,
 Version: OS, Ubuntu 20.04 LTS, FreeFileSync, 11.5
+---
 
 
 Go to [https://freefilesync.org/download.php](https://freefilesync.org/download.php) and download the latest version for Ubuntu. For most browsers, the default download location is the directory `~/Downloads`. 

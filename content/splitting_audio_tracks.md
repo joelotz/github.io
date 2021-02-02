@@ -1,29 +1,30 @@
+---
 Title: Splitting Audio Files into Tracks Based on .cue File
 Date: 2021-01-26
 Tags: Audacity, Python
 Keywords: Python, Audacity, label file, splitting tracks, cue file
 Version: Audacity, 2.3.3, Python, 3.7.9
-
-
+---
 
 Here's a problem that I come across once in a while. Let’s say you’ve downloaded an album from torrent and the entire album is in a single file. Sure, you can load the .cue file into your favorite music player and play the different tracks but you really would like this album split into individual files for each track. 
 
-!!! warning
-	It's assumed that you are downloading ***legally*** obtained torrents. Don't sue me RIAA!!
+
+Warning
+ ~ It's assumed that you are downloading ***legally*** obtained torrents. Don't sue me RIAA!!
 
 You can, of course, load the flac/mp3 into [Audacity](https://www.audacityteam.org/), manually insert labels (for example at the arrow locations), and export tracks. But I'm going to show you a semi-automated method. 
 
-![audacity_05](/images/2021/audacity_05.png)
+![Audacity Showing Track Breaks in the Audio File](/images/2021/audacity_05.png)
 
 Audacity has the ability to import label files. These are basically text files that tells the program at what starting/ending point to add the label and what the label’s… um… label should be. That’s great, but I don’t know where you get this label file from. This is not included with your (legally obtained!) torrent. But you do typically get a .cue file. If you got this file we are in the game.
 
-<img src="/images/2021/audacity_01.png" alt="audacity_01" style="zoom:80%;" />
+![](/images/2021/audacity_01.png)
 
 There is a site online that someone wrote that will convert for you here [http://grimblefritz.com/audacity/cue2lbl.php](http://grimblefritz.com/audacity/cue2lbl.php). 
 
-Of course, being a geek I wrote my own Python script to do it for me!  Download the gist [here](https://gist.github.com/joelotz/49d99e6c464825a0e551146bd92369a3).
+Of course, being a geek I wrote my own Python script to do it for me!  Download the github gist [here](https://gist.github.com/joelotz/49d99e6c464825a0e551146bd92369a3).
 
-```python
+```{#cue2label .python .numberLines}
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Convert a music .cue file into a label file.
@@ -178,25 +179,26 @@ or
 $ python cue2labels.py "inputfile.cue"
 ```
 Your cue file contains the albums information, like album title, metadata, track titles, starting position, etc. It will look something like this:
-<img src="/images/2021/audacity_03.png" alt="audacity_03" style="zoom:80%;" />
+
+![Example .cue File](/images/2021/audacity_03.png)
 
 At this point you can convert the cue to a label file, either online or with the Python script. If you ran the Python script you will have a new file in the same directory as the cue file. Like this:
 
-<img src="/images/2021/audacity_02.png" alt="audacity_02" style="zoom:80%;" />
+![Example of Label File Created in Directory](/images/2021/audacity_02.png)
 
 The label file will be pretty simple with the track starting times and title names and will look like this:
 
-<img src="/images/2021/audacity_04.png" alt="audacity_04" style="zoom:80%;" />
+![Example Lable File](/images/2021/audacity_04.png)
 
 Now we are on the home stretch! Open Audacity and import your music flac/mp3 file. Now go to `File > Import > Labels...`, select the label file.
 
 The labels are now magically inserted at the track start times with the title filled in!
 
-![audacity_06](/images/2021/audacity_06.png)
+![Example Showing Labels Imported from File Within Audacity](/images/2021/audacity_06.png)
 
 From here go to `File > Export > Export Multiple...` yadda, yadda. The result are individual files for each track as shown here:
 
-<img src="/images/2021/audacity_07.png" alt="audacity_07" style="zoom:80%;" />
+![Example Output Showing Individual Track Files Were Created](/images/2021/audacity_07.png)
 
 On a final and unrelated note, if you've never heard of [Tower of Power](https://en.wikipedia.org/wiki/Tower_of_Power) you are missing out. It's an R&B band started in the 70's that has a *killer* horn section.
 

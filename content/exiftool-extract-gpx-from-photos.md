@@ -1,3 +1,4 @@
+---
 Title: Extract gpx Trace from Geotagged Photos
 Date: 2020-06-11
 Tags: Bash
@@ -5,6 +6,7 @@ Author: Joe
 Keywords: pelican, pelican static site generator, ubuntu 20.4, x
 Version: OS, Ubuntu 20.04 LTS, x
 Status: draft
+---
 
 On an Android the photos taken from the Mapillary app are stored in the app data directory. 
 

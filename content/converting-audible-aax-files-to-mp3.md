@@ -1,3 +1,4 @@
+---
 Title: Converting Audible .aax Audiobook Files Into .mp3 on Ubuntu
 Date: 2020-05-15
 Tags: Ubuntu, FFmpeg
@@ -5,6 +6,7 @@ Author: Joe
 Keywords: ubuntu 20.04, audible.com, .aax, convert aax to mp3
 Excerpt: Audible lets you download your audiobooks but they are DRM'd. Crack the SHA hash with your authentication code and save the .aax files into other formats like .mp3 or even .ogg.
 Version: OS, Ubuntu 20.04 LTS, bash, 5.0.16(1)-release, python, 2.7.4, FFmpeg,4.2.2-1
+---
 
 I have a bunch of audio-books on Audible.com that I’ve collected in the past year or two. I’ve been meaning to cancel my monthly subscription but I don’t get around to it, which leads to more monthly credits, and then I don’t want to cancel and lose those unused credits…or lose the books I haven’t listed to. It’s a brilliant ploy on Audible’s part to keep their customers. So there’s the problem, I want to part ways and cancel my monthly subscription but I don’t want to lose the books that I’ve already paid for, both listened to and not. 
 
@@ -16,11 +18,12 @@ First, log into www.audible.com and download one of your audio-books. Login, go 
 
 ```bash
 ffprobe <inputfile.aax>
+
 # Example
 ffprobe TheGrapesofWrath.aax
 ```
 
-![audibleConvert-01](/images/2020/audibleConvert-01.png)
+![Example of ffprobe](/images/2020/audibleConvert-01.png)
 
 After all the stupid library declarations you’ll see the line `[aax] file checksum` and you want to copy that key that I circled in the image above. This is your checksum that is the input to RainbowCrack. [RainbowCrack](http://project-rainbowcrack.com/) is a hash cracking program that uses [rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table) to decrypt… [passwords](https://en.wikipedia.org/wiki/Password_cracking) and stuff. We will be using it decrypt this hash and tell us our Audible code.
 
@@ -34,7 +37,7 @@ cd tables/
 ./rcrack . h 123456789abcdef123456789abcdef
 ```
 
-![audibleConvert-02](/images/2020/audibleConvert-02.png)
+![Example of Using rcrack](/images/2020/audibleConvert-02.png)
 
 It’s all gravy from here now that you have your unique code, you can remove the DRM from your audiobook files and decode into other other formats like mp3, mp4, m4a, m4b, flac, ogg, opus, etc, etc, etc. Note that the files you downloaded are hashed with your specific account, so it’s not like you can use my numbers, but I did obfuscate them in the images just in case.
 

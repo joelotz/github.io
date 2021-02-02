@@ -1,9 +1,11 @@
+---
 Title: Setup Google Domain for Github Pages
 Date: 2020-07-11
 Tags: 
 Author: Joe
 Keywords: pelican, pelican static site generator, ubuntu 20.4, github pages, custom domain, google domain
 Version: OS, Ubuntu 20.04 LTS, Pelican, 4.5.4
+---
 
 So you are using github pages and want a custom domain name? This article will explain how to configure the DNS records to make that possible. 
 

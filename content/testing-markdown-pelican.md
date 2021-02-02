@@ -1,8 +1,11 @@
+---
 Title: Adding Python-Markdown Extensions in Pelican 
 Date: 2021-01-21
 Tags: Pelican, Markdown
 Keywords: python-markdown, pelican, markdown, definition list, admonitions
 Version: Pelican, 4.5.4, Python-Markdown, 3.3.3
+Status: Draft
+---
 
 
 

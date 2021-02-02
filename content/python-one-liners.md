@@ -1,8 +1,10 @@
+---
 Title: Python One-Liners
 Date: 2021-01-20
 Tags: Python
 Keywords: python,
 Version: Python, 3.7.4
+---
 
 
 

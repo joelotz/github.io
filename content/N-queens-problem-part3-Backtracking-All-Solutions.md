@@ -1,3 +1,4 @@
+---
 Title: N-Queens Puzzle, Part 3-Backtracking Algorithm (All Solutions)
 Date: 2020-07-17
 Tags: Python
@@ -5,6 +6,7 @@ Author: Joe
 Keywords: ubuntu 20.4, n queens, n-queens, backtracking search, alogrithms, python 3
 Version: OS, Ubuntu 20.04 LTS, python, 3.7.4
 Status: Draft
+---
 
 This article is Part 3 in a series implementing different algorithms to solve the N-Queens problem. In this article I’ll be exploring the [backtracking](https://en.wikipedia.org/wiki/Backtracking) search algorithm. See the first article ["Part 1-Introduction"](n-queens-puzzle-part-1-introduction.html) for an overview of the puzzle and some background information.
 

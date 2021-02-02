@@ -1,8 +1,10 @@
+---
 Title: Creating a Launch Shortcut for Anaconda on Ubuntu
 Date: 2021-01-16
 Tags: Ubuntu, Anaconda
 Keywords: ubuntu 20.4, Anaconda, shortcut, launch
-Version: OS, Ubuntu 20.04.01, Anaconda, 4.9.2, Python, 3.7
+Version: Ubuntu, 20.04.01, Anaconda, 4.9.2, Python, 3.7
+---
 
 
 
@@ -13,7 +15,7 @@ Next, create a desktop file in your applications directory.
 gedit ~/.local/share/applications/anaconda.desktop
 ```
 Enter this data, it's pretty straight forward.
-```bash
+```plaintext
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -25,5 +27,6 @@ Terminal=false
 The two important items are `Exec` and `Icon` paths. `Exec` is where anaconda was installed. More than likely you will only need to replace "joe" with your userpath. I recommend verifying the `Icons` path, for example you may be more up to date and are using python3.8. In which case your path would be slightly different. 
 
 That's it! Now you can press Windows Key and activate the Application Launcher and start typing anaconda. You should see your shortcut there.
-![anaconda-launcher](/images/2021/anaconda-launcher.png)
+
+![Anaconda Launcher](/images/2021/anaconda-launcher.png)
 

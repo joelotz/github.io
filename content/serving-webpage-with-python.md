@@ -1,9 +1,11 @@
+---
 Title: Serving Local Webpages with Python
 Date: 2020-07-16
 Tags: Python
 Author: Joe
 Keywords: pelican, pelican static site generator, ubuntu 20.4, github pages, python
 Version: OS, Ubuntu 20.04 LTS, python, 3.7.4
+---
 
 This article is less of instruction and more documentation for myself since I keep forgetting the Python3 syntax. You can easily serve web pages locally using a bunch of languages and tools, but my preferred method is with Python. It has a simple server that can be quickly launched without a LAMP stack or anything crazy. 
 

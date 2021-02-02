@@ -1,9 +1,11 @@
+---
 Title: Shell Script to Write Your Weight to a csv Log File
 Date: 2020-06-19
 Tags: Bash
 Author: Joe
 Keywords: ubuntu 20.4, weight logging shell script, log from terminal
 Version: OS, Ubuntu 20.04 LTS, Bash, 5.0.16(1)-release
+---
 
 **<u>(2020/06/17)</u>**: Updated post with the script version 0.2.
 

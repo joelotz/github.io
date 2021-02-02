@@ -1,3 +1,4 @@
+---
 Title: Auto-generate and Publish Pelican Blog to Github Pages on Ubuntu
 Date: 2020-05-22
 Tags: Ubuntu, Pelican
@@ -5,6 +6,7 @@ Author: Joe
 Keywords: pelican, pelican static site generator, ubuntu 20.4, ghp-import, github, github pages
 Excerpt: I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages.
 Version: OS, Ubuntu 20.04 LTS, git, 2.25.1, Pelican, 4.2.0
+---
 
 I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes [zenity](https://packages.ubuntu.com/focal/zenity) is installed on the system. If not, easily install via:
 ```bash
@@ -14,7 +16,7 @@ sudo apt install zenity
 I would highly recommend setting up `ghp-import` and this script assumes you have. Follow [these instructions](https://opensource.com/article/19/5/run-your-blog-github-pages-python) if you  need to install/configure it. 
 
 Here’s the script, save it in the root directory of your pelican blog and make it [executable](https://www.andrewcbancroft.com/blog/musings/make-bash-script-executable/).
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # ========================================================================
@@ -59,7 +61,8 @@ else # Else, run
 fi
 ```
 A zenity input box is used to capture the commit message. 
-![pelicanGithub-01](/images/2020/pelicanGithub-01.png)
+
+![Zenity Input Box](/images/2020/pelicanGithub-01.png)
 
 ```bash
 pelican content -o output -s publishconf.py
@@ -78,9 +81,9 @@ git commit -m "$inputStr"
 git push origin content
 ```
 
-This last bit is a little tricky. First, I want to add everything in my blog folder then remove from staging the output folder (which I’m already pushing to the master branch), the plugin folder, and the \__pycache__ folder. You can also accomplish this with a .gitignore file. Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. 
+This last bit is a little tricky. First, I want to add everything in my blog folder then remove from staging the output folder (which I’m already pushing to the master branch), the plugin folder, and the \_\_pycache\_\_ folder. You can also accomplish this with a .gitignore file. Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the files. 
 
-![pelicanGithub-02](/images/2020/pelicanGithub-02.png)
+![Example Github Repository](/images/2020/pelicanGithub-02.png)
 
-In your <name>github.io repository, click the branch button and you will see the ‘master’ which is default and contains the generated html files. You can also click the ‘content’ branch and see your source files.
+In your <name>github.io repository, click the branch button and you will see the `master` which is default and contains the generated html files. You can also click the `content` branch and see your source files.
 
