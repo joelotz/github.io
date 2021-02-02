@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Use Pandoc Markdown in&nbsp;Pelican | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Use Pandoc Markdown in&nbsp;Pelican</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 31, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74548.9 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/pandoc.html">Pandoc</a>  <a href="/tag/pelican.html">Pelican</a>     </p>
+    <p>This article documents installing the pelican plugin <a href="https://pypi.org/project/pelican-pandoc-reader/">Pandoc-Reader</a>, which changes the engine that converts <a href="https://www.markdownguide.org/basic-syntax/">Markdown</a> syntax to html from the standard <a href="https://python-markdown.github.io/">Python-Markdown</a> to <a href="https://pandoc.org/">Pandoc.</a>.</p>
+<p><strong>Why?</strong> Pandoc is awesome on many levels, but specifically for this blog, it allows me to write pandoc’s flavor of markdown. I added <a href="https://python-markdown.github.io/extensions/">Python-Markdown Extensions</a> which gave some cool features, but it still didn’t satisfy&nbsp;me.</p>
+<p>Some of my personal favorite features&nbsp;are:</p>
+<ul>
+<li>Figure&nbsp;Captions!</li>
+<li>Footnotes</li>
+<li>Emojis</li>
+<li>Internal&nbsp;Links</li>
+</ul>
+<p>One feature it doesn’t have are reStructured-like <a href="https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html">admonitions</a>. This is something that Markdown Extensions had <span class="emoji" data-emoji="disappointed">😞</span> - but I saw a Pandoc filter that looked like it will implement&nbsp;those.</p>
+<h3 id="installation">Installation</h3>
+<p>The installation is easy and the instructions are clear. Make sure you have at least Pandoc 2.11, then pip install the&nbsp;plugin.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">python</span> -m pip install pelican-pandoc-reader</span></code></pre></div>
+<p>One note is that your metadata (Title:, Date:, etc.) has to be in <span class="caps">YAML</span> format. That is means fenced by triple dashes.&nbsp;Example:</p>
+<pre class="plaintext"><code>---
+Title: Me
+Date: 2021-01-01
+---</code></pre>
+<p>If you already have a bunch of articles written, <a href="https://gist.github.com/joelotz/fc92891d13c71021cf4359e492ab3f8c">here</a> is a simple python script that should convert it for&nbsp;you.</p>
+<p>You also need to add these variables to the <code>pelicanconf.py</code> file.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="co"># Arguments passed into pandoc</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a>PANDOC_ARGS <span class="op">=</span> [</span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a>    <span class="st">"--mathjax"</span>,</span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>]</span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="co"># Non-Pandoc Extensions that are not enabled by default in pandoc</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="co">#   https://pandoc.org/MANUAL.html#non-pandoc-extensions</span></span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a>PANDOC_EXTENSIONS <span class="op">=</span> [</span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a>    <span class="st">"+abbreviations"</span>,</span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a>    <span class="st">"+backtick_code_blocks"</span>,</span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a>    <span class="st">"+emoji"</span></span>
+<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a>    ]</span></code></pre></div>
+<h2 id="pandoc-markdown">Pandoc&nbsp;Markdown</h2>
+<p>Here are some examples of the cool features built-in Pandoc&nbsp;Markdown.</p>
+<h3 id="figure-captions">Figure&nbsp;Captions</h3>
+<figure>
+<img alt="This is my figure caption." src="/images/2021/cute-dog.jpg"/><figcaption aria-hidden="true">This is my figure caption.</figcaption>
+</figure>
+<dl>
+<dt>Note</dt>
+<dd>I’ve applied styling to the figure and figure captions within my <span class="caps">CSS</span>&nbsp;Stylesheets.
+</dd>
+</dl>
+<h3 id="footnotes">Footnotes</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>Here is a footnote reference,<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> and another.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<h3 id="emojis">Emojis</h3>
+<p>Pandoc converys textual emojis into Unicode emoticons. <a class="uri" href="https://www.webfx.com/tools/emoji-cheat-sheet/">https://www.webfx.com/tools/emoji-cheat-sheet/</a></p>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code> :smiley:
+ :cow:</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ul>
+<li><span class="emoji" data-emoji="smiley">😃</span></li>
+<li><span class="emoji" data-emoji="cow">🐮</span></li>
+</ul>
+<h3 id="links">Links</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>You can go directly to &lt;https://.google.com&gt; to find it.</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>You can go directly to <a class="uri" href="https://google.com">https://google.com</a> to find&nbsp;it.</p>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>Go see the very last header named [MathJax](#mathjax)</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>Go see the very first header named <a href="#smartypants">SmartyPants</a></p>
+<h3 id="smartypants">SmartyPants</h3>
+<p>Write this in <span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>"curly quotes"
+... are ellipses
+-- are en-dashes
+--- are em-dashes</code></pre>
+<p>To get this <span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ul>
+<li>“curly&nbsp;quotes”</li>
+<li>… are&nbsp;ellipses</li>
+<li>– are&nbsp;en-dashes</li>
+<li>— are&nbsp;em-dashes</li>
+</ul>
+<h3 id="line-blocks">Line&nbsp;Blocks</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>| The limerick packs laughs anatomical
+| In space that is quite economical.
+|    But the good ones I've seen
+|    So seldom are clean
+| And the clean ones so seldom are comical
+
+| 200 Main St.
+| Berkeley, CA 94718</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<div class="line-block">The limerick packs laughs anatomical<br/>
+In space that is quite economical.<br/>
+   But the good ones I’ve seen<br/>
+   So seldom are clean<br/>
+And the clean ones so seldom are comical</div>
+<div class="line-block">200 Main St.<br/>
+Berkeley, <span class="caps">CA</span> 94718</div>
+<h3 id="lists">Lists</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>COMPACT LISTS
+-------------
+* one
+* two
+* three</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ul>
+<li>one</li>
+<li>two</li>
+<li>three</li>
+</ul>
+<pre class="plaintext"><code>LOOSE LISTS
+-----------
+* one
+
+* two
+
+* three</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ul>
+<li><p>one</p></li>
+<li><p>two</p></li>
+<li><p>three</p></li>
+</ul>
+<h3 id="fancy-list">Fancy&nbsp;List</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>(1) One
+(2) Two
+    a. 2.1
+    b. 2.2
+(3) Three</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ol type="1">
+<li>One</li>
+<li>Two
+<ol type="a">
+<li>2.1</li>
+<li>2.2</li>
+</ol></li>
+<li>Three</li>
+</ol>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>#. one
+#. two
+#. three</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ol>
+<li>one</li>
+<li>two</li>
+<li>three</li>
+</ol>
+<h3 id="startnum">StartNum</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code> 9)  Ninth
+10)  Tenth
+11)  Eleventh
+       i. subone
+      ii. subtwo
+     iii. subthree</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ol start="9" type="1">
+<li>Ninth</li>
+<li>Tenth</li>
+<li>Eleventh
+<ol type="i">
+<li>subone</li>
+<li>subtwo</li>
+<li>subthree</li>
+</ol></li>
+</ol>
+<h3 id="defintion-lists">Defintion&nbsp;Lists</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>Term 1
+  ~ Definition 1
+
+Term 2
+  ~ Definition 2a
+  ~ Definition 2b</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<dl>
+<dt>Term&nbsp;1</dt>
+<dd>Definition&nbsp;1
+</dd>
+<dt>Term&nbsp;2</dt>
+<dd>Definition&nbsp;2a
+</dd>
+<dd>Definition&nbsp;2b
+</dd>
+</dl>
+<p>**<span class="caps">NOTE</span>: I styled the definitions with <span class="caps">CSS</span></p>
+<h3 id="example-lists">Example&nbsp;Lists</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>(@)  My first example will be numbered (1).
+(@)  My second example will be numbered (2).
+
+Explanation of examples.
+
+(@)  My third example will be numbered (3).</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<ol class="example" type="1">
+<li>My first example will be numbered&nbsp;(1).</li>
+<li>My second example will be numbered&nbsp;(2).</li>
+</ol>
+<p>Explanation of&nbsp;examples.</p>
+<ol class="example" start="3" type="1">
+<li>My third example will be numbered&nbsp;(3).</li>
+</ol>
+<h3 id="superscript-and-subscripts">Superscript and&nbsp;Subscripts</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>H~2~O is a liquid.  2^10^ is 1024.</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>H<sub>2</sub>O is a liquid. 2<sup>10</sup> is&nbsp;1024.</p>
+<h3 id="strikeout">Strikeout</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>This ~~is deleted text.</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>This <del>is deleted text.</del></p>
+<h3 id="small-caps">Small&nbsp;Caps</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>[Hello Everyone]{.smallcaps}, how are you doing?</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p><span class="smallcaps">Hello Everyone</span>, how are you&nbsp;doing?</p>
+<h3 id="mathjax">MathJax</h3>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>This is an inline math $y = mx +b$ which is cool.</code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>This is an inline math <span class="math inline">\(y = mx +b\)</span> which is&nbsp;cool.</p>
+<p><span class="caps">MARKDOWN</span>:</p>
+<pre class="plaintext"><code>This is a full math equation.
+$$ y = mx +b $$ </code></pre>
+<p><span class="caps">HTML</span> <span class="caps">RESULT</span>:</p>
+<p>This is a full math equation. <span class="math display">\[ y = mx +b&nbsp;\]</span></p>
+<!--
+### Admonitions
+ BREAK 
+
+::::: {.admonition .error}
+
+:::::::: {.admonition-title}
+Error 
+::::::::
+This is the message
+:::::
+
+::::: {.admonition .error}
+
+[Error]{.admonition-title}
+This is the message
+:::::
+-->
+<section class="footnotes" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Here is the footnote.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Here’s one with multiple blocks.<a class="footnote-back" href="#fnref2" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+    
+    <div class="version">
+    <h3>Software Versions</h3>
+    This is an automated list of software versions used during the writing of this article. 
+    <code>
+    <table>
+    <tr><th>Software</th><th>Version</th></tr>
+    <tr><td>Pelican</td><td> 4.5.4</td></tr>
+    <tr><td> Pandoc</td><td> 2.11</td></tr>
+    <tr><td> Pandoc-Reader</td><td> 1.0.0</td></tr>
+    <tr><td> Python</td><td> 3.7.9</td></tr>
+    </table>
+    </code>
+    </div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
