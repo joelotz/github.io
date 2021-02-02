@@ -73,21 +73,6 @@ GOOGLE_ANALYTICS_ACCOUNT = 'UA-48351953-1 '
 ## PLUGIN CONFIGURATION ##################################
 MARKUP = ('md', 'ipynb')
 
-# https://jackdewinter.github.io/2019/10/16/fine-tuning-pelican-markdown-configuration/
-MARKDOWN = {
-    'extension_configs': {
-        'markdown.extensions.extra': {},
-        'markdown.extensions.footnotes': {},
-        'markdown.extensions.admonition': {},
-        'markdown.extensions.nl2br': {},
-        'smarty' : {
-            'smart_angled_quotes' : 'true'},
-        'markdown.extensions.codehilite': {
-            'css_class': 'highlight'},
-    },
-    'output_format': 'html5', # is this really needed?
-}
-
 ## PLUGIN CONFIGURATION ##################################
 PLUGIN_PATHS = ['./plugins']
 from pelican_jupyter import markup as nb_markup
@@ -95,10 +80,20 @@ PLUGINS = [nb_markup, 'stardate', 'render_math']
 # if you create jupyter files in the content dir, snapshots are saved with the same
 # metadata. These need to be ignored. 
 IGNORE_FILES = [".ipynb_checkpoints"]  
-
-
 MATH_JAX = {'align':'left','indent':'2em'}
 
+
+PANDOC_ARGS = [
+    "--mathjax",
+]
+
+#     "--citeproc",
+
+PANDOC_EXTENSIONS = [
+    "+abbreviations",
+    "+backtick_code_blocks",
+    "+emoji"
+    ]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
