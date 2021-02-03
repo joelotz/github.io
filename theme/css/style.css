@@ -535,8 +535,9 @@ figcaption::before {
     content: "Figure. ";
 }
 
+.footnotes hr {
+display: none;}
 
-.active
 
 
 
