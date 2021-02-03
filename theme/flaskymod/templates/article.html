@@ -12,21 +12,21 @@
     </p>
     {{ article.content }}
     
-    {% if article.version %}
-    <div class="version">
-    <h3>Software Versions</h3>
-    This is an automated list of software versions used during the writing of this article. 
+{% if article.version %}
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
     {% set vers = article.version.split(',') %}
-    <code>
+  <code>
     <table>
-    <tr><th>Software</th><th>Version</th></tr>
-    {% for software in vers|batch(2) %}
-    <tr><td>{{ software[0] }}</td><td>{{ software[1] }}</td></tr>
-    {% endfor %}
+        <tr><th>Software</th><th>Version</th></tr>
+        {% for software in vers|batch(2) %}
+        <tr><td>{{ software[0] }}</td><td>{{ software[1] }}</td></tr>
+        {% endfor %}
     </table>
-    </code>
+  </code>
     {% endif %}
-    </div>
+</div>
 
 
 {% endblock %}
