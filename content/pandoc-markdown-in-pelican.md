@@ -9,7 +9,7 @@ Version: Pelican, 4.5.4, Pandoc, 2.11, Pandoc-Reader, 1.0.0, Python, 3.7.9
 
 This article documents installing the pelican plugin [Pandoc-Reader](https://pypi.org/project/pelican-pandoc-reader/), which changes the engine that converts [Markdown](https://www.markdownguide.org/basic-syntax/) syntax to html from the standard [Python-Markdown](https://python-markdown.github.io/) to [Pandoc. ](https://pandoc.org/). 
 
-**Why?** Pandoc is awesome on many levels, but specifically for this blog, it allows me to write pandoc's flavor of markdown. I added [Python-Markdown Extensions](https://python-markdown.github.io/extensions/) which gave some cool features, but it still didn't satisfy me. 
+**Why?** Pandoc is awesome on many levels, but specifically for this blog, it allows me to write pandoc's flavor of markdown. I added [Python-Markdown Extensions](https://python-markdown.github.io/extensions/) that gave some cool features, but it still didn't satisfy me. 
 
 Some of my personal favorite features are:
 

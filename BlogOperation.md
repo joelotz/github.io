@@ -19,6 +19,7 @@ git push origin content
 ```
 
 #### Other useful commands
+
 ```bash
 git reset FILE #pulls file out of staging
 git rm FILE #deletes file locally and from repo
@@ -29,7 +30,7 @@ git rm -r --cached DIR #deletes dir only from repo
 ls -a #lists hidden files in dir
 ```
 
-
+#### Rebuilding Fresh from Start
 
 ```bash
 joe@Praimfaya:/mnt/DataDrive$ git clone -b content https://github.com/joelotz/joelotz.github.io.git Blog
