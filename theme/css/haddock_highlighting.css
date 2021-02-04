@@ -12,7 +12,8 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+  { counter-reset: source-line 0; 
+    font-family: 'Ubuntu Mono', monospace;}
 pre.numberSource code > span
   { position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before

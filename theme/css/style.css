@@ -243,7 +243,7 @@ h1 + p.date {
 /* code formatting.  no monospace because of webkit (bug?) */
 pre, code,tt {
   font-family: 'Ubuntu Mono', monospace;
-  font-size: 13px;
+  font-size: 0.95em;
   letter-spacing: 0.015em;
 }
 
