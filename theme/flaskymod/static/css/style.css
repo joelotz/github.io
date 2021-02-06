@@ -523,7 +523,7 @@ figcaption em, figcaption i {
 figcaption {
 	clear: left;
 	margin: .75em 0;
-	text-align: left;
+	text-align: center;
 	font-style: italic;
 	line-height: 1.5em;
   font-size: 0.85em
