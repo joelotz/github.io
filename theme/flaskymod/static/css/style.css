@@ -526,12 +526,16 @@ figcaption {
 	text-align: left;
 	font-style: italic;
 	line-height: 1.5em;
+  font-size: 0.85em
 }
 
-
+/*
 figcaption::before {
     content: "Figure. ";
+	font-style: bold;    
 }
+*/
+
 /*
 .footnotes hr {
 display: none;}
