@@ -63,10 +63,10 @@ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-
 
 1. Start AVD Manager by clicking on the little phone icon in the far upper-right.
 
-![Starting AVD Manager from Within Androind Studio](/images/2021/DRM_06.png)
+![Starting AVD Manager from Within Android Studio](/images/2021/DRM_06.png)
 
 2. Next you need a virtual device. I am a total idiot in this area. I have no experience with Android development. But I can tell you that you must have root-access on the device you create, and in order to allow root access you must not use a Google Play image. So what does that mean? That means do not use an image that has the Google Play icon, like this **(A)**.
-![](/images/2021/DRM_05.png)
+![Selecting an Image Withing AVD Manager](/images/2021/DRM_07.png)
 
 - You can create your own image as others have done, but I just used the `Pixel_3a_API_30_x86` that was present when I started AVD Manager. 
 - To start the image click the green "play" triangle **(B)**.
