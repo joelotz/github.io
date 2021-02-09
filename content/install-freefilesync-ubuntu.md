@@ -7,6 +7,9 @@ Keywords: ubuntu 20.4, FreeFileSync installation,
 Version: OS, Ubuntu 20.04 LTS, FreeFileSync, 11.5
 ---
 
+**(2021-02-09)**: As of v11.6 FreeFileSync uses an installer. I don't believer these instructions are valid anymore. The package you download is now a `.zip` containing a `.run` and a `.key` file. From terminal you execure the `.run` file, or you could probably double-click it. It asked to accept the license terms and then asked to accept the installation location. It was pretty slick!
+
+------
 
 Go to [https://freefilesync.org/download.php](https://freefilesync.org/download.php) and download the latest version for Ubuntu. For most browsers, the default download location is the directory `~/Downloads`. 
 
