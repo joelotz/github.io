@@ -66,3 +66,7 @@ git reset --hard
 # Write both the index and working directory from git's database.
 ```
 
+### Killing a process on Pork 8000
+```
+sudo kill -9 `sudo lsof -t -i:8000`
+```
