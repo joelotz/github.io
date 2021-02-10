@@ -1,5 +1,5 @@
 ---
-Title: Install and Configure arbtt
+Title: Welcome to arbbt, Your OCD Time Tracker
 Date: 2021-02-09
 Tags: arbtt, Python
 Keywords: time tracking, arbtt, Automatic Rule-Based Time Tracker, arbtt-graph, installation
@@ -8,9 +8,9 @@ Keywords: time tracking, arbtt, Automatic Rule-Based Time Tracker, arbtt-graph, 
 arbtt
   ~ The Automatic Rule-Based Time Tracker
 	
-I'm applying for a graduate program and in the meantime, while my application is being considered, I've started building out my [LaTeX](https://en.wikipedia.org/wiki/LaTeX) thesis template and workflow. I know it's premature but I haven't played with LaTeX since writing my Master's Thesis nearly 15 years ago and wanted to reacqaint myself. After a couple of days, I was thinking to myself, "man, after the end of this I'm going to have a bunch of hours racked up." So that thought experiment led me to look at time tracking software. 
+I'm applying for a graduate program and in the meantime, while my application is being considered, I've started building out my [LaTeX](https://en.wikipedia.org/wiki/LaTeX) thesis template and workflow. I know it's premature but I haven't played with LaTeX since writing my Master's Thesis nearly 15 years ago and wanted to reacquaint myself. After a couple of days, I was thinking to myself, "man, after the end of this I'm going to have a bunch of hours racked up." So that thought experiment led me to look at time tracking software. 
 
-The one I thought was the "best" was [arbtt](http://arbtt.nomeata.de/#what), <u>a</u>utomated, <u>r</u>ule-<u>b</u>ased <u>t</u>ime <u>t</u>racker.
+The one I thought was the "best" was [arbtt](http://arbtt.nomeata.de/#what), **<u>a</u>**utomated, **<u>r</u>**ule-**<u>b</u>**ased **<u>t</u>**ime **<u>t</u>**racker.
 
 ### Installation
 
