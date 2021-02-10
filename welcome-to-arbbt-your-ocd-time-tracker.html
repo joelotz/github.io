@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe">
+    <title> Welcome to arbbt, Your <span class="caps">OCD</span> Time&nbsp;Tracker | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="/index.html">Blog</a> </li>
+	            <li><a href="/archives.html">Archive</a> </li>
+	            <li><a href="/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Welcome to arbbt, Your <span class="caps">OCD</span> Time&nbsp;Tracker</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;February 09, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74573.6 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/tag/arbtt.html">arbtt</a>  <a href="/tag/python.html">Python</a>     </p>
+    <dl>
+<dt>arbtt</dt>
+<dd>The Automatic Rule-Based Time&nbsp;Tracker
+</dd>
+</dl>
+<p>I’m applying for a graduate program and in the meantime, while my application is being considered, I’ve started building out my <a href="https://en.wikipedia.org/wiki/LaTeX">LaTeX</a> thesis template and workflow. I know it’s premature but I haven’t played with LaTeX since writing my Master’s Thesis nearly 15 years ago and wanted to reacquaint myself. After a couple of days, I was thinking to myself, “man, after the end of this I’m going to have a bunch of hours racked up.” So that thought experiment led me to look at time tracking&nbsp;software.</p>
+<p>The one I thought was the “best” was <a href="http://arbtt.nomeata.de/#what">arbtt</a>, <strong><u>a</u></strong>utomated, <strong><u>r</u></strong>ule-<strong><u>b</u></strong>ased <strong><u>t</u></strong>ime <strong><u>t</u></strong>racker.</p>
+<h3 id="installation">Installation</h3>
+<p>Installation was very&nbsp;easy.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">sudo</span> apt-get install arbtt</span></code></pre></div>
+<p>Tell Ubuntu to start the daemon automatically on system&nbsp;start</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">cp</span> /usr/share/doc/arbtt/examples/arbtt-capture.desktop ~/.config/autostart/</span></code></pre></div>
+<p>Go ahead and manually start the&nbsp;daemon</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">arbtt-capture</span> <span class="kw">&amp;)</span></span></code></pre></div>
+<p>And create your categorize.cfg&nbsp;file</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">~/.arbtt/categorize.cfg</span></span></code></pre></div>
+<p>That’s&nbsp;it</p>
+<h3 id="categorization">Categorization</h3>
+<p>This is where the magic is. <code>arbtt</code> tracks X properties like window title, class, and running programs, and you write rules to classify those strings. You can get as detailed as you want. For example, you can say “If Firefox is the active window (i.e. mouse or keyboard is working within it) and the title of the tab contains the word Twitter, than label all that accumulated time as Web_Twitter”. Something like that. Then you can apply regular expressions and complicated logic to figure out exactly what you&nbsp;want.</p>
+<p>For a start, here are my “rules” in the <code>categorization.cfg</code> file.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="co">-- A rule that probably everybody wants. Being inactive for over a minute</span></span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a><span class="co">-- causes this sample to be ignored by default.</span></span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a><span class="op">$</span>idle <span class="op">&gt;</span> <span class="dv">60</span> <span class="op">==&gt;</span> tag inactive,</span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a><span class="co">-- Simple rule that just tags the current program</span></span>
+<span id="cb5-6"><a aria-hidden="true" href="#cb5-6" tabindex="-1"></a><span class="co">--tag Program:$current.program,</span></span>
+<span id="cb5-7"><a aria-hidden="true" href="#cb5-7" tabindex="-1"></a><span class="co">--tag Title:$current.title,</span></span>
+<span id="cb5-8"><a aria-hidden="true" href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a aria-hidden="true" href="#cb5-9" tabindex="-1"></a><span class="co">-- PYTHON</span></span>
+<span id="cb5-10"><a aria-hidden="true" href="#cb5-10" tabindex="-1"></a>current window <span class="op">$</span>program <span class="op">==</span> [<span class="st">"Spyder"</span>] <span class="op">==&gt;</span> tag python,</span>
+<span id="cb5-11"><a aria-hidden="true" href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a aria-hidden="true" href="#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a aria-hidden="true" href="#cb5-13" tabindex="-1"></a><span class="co">-- THESIS</span></span>
+<span id="cb5-14"><a aria-hidden="true" href="#cb5-14" tabindex="-1"></a>( current window <span class="op">$</span>program <span class="op">==</span> <span class="st">"evince"</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb5-15"><a aria-hidden="true" href="#cb5-15" tabindex="-1"></a>        current window <span class="op">$</span>title <span class="op">=~</span> <span class="op">/</span>dissertation<span class="op">/</span> ) <span class="op">==&gt;</span> tag thesis,</span>
+<span id="cb5-16"><a aria-hidden="true" href="#cb5-16" tabindex="-1"></a></span>
+<span id="cb5-17"><a aria-hidden="true" href="#cb5-17" tabindex="-1"></a>current window <span class="op">$</span>program <span class="op">==</span> [<span class="st">"code"</span>] <span class="op">==&gt;</span> tag thesis,</span>
+<span id="cb5-18"><a aria-hidden="true" href="#cb5-18" tabindex="-1"></a></span>
+<span id="cb5-19"><a aria-hidden="true" href="#cb5-19" tabindex="-1"></a>( current window <span class="op">$</span>program <span class="op">=~</span> <span class="op">/</span>install4j<span class="op">/</span> <span class="op">||</span></span>
+<span id="cb5-20"><a aria-hidden="true" href="#cb5-20" tabindex="-1"></a>        current window <span class="op">$</span>title <span class="op">=~</span> <span class="op">/</span>yEd<span class="op">/</span> ) <span class="op">==&gt;</span> tag thesis,</span>
+<span id="cb5-21"><a aria-hidden="true" href="#cb5-21" tabindex="-1"></a></span>
+<span id="cb5-22"><a aria-hidden="true" href="#cb5-22" tabindex="-1"></a></span>
+<span id="cb5-23"><a aria-hidden="true" href="#cb5-23" tabindex="-1"></a><span class="co">-- WEB BROWSER</span></span>
+<span id="cb5-24"><a aria-hidden="true" href="#cb5-24" tabindex="-1"></a>current window <span class="op">$</span>title <span class="op">=~</span> [<span class="op">/</span><span class="dt">LinkedIn</span><span class="op">/</span>, <span class="op">/</span><span class="dt">Twitter</span><span class="op">/</span>] <span class="op">==&gt;</span> tag <span class="dt">Web</span><span class="op">:</span>socialmedia,</span>
+<span id="cb5-25"><a aria-hidden="true" href="#cb5-25" tabindex="-1"></a></span>
+<span id="cb5-26"><a aria-hidden="true" href="#cb5-26" tabindex="-1"></a>current window <span class="op">$</span>program <span class="op">==</span> <span class="st">"Navigator"</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb5-27"><a aria-hidden="true" href="#cb5-27" tabindex="-1"></a>        <span class="op">!</span>(current window <span class="op">$</span>title <span class="op">=~</span> [<span class="op">/</span><span class="dt">LinkedIn</span><span class="op">/</span>, <span class="op">/</span><span class="dt">Twitter</span><span class="op">/</span>]) <span class="op">==&gt;</span> tag <span class="dt">Web</span><span class="op">:</span>web_browsing,</span></code></pre></div>
+<p>I’m basically tracking three things; how much time I’m coding Python, working on my thesis, and wasting on social media. I was able to do this by just looking at the example file and trial-and-error. Then I can view the&nbsp;results:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="ex">joe@Praimfaya</span>:~$ arbtt-stats</span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="ex">Processing</span> data [================================================================================] 100%</span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="ex">Total</span> time per tag</span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a>==================</span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="ex">_____________Tag_</span><span class="kw">|</span><span class="ex">______Time_</span><span class="kw">|</span><span class="ex">_Percentage_</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="ex">Web</span>:web_browsing <span class="kw">|</span>  <span class="ex">1h33m00s</span> <span class="kw">|</span>      <span class="ex">27.43</span></span>
+<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a>          <span class="ex">python</span> <span class="kw">|</span>    <span class="ex">45m00s</span> <span class="kw">|</span>      <span class="ex">13.27</span></span>
+<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a>          <span class="ex">thesis</span> <span class="kw">|</span>    <span class="ex">12m00s</span> <span class="kw">|</span>       <span class="ex">3.54</span></span>
+<span id="cb6-9"><a aria-hidden="true" href="#cb6-9" tabindex="-1"></a> <span class="ex">Web</span>:socialmedia <span class="kw">|</span>     <span class="ex">7m00s</span> <span class="kw">|</span>       <span class="ex">2.06</span></span></code></pre></div>
+<p>Cool!</p>
+<h3 id="taking-it-too-far-arbtt-graph">Taking it too far =&nbsp;arbtt-graph</h3>
+<p>Of course, I will take it too far. There is an add-on names <a href="https://github.com/rejuvyesh/arbtt-graph">arbtt-graph</a> that will take the data collected and serve a webpage with it all graphed out. Installation consisted of cloning the github repo and configuring the scripts. The workflow is to run the <code>update</code> bash script which dumps the arbtt-stats data into <code>.csv</code> files and then runs a python script to process the data and manipulate it into a <code>json</code> file. Then you run a python script that simply initiates a web server to display the html files from the “render”&nbsp;folder.</p>
+<p>I ran into two problems that needed to be&nbsp;fixed.</p>
+<ol type="1">
+<li>I don’t know if I had set it up wrong, but it didn’t like it when I had tags without categories. Meaning you can have tags like Web:general and Web:socialmedia, where “Web” was the category and “general” was the sub-tag. The python script assumed I would always have a category and barfed when I didn’t. I fixed this with try/catch&nbsp;blocks.</li>
+<li>I was greedy a combined the update and serving steps into a single bash file in path, so I could just call <code>timestats.sh</code> and update would get ran, a server is started on localhost, and a firefox tab is opened to the right page. The problem was all the files in arbtt-graph used relative paths so if I called from a random terminal directory it would barf again. I fixed by going into both python and bash scripts and changing to a absolute paths. This needs to be cleaned up and changed to directory variables because any change to the location and everything is screwed up again. But I was glad everything (arbtt-stats and -graph) was working so I left it&nbsp;alone.</li>
+</ol>
+<p>Here’s what it looks like with my nominal&nbsp;setup.</p>
+<figure>
+<img alt="First day, several hours usage" src="/images/2021/arbtt_00.png"/><figcaption aria-hidden="true">First day, several hours usage</figcaption>
+</figure>
+    
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
