@@ -2,51 +2,74 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = 'Joe'
+AUTHOR = 'Joe Lotz'
 SITENAME = 'Delving into Delusion'
 SITEURL = 'http://www.joelotz.com'
-PATH = 'content'
 TIMEZONE = 'Asia/Kolkata'
-DEFAULT_LANG = 'en'
-
+DEFAULT_LANG = 'en-us'
 THEME = "theme/flaskymod"
-
-## FLASKY CONFIGURATION #############################################
-# Navigation sections and relative URL:
-SECTIONS = [('Blog', 'index.html'),
-        ('Archive', 'archives.html'),
-        ('Tags', 'tags.html')]
-#        ('Projects', 'pages/projects.html'),
-#        ('Talks', 'pages/talks.html'),
-#        ('About', 'pages/about-me.html')]
-
 DATE_FORMAT = { 'en': '%B %d, %Y' }
 
-# DEFAULT CONFIGS
-DEFAULT_CATEGORY = 'Uncategorized'
-DEFAULT_DATE_FORMAT = '%B %d, %Y'
-DEFAULT_PAGINATION = 15
-#DEFAULT_METADATA = {'AUTHOR': 'Joe'} # global metadata to all the contents 
-
+SLUGIFY_SOURCE = 'title'
 PDF_GENERATOR = False
-REVERSE_CATEGORY_ORDER = True
 
-#FEED_RSS = 'feeds/all.rss.xml'
-#CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
-FEED_RSS = ''
-CATEGORY_FEED_RSS = ''
 
+## PATHS ##
+SECTIONS = [('Blog', 'index.html'),
+        ('Archive', 'archives.html'),
+        ('Tags', 'tags/tags.html')]
 RELATIVE_URLS = False
+PATH = 'content/'
 OUTPUT_PATH = 'output/'
 OUTPUT_RETENTION = [".git"]
+
+
+
+
+## DEFAULT CONFIGS ##
+#DEFAULT_CATEGORY = 'misc'
+DEFAULT_DATE_FORMAT = '%B %d, %Y'  # Jan 01, 2000
+DEFAULT_PAGINATION = 15
+
+#REVERSE_CATEGORY_ORDER = True
+
+
+## FEEDS ##
+FEED_ALL_RSS = None
+FEED_ALL_ATOM = 'blog/all.atom.xml'
+CATEGORY_FEED_ATOM = None
+CATEGORY_FEED_RSS = None
+TRANSLATION_FEED_ATOM = None
+TRANSLATION_FEED_RSS = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
+
+
+## PAGES ##
+CATEGORIES_SAVE_AS = ''
+INDEX_SAVE_AS = 'blog/index.html'
+TAGS_SAVE_AS = 'blog/tags/tags.html'
+ARCHIVES_SAVE_AS = 'blog/archives.html'
+
 ARTICLE_URL = 'blog/{date:%Y}/{slug}.html'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{slug}.html'
 
-#ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
-#ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
+TAG_URL = 'blog/tags/{slug}/'
+TAG_SAVE_AS = 'blog/tags/{slug}/index.html'
+
+CATEGORY_URL = ''
+CATEGORY_SAVE_AS = ''
+
+AUTHOR_URL = ''
+AUTHOR_SAVE_AS = ''
+
+DRAFT_URL = 'blog/drafts/'
+DRAFT_SAVE_AS = 'blog/drafts/{slug}.html'
+
 
 # static paths will be copied under the same name
-STATIC_PATHS = ['images', 'extra/CNAME', 'extra/.nojekyll']
+#STATIC_PATHS = ['images', 'extra/CNAME', 'extra/.nojekyll', 'extra/index.html']
+STATIC_PATHS = ['images', 'extra']
 EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},'extra/.nojekyll': {'path': '.nojekyll'}}
 
 TYPOGRIFY = True
@@ -75,10 +98,7 @@ GOOGLE_ANALYTICS_ACCOUNT = 'UA-48351953-1 '
 #PIWIK_SITE_ID = '1'
 
 
-## FLASKY CONFIG END ###########################################
-
-
-## PLUGIN CONFIGURATION ##################################
+## PLUGIN CONFIGURATION ##
 MARKUP = ('md', 'ipynb')
 
 ## PLUGIN CONFIGURATION ##################################
@@ -87,7 +107,7 @@ from pelican_jupyter import markup as nb_markup
 PLUGINS = [nb_markup, 'stardate', 'render_math']
 # if you create jupyter files in the content dir, snapshots are saved with the same
 # metadata. These need to be ignored. 
-IGNORE_FILES = [".ipynb_checkpoints"]  
+IGNORE_FILES = ['.ipynb_checkpoints', '.git']  
 MATH_JAX = {'align':'left','indent':'2em'}
 
 
@@ -103,12 +123,7 @@ PANDOC_EXTENSIONS = [
     "+emoji"
     ]
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
+
 
 # Blogroll
 #LINKS = (('Pelican', 'http://getpelican.com/'),
