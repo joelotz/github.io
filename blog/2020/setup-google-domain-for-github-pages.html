@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Setup Google Domain for Github&nbsp;Pages | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Setup Google Domain for Github&nbsp;Pages</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 11, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73990.4 &nbsp;&nbsp;&nbsp;
+    </p>
+    <p>So you are using github pages and want a custom domain name? This article will explain how to configure the <span class="caps">DNS</span> records to make that&nbsp;possible.</p>
+<h3 id="github-settings">Github&nbsp;Settings</h3>
+<p>First, go into your github pages repository and select the Settings. Note that your github pages is probably something like <code>&lt;yourname&gt;/&lt;yourname&gt;.github.io</code>.</p>
+<figure>
+<img alt="customdomain-00" src="/images/2020/customdomain-00.png"/><figcaption aria-hidden="true">customdomain-00</figcaption>
+</figure>
+<p>Scroll down until you see “custom domain” and then enter the domain you purchased from Google Domain and Save. Be sure to enter “www” before the domain name as shown, I’ll explain why&nbsp;later.</p>
+<figure>
+<img alt="customdomain-01" src="/images/2020/customdomain-01.png"/><figcaption aria-hidden="true">customdomain-01</figcaption>
+</figure>
+<h3 id="google-domain-dns-settings">Google Domain <span class="caps">DNS</span>&nbsp;Settings</h3>
+<p>Now go to <a href="https://domains.google.com/m/registrar/">Google Domain</a> and select “Manage” next to the domain&nbsp;name.</p>
+<figure>
+<img alt="customdomain-08" src="/images/2020/customdomain-08.png"/><figcaption aria-hidden="true">customdomain-08</figcaption>
+</figure>
+<p>Next click the “<span class="caps">DNS</span>” option on the left-hand menu and we are ready to make some entries. The first is a <span class="caps">DNS</span> ‘A’ record or ‘address’. This is the most fundamental record and indicates the <span class="caps">IP</span> address of the domain, in this example, of&nbsp;joelotz.com.</p>
+<p>Scroll down the page until you see the section “Custom resource records”. Most likely it is already set to ‘A’, if not, just click the drop-down and set it. To begin with you won’t see the <span class="caps">IP</span> addresses, you need to add those. What we are doing here is telling all the <span class="caps">DNS</span> servers, “if someone comes looking for joelotz.com go to one of these four server addresses <em>(which are at github)</em>.” These <span class="caps">IP</span> address come from the <a href="https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-a-records-with-your-dns-provider">github docs</a>. Enter an address and click the + sign to get another row. Once all four are entered hit the ‘Add’&nbsp;button.</p>
+<figure>
+<img alt="customdomain-02" src="/images/2020/customdomain-02.png"/><figcaption aria-hidden="true">customdomain-02</figcaption>
+</figure>
+<p>Next, I don’t just want to forward traffic from joelotz.com to joelotz.github.io, I want the address to actually be joelotz.com. For this, we need to create a <span class="caps">CNAME</span> Record. This creates an alias from one domain name (joelotz.github.io) to another&nbsp;(joelotz.com).</p>
+<p>In the same section as before, change the drop-down from an “A” to “<span class="caps">CNAME</span>”. Then add “www” to the far left field and your github pages address to the far&nbsp;right.</p>
+<figure>
+<img alt="customdomain-03" src="/images/2020/customdomain-03.png"/><figcaption aria-hidden="true">customdomain-03</figcaption>
+</figure>
+<p>This is what it should look like when&nbsp;completed.</p>
+<figure>
+<img alt="customdomain-04" src="/images/2020/customdomain-04.png"/><figcaption aria-hidden="true">customdomain-04</figcaption>
+</figure>
+<p>I found it takes about 5 minutes for this information to propagate, so go grab an iced tea, you deserve it. For those extra-nerdy, you can verify that records are set by&nbsp;typing:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">dig</span> <span class="op">&lt;</span>domain<span class="op">&gt;</span> +nostats +nocomments +nocmd</span></code></pre></div>
+<p>This command will perform a <span class="caps">DNS</span> lookup and display the answers that are returned from the name server(s). There is a bunch of fluff that is hidden with all the +no&nbsp;flags.</p>
+<figure>
+<img alt="customdomain-06" src="/images/2020/customdomain-06.png"/><figcaption aria-hidden="true">customdomain-06</figcaption>
+</figure>
+<h3 id="encrypted-traffic">Encrypted&nbsp;Traffic</h3>
+<p>And now a statement on security and privacy, which are related but not the same… it is ridiculously easy to “see” what you are doing on the internet. This is currently used by all types of people, governments and large companies, to collect your data and information. The most easiest method of keeping your traffic private is to <a href="https://www.eff.org/deeplinks/2018/12/how-https-everywhere-keeps-protecting-users-increasingly-encrypted-web">encrypt it</a>. To do that you must browse the <u>https</u> version of a site, but first you must have an https encrypted&nbsp;version.</p>
+<p>Now that the <span class="caps">DNS</span> records are entered and propogated, go back to github pages repository. Scroll down until you see and then select “Enforce <span class="caps">HTTPS</span>”. According to Monarch&nbsp;Wadia,</p>
+<blockquote>
+<p>Your github repo settings’ “Custom Domain” field *<strong><span class="caps">HAS</span> to have “www” in it,*</strong> and it <span class="caps">HAS</span> to have “Enforce <span class="caps">HTTPS</span>”&nbsp;checked!</p>
+</blockquote>
+<p><span class="citation" data-cites="monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6">[https://medium.com/@monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6]</span>(https://medium.com/<span class="citation" data-cites="monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6">@monarchwadia/github-pages-setting-up-www-subdomain-with-ssl-https-aca9eca371d6</span>)</p>
+<figure>
+<img alt="customdomain-07" src="/images/2020/customdomain-07.png"/><figcaption aria-hidden="true">customdomain-07</figcaption>
+</figure>
+<p>This is why I had you use “www” in front of your domain name way back in step 1. If I didn’t then <code>https://joelotz.com</code> would work but <code>https://www.joelotz.com</code> would result in a Certificate Invalid&nbsp;error.</p>
+<h3 id="update---20201114">Update -&nbsp;2020/11/14</h3>
+<p>This may be obvious to some of you, but I wanted to point something out that gave me some hassle. I use <a href="https://pypi.org/project/pelican/">Pelican</a> static-site generator to create my blog. When I generate the html files from markdown it completely erases the “output” folder and re-builds the blog. From there, I push the output folder to the github master branch to be served. The problem is… was… that I was blasting away the <span class="caps">CNAME</span> file that was created in github. I <em>assume</em> this problem exists with Jekyll or other static-site platforms. The solution I found was to either have Pelican create this file as a static page when generating the blog. There are probably other solutions, but this worked for&nbsp;me.</p>
+<p>First, tell Pelican where to find the static file “<span class="caps">CNAME</span>”. Add these options to <code>pelicanconf.py</code> file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="ex">STATIC_PATHS</span> = [<span class="st">'extra/CNAME'</span>]</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="ex">EXTRA_PATH_METADATA</span> = {<span class="st">'extra/CNAME'</span>: {<span class="st">'path'</span>: <span class="st">'CNAME'</span>},}</span></code></pre></div>
+<p>Or if you already have STATIC_PATHS, like an image folder, it would look something like&nbsp;this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">STATIC_PATHS</span> = [<span class="st">'images'</span>, <span class="st">'extra/CNAME'</span>]</span></code></pre></div>
+<p>Now create a directory in the blog’s content folder named <code>extra</code> and in that folder a file named <code>CNAME</code> as described above. When you generate the blog, i.e. <code>pelican content -o output -s pelicanconf.py</code> the file <code>CNAME</code> will be copied into the output folder. And more importantly when you push the output folder to github it won’t blast your <span class="caps">CNAME</span>&nbsp;file.</p>
+<p>Source: <a href="https://docs.getpelican.com/en/latest/tips.html?highlight=static%20files#copy-static-files-to-the-root-of-your-site">https://docs.getpelican.com/en/latest/tips.html?highlight=static%20files#copy-static-files-to-the-root-of-your-site</a></p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+        <tr><td> Pelican</td><td> 4.5.4</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Playing around with&nbsp;FizzBuzz | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Playing around with&nbsp;FizzBuzz</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 18, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74513.4 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tag/python.html">Python</a>     </p>
+    <p>I was bored and reading a Python article on Medium where it challenged the reader to write a python one-liner to solve the <a href="https://en.wikipedia.org/wiki/Fizz_buzz">FizzBuzz</a> question. This is a long-time famous programming interview question that everyone most likely knows, so I won’t explain it. Like I said, I was bored so I wrote it&nbsp;out.</p>
+<p>Here is my long-form solution using&nbsp;loops:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="kw">def</span> loop_fizzbuzz(num<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>        <span class="cf">if</span> (i<span class="op">%</span><span class="dv">3</span><span class="op">==</span><span class="dv">0</span> <span class="kw">and</span> i<span class="op">%</span><span class="dv">5</span><span class="op">==</span><span class="dv">0</span>): <span class="bu">print</span>(<span class="st">"FizzBuzz"</span>)</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>        <span class="cf">elif</span> i<span class="op">%</span><span class="dv">3</span><span class="op">==</span><span class="dv">0</span>: <span class="bu">print</span>(<span class="st">"Fizz"</span>)</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>        <span class="cf">elif</span> i<span class="op">%</span><span class="dv">5</span><span class="op">==</span><span class="dv">0</span>: <span class="bu">print</span>(<span class="st">"Buzz"</span>)</span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>        <span class="cf">else</span>: <span class="bu">print</span>(i)</span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a>    </span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a>loop_fizzbuzz()    </span></code></pre></div>
+<p>I did the one-liner using list comprehension, but then thought it would be interesting to create a generator and spit it out in a list comprehension. Since this is such a trivial example, I don’t see any memory benefit, or any benefit it all except being&nbsp;silly.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="kw">def</span> listcomp_fizzbuzz(num<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a>    <span class="co"># create a generator</span></span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a>    <span class="cf">return</span> ( <span class="st">'FizzBuzz'</span> <span class="cf">if</span> (i<span class="op">%</span><span class="dv">3</span><span class="op">==</span><span class="dv">0</span> <span class="kw">and</span> i<span class="op">%</span><span class="dv">5</span><span class="op">==</span><span class="dv">0</span>) <span class="cf">else</span> <span class="st">'Fizz'</span> <span class="cf">if</span> i<span class="op">%</span><span class="dv">3</span><span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">'Buzz'</span> <span class="cf">if</span> i<span class="op">%</span><span class="dv">5</span><span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num<span class="op">+</span><span class="dv">1</span>) )</span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a>[ <span class="bu">print</span>(i) <span class="cf">for</span> i <span class="kw">in</span> listcomp_fizzbuzz() ]</span></code></pre></div>
+<p>Completely by coincidence - honestly - I just saw on Twitter that <a href="https://joelgrus.com/">Joel Grus</a> <span class="citation" data-cites="joelgrus">[@joelgrus]</span>(https://twitter.com/joelgrus) (a data science nerd that I <s>stalk</s> follow) just published a humorous and interesting book titled “<a href="https://leanpub.com/fizzbuzz/">Ten Essays on Fizz Buzz</a>”. It’s a collection of stories with unusual Fizz Buzz solutions, for example, he imagines creating and training a neural network to predict the first 100 answers. Totally outrageous, but the interview story he imagines along with the solution is pretty funny! Anyways - support your fellow&nbsp;nerds!</p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>Python</td><td> 3.7.4</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

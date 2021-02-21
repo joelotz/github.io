@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Extract gpx Trace from Geotagged&nbsp;Photos | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Extract gpx Trace from Geotagged&nbsp;Photos</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 11, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tag/bash.html">Bash</a>     </p>
+    <p>On an Android the photos taken from the Mapillary app are stored in the app data&nbsp;directory.</p>
+<p>Most likely you are storing the photos on an external <span class="caps">SD</span> Card, if so the storage location is: <code>SAMSUNG Android/Card/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
+<p>Otherwise :<code>SAMSUNG Android/Phone/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
+<p>A gpx file is automatically created by the Mapillary app and is stored in the directory under file&nbsp;name</p>
+<p>Photos are names in this format: <code>2020_06_06_14_06_41_856_+0530.jpg</code> YYY_MM_DD_HH_MM_SS_xxx_UTCOffset I thought xxx would be the subseconds but it does not match the subseconds data&nbsp;field.</p>
+<p>Adding geotags to&nbsp;images</p>
+<ul>
+<li>https://exiftool.org/geotag.html</li>
+<li>https://exiftool.org/geotag.html#Inverse%20Geotagging</li>
+</ul>
+<p>Some useful&nbsp;options:</p>
+<ul>
+<li>if makes exiftool only process files with a gps&nbsp;tag,</li>
+<li>fileOrder allows processing in a forced&nbsp;order,</li>
+<li>d allows formatting the datatime&nbsp;string.</li>
+</ul>
+<p>For&nbsp;example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">exiftool</span> -if <span class="st">'$gpsdatetime'</span> -fileOrder gpsdatetime -p ./gpx.fmt -d %Y-%m-%dT%H:%M:%SZ *JPG <span class="op">&gt;</span> output.gpx</span></code></pre></div>
+<p><code>exiftool -s -G -a file.jpg</code></p>
+<ul>
+<li><strong>-s</strong> means instead of showing the “friendly” names like “Create Date”, show the names you need to use when you write ExifTool commands. So instead of “Create Date” you see&nbsp;“CreateDate”.</li>
+<li><strong>-G</strong> means also show the metadata Group to which the metadata tag&nbsp;belongs.</li>
+<li><strong>-a</strong> means to show all tags, even if they are&nbsp;duplicates.</li>
+</ul>
+<p>This uses a custom format to create a csv of the subsecond creation date, latitude, and longitude of all photos. <code>exiftool -p ./csv_original.fmt *.jpg &gt; original.csv</code></p>
+<p><code>exiftool -csv -filename -imagesize -gps:GPSLatitude -gps:GPSLongitude ./ &gt; long.csv</code></p>
+<p><code>exiftool -ee -n -p "$gpslatitude,$gpslongitude,$gpsdatestamp,$gpstimestamp,$gpsspeed" FILE &gt; out.csv</code></p>
+<p>This uses a gps logfile (.gpx) and interpolates photos based on CreateDate or SubSecCreateDate? <code>exiftool -geotag log.gpx *jpg</code> <code>exiftool -geotag log.gpx "-GeoTime&lt;SubSecDateTimeOriginal" *jpg</code></p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+        <tr><td> x</td><td></td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

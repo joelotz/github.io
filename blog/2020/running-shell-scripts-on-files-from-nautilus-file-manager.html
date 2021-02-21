@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Running Shell Scripts on Files from Nautilus File&nbsp;Manager | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Running Shell Scripts on Files from Nautilus File&nbsp;Manager</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 10, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73738.5 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tag/ubuntu.html">Ubuntu</a>  <a href="/blog/tag/bash.html">bash</a>     </p>
+    <p>In a <a href="converting-mp4-to-mov-with-ffmpeg-in-ubuntu.html">previous post</a> I wrote a script to transcode a video in an mp4 container to mov container. It would be really cool to simply right-click on the file and run the script. <a href="https://askubuntu.com/questions/1031807/how-to-integrate-run-as-shell-script-in-right-click-menu-of-file-manager">AskUbuntu</a> had a decent guide that explained&nbsp;how.</p>
+<p>First create a new file in the <code>/.local/share/nautilus/scripts/</code> folder using vi, gedit, or your favorite text&nbsp;editor.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="bu">cd</span> ~/.local/share/nautilus/scripts/</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="ex">gedit</span> <span class="op">&lt;</span>name of script<span class="op">&gt;</span></span></code></pre></div>
+<p>Now, of course, make the script&nbsp;executable.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">chmod</span> +x ~/.local/share/nautilus/scripts/<span class="op">&lt;</span>name of script.</span></code></pre></div>
+<h3 id="writing-the-video-transcode-script-with-ffmpeg">Writing the Video Transcode Script with&nbsp;FFMpeg</h3>
+<p>Here is the script I wrote, encorporating the ffmpeg command from the previous post. The variables allow the output file to be the same size/resolution as the input file. Depending on the size of the file it could take some time, so I added a zenity popup box so you have to install zenity (<code>sudo apt install zenity</code>) or comment out the pop-ups. It may be useful to add an progress-box for the&nbsp;future…</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="co">## assumes FFPMEG is installed</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="co">## converts a mp4 vidoe file to mov container in order ot use in DVR</span></span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="co"># strip new line char passed by Nautilus</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="va">FILENAME=$(</span><span class="bu">echo</span> <span class="va">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span> <span class="kw">|</span> <span class="fu">sed</span> -e <span class="st">'s/\r//g'</span><span class="va">)</span></span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="co">#convert to lowercase in order to check extension...i can't work the lowercase into the logic below so this is a work around</span></span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="va">FILENAME2=${FILENAME,,}</span></span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="co">#check to see if file ends with .mp4</span></span>
+<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a><span class="kw">if</span><span class="bu"> [</span> <span class="va">${FILENAME2: -4}</span> <span class="ot">==</span> <span class="st">".mp4"</span><span class="bu"> ]</span></span>
+<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a><span class="kw">then</span></span>
+<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a>    <span class="co"># cut off the extension and rename to file.mov</span></span>
+<span id="cb3-16"><a aria-hidden="true" href="#cb3-16" tabindex="-1"></a>    <span class="va">FILENAME3=$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$FILENAME</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">cut</span> -f 1 -d <span class="st">'.'</span><span class="va">)</span> </span>
+<span id="cb3-17"><a aria-hidden="true" href="#cb3-17" tabindex="-1"></a>    <span class="va">NEWFILE=</span><span class="st">"</span><span class="va">${FILENAME3}</span><span class="st">.mov"</span></span>
+<span id="cb3-18"><a aria-hidden="true" href="#cb3-18" tabindex="-1"></a></span>
+<span id="cb3-19"><a aria-hidden="true" href="#cb3-19" tabindex="-1"></a></span>
+<span id="cb3-20"><a aria-hidden="true" href="#cb3-20" tabindex="-1"></a>    <span class="co"># determined width and height of the video</span></span>
+<span id="cb3-21"><a aria-hidden="true" href="#cb3-21" tabindex="-1"></a>    <span class="co"># the assumption is the output file is desired to be the same same as input </span></span>
+<span id="cb3-22"><a aria-hidden="true" href="#cb3-22" tabindex="-1"></a>    <span class="va">WIDTH=$(</span><span class="ex">ffprobe</span> -v error -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 <span class="st">"</span><span class="va">${FILENAME}</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb3-23"><a aria-hidden="true" href="#cb3-23" tabindex="-1"></a>    <span class="va">HEIGHT=$(</span><span class="ex">ffprobe</span> -v error -show_entries stream=height -of default=noprint_wrappers=1:nokey=1 <span class="st">"</span><span class="va">${FILENAME}</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb3-24"><a aria-hidden="true" href="#cb3-24" tabindex="-1"></a>    <span class="va">FRAMERATE=$(</span><span class="ex">ffprobe</span> -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 <span class="st">"</span><span class="va">${FILENAME}</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb3-25"><a aria-hidden="true" href="#cb3-25" tabindex="-1"></a></span>
+<span id="cb3-26"><a aria-hidden="true" href="#cb3-26" tabindex="-1"></a>    <span class="co"># this is the processing magic, notice I use the original FILENAME variable due to my goofy hack</span></span>
+<span id="cb3-27"><a aria-hidden="true" href="#cb3-27" tabindex="-1"></a>    <span class="co"># https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format</span></span>
+<span id="cb3-28"><a aria-hidden="true" href="#cb3-28" tabindex="-1"></a>    <span class="ex">ffmpeg</span> -i <span class="st">"</span><span class="va">${FILENAME}</span><span class="st">"</span> -c:v dnxhd -profile:v dnxhr_hqx -vf <span class="st">"scale=</span><span class="va">${WIDTH}</span><span class="st">:</span><span class="va">${HEIGHT}</span><span class="st">,fps=</span><span class="va">${FRAMERATE}</span><span class="st">,format=yuv422p10le"</span> -c:a pcm_s16le <span class="st">"</span><span class="va">${NEWFILE}</span><span class="st">"</span></span>
+<span id="cb3-29"><a aria-hidden="true" href="#cb3-29" tabindex="-1"></a></span>
+<span id="cb3-30"><a aria-hidden="true" href="#cb3-30" tabindex="-1"></a>    <span class="co"># finished message box</span></span>
+<span id="cb3-31"><a aria-hidden="true" href="#cb3-31" tabindex="-1"></a>    <span class="ex">zenity</span> --info --title <span class="st">"Procesing completed"</span> --text <span class="st">"</span><span class="va">${FILENAME3}</span><span class="st">.mp4 has been transcoded to a .mov file at size </span><span class="va">${WIDTH}</span><span class="st">:</span><span class="va">${HEIGHT}</span><span class="st"> and framerate=</span><span class="va">${FRAMERATE}</span><span class="st">"</span> --width=600</span>
+<span id="cb3-32"><a aria-hidden="true" href="#cb3-32" tabindex="-1"></a></span>
+<span id="cb3-33"><a aria-hidden="true" href="#cb3-33" tabindex="-1"></a><span class="kw">else</span> # <span class="ex">it</span> does not end in .mp4 so do not process</span>
+<span id="cb3-34"><a aria-hidden="true" href="#cb3-34" tabindex="-1"></a>    <span class="ex">zenity</span> --error --title <span class="st">"This is not an .mp4 file"</span> --text <span class="st">"File must end with extension '.mp4'"</span> --width=600</span>
+<span id="cb3-35"><a aria-hidden="true" href="#cb3-35" tabindex="-1"></a><span class="kw">fi</span></span></code></pre></div>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
+        <tr><td> bash</td><td> 5.0.16(1)-release</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
