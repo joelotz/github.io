@@ -31,11 +31,19 @@ DEFAULT_PAGINATION = 15
 PDF_GENERATOR = False
 REVERSE_CATEGORY_ORDER = True
 
-FEED_RSS = 'feeds/all.rss.xml'
-CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
+#FEED_RSS = 'feeds/all.rss.xml'
+#CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
+FEED_RSS = ''
+CATEGORY_FEED_RSS = ''
 
 RELATIVE_URLS = False
 OUTPUT_PATH = 'output/'
+OUTPUT_RETENTION = [".git"]
+ARTICLE_URL = 'blog/{date:%Y}/{slug}.html'
+ARTICLE_SAVE_AS = 'blog/{date:%Y}/{slug}.html'
+
+#ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
+#ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
 
 # static paths will be copied under the same name
 STATIC_PATHS = ['images', 'extra/CNAME', 'extra/.nojekyll']
