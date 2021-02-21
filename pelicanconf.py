@@ -70,7 +70,7 @@ DRAFT_SAVE_AS = 'blog/drafts/{slug}.html'
 # static paths will be copied under the same name
 #STATIC_PATHS = ['images', 'extra/CNAME', 'extra/.nojekyll', 'extra/index.html']
 STATIC_PATHS = ['images', 'extra']
-EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},'extra/.nojekyll': {'path': '.nojekyll'}}
+EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},'extra/.nojekyll': {'path': '.nojekyll'}, 'extra/index.html': {'path': 'index.html'}}
 
 TYPOGRIFY = True
 WITH_FUTURE_DATES = False #If disabled, content with dates in the future will get a default status of draft.
@@ -107,9 +107,9 @@ from pelican_jupyter import markup as nb_markup
 PLUGINS = [nb_markup, 'stardate', 'render_math']
 # if you create jupyter files in the content dir, snapshots are saved with the same
 # metadata. These need to be ignored. 
-IGNORE_FILES = ['.ipynb_checkpoints', '.git']  
+IGNORE_FILES = ['.ipynb_checkpoints', '.git', '.html']  
 MATH_JAX = {'align':'left','indent':'2em'}
-
+ARTICLE_EXCLUDES = ['extra'] 
 
 PANDOC_ARGS = [
     "--mathjax",
