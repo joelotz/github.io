@@ -31,7 +31,7 @@
             <ul>
 	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
 	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
-	            <li><a href="http://www.joelotz.com/blog/tags.html">Tags</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
             </ul>
         </div>
         <div class=separator></div>
@@ -40,7 +40,7 @@
     <h1 class="title"> Running FreeFileSync Backup from Crontab on&nbsp;Ubuntu</h1>
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 08, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73815.2 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/blog/tag/ubuntu.html">Ubuntu</a>     </p>
+ <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
     <p>It took me half a day, maybe 4 hours, to solve this problem and I want to document the solution. I wanted to use <a href="https://www.linux-magazine.com/Online/Features/FreeFileSync/(offset)/3">FreeFileSync</a> to backup all my files to an external hard drive. I looked at <a href="https://www.capterra.com/file-sync-software/">a bunch of other software</a> but what I want to do is pretty basic and everything else was too complicated for me. Regardless, I installed <a href="https://freefilesync.org/">FreeFileSync</a>, setup the configuration, and saved the “batch job”. Everything works smooth when manually run, but of course I want to automate the process and setup a cron&nbsp;job.</p>
 <p>I kept getting error messages. Many solutions suggested to use gnome-schedule but that appears to be defunct and no longer available for Ubuntu 20.04. I went down the path of trying to build it from source and yadda yadda. That wasted some time. Another error message I got was <code>Failed to load module canberra-gtk-module</code> - which was easily&nbsp;fixed.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt install libcanberra-gtk3-module</span></code></pre></div>

@@ -31,7 +31,7 @@
             <ul>
 	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
 	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
-	            <li><a href="http://www.joelotz.com/blog/tags.html">Tags</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
             </ul>
         </div>
         <div class=separator></div>
@@ -40,7 +40,7 @@
     <h1 class="title"> Converting mp4 to Animated gif with FFmpeg in&nbsp;Ubuntu</h1>
     <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 17, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73757.7 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/blog/tag/ubuntu.html">Ubuntu</a>  <a href="/blog/tag/ffmpeg.html">FFmpeg</a>     </p>
+ <a href="/blog/tags/ubuntu/">Ubuntu</a>  <a href="/blog/tags/ffmpeg/">FFmpeg</a>     </p>
     <p>Source is from an <a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality">excellent answer</a> on SuperUser&nbsp;StackExchange.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">ffmpeg</span> input.mp4 -vf <span class="st">"fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse"</span> -loop 0 output.gif</span></code></pre></div>
 <p>You can define the frames per second via the ”fps” argument. The standard for an animated gif is <a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs">between 15 and 24</a>, but the more frames the larger the output&nbsp;file.</p>
