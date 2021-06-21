@@ -46,11 +46,11 @@ This will take you to the OSM Trace Upload page. Click “Upload a trace”
 
 Then select your gpx file and enter the details as appropriate.
 
-![garmin_08](/images/2021/garmin_08.png)
+![garmin_08](/images/2021/garmin_08a.png)
 
 After uploading, you'll need to wait 1-2 minutes, at the most, for the system to enter the trace into the database.
 
-![garmin_09](/images/2021/garmin_09.png)
+![garmin_09](/images/2021/garmin_09a.png)
 
 Refresh the webpage and you'll see a list of all your uploaded traces. Select “Edit Map” to open the trace in OSM.
 
