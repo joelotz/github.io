@@ -38,74 +38,80 @@
                 
         <div class=body>
     <h1 class="title"> Auto-generate and Publish Pelican Blog to Github Pages on&nbsp;Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 22, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73853.5 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 22, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73854.7 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/blog/tags/ubuntu/">Ubuntu</a>  <a href="/blog/tags/pelican/">Pelican</a>     </p>
     <p>I thought I’d share an automation script I wrote that builds my Pelican site, asks for a commit message, then pushes it to github pages. This script assumes <a href="https://packages.ubuntu.com/focal/zenity">zenity</a> is installed on the system. If not, easily install&nbsp;via:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">sudo</span> apt install zenity</span></code></pre></div>
-<p>I would highly recommend setting up <code>ghp-import</code> and this script assumes you have. Follow <a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">these instructions</a> if you need to install/configure&nbsp;it.</p>
+<div class="highlight"><pre><span></span><code>sudo apt update
+sudo apt install zenity
+</code></pre></div>
+
+<p>I would highly recommend setting up <code>ghp-import</code> and this script assumes you have. Follow <a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">these instructions</a> if you  need to install/configure&nbsp;it. </p>
 <p>Here’s the script, save it in the root directory of your pelican blog and make it <a href="https://www.andrewcbancroft.com/blog/musings/make-bash-script-executable/">executable</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># ========================================================================</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Automated script to build Pelican blog, ask for a commit message, then</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#   push to github pages.</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Requirement:</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#   Assumes zenity is installed, ghp-import is installed, and</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#       assumes github credentials are stored locally</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co"># Input user commit message</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="va">inputStr=$(</span><span class="ex">zenity</span> --entry --title=<span class="st">"Commit Message"</span> <span class="kw">\</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>    <span class="ex">--text</span>=<span class="st">"What is your commit message?"</span> --width=600<span class="va">)</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># If the canceled button is pressed, exit script</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">if</span><span class="bu"> [</span> <span class="st">"</span><span class="va">$?</span><span class="st">"</span> <span class="ot">!=</span> 0<span class="bu"> ]</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="kw">then</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    <span class="bu">echo</span> <span class="st">"Commit message was canceled, abandoning script"</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="bu">exit</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">fi</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># If the commit message is empty, exit script</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="kw">if</span><span class="bu"> [</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$inputStr</span><span class="st">"</span><span class="bu"> ]</span> </span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">then</span>    </span>
-<span id="cb2-26"><a href="#cb2-26"></a>    <span class="bu">echo</span> <span class="st">"Commit message is empty, abandoning script"</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>    <span class="bu">exit</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="kw">else</span> # <span class="ex">Else</span>, run </span>
-<span id="cb2-29"><a href="#cb2-29"></a></span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="co"># Build the blog    </span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    <span class="ex">pelican</span> content -o output -s pelicanconf.py</span>
-<span id="cb2-32"><a href="#cb2-32"></a>    <span class="co"># collect and push the blog output folder to github pages</span></span>
-<span id="cb2-33"><a href="#cb2-33"></a>    <span class="co">#  in a branch called 'master'</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a>    <span class="ex">ghp-import</span> -m <span class="st">"</span><span class="va">$inputStr</span><span class="st">"</span> --no-jekyll -b master output</span>
-<span id="cb2-35"><a href="#cb2-35"></a>    <span class="fu">git</span> push origin master</span>
-<span id="cb2-36"><a href="#cb2-36"></a>    <span class="co"># save the "non-compiled" files of blog and push to a</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a>    <span class="co">#  branch called 'content'</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>    <span class="fu">git</span> add .</span>
-<span id="cb2-39"><a href="#cb2-39"></a>    <span class="fu">git</span> reset output plugins __pycache__</span>
-<span id="cb2-40"><a href="#cb2-40"></a>    <span class="fu">git</span> commit -m <span class="st">"</span><span class="va">$inputStr</span><span class="st">"</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a>    <span class="fu">git</span> push origin content</span>
-<span id="cb2-42"><a href="#cb2-42"></a><span class="kw">fi</span></span></code></pre></div>
-<p>A zenity input box is used to capture the commit&nbsp;message.</p>
-<figure>
-<img alt="Zenity Input Box" src="/images/2020/pelicanGithub-01.png"/><figcaption aria-hidden="true">Zenity Input Box</figcaption>
-</figure>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">pelican</span> content -o output -s publishconf.py</span></code></pre></div>
-<p>This is your <a href="https://docs.getpelican.com/en/stable/publish.html">standard command</a> for generating and deploying a pelican blog. This next line is where things get&nbsp;interesting.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">ghp-import</span> -m <span class="st">"</span><span class="va">$inputStr</span><span class="st">"</span> --no-jekyll -b master output</span>
-<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="fu">git</span> push origin master</span></code></pre></div>
-<p>This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box”. Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don’t need to enter them, <a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git">[1]</a> and <a href="https://git-scm.com/docs/git-credential-store">[2]</a>.</p>
-<pre class="shell"><code>git add .
+<div class="numberLines highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># ========================================================================</span>
+<span class="c1"># Automated script to build Pelican blog, ask for a commit message, then</span>
+<span class="c1">#   push to github pages.</span>
+<span class="c1">#</span>
+<span class="c1"># Requirement:</span>
+<span class="c1">#   Assumes zenity is installed, ghp-import is installed, and</span>
+<span class="c1">#       assumes github credentials are stored locally</span>
+<span class="c1">#</span>
+
+<span class="c1"># Input user commit message</span>
+<span class="nv">inputStr</span><span class="o">=</span><span class="k">$(</span>zenity --entry --title<span class="o">=</span><span class="s2">&quot;Commit Message&quot;</span> <span class="se">\</span>
+    --text<span class="o">=</span><span class="s2">&quot;What is your commit message?&quot;</span> --width<span class="o">=</span><span class="m">600</span><span class="k">)</span>
+
+<span class="c1"># If the canceled button is pressed, exit script</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$?</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="m">0</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Commit message was canceled, abandoning script&quot;</span>
+    <span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="c1"># If the commit message is empty, exit script</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span> <span class="o">]</span> 
+<span class="k">then</span>    
+    <span class="nb">echo</span> <span class="s2">&quot;Commit message is empty, abandoning script&quot;</span>
+    <span class="nb">exit</span>
+<span class="k">else</span> <span class="c1"># Else, run </span>
+
+    <span class="c1"># Build the blog    </span>
+    pelican content -o output -s pelicanconf.py
+    <span class="c1"># collect and push the blog output folder to github pages</span>
+    <span class="c1">#  in a branch called &#39;master&#39;</span>
+    ghp-import -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span> --no-jekyll -b master output
+    git push origin master
+    <span class="c1"># save the &quot;non-compiled&quot; files of blog and push to a</span>
+    <span class="c1">#  branch called &#39;content&#39;</span>
+    git add .
+    git reset output plugins __pycache__
+    git commit -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span>
+    git push origin content
+<span class="k">fi</span>
+</code></pre></div>
+
+<p>A zenity input box is used to capture the commit&nbsp;message. </p>
+<p><img alt="Zenity Input Box" src="/images/2020/pelicanGithub-01.png"></p>
+<div class="highlight"><pre><span></span><code>pelican content -o output -s publishconf.py
+</code></pre></div>
+
+<p>This is your <a href="https://docs.getpelican.com/en/stable/publish.html">standard command</a> for generating and deploying a pelican blog. This next line is where things get&nbsp;interesting. </p>
+<div class="highlight"><pre><span></span><code>ghp-import -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span> --no-jekyll -b master output
+git push origin master
+</code></pre></div>
+
+<p>This command is saying, “take the contents of the folder ‘/output’, add to the master branch, make the commit message what you typed into the input box&#8221;. Then push the local master branch to the remote repo. I am assuming you have already locally cached your github credentials so you don&#8217;t need to enter them, <a href="https://help.github.com/en/github/using-git/caching-your-github-password-in-git">[1]</a> and <a href="https://git-scm.com/docs/git-credential-store">[2]</a>.</p>
+<div class="highlight"><pre><span></span><code>git add .
 git reset output/* plugins/* __pycache__/*
-git commit -m "$inputStr"
-git push origin content</code></pre>
-<p>This last bit is a little tricky. First, I want to add everything in my blog folder then remove from staging the output folder (which I’m already pushing to the master branch), the plugin folder, and the __pycache__ folder. You can also accomplish this with a .gitignore file. Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the&nbsp;files.</p>
-<figure>
-<img alt="Example Github Repository" src="/images/2020/pelicanGithub-02.png"/><figcaption aria-hidden="true">Example Github Repository</figcaption>
-</figure>
-<p>In your <name>github.io repository, click the branch button and you will see the <code>master</code> which is default and contains the generated html files. You can also click the <code>content</code> branch and see your source files.</name></p>
+git commit -m <span class="s2">&quot;</span><span class="nv">$inputStr</span><span class="s2">&quot;</span>
+git push origin content
+</code></pre></div>
+
+<p>This last bit is a little tricky. First, I want to add everything in my blog folder then remove from staging the output folder (which I’m already pushing to the master branch), the plugin folder, and the __pycache__ folder. You can also accomplish this with a .gitignore file. Next, commit and push the ‘source’ files or all my non-generated pages to the content branch and push to the remote repo. This way I can host my html generated files as a website on github pages but I can also store/backup my source files. This prevents the need to have multiple repositories, one for hosting the blog and one for backing up the&nbsp;files. </p>
+<p><img alt="Example Github Repository" src="/images/2020/pelicanGithub-02.png"></p>
+<p>In your <name>github.io repository, click the branch button and you will see the <code>master</code> which is default and contains the generated html files. You can also click the <code>content</code> branch and see your source&nbsp;files.</p>
     
 <div class="version">
 <h3>Software Versions</h3>

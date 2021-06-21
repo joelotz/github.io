@@ -38,14 +38,20 @@
                 
         <div class=body>
     <h1 class="title"> Converting mp4 to Animated gif with FFmpeg in&nbsp;Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 17, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73757.7 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;April 17, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73758.9 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/blog/tags/ubuntu/">Ubuntu</a>  <a href="/blog/tags/ffmpeg/">FFmpeg</a>     </p>
     <p>Source is from an <a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality">excellent answer</a> on SuperUser&nbsp;StackExchange.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">ffmpeg</span> input.mp4 -vf <span class="st">"fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse"</span> -loop 0 output.gif</span></code></pre></div>
-<p>You can define the frames per second via the ”fps” argument. The standard for an animated gif is <a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs">between 15 and 24</a>, but the more frames the larger the output&nbsp;file.</p>
-<p>The split commands splits the video into two streams for generate a color palette and downsampling the incoming&nbsp;video.</p>
-<p>The loop argument defines how many times you want the gif to loop. - 1 = no looping - 1 = loop once - n = loop n times - 0 = loop infinite =&nbsp;“forever”</p>
+<div class="highlight"><pre><span></span><code>ffmpeg input.mp4 -vf <span class="s2">&quot;fps=15,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse&quot;</span> -loop <span class="m">0</span> output.gif
+</code></pre></div>
+
+<p>You can define the frames per second via the ”fps” argument. The standard for an animated gif is <a href="https://www.bluefrogdm.com/blog/best-practices-for-creating-animated-gifs">between 15 and 24</a>, but the more frames the larger the output&nbsp;file. </p>
+<p>The split commands splits the video into two streams for generate a color palette and downsampling the incoming&nbsp;video. </p>
+<p>The loop argument defines how many times you want the gif to loop.
+- 1 = no looping
+- 1 = loop once
+- n = loop n times
+- 0 = loop infinite =&nbsp;“forever”</p>
     
 <div class="version">
 <h3>Software Versions</h3>

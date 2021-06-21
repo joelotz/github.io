@@ -38,52 +38,59 @@
                 
         <div class=body>
     <h1 class="title"> N-Queens Puzzle, Part&nbsp;1-Introduction</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 26, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73949.4 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 26, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73950.6 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/blog/tags/python/">Python</a>     </p>
-    <p>The N-Queens puzzle is the popular problem of placing N number of chess queens on an NxN grid board such that no queens cannot attack each other; i.e no two queens share the same row, column, or diagonal. The puzzle is often generalized to the “<a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle">8 Queens Puzzle</a>” to match a standard size chess board and is a good example of a simple but nontrivial algorithm&nbsp;problem.</p>
+    <p>The N-Queens puzzle is the popular problem of placing N number of chess queens on an NxN grid board such that no queens cannot attack each other; i.e no two queens share the same row, column, or diagonal. The puzzle is often generalized to the “<a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle">8 Queens Puzzle</a>” to match a standard size chess board and is a good example of a simple but nontrivial algorithm&nbsp;problem. </p>
 <ul>
 <li>It is known that a solution exists for all&nbsp;N&gt;3</li>
 <li>It gets <em>very</em> difficult to do by hand for&nbsp;N&gt;7</li>
 <li>Good candidate for computer (programmatic)&nbsp;solution</li>
 </ul>
-<h3 id="combinations-and-permutations">Combinations and&nbsp;Permutations</h3>
-<p><a href="https://en.wikipedia.org/wiki/Combination">Combinations</a> and <a href="https://en.wikipedia.org/wiki/Permutation">permutations</a> are often confused; for our purposes I will simply say that one cares about order while the other does not, and this makes a difference. In combinations the pair <span class="math inline">\((0,1)\)</span> is the same as <span class="math inline">\((1,0)\)</span>. This is good for relationships or interactions because the interaction between John and Bill is the same and between Bill and John, we don’t care about&nbsp;order.</p>
-<p>On the other hand, let’s say… for example… I want to calculate all the possible locations of queens without duplication of rows. So given a list of objects <span class="math inline">\([A,B,C,D]\)</span> or, in our example case, the four possible rows <span class="math inline">\([0,1,2,3]\)</span>, how many different ways can we arrange the queens with one on each row? <span class="math display">\[ P_N = N! \]</span> <span class="math display">\[ P_4 = 4!= 4 \cdot 3 \cdot 2 \cdot 1 =&nbsp;24\]</span></p>
-<p>Now is a good time to finally break out <code>python</code> and the standard library <a href="https://docs.python.org/2/library/itertools.html">itertools</a>. Here we can just ask itertools to create all the permutations of [0,1,2,3] for us. Note the result from itertools is an <a href="https://www.geeksforgeeks.org/iterators-in-python/">iterator</a> so to view it (i.e. print it) we must turn the iterator into a&nbsp;list.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="im">import</span> itertools</span>
-<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>perms <span class="op">=</span> <span class="bu">list</span>(itertools.permutations([<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]))</span>
-<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="bu">print</span>(perms)</span>
-<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>[(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a> (<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
-<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a> (<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
-<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a> (<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>),</span>
-<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a> (<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a> (<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a> (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb1-12"><a aria-hidden="true" href="#cb1-12" tabindex="-1"></a> (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
-<span id="cb1-13"><a aria-hidden="true" href="#cb1-13" tabindex="-1"></a> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb1-14"><a aria-hidden="true" href="#cb1-14" tabindex="-1"></a> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">0</span>),</span>
-<span id="cb1-15"><a aria-hidden="true" href="#cb1-15" tabindex="-1"></a> (<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb1-16"><a aria-hidden="true" href="#cb1-16" tabindex="-1"></a> (<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">0</span>),</span>
-<span id="cb1-17"><a aria-hidden="true" href="#cb1-17" tabindex="-1"></a> (<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
-<span id="cb1-18"><a aria-hidden="true" href="#cb1-18" tabindex="-1"></a> (<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>),</span>
-<span id="cb1-19"><a aria-hidden="true" href="#cb1-19" tabindex="-1"></a> (<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb1-20"><a aria-hidden="true" href="#cb1-20" tabindex="-1"></a> (<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>),</span>
-<span id="cb1-21"><a aria-hidden="true" href="#cb1-21" tabindex="-1"></a> (<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb1-22"><a aria-hidden="true" href="#cb1-22" tabindex="-1"></a> (<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb1-23"><a aria-hidden="true" href="#cb1-23" tabindex="-1"></a> (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb1-24"><a aria-hidden="true" href="#cb1-24" tabindex="-1"></a> (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb1-25"><a aria-hidden="true" href="#cb1-25" tabindex="-1"></a> (<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb1-26"><a aria-hidden="true" href="#cb1-26" tabindex="-1"></a> (<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>),</span>
-<span id="cb1-27"><a aria-hidden="true" href="#cb1-27" tabindex="-1"></a> (<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb1-28"><a aria-hidden="true" href="#cb1-28" tabindex="-1"></a> (<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)]</span></code></pre></div>
+<h3>Combinations and&nbsp;Permutations</h3>
+<p><a href="https://en.wikipedia.org/wiki/Combination">Combinations</a> and <a href="https://en.wikipedia.org/wiki/Permutation">permutations</a> are often confused; for our purposes I will simply say that one cares about order while the other does not, and this makes a difference. In combinations the pair <span class="math">\((0,1)\)</span> is the same as <span class="math">\((1,0)\)</span>. This is good for relationships or interactions because the interaction between John and Bill is the same and between Bill and John, we don’t care about&nbsp;order. </p>
+<p>On the other hand, let’s say… for example… I want to calculate all the possible locations of queens without duplication of rows. So given a list of objects <span class="math">\([A,B,C,D]\)</span> or, in our example case, the four possible rows <span class="math">\([0,1,2,3]\)</span>, how many different ways can we arrange the queens with one on each&nbsp;row?
+</p>
+<div class="math">$$ P_N = N! $$</div>
+<div class="math">$$ P_4 = 4!= 4 \cdot 3 \cdot 2 \cdot 1 = 24$$</div>
+<p>Now is a good time to finally break out <code>python</code> and the standard library <a href="https://docs.python.org/2/library/itertools.html">itertools</a>. Here we can just ask itertools to create all the permutations of [0,1,2,3] for us. Note the result from itertools is an <a href="https://www.geeksforgeeks.org/iterators-in-python/">iterator</a> so to view it (i.e. print it) we must turn the iterator into a&nbsp;list.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">perms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+</code></pre></div>
+
 <p>Above are all the possible locations of our queens. Since this is a python list we can view the length of it. For a 4x4 grid there are 24 possible locations of 4 queens on different&nbsp;rows.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="bu">len</span>(perms)</span>
-<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="dv">24</span></span></code></pre></div>
-<h3 id="solutions">Solutions</h3>
-<p>Now the part we’ve all been waiting for…how do we find the solution(s) to our puzzle? The different methods and algorithms of finding the solution is the fun part and the entire point of this series of articles. I will look at the popular algorithms as a exercise in my python coding skills and an opportunity to learn something&nbsp;new.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+<span class="mi">24</span>
+</code></pre></div>
+
+<h3>Solutions</h3>
+<p>Now the part we&#8217;ve all been waiting for&#8230;how do we find the solution(s) to our puzzle? The different methods and algorithms of finding the solution is the fun part and the entire point of this series of articles. I will look at the popular algorithms as a exercise in my python coding skills and an opportunity to learn something&nbsp;new. </p>
 <p>See the next articles were I find solutions using the following&nbsp;algorithms:</p>
 <ul>
 <li><a href="n-queens-puzzle-part-2-brute-force-algorithm.html">Part 2 - Brute&nbsp;Force</a></li>
@@ -93,6 +100,68 @@
 <li>Branch and&nbsp;Bound</li>
 <li>Genetic&nbsp;Algorithms</li>
 </ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "left",
+        indent = "2em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
     
 <div class="version">
 <h3>Software Versions</h3>

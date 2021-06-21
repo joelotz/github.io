@@ -38,11 +38,12 @@
                 
         <div class=body>
     <h1 class="title"> Searching Files for Keyword in&nbsp;Terminal</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;September 13, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74165.6 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;September 13, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74166.8 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/blog/tags/terminal/">Terminal</a>     </p>
-    <p>This is a simple post to document a recent learning. I realized my blog had multiple authors listed due to me being inconsistent with how I wrote it. Sometimes I used “Joe” or other times “Joe Lotz”. I <em>googled</em> and found a terminal command to search a directory for&nbsp;keywords.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">find</span> /DIR_TO_SEARCH/ -type  f -exec grep --color -HIi <span class="st">'KEYWORD_OR_PHRASE'</span> {} <span class="ex">+</span></span></code></pre></div>
+    <p>This is a simple post to document a recent learning. I realized my blog had multiple authors listed due to me being inconsistent with how I wrote it. Sometimes I used &#8220;Joe&#8221; or other times &#8220;Joe Lotz&#8221;. I <em>googled</em> and found a terminal command to search a directory for&nbsp;keywords.</p>
+<div class="highlight"><pre><span></span><code>find /DIR_TO_SEARCH/ -type  f -exec grep --color -HIi <span class="s1">&#39;KEYWORD_OR_PHRASE&#39;</span> <span class="o">{}</span> +
+</code></pre></div>
     
 </div>
 

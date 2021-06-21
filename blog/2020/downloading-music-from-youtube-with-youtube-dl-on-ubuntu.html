@@ -38,40 +38,56 @@
                 
         <div class=body>
     <h1 class="title"> Downloading Music from Youtube with youtube-dl on&nbsp;Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 01, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73796.0 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;May 01, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 73797.2 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/blog/tags/ubuntu/">Ubuntu</a>  <a href="/blog/tags/ffmpeg/">FFmpeg</a>     </p>
     <p>I got bluetooth headphones for running since my old wired headphones were falling apart. I don’t need anything super-high quality since these are for running and I’ll be huffing and puffing - so I got what was available in India - <a href="https://in.jbl.com/JBL+Endurance+DIVE.html"><span class="caps">JBL</span> Endurance Dive</a>. I currently jog with my phone playing Amazon Music, so I was going to bluetooth to my phone until I get a small bluetooth player like the <a href="https://www.amazon.com/SanDisk-SDMX28-016G-G46K-Sport-Player-Black/dp/B01LW2F237/r">SanDisk Clip Sport Plus</a>. <span class="caps">BUT</span>, the <span class="caps">JBL</span> headphones have a built-in mp3 player with <span class="caps">1GB</span> storage, so no external player needed! Of course, this is not the highest quality, but like I said I’m just&nbsp;running.</p>
-<p>The next challenge is getting music for the player. I’m streaming music and don’t <em>necessarily</em> want to torrent. After a short time searching I found a cross-platform utility named <a href="https://github.com/ytdl-org/youtube-dl/blob/master/README.md">youtube-dl</a>.</p>
+<p>The next challenge is getting music for the player. I’m streaming music and don’t <em>necessarily</em> want to torrent. After a short time searching I found a cross-platform utility named <a href="https://github.com/ytdl-org/youtube-dl/blob/master/README.md">youtube-dl</a>. </p>
 <p><em>Source: <a href="https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/">https://linoxide.com/linux-how-to/install-use-youtube-dl-ubuntu/</a></em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt install youtube-dl</span></code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo apt install youtube-dl
+</code></pre></div>
+
 <p>Now that it is installed, I recommend installing FFmpeg also. This is pretty simple, as described in this <a href="https://linuxconfig.org/ubuntu-20-04-ffmpeg-installation">tutorial instructions</a>. This is just a very useful utility to have and I use a bunch for transcoding video&nbsp;formats.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">sudo</span> apt install ffmpeg</span></code></pre></div>
-<p>Once you have chosen a youtube video, you can list all available audio/video formats and bitrates. Note, replace <id> with the actual <span class="caps">ID</span> of the video you want. Better yet, just copy/past the entire <span class="caps">URL</span>.</id></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">youtube-dl</span> -F https://www.youtube.com/watch?v=<span class="op">&lt;</span>id<span class="op">&gt;</span></span></code></pre></div>
-<p>If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; <span class="caps">ID</span># 249, 250, 251, 140 are audio. The first three are in <a href="https://en.wikipedia.org/wiki/WebM">webm</a> format and the last is <a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A">m4a</a>, both are optimized for delivering on the web. <img alt="youtube-dl" src="/images/2020/youtube-dl.png"/> You can select the specific stream you want and download&nbsp;it.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">youtube-dl</span> -f 278 https://www.youtube.com/watch?v=yYzrSGRzttk</span></code></pre></div>
-<p>The better method is to let youtube-dl choose the best audio stream and download&nbsp;it.</p>
+<div class="highlight"><pre><span></span><code>sudo apt install ffmpeg
+</code></pre></div>
+
+<p>Once you have chosen a youtube video, you can list all available audio/video formats and bitrates. Note, replace <id> with the actual <span class="caps">ID</span> of the video you want. Better yet, just copy/past the entire <span class="caps">URL</span>.</p>
+<div class="highlight"><pre><span></span><code>youtube-dl -F https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
+</code></pre></div>
+
+<p>If I run this command on the video “yYzrSGRzttk”, I see a whole list of audio and video files that are available. The first four; <span class="caps">ID</span># 249, 250, 251, 140 are audio. The first three are in <a href="https://en.wikipedia.org/wiki/WebM">webm</a> format and the last is <a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14#.MP4_versus_.M4A">m4a</a>, both are optimized for delivering on the web. 
+<img alt="youtube-dl" src="/images/2020/youtube-dl.png">
+You can select the specific stream you want and download&nbsp;it.</p>
+<div class="highlight"><pre><span></span><code>youtube-dl -f <span class="m">278</span> https://www.youtube.com/watch?v<span class="o">=</span>yYzrSGRzttk
+</code></pre></div>
+
+<p>The better method is to let youtube-dl choose the best audio stream and download&nbsp;it. </p>
 <p><em>Source: <a href="https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl">https://stackoverflow.com/questions/49804874/download-the-best-quality-audio-file-with-youtube-dl</a></em></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="ex">youtube-dl</span> -f bestaudio https://www.youtube.com/watch?v=<span class="op">&lt;</span>id<span class="op">&gt;</span></span></code></pre></div>
-<p>You can specify the name of the downloaded&nbsp;file.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="ex">youtube-dl</span> -f bestaudio https://www.youtube.com/watch?v=<span class="op">&lt;</span>id<span class="op">&gt;</span> --output <span class="st">"outputName.%(ext)s"</span></span></code></pre></div>
-<p>With FFmpeg installed, you can also convert to mp3. I know converting formats probably degrade the audio quality, but my cheap headphone mp3 player doesn’t play the webm file&nbsp;format.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="ex">youtube-dl</span> -x --audio-format mp3 https://www.youtube.com/watch?v=<span class="op">&lt;</span>id<span class="op">&gt;</span></span></code></pre></div>
-<p>And then finally, you can download, convert to mp3, and rename the&nbsp;file.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="ex">youtube-dl</span> -x --audio-format mp3 https://www.youtube.com/watch?v=<span class="op">&lt;</span>id<span class="op">&gt;</span> --output <span class="st">"outputName.%(ext)s"</span>]</span></code></pre></div>
-<h3 id="audacity-to-clean-up">Audacity to Clean&nbsp;Up</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">sudo</span> apt install audacity</span></code></pre></div>
+<div class="highlight"><pre><span></span><code>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
+</code></pre></div>
+
+<p>You can specify the name of the downloaded&nbsp;file. </p>
+<div class="highlight"><pre><span></span><code>youtube-dl -f bestaudio https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt; --output <span class="s2">&quot;outputName.%(ext)s&quot;</span>
+</code></pre></div>
+
+<p>With FFmpeg installed, you can also convert to mp3. I know converting formats probably degrade the audio quality, but my cheap headphone mp3 player doesn’t play the webm file&nbsp;format. </p>
+<div class="highlight"><pre><span></span><code>youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt;
+</code></pre></div>
+
+<p>And then finally, you can download, convert to mp3, and rename the&nbsp;file. </p>
+<div class="highlight"><pre><span></span><code>youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v<span class="o">=</span>&lt;id&gt; --output <span class="s2">&quot;outputName.%(ext)s&quot;</span><span class="o">]</span>
+</code></pre></div>
+
+<h3>Audacity to Clean&nbsp;Up</h3>
+<div class="highlight"><pre><span></span><code>sudo apt install audacity
+</code></pre></div>
+
 <p><em>Source: <a href="https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files">https://askubuntu.com/questions/246242/how-to-normalize-sound-in-mp3-files</a></em></p>
-<p>The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded&nbsp;folder.</p>
+<p>The audio files downloaded from the web probably have different loudness levels which can be undesirable. You can run a normalize and clean up batch process to all the downloaded&nbsp;folder. </p>
 <p>Select “Tools &gt;&nbsp;Macros…”</p>
-<figure>
-<img alt="Audacity Macro - Normalize Levels" src="/images/2020/audacity_macros.png"/><figcaption aria-hidden="true">Audacity Macro - Normalize Levels</figcaption>
-</figure>
-<p>Make sure the macro “<span class="caps">MP3</span> Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to&nbsp;normalize.</p>
-<figure>
-<img alt="Audacity Macro - MP3 Conversion" src="/images/2020/audacity_macros2.png"/><figcaption aria-hidden="true">Audacity Macro - <span class="caps">MP3</span> Conversion</figcaption>
-</figure>
+<p><img alt="Audacity Macro - Normalize Levels" src="/images/2020/audacity_macros.png"></p>
+<p>Make sure the macro “<span class="caps">MP3</span> Conversion” is selected, then click “Files…”. This will open up a standard file browser where you can shift/select all the mp3 files you want to&nbsp;normalize. </p>
+<p><img alt="Audacity Macro - MP3 Conversion" src="/images/2020/audacity_macros2.png"></p>
 <p>Then the magic happens! The modified files will be in a new folder named&nbsp;“macro-output”.</p>
     
 <div class="version">

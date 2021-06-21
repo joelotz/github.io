@@ -38,25 +38,27 @@
                 
         <div class=body>
     <h1 class="title"> Creating a Launch Shortcut for Anaconda on&nbsp;Ubuntu</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 16, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74507.9 &nbsp;&nbsp;&nbsp;
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;January 16, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74509.2 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
  <a href="/blog/tags/ubuntu/">Ubuntu</a>  <a href="/blog/tags/anaconda/">Anaconda</a>     </p>
     <p>When you install Anaconda on Ubuntu, for some reason, it doesn’t create a launching shortcut. First, install per instructions: <a href="https://linuxize.com/post/how-to-install-anaconda-on-ubuntu-20-04/">https://linuxize.com/post/how-to-install-anaconda-on-ubuntu-20-04/</a></p>
 <p>Next, create a desktop file in your applications&nbsp;directory.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">gedit</span> ~/.local/share/applications/anaconda.desktop</span></code></pre></div>
-<p>Enter this data, it’s pretty straight&nbsp;forward.</p>
-<pre class="plaintext"><code>[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Anaconda
-Exec=/home/joe/anaconda3/bin/anaconda-navigator
-Icon=/home/joe/anaconda3/lib/python3.7/site-packages/anaconda_navigator/app/icons/Icon1024.png
-Terminal=false</code></pre>
-<p>The two important items are <code>Exec</code> and <code>Icon</code> paths. <code>Exec</code> is where anaconda was installed. More than likely you will only need to replace “joe” with your userpath. I recommend verifying the <code>Icons</code> path, for example you may be more up to date and are using python3.8. In which case your path would be slightly&nbsp;different.</p>
-<p>That’s it! Now you can press Windows Key and activate the Application Launcher and start typing anaconda. You should see your shortcut&nbsp;there.</p>
-<figure>
-<img alt="Anaconda Launcher" src="/images/2021/anaconda-launcher.png"/><figcaption aria-hidden="true">Anaconda Launcher</figcaption>
-</figure>
+<div class="highlight"><pre><span></span><code>gedit ~/.local/share/applications/anaconda.desktop
+</code></pre></div>
+
+<p>Enter this data, it&#8217;s pretty straight&nbsp;forward.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[Desktop Entry]</span>
+<span class="na">Version</span><span class="o">=</span><span class="s">1.0</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
+<span class="na">Name</span><span class="o">=</span><span class="s">Anaconda</span>
+<span class="na">Exec</span><span class="o">=</span><span class="s">/home/joe/anaconda3/bin/anaconda-navigator</span>
+<span class="na">Icon</span><span class="o">=</span><span class="s">/home/joe/anaconda3/lib/python3.7/site-packages/anaconda_navigator/app/icons/Icon1024.png</span>
+<span class="na">Terminal</span><span class="o">=</span><span class="s">false</span>
+</code></pre></div>
+
+<p>The two important items are <code>Exec</code> and <code>Icon</code> paths. <code>Exec</code> is where anaconda was installed. More than likely you will only need to replace &#8220;joe&#8221; with your userpath. I recommend verifying the <code>Icons</code> path, for example you may be more up to date and are using python3.8. In which case your path would be slightly&nbsp;different. </p>
+<p>That&#8217;s it! Now you can press Windows Key and activate the Application Launcher and start typing anaconda. You should see your shortcut&nbsp;there.</p>
+<p><img alt="Anaconda Launcher" src="/images/2021/anaconda-launcher.png"></p>
     
 <div class="version">
 <h3>Software Versions</h3>
