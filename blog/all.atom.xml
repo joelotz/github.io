@@ -19,9 +19,9 @@
 &lt;p&gt;This will take you to the &lt;span class="caps"&gt;OSM&lt;/span&gt; Trace Upload page. Click “Upload a&amp;nbsp;trace”&lt;/p&gt;
 &lt;p&gt;&lt;img alt="garmin_07" src="/images/2021/garmin_07.png"&gt;&lt;/p&gt;
 &lt;p&gt;Then select your gpx file and enter the details as&amp;nbsp;appropriate.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="garmin_08" src="/images/2021/garmin_08.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="garmin_08" src="/images/2021/garmin_08a.png"&gt;&lt;/p&gt;
 &lt;p&gt;After uploading, you&amp;#8217;ll need to wait 1-2 minutes, at the most, for the system to enter the trace into the&amp;nbsp;database.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="garmin_09" src="/images/2021/garmin_09.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="garmin_09" src="/images/2021/garmin_09a.png"&gt;&lt;/p&gt;
 &lt;p&gt;Refresh the webpage and you&amp;#8217;ll see a list of all your uploaded traces. Select “Edit Map” to open the trace in &lt;span class="caps"&gt;OSM&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="garmin_10" src="/images/2021/garmin_10.png"&gt;&lt;/p&gt;
 &lt;p&gt;The results are the same as drag and dropping but now if someone turns on the &lt;span class="caps"&gt;GPS&lt;/span&gt; Trace layer they will see your traces. One thing you can do is draw over your gpx trace and create a path or&amp;nbsp;trail. &lt;/p&gt;
