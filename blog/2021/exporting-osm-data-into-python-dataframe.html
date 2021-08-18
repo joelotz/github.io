@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Exporting <span class="caps">OSM</span> Data into Python&nbsp;Dataframe | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Exporting <span class="caps">OSM</span> Data into Python&nbsp;Dataframe</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;August 10, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75073.1 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/openstreetmaposm/">OpenStreetMap(OSM)</a>  <a href="/blog/tags/python/">Python</a>     </p>
+    <p>In this post I am documenting how I exported OpenStreetMap (<span class="caps">OSM</span>) data into a Python dataframe for inspection. The use case for this task is the following: in <span class="caps">OSM</span> I have added all the schools in my area along with a list of tags. Because it took a couple days and I evolved the process along the way, I’m not confident that the tags are consistent or completely accurate. To audit in <span class="caps">OSM</span> is difficult because I would need to select each school, then scroll through and maybe take a screenshot&#8230;it’s just a mess. Having all the data in a tabular format would just be super&nbsp;efficient. </p>
+<p>Here is an example of the value/keys or “tag data” assigned to a particular elementary school. Notice there are 21 different tags, but this is not a set value, it could be a different number for a different&nbsp;school. </p>
+<p><img alt="Original view of the data in OSM" src="/images/2021/OSM2python_01.png"></p>
+<h2>Overpass-Turbo</h2>
+<p>First of all, there are different <span class="caps">OSM</span> tools depending on what you want to do. For example, the most popular and diverse is rendering data. There are dozens of different apps and websites that do this. The most generic is https://www.openstreetmap.org/. Then, if you want to add or edit data within the <span class="caps">OSM</span> database you can use web-based iD, <span class="caps">JOSM</span>, various apps, etc. If you want to query data, there are libraries for your favorite language, but the only method that I have any workable knowledge with is the web-based&nbsp;https://overpass-turbo.eu/. </p>
+<p>With Overpass-Turbo is a front-end to the Overpass <span class="caps">API</span> and has a query-wizard which makes it quite beginner&nbsp;friendly.  </p>
+<h3>Query Your&nbsp;Data</h3>
+<p>There are plenty of tutorials on using overpass-turbo, including the <a href="https://wiki.openstreetmap.org/wiki/Overpass_turbo">wiki</a>, but as a very quick&nbsp;primer&#8230;</p>
+<p>You can create a query via the wizard by clicking “Wizard”, enter your string query, then ( click “build query” and “Run”) or ( click “build and run&nbsp;query”).  </p>
+<p><img alt="osm2python_02" src="images/2021/osm2python_02.PNG"></p>
+<p>The query language is <a href="https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide">Overpass <span class="caps">QL</span></a> and the wizard-generated query is on the left panel and the map or data results are on the right&nbsp;panel. </p>
+<p><img alt="osm2python_03" src="images/2021/osm2python_03.PNG"></p>
+<p>The map results are the actual shape but in zoomed out revert to a circle. If you click on the result it shows you all the tags, as shown&nbsp;below. </p>
+<p><img src="images/2021/osm2python_03b.PNG" alt="osm2python_03b" style="zoom:40%;" /></p>
+<p>On the right-hand panel, you can also click the “Data” tab to see the <span class="caps">JSON</span> data of the&nbsp;results.</p>
+<p><img src="images/2021/osm2python_05.PNG" alt="osm2python_05" style="zoom:40%;" /></p>
+<h3>Save The&nbsp;Results</h3>
+<p>But! What we ultimately want is just the data under “tags” for each result. There are a plethora of options, like outputting to csv, json, xml or filtering the output to specific fields. The easiest (for me) for this use-case is to simply filter the output to just show the&nbsp;“tags”. </p>
+<p>To begin with, I commented out the nodes and relations because I only want the ways. The next step is to replace <code>out body;</code> with <code>out tags;</code>. “tags” is a prebuilt key that outputs all the tags.  See the difference of output in the right-hand panel. To complete this step, save the&nbsp;file.</p>
+<p><img alt="osm2python_04" src="images/2021/osm2python_04.PNG"></p>
+<h2>Python to the&nbsp;Rescue</h2>
+<p>Python can be used to read the json file into a dataframe. I’m not convinced this is the most pythonic or efficient code, but it&nbsp;works.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;schools.json&#39;</span><span class="p">))</span> <span class="c1"># Read turbo-overpass output file</span>
+
+<span class="c1"># This is a bit hacky... I need to pull out the second-level data</span>
+<span class="n">tempdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">tempdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]]</span>
+
+<span class="n">school</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">test1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">school</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">school</span><span class="p">,</span><span class="n">test1</span><span class="p">])</span>
+
+<span class="n">school</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># Let&#39;s look at it</span>
+<span class="n">school</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;output.xlsx&quot;</span><span class="p">)</span> <span class="c1"># Send it to an Excel sheet</span>
+</code></pre></div>
+
+<p>For this I used a <a href="https://jupyter.org/">Jupyter Notebook</a>. Here is my&nbsp;output.</p>
+<p><img alt="osm2python_06" src="images/2021/osm2python_06.PNG"></p>
+<p>This already is awesome! I can clearly see that the school on the bottom does not have a Facebook page, but for some ungodly reason has a fax number. What is even cooler is that I slipped in code to export all this to Excel. Check out the last line of the code&nbsp;above. </p>
+<p><img alt="osm2python_07" src="images/2021/osm2python_07.PNG"></p>
+<p>This is the final result. From here I can sort, filter, and search. For example, all schools should have a phone number, so I can identify those that do not easily and add&nbsp;it.</p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>Python</td><td> 3.8.5</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
