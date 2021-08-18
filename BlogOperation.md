@@ -1,11 +1,22 @@
-#### My Build Workflow
+#### Notes
 
-Note: On Win10 open and run from Anaconda Prompt
+1. On Win10 open and run from Anaconda Prompt
+2. On Win10, it seems to rename the file extension as capital which is screwing up everything. 
+
+#### Pulling Remote into Local
+
+```bash
+git pull remotename branchname
+```
+
+
+
+#### My Build Workflow
 
 ```bash
 pelican content -o output -s pelicanconf.py
 
-cd output/blo
+cd output
 git add .
 git status 
 git commit -m ""

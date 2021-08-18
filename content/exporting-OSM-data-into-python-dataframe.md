@@ -11,7 +11,7 @@ In this post I am documenting how I exported OpenStreetMap (OSM) data into a Pyt
 
 Here is an example of the value/keys or “tag data” assigned to a particular elementary school. Notice there are 21 different tags, but this is not a set value, it could be a different number for a different school. 
 
-![Original view of the data in OSM](/images/2021/OSM2python_01.png)
+![Original view of the data in OSM](/images/2021/osm2python_01.png)
 
 ## Overpass-Turbo
 
@@ -25,19 +25,19 @@ There are plenty of tutorials on using overpass-turbo, including the [wiki](http
 
 You can create a query via the wizard by clicking “Wizard”, enter your string query, then ( click “build query” and “Run”) or ( click “build and run query”).  
 
-![osm2python_02](images/2021/osm2python_02.PNG)
+![osm2python_02](/images/2021/osm2python_02.png)
 
 The query language is [Overpass QL](https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide) and the wizard-generated query is on the left panel and the map or data results are on the right panel. 
 
-![osm2python_03](images/2021/osm2python_03.PNG)
+![osm2python_03](/images/2021/osm2python_03.png)
 
 The map results are the actual shape but in zoomed out revert to a circle. If you click on the result it shows you all the tags, as shown below. 
 
-<img src="images/2021/osm2python_03b.PNG" alt="osm2python_03b" style="zoom:40%;" />
+<img src="/images/2021/osm2python_03b.png" alt="osm2python_03b" style="zoom:40%;" />
 
 On the right-hand panel, you can also click the “Data” tab to see the JSON data of the results.
 
-<img src="images/2021/osm2python_05.PNG" alt="osm2python_05" style="zoom:40%;" />
+<img src="/images/2021/osm2python_05.png" alt="osm2python_05" style="zoom:40%;" />
 
 ### Save The Results
 
@@ -45,7 +45,7 @@ But! What we ultimately want is just the data under “tags” for each result. 
 
 To begin with, I commented out the nodes and relations because I only want the ways. The next step is to replace `out body;` with `out tags;`. “tags” is a prebuilt key that outputs all the tags.  See the difference of output in the right-hand panel. To complete this step, save the file.
 
-![osm2python_04](images/2021/osm2python_04.PNG)
+![osm2python_04](/images/2021/osm2python_04.png)
 
 ## Python to the Rescue
 
@@ -72,10 +72,10 @@ school.to_excel("output.xlsx") # Send it to an Excel sheet
 
 For this I used a [Jupyter Notebook](https://jupyter.org/). Here is my output.
 
-![osm2python_06](images/2021/osm2python_06.PNG)
+![osm2python_06](/images/2021/osm2python_06.png)
 
 This already is awesome! I can clearly see that the school on the bottom does not have a Facebook page, but for some ungodly reason has a fax number. What is even cooler is that I slipped in code to export all this to Excel. Check out the last line of the code above. 
 
-![osm2python_07](images/2021/osm2python_07.PNG)
+![osm2python_07](/images/2021/osm2python_07.png)
 
 This is the final result. From here I can sort, filter, and search. For example, all schools should have a phone number, so I can identify those that do not easily and add it.

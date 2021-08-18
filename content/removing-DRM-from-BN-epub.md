@@ -22,7 +22,6 @@ I’ve rearranged the order of operations from Aric to put the most difficult (I
 1. Install DeDRM plug-in for Calibre
 1. Remove DRM from book
 
-
 ### Step 1. Install Android Studio and Android Studio SDK
 
 1. [Download](https://developer.android.com/studio/) the .zip package for Android Studio for Linux. Save it somewhere like in your Downloads directory. At the time of writing I downloaded version 201.7042882.

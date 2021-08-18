@@ -1,7 +1,7 @@
 ---
 Title: Importing Garmin 245 Watch GPX File into Openstreetmap as Traces
 Date: 2021-06-10
-Tags: OpenStreetMap(OSM)
+Tags: OpenStreetMap(OSM), Garmin
 Author: Joe
 Keywords: Garmin 245, OpenStreetMap, OSM, GPX, gps
 ---
