@@ -1,11 +1,11 @@
 #### My Build Workflow
 
+Note: On Win10 open and run from Anaconda Prompt
+
 ```bash
 pelican content -o output -s pelicanconf.py
-<OR>
-make html
 
-cd output
+cd output/blo
 git add .
 git status 
 git commit -m ""
@@ -65,6 +65,16 @@ git rm --cached -r .
 git reset --hard
 # Write both the index and working directory from git's database.
 ```
+
+### Serving html on python3 server
+
+`python -m http.server `
+
+Defaults to port 8000
+
+`python -m http.server 7800`
+
+Starts on port 7800
 
 ### Killing a process on Port 8000
 
