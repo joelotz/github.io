@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Importing a <span class="caps">GPX</span> Course into Garmin 245&nbsp;Watch | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Importing a <span class="caps">GPX</span> Course into Garmin 245&nbsp;Watch</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;August 18, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75095.0 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/garmin/">Garmin</a>     </p>
+    <p>In this post I am documenting how I imported a defined run path into my Garmin 245 watch. This is nearly the opposite of my <a href="https://www.joelotz.com/blog/2021/importing-garmin-245-watch-gpx-file-into-openstreetmap-as-traces.html">earlier post</a> where I exported a path (<span class="caps">GPX</span> Trace) out of the Garmin. Why do I want to do this? Say I have a specific run path I want to take or I’m hiking in a new area and want turn-by-turn directions on my wrist. This will do&nbsp;it.</p>
+<h2>BRouter-Web</h2>
+<p>The first item you need to complete this mission is a <span class="caps">GPX</span> file representing the desired path. There are many places you can download a popular trail hike or run. The pro-version of www.alltrails.com let you do this or I believe the paid-version of www.strava.com does as well. Another option is to create your own custom path using a router. Again, several apps and websites offer this but the one I currently like is https://brouter.de/brouter-web/. I believe it stands for “Bike Router” but it has different settings to optimize the automatic&nbsp;routing. </p>
+<p>To make a “route” or “path” you click the pencil icon and start click on the map at waypoints. The web app will then route a path between the waypoints. In the example image below the flags are my waypoints and the pink line is the&nbsp;route. </p>
+<p><img alt="route_01" src="/images/2021/route_01.png"></p>
+<p>You can use BRouter for other use-cases as well. Like plan a drive route and import it into <a href="https://osmand.net/">OSMAnd</a>.</p>
+<p>Once the route is made, click the “Export” button, name the route, select “<span class="caps">GPX</span>” format, and “Export&nbsp;route”.</p>
+<p><img alt="route_02" src="/images/2021/route_02.png"></p>
+<h3>Garmin&nbsp;Connect</h3>
+<p>Now you have a <span class="caps">GPX</span> file with your planned route. Next you need to import that route into your Garmin watch. Open <a href="https://connect.garmin.com/">Garmin Connect</a> and login. On the left-hand pane click “Training” and “Courses”. Then way down low in little print click&nbsp;“Import”.</p>
+<p><img alt="route_03" src="/images/2021/route_03.png"></p>
+<p>This will bring up a standard file upload window. Select your <span class="caps">GPX</span>&nbsp;file. </p>
+<p><img src="/images/2021/route_04.png" alt="route_04" style="zoom:50%;" /></p>
+<p>It will ask you the course type. I’m not sure why this is important, but it probably has different available metrics. I checked and regardless of the “course type” I was able to access and use it in different activities. For example, if I saved it as “Trail Running” I could still use it in a Bike activity&#8230; so maybe it isn’t too important what you&nbsp;choose.</p>
+<p><img src="/images/2021/route_05.png" alt="route_05" style="zoom:50%;" /></p>
+<p>Once the route/path/course - whatever you call it is imported, Connect will ask for some settings. Like if it is a loop you can go clockwise or counter, if it isn’t a loop you can tell it to go to the end and back, or just to the&nbsp;end. </p>
+<p><img alt="route_06" src="/images/2021/route_06.png"></p>
+<p>Once it’s saved you can also play around with some of the other features if you wish. Like if you are running for a specific time or want to define a pace&nbsp;strategy. </p>
+<p><img alt="route_07" src="/images/2021/route_07.png"></p>
+<p>When you are all done click “Send to Device”.  Assuming you’ve already have been using and syncing the watch, everything is installed and configured correctly - this will open the Garmin Express app and synchronize. All new data, including the course will be uploaded to the&nbsp;watch. </p>
+<p><img src="/images/2021/route_08.png" alt="route_08" style="zoom:80%;" /></p>
+<p><img src="/images/2021/route_09.png" alt="route_09" style="zoom:50%;" /></p>
+<p>When completed, on your watch when you select an activity, like Trail Run, you can select “Options” by pressing up and select “Courses”. Now select the name of your course. From there the <span class="caps">GPS</span> will lock on and you are given directions on your watch with a arrow. It will also buzz when there is a change in&nbsp;direction. </p>
+<p><img alt="route_10" src="/images/2021/route_10.png"></p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>BRouter-Web</td><td> 0.16.0</td></tr>
+        <tr><td> Garmin Express</td><td> 7.7.1.0</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
