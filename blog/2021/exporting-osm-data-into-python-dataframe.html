@@ -43,24 +43,24 @@
  <a href="/blog/tags/openstreetmaposm/">OpenStreetMap(OSM)</a>  <a href="/blog/tags/python/">Python</a>     </p>
     <p>In this post I am documenting how I exported OpenStreetMap (<span class="caps">OSM</span>) data into a Python dataframe for inspection. The use case for this task is the following: in <span class="caps">OSM</span> I have added all the schools in my area along with a list of tags. Because it took a couple days and I evolved the process along the way, I’m not confident that the tags are consistent or completely accurate. To audit in <span class="caps">OSM</span> is difficult because I would need to select each school, then scroll through and maybe take a screenshot&#8230;it’s just a mess. Having all the data in a tabular format would just be super&nbsp;efficient. </p>
 <p>Here is an example of the value/keys or “tag data” assigned to a particular elementary school. Notice there are 21 different tags, but this is not a set value, it could be a different number for a different&nbsp;school. </p>
-<p><img alt="Original view of the data in OSM" src="/images/2021/OSM2python_01.png"></p>
+<p><img alt="Original view of the data in OSM" src="/images/2021/osm2python_01.png"></p>
 <h2>Overpass-Turbo</h2>
 <p>First of all, there are different <span class="caps">OSM</span> tools depending on what you want to do. For example, the most popular and diverse is rendering data. There are dozens of different apps and websites that do this. The most generic is https://www.openstreetmap.org/. Then, if you want to add or edit data within the <span class="caps">OSM</span> database you can use web-based iD, <span class="caps">JOSM</span>, various apps, etc. If you want to query data, there are libraries for your favorite language, but the only method that I have any workable knowledge with is the web-based&nbsp;https://overpass-turbo.eu/. </p>
 <p>With Overpass-Turbo is a front-end to the Overpass <span class="caps">API</span> and has a query-wizard which makes it quite beginner&nbsp;friendly.  </p>
 <h3>Query Your&nbsp;Data</h3>
 <p>There are plenty of tutorials on using overpass-turbo, including the <a href="https://wiki.openstreetmap.org/wiki/Overpass_turbo">wiki</a>, but as a very quick&nbsp;primer&#8230;</p>
 <p>You can create a query via the wizard by clicking “Wizard”, enter your string query, then ( click “build query” and “Run”) or ( click “build and run&nbsp;query”).  </p>
-<p><img alt="osm2python_02" src="images/2021/osm2python_02.PNG"></p>
+<p><img alt="osm2python_02" src="/images/2021/osm2python_02.PNG"></p>
 <p>The query language is <a href="https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide">Overpass <span class="caps">QL</span></a> and the wizard-generated query is on the left panel and the map or data results are on the right&nbsp;panel. </p>
-<p><img alt="osm2python_03" src="images/2021/osm2python_03.PNG"></p>
+<p><img alt="osm2python_03" src="/images/2021/osm2python_03.PNG"></p>
 <p>The map results are the actual shape but in zoomed out revert to a circle. If you click on the result it shows you all the tags, as shown&nbsp;below. </p>
-<p><img src="images/2021/osm2python_03b.PNG" alt="osm2python_03b" style="zoom:40%;" /></p>
+<p><img src="/images/2021/osm2python_03b.PNG" alt="osm2python_03b" style="zoom:40%;" /></p>
 <p>On the right-hand panel, you can also click the “Data” tab to see the <span class="caps">JSON</span> data of the&nbsp;results.</p>
-<p><img src="images/2021/osm2python_05.PNG" alt="osm2python_05" style="zoom:40%;" /></p>
+<p><img src="/images/2021/osm2python_05.PNG" alt="osm2python_05" style="zoom:40%;" /></p>
 <h3>Save The&nbsp;Results</h3>
 <p>But! What we ultimately want is just the data under “tags” for each result. There are a plethora of options, like outputting to csv, json, xml or filtering the output to specific fields. The easiest (for me) for this use-case is to simply filter the output to just show the&nbsp;“tags”. </p>
 <p>To begin with, I commented out the nodes and relations because I only want the ways. The next step is to replace <code>out body;</code> with <code>out tags;</code>. “tags” is a prebuilt key that outputs all the tags.  See the difference of output in the right-hand panel. To complete this step, save the&nbsp;file.</p>
-<p><img alt="osm2python_04" src="images/2021/osm2python_04.PNG"></p>
+<p><img alt="osm2python_04" src="/images/2021/osm2python_04.PNG"></p>
 <h2>Python to the&nbsp;Rescue</h2>
 <p>Python can be used to read the json file into a dataframe. I’m not convinced this is the most pythonic or efficient code, but it&nbsp;works.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
@@ -82,9 +82,9 @@
 </code></pre></div>
 
 <p>For this I used a <a href="https://jupyter.org/">Jupyter Notebook</a>. Here is my&nbsp;output.</p>
-<p><img alt="osm2python_06" src="images/2021/osm2python_06.PNG"></p>
+<p><img alt="osm2python_06" src="/images/2021/osm2python_06.PNG"></p>
 <p>This already is awesome! I can clearly see that the school on the bottom does not have a Facebook page, but for some ungodly reason has a fax number. What is even cooler is that I slipped in code to export all this to Excel. Check out the last line of the code&nbsp;above. </p>
-<p><img alt="osm2python_07" src="images/2021/osm2python_07.PNG"></p>
+<p><img alt="osm2python_07" src="/images/2021/osm2python_07.PNG"></p>
 <p>This is the final result. From here I can sort, filter, and search. For example, all schools should have a phone number, so I can identify those that do not easily and add&nbsp;it.</p>
     
 <div class="version">
