@@ -19,13 +19,13 @@ pelican content -o output -s pelicanconf.py
 cd output
 git add .
 git status 
-git commit -m ""
+git commit -m "fixing post image"
 git push origin master
 
 cd ..
 git add .
 git status
-git commmit -m ""
+git commit -m "fixing post image"
 git push origin content
 ```
 
