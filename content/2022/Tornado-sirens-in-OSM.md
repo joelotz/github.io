@@ -10,7 +10,9 @@ I spent a couple hours adding tornado sirens in my town to [OpenStreetMap](https
 
 ### The original city map
 
-![](/images/2022/TornadoSiren_02.png)
+[https://www.cityofdenton.com/DocumentCenter/View/679/Outdoor-Warning-Siren-Map-PDF](https://www.cityofdenton.com/DocumentCenter/View/679/Outdoor-Warning-Siren-Map-PDF)
+
+![](/images/2022/TornadoSiren_02.png style="zoom:80%;")
 
 ### My Map Created From OSM Data
 
