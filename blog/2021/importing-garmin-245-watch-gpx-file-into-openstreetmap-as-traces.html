@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Importing Garmin 245 Watch <span class="caps">GPX</span> File into Openstreetmap as&nbsp;Traces | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Importing Garmin 245 Watch <span class="caps">GPX</span> File into Openstreetmap as&nbsp;Traces</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 10, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 74904.9 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/openstreetmaposm/">OpenStreetMap(OSM)</a>  <a href="/blog/tags/garmin/">Garmin</a>     </p>
+    <p>I have a Garmin 245 watch that I use for trail running. What I wanted to do was update/add trails in <a href="https://www.openstreetmap.org/">OpenStreetMap</a> based on the gps data of where I ran. This post will document the procedures for downloading a <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">gpx file</a> file created by the Garmin watch and importing it into OpenStreetMap (<span class="caps">OSM</span>).</p>
+<h3 id="create-gpx-file">Create <span class="caps">GPX</span>&nbsp;File</h3>
+<p>I’m not going to go to far into this first topic. I’m going to assume you know how to create and save an “activity” on your watch. For Garmin, <a href="https://www8.garmin.com/manuals/webhelp/forerunner245/EN-US/GUID-2AE86593-AC85-4368-907C-9C6EEE28FD11.html">specifically my 245</a>, I record my&nbsp;run.</p>
+<h3 id="download-gpx-file-from-garmin-connect">Download <span class="caps">GPX</span> File from Garmin&nbsp;Connect</h3>
+<p>On your computer browse to <a href="https://connect.garmin.com/">https://connect.garmin.com/</a> and sign into your account. Open the left-side panel and under the ‘Activities’ section select ‘All&nbsp;Activities’.</p>
+<figure>
+<img alt="garmin_01" src="/images/2021/garmin_01.png"/><figcaption aria-hidden="true">garmin_01</figcaption>
+</figure>
+<p>Select the “Activity” or the run that you want to&nbsp;export.</p>
+<figure>
+<img alt="garmin_02" src="/images/2021/garmin_02.png"/><figcaption aria-hidden="true">garmin_02</figcaption>
+</figure>
+<p>After opening the run you see a map and the trace. To download, click the gear icon in the upper-right and select “Export to <span class="caps">GPX</span>”. Save the file somewhere on your&nbsp;computer.</p>
+<figure>
+<img alt="garmin_03" src="/images/2021/garmin_03.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<h4 id="importing-gpx-into-osm">Importing <span class="caps">GPX</span> into <span class="caps">OSM</span></h4>
+<p>The easiest way to see the gpx file in <span class="caps">OSM</span> is to simply drag and drop the file. Open <a href="https://www.openstreetmap.org/">OpenStreetMap</a> in your browser. Click the edit button which opens the iD&nbsp;Editor.</p>
+<figure>
+<img alt="garmin_04" src="/images/2021/garmin_04.png"/><figcaption aria-hidden="true">garmin_04</figcaption>
+</figure>
+<p>From here, simply (and literally) drag the .gpx file into the browser window. The run will show as a pink&nbsp;trace.</p>
+<figure>
+<img alt="garmin_05" src="/images/2021/garmin_05.png"/><figcaption aria-hidden="true">garmin_05</figcaption>
+</figure>
+<p>Another method is to upload the trace into the <span class="caps">OSM</span> database for everyone to view and use. From the iD Editor click on “<span class="caps">GPS</span>&nbsp;Traces”.</p>
+<figure>
+<img alt="garmin_06" src="/images/2021/garmin_06.png"/><figcaption aria-hidden="true">garmin_06</figcaption>
+</figure>
+<p>This will take you to the <span class="caps">OSM</span> Trace Upload page. Click “Upload a&nbsp;trace”</p>
+<figure>
+<img alt="garmin_07" src="/images/2021/garmin_07.png"/><figcaption aria-hidden="true">garmin_07</figcaption>
+</figure>
+<p>Then select your gpx file and enter the details as&nbsp;appropriate.</p>
+<figure>
+<img alt="garmin_08" src="/images/2021/garmin_08a.png"/><figcaption aria-hidden="true">garmin_08</figcaption>
+</figure>
+<p>After uploading, you’ll need to wait 1-2 minutes, at the most, for the system to enter the trace into the&nbsp;database.</p>
+<figure>
+<img alt="garmin_09" src="/images/2021/garmin_09a.png"/><figcaption aria-hidden="true">garmin_09</figcaption>
+</figure>
+<p>Refresh the webpage and you’ll see a list of all your uploaded traces. Select “Edit Map” to open the trace in <span class="caps">OSM</span>.</p>
+<figure>
+<img alt="garmin_10" src="/images/2021/garmin_10.png"/><figcaption aria-hidden="true">garmin_10</figcaption>
+</figure>
+<p>The results are the same as drag and dropping but now if someone turns on the <span class="caps">GPS</span> Trace layer they will see your traces. One thing you can do is draw over your gpx trace and create a path or&nbsp;trail.</p>
+<figure>
+<img alt="garmin_11" src="/images/2021/garmin_11.png"/><figcaption aria-hidden="true">garmin_11</figcaption>
+</figure>
+    
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

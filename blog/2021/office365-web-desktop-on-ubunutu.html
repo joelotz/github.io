@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Office365 Web Desktop on&nbsp;Ubunutu | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Office365 Web Desktop on&nbsp;Ubunutu</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;October 20, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75266.3 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
+    <p>My university provides Office 365 desktop and web for the students. Which is the least they could do with the amount of tuition we are paying! My class team collaboratively authors office files synced to our online accounts, so I want to use M$ but I also want to use my linux&nbsp;box.</p>
+<h3 id="options">Options</h3>
+<p>Many years ago, over a decade, I ran <span class="caps">MS</span> Office on a paid <span class="caps">WINE</span> instance named Codeweavers CrossOver. I see there is a free version named PlayOnLinux that looks very similar but is not so straightforward. I could also run Office “naively” in a VirtualMachine but I don’t want to start a <span class="caps">VM</span> every time I want an office app nor keep it running. So, the option I am going with is to run online apps. Being a little old school online apps seemed odd to me, but with Google Docs and so many other examples it is pretty common&nbsp;place.</p>
+<p>I can run Office from a browser but this is distracting to have tabs open and such, so I’m installing <a href="https://snapcraft.io/install/office365webdesktop/ubuntu#install">Office365WebDesktop</a> to emulate a desktop&nbsp;app.</p>
+<h3 id="installation">Installation</h3>
+<ol type="1">
+<li>First, install the desktop wrapper from <a href="https://github.com/rafgui12/Office365WebDesktop">github</a>, or more easily, as a&nbsp;snap.</li>
+</ol>
+<figure>
+<img alt="office_00" src="/images/2021/Office365_AA.png"/><figcaption aria-hidden="true">office_00</figcaption>
+</figure>
+<ul>
+<li>You can see the wrapper is now installed. Run it to add your login&nbsp;credentials.</li>
+</ul>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_00.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>Select “Sign&nbsp;in”</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_01.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>Add your email&nbsp;address.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_02.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>Add your password. For <span class="caps">CSU</span> this is your eID&nbsp;password.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_03.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="5" type="1">
+<li>You might as well save these&nbsp;credentials.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_04.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="6" type="1">
+<li>And as of Oct 01, 2021 you must have <span class="caps">2FA</span> setup. So you will need to authorize with&nbsp;Duo.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_05.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<p>Now you have a convenient Ubuntu desktop web-app wrapper for <span class="caps">MS</span> Office&nbsp;365.</p>
+    
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
