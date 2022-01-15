@@ -20,6 +20,8 @@ SECTIONS = [('Blog', 'index.html'),
         ('Tags', 'tags/tags.html')]
 RELATIVE_URLS = False
 PATH = 'content/'
+USE_FOLDER_AS_CATEGORY = True
+
 OUTPUT_PATH = 'output/'
 OUTPUT_RETENTION = [".git"]
 
