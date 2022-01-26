@@ -79,13 +79,20 @@ git reset --hard
 
 ### Serving html on python3 server
 
-`python -m http.server `
+```bash
+cd output/
+python -m http.server  
 
-Defaults to port 8000
+%Defaults to port 8000
+```
+Then in browser go to `http://localhost:8000/blog/index.html`
+
 
 `python -m http.server 7800`
 
 Starts on port 7800
+
+
 
 ### Killing a process on Port 8000
 
