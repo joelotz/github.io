@@ -47,21 +47,18 @@
 <p>I <a href="/tag/exiftool.html">really like</a> <a href="https://exiftool.org/">exiftool</a>, it is an amazing utility. Let’s start by looking at all the data fields that contain&nbsp;dates.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">exiftool</span> -time:all -a -G0:1 -s filename.mp4</span></code></pre></div>
 <p>As you would expect there are multiple date fields set by GoPro in the mp4&nbsp;container.</p>
-<figure>
-<img alt="Image1" src="/images/2020/ChangingMp4Date_01.png"/><figcaption aria-hidden="true">Image1</figcaption>
-</figure>
+<p><img src="/images/2020/ChangingMp4Date_01.png"/></p>
 <p>There are multiple solutions… we could set each field individually and&nbsp;explicitly.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="ex">exiftool</span> -CreateDate=<span class="st">"2020:08:20 00:46:59"</span> -ModifyDate=<span class="st">"2020:08:20 00:46:59"</span> -Track*Date=<span class="st">"2020:08:20 00:46:59"</span> -Media*Date=<span class="st">"2020:08:20 00:46:59"</span> test.MP4</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="ex">exiftool</span> -CreateDate=<span class="st">"2020:08:20 00:46:59"</span> -ModifyDate=<span class="st">"2020:08:20 00:46:59"</span> -Track*Date=<span class="st">"2020:08:20 00:46:59"</span> -Media*Date=<span class="st">"2020:08:20 00:46:59"</span> filename.mp4</span></code></pre></div>
 <p>Not surprisingly, Phil Harvey (the awesome author of exiftool) has created a magic tag names “time:all”. This makes our command a bit&nbsp;easier.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">exiftool</span> -time:all=<span class="st">"2020:08:20 00:46:59"</span> test.MP4</span></code></pre></div>
-<figure>
-<img alt="Image2" src="/images/2020/ChangingMp4Date_03.png"/><figcaption aria-hidden="true">Image2</figcaption>
-</figure>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">exiftool</span> -time:all=<span class="st">"2020:08:20 00:46:59"</span> filename.mp4</span></code></pre></div>
+<p><span class="caps">WOW</span>! Check out all these fields. This definitely changes <em>all</em> the time&nbsp;fields.</p>
+<p><img src="/images/2020/ChangingMp4Date_02.png"/></p>
 <p>This would work for a file or two, but I want to change a couple dozen files and the above solution would require me to enter the date and time for each file. The solution is time-shifting. As stated earlier in this post, the files are 1600 days behind the current date. We can time-shift the dates <em>forward</em> by 1600&nbsp;days.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">exiftools</span> -time:all+=<span class="st">"00:00:1600 0"</span> test.MP4</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">exiftools</span> -time:all+=<span class="st">"00:00:1600 0"</span> filename.mp4</span></code></pre></div>
 <p>The format for the date/time is <em><span class="caps">YY</span>:<span class="caps">MM</span>:<span class="caps">DD</span> <span class="caps">HH</span>:<span class="caps">MM</span>:<span class="caps">SS</span></em>. Note that “0” in the time field is shorthand for 00:00:00 and if you enter a time value then it won’t&nbsp;work.</p>
 <p>The final command to shift all <span class="caps">MP4</span> files in a directory forward by 1600 days&nbsp;is:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="ex">exiftools</span> -time:all+=<span class="st">"00:00:1600 0"</span> *.MP4</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="ex">exiftools</span> -time:all+=<span class="st">"00:00:1600 0"</span> *.mp4</span></code></pre></div>
 <h3 id="bonus-command">Bonus&nbsp;Command</h3>
 <p>My Android camera names pictures as <em>YYYYMMDD_xxxxxx.jpg</em> and I’ve grown to like this convention. It allows me to sort, filter, find pictures easier by looking at the date in the file name. I’d like my GoPro videos to follow the same convention so that when I combine photos and videos in a directory I have a built-in&nbsp;timeline.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="ex">exiftool</span> -r <span class="st">'-FileName&lt;CreateDate'</span> -d <span class="st">'%Y%m%d_%%f.%%e'</span> *.MP4</span></code></pre></div>
