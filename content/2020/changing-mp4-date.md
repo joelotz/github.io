@@ -20,26 +20,28 @@ exiftool -time:all -a -G0:1 -s filename.mp4
 ```
 As you would expect there are multiple date fields set by GoPro in the mp4 container.
 
-![Image1](/images/2020/ChangingMp4Date_01.png)
+![](/images/2020/ChangingMp4Date_01.png)
 
  There are multiple solutions… we could set each field individually and explicitly. 
 
 ```bash
-exiftool -CreateDate="2020:08:20 00:46:59" -ModifyDate="2020:08:20 00:46:59" -Track*Date="2020:08:20 00:46:59" -Media*Date="2020:08:20 00:46:59" test.MP4
+exiftool -CreateDate="2020:08:20 00:46:59" -ModifyDate="2020:08:20 00:46:59" -Track*Date="2020:08:20 00:46:59" -Media*Date="2020:08:20 00:46:59" filename.mp4
 ```
 
 Not surprisingly, Phil Harvey (the awesome author of exiftool) has created a magic tag names “time:all”. This makes our command a bit easier.
 
 ```bash
-exiftool -time:all="2020:08:20 00:46:59" test.MP4
+exiftool -time:all="2020:08:20 00:46:59" filename.mp4
 ```
 
-![Image2](/images/2020/ChangingMp4Date_03.png)
+WOW! Check out all these fields. This definitely changes *all* the time fields.
+
+![](/images/2020/ChangingMp4Date_02.png)
 
 This would work for a file or two, but I want to change a couple dozen files and the above solution would require me to enter the date and time for each file. The solution is time-shifting. As stated earlier in this post, the files are 1600 days behind the current date. We can time-shift the dates *forward* by 1600 days. 
 
 ```bash
-exiftools -time:all+="00:00:1600 0" test.MP4
+exiftools -time:all+="00:00:1600 0" filename.mp4
 ```
 
 The format for the date/time is *YY:MM:DD HH:MM:SS*. Note that “0” in the time field is shorthand for 00:00:00 and if you enter a time value then it won’t work. 
@@ -47,7 +49,7 @@ The format for the date/time is *YY:MM:DD HH:MM:SS*. Note that “0” in the ti
 The final command to shift all MP4 files in a directory forward by 1600 days is:
 
 ```bash
-exiftools -time:all+="00:00:1600 0" *.MP4
+exiftools -time:all+="00:00:1600 0" *.mp4
 ```
 
 ### Bonus Command
