@@ -6,7 +6,10 @@
 #### Pulling Remote into Local
 
 ```bash
-git pull remotename branchname
+git pull origin content
+cd output
+git pull origin master
+cd
 ```
 
 
