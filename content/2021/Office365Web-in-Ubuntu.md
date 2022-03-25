@@ -1,5 +1,5 @@
 ---
-Title: Office365 Web Desktop on Ubunutu
+Title: Office365 Web Desktop on Ubuntu
 Date: 2021-10-20
 Tags: Ubuntu
 Author: Joe

@@ -9,15 +9,15 @@
                 s = '{{ MAIL_HOST }}';
                 document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
               </script>
-                <li><i class="icon-envelope icon-large"></i> </li>
+                <li><<i class="fa-regular fa-envelope"></i> </li>
               </a>{% endif %}
-              {% if TWITTER_USERNAME %}<a href="http://twitter.com/{{ TWITTER_USERNAME }}" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a>{% endif %}
-              {% if LINKEDIN_URL %}<a href="{{ LINKEDIN_URL }}" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a>{% endif %}
-              {% if GITHUB_URL %}<a href="{{ GITHUB_URL }}" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>{% endif %}
-              {% if FACEBOOK_URL %}<a href="{{ FACEBOOK_URL }}" target="_blank"><li> <i class="icon-facebook-sign icon-large"></i></li> </a>{% endif %}
-              {% if GOOGLEPLUS_URL %}<a href="{{ GOOGLEPLUS_URL }}" target="_blank"><li><i class="icon-google-plus-sign icon-large"></i> </li> </a>{% endif %}
-              {% if PINTEREST_URL %}<a href="{{ PINTEREST_URL }}" target="_blank"><li><i class="icon-pinterest-sign icon-large"></i></li></a>{% endif %}
-              <a href="{{ SITEURL }}/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              {% if TWITTER_USERNAME %}<a href="http://twitter.com/{{ TWITTER_USERNAME }}" target="_blank"> <li> <i class="fa-brands fa-twitter-square fa-lg"></i> </li> </a>{% endif %}
+              {% if LINKEDIN_URL %}<a href="{{ LINKEDIN_URL }}" target="_blank"><li><i class="fa-brands fa-linkedin fa-lg"></i></li></a>{% endif %}
+              {% if GITHUB_URL %}<a href="{{ GITHUB_URL }}" target="_blank"> <li> <i class="fa-brands fa-github-square fa-lg"></i> </li> </a>{% endif %}
+              {% if FACEBOOK_URL %}<a href="{{ FACEBOOK_URL }}" target="_blank"><li> <i class="fa-brands fa-facebook-square fa-lg"></i></li> </a>{% endif %}
+              {% if INSTAGRAM_URL %}<a href="{{ INSTAGRAM_URL }}" target="_blank"><li><i class="fa-brands fa-instagram fa-lg"></i> </li> </a>{% endif %}
+              {% if PINTEREST_URL %}<a href="{{ PINTEREST_URL }}" target="_blank"><li><<i class="fa-brands fa-pinterest-square fa-lg"></i></li></a>{% endif %}
+              <a href="{{ SITEURL }}/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="fa-solid fa-rss fa-lg"></i></i> </li></a>
               </ul>
             </div>
             </p>

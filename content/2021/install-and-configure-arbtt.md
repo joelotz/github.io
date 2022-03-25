@@ -1,7 +1,7 @@
 ---
 Title: Welcome to arbbt, Your OCD Time Tracker
 Date: 2021-02-09
-Tags: arbtt, Python
+Tags: Arbtt, Python
 Keywords: time tracking, arbtt, Automatic Rule-Based Time Tracker, arbtt-graph, installation
 ---
 
