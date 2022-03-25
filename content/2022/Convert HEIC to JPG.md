@@ -5,6 +5,7 @@ Tags: ImageMagick, Ubuntu
 Author: Joe
 Keywords: imagemagick, ubuntu 20.04, HEIC, convert heic to jpg
 Version: Ubuntu, 20.04.3 LTS
+Status: Draft
 ---
 
 In this post I upgrade my existing ImageMagick installation on Ubuntu 20.04 for HEIC support, then batch convert a bunch of images from HEIC to JPG.
