@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+<!--    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    <title> Bulk rename photos to date taken with&nbsp;Exiftool | Delving into Delusion </title>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/admonition3.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/> 
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+    <link rel="apple-touch-icon" sizes="180x180" href="/theme/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/theme/favicon/site.webmanifest">    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Bulk rename photos to date taken with&nbsp;Exiftool</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;March 25, 2022 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75693.4 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/exiftool/">Exiftool</a>  <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
+    <p>In this post I document the Exiftool bash command for renaming a folder of photo files according to their creation date/time. I like this because my wife’s phone saves images as “IMG_YYMMDD_XXXXX.<span class="caps">JPG</span>” and my phone saves images as “YYMMDD_XXXXX.jpg”. So this combination doesn’t allow me to sort a folder full of images according to filename properly. If I do any sort of editing on her images the ModifiedDate is changed and then I can’t even sort by that in the file&nbsp;explorer.</p>
+<p>So here is the&nbsp;command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">exiftool</span> <span class="st">'-filename&lt;CreateDate'</span> -d %Y%m%d_%H%M%S%%-c.%%le -ext jpg -r /mnt/Drive/Folder/    </span></code></pre></div>
+<p>Source;&nbsp;https://ninedegreesbelow.com/photography/exiftool-commands.html#rename</p>
+<ul>
+<li><strong>‘-filename&lt;CreateDate’</strong> means rename the image file using the image’s creation date and&nbsp;time.</li>
+<li><strong>-d</strong> means “<a href="http://owl.phy.queensu.ca/~phil/exiftool/exiftool_pod.html">Set format for date/time values</a>”.</li>
+<li><strong>%Y%m%d_%H%M%S%%-c.%%le</strong>, used in conjunction with “<strong>-d</strong>” specifies the format to use for the date and time when renaming the file. Breaking the format down:
+<ul>
+<li><strong>%Y%m%d_</strong> means the first part of the new file name should be composed of the four digit creation-date year, followed by the two digit month month and day, both represented by two digits. The underscore **_** means put in an underscore after the date part of the file&nbsp;name.</li>
+<li><strong>%H%M%S</strong> means add the hour, minute, and second of the creation time, all represented by two digits. This ensures a <em>mostly</em> unique filename, the next option will ensure&nbsp;it.</li>
+<li><strong>%%-c</strong> means that if two images have the same file name up to this point in the naming process, add “<a href="http://owl.phy.queensu.ca/~phil/exiftool/exiftool_pod.html">a copy number which is automatically incremented</a>” to give each image a unique name. The “-” before the “c” isn’t really necessary, but it puts a dash before the copy&nbsp;number.</li>
+<li><strong>.%%le</strong> means keep the original file name extension, but make it lower-case if it was originally upper-case, a nice option if the cameras uses “<span class="caps">JPG</span>” instead of&nbsp;“jpg”.</li>
+</ul></li>
+<li><strong>-ext jpg -ext mp4</strong> means only rename files with the “jpg” or “mp4” extension. To rename all image files in the source folder, don’t specify any&nbsp;extensions.</li>
+<li><strong>-r</strong> means execute this command recursively for every image file in the top “source” folder (that is, the folder where all the files to be renamed are located), and also for the image files in all the source folder’s subfolders, sub-subfolders, and so&nbsp;on.</li>
+<li><strong>/mnt/drive/folder</strong> is the absolute path to the top folder holding all the images to be renamed (your path will be different, of&nbsp;course).</li>
+</ul>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>Ubuntu</td><td> 20.04.4 LTS</td></tr>
+        <tr><td> Exiftool</td><td> 11.88</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a><a href="http://github.com/joelotz" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
