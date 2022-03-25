@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Joe Lotz">
     
-    <title> Extract gpx Trace from Geotagged&nbsp;Photos | Delving into Delusion </title>
+    <title> Office365 Web Desktop on&nbsp;Ubuntu | Delving into Delusion </title>
 
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
@@ -38,50 +38,59 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> Extract gpx Trace from Geotagged&nbsp;Photos</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 11, 2020 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
+    <h1 class="title"> Office365 Web Desktop on&nbsp;Ubuntu</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;October 20, 2021 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75266.3 &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/blog/tags/bash/">Bash</a>     </p>
-    <p>On an Android the photos taken from the Mapillary app are stored in the app data&nbsp;directory.</p>
-<p>Most likely you are storing the photos on an external <span class="caps">SD</span> Card, if so the storage location is: <code>SAMSUNG Android/Card/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
-<p>Otherwise :<code>SAMSUNG Android/Phone/Android/data/app.mapillary/files/CAMERA2_0/&lt;dirs&gt;/</code></p>
-<p>A gpx file is automatically created by the Mapillary app and is stored in the directory under file&nbsp;name</p>
-<p>Photos are names in this format: <code>2020_06_06_14_06_41_856_+0530.jpg</code> YYY_MM_DD_HH_MM_SS_xxx_UTCOffset I thought xxx would be the subseconds but it does not match the subseconds data&nbsp;field.</p>
-<p>Adding geotags to&nbsp;images</p>
+ <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
+    <p>My university provides Office 365 desktop and web for the students. Which is the least they could do with the amount of tuition we are paying! My class team collaboratively authors office files synced to our online accounts, so I want to use M$ but I also want to use my linux&nbsp;box.</p>
+<h3 id="options">Options</h3>
+<p>Many years ago, over a decade, I ran <span class="caps">MS</span> Office on a paid <span class="caps">WINE</span> instance named Codeweavers CrossOver. I see there is a free version named PlayOnLinux that looks very similar but is not so straightforward. I could also run Office “naively” in a VirtualMachine but I don’t want to start a <span class="caps">VM</span> every time I want an office app nor keep it running. So, the option I am going with is to run online apps. Being a little old school online apps seemed odd to me, but with Google Docs and so many other examples it is pretty common&nbsp;place.</p>
+<p>I can run Office from a browser but this is distracting to have tabs open and such, so I’m installing <a href="https://snapcraft.io/install/office365webdesktop/ubuntu#install">Office365WebDesktop</a> to emulate a desktop&nbsp;app.</p>
+<h3 id="installation">Installation</h3>
+<ol type="1">
+<li>First, install the desktop wrapper from <a href="https://github.com/rafgui12/Office365WebDesktop">github</a>, or more easily, as a&nbsp;snap.</li>
+</ol>
+<figure>
+<img alt="office_00" src="/images/2021/Office365_AA.png"/><figcaption aria-hidden="true">office_00</figcaption>
+</figure>
 <ul>
-<li>https://exiftool.org/geotag.html</li>
-<li>https://exiftool.org/geotag.html#Inverse%20Geotagging</li>
+<li>You can see the wrapper is now installed. Run it to add your login&nbsp;credentials.</li>
 </ul>
-<p>Some useful&nbsp;options:</p>
-<ul>
-<li>if makes exiftool only process files with a gps&nbsp;tag,</li>
-<li>fileOrder allows processing in a forced&nbsp;order,</li>
-<li>d allows formatting the datatime&nbsp;string.</li>
-</ul>
-<p>For&nbsp;example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">exiftool</span> -if <span class="st">'$gpsdatetime'</span> -fileOrder gpsdatetime -p ./gpx.fmt -d %Y-%m-%dT%H:%M:%SZ *JPG <span class="op">&gt;</span> output.gpx</span></code></pre></div>
-<p><code>exiftool -s -G -a file.jpg</code></p>
-<ul>
-<li><strong>-s</strong> means instead of showing the “friendly” names like “Create Date”, show the names you need to use when you write ExifTool commands. So instead of “Create Date” you see&nbsp;“CreateDate”.</li>
-<li><strong>-G</strong> means also show the metadata Group to which the metadata tag&nbsp;belongs.</li>
-<li><strong>-a</strong> means to show all tags, even if they are&nbsp;duplicates.</li>
-</ul>
-<p>This uses a custom format to create a csv of the subsecond creation date, latitude, and longitude of all photos. <code>exiftool -p ./csv_original.fmt *.jpg &gt; original.csv</code></p>
-<p><code>exiftool -csv -filename -imagesize -gps:GPSLatitude -gps:GPSLongitude ./ &gt; long.csv</code></p>
-<p><code>exiftool -ee -n -p "$gpslatitude,$gpslongitude,$gpsdatestamp,$gpstimestamp,$gpsspeed" FILE &gt; out.csv</code></p>
-<p>This uses a gps logfile (.gpx) and interpolates photos based on CreateDate or SubSecCreateDate? <code>exiftool -geotag log.gpx *jpg</code> <code>exiftool -geotag log.gpx "-GeoTime&lt;SubSecDateTimeOriginal" *jpg</code></p>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_00.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>Select “Sign&nbsp;in”</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_01.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>Add your email&nbsp;address.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_02.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>Add your password. For <span class="caps">CSU</span> this is your eID&nbsp;password.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_03.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="5" type="1">
+<li>You might as well save these&nbsp;credentials.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_04.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<ol start="6" type="1">
+<li>And as of Oct 01, 2021 you must have <span class="caps">2FA</span> setup. So you will need to authorize with&nbsp;Duo.</li>
+</ol>
+<figure>
+<img alt="garmin_03" src="/images/2021/Office365_05.png"/><figcaption aria-hidden="true">garmin_03</figcaption>
+</figure>
+<p>Now you have a convenient Ubuntu desktop web-app wrapper for <span class="caps">MS</span> Office&nbsp;365.</p>
     
-<div class="version">
-<h3>Software Versions</h3>
-<p>This is an automated list of software versions used during the writing of this article.</p>
-
-  <code>
-    <table>
-        <tr><th>Software</th><th>Version</th></tr>
-        <tr><td>OS</td><td> Ubuntu 20.04 LTS</td></tr>
-        <tr><td> x</td><td></td></tr>
-    </table>
-  </code>
 </div>
 
 
