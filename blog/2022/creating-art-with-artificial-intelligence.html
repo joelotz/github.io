@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    
+    <title> Creating Art with Artificial&nbsp;Intelligence | Delving into Delusion </title>
+
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://kit.fontawesome.com/82e3c98057.js" crossorigin="anonymous"></script> 
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Creating Art with Artificial&nbsp;Intelligence</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;June 06, 2022 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75893.2 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/python/">Python</a>     </p>
+    <p>I was surfing YouTube and watched <a href="https://www.youtube.com/watch?v=SVcsDDABEkM&amp;t=680s">a video by Vox</a> about art created by Artificial Intelligence. In the beginning, <span class="caps">AI</span> was used to label an image but soon some very creative people wanted to reverse the process and have <span class="caps">AI</span> create an image from labels. I think most people know that deep-learning Neural Nets and other tech have exploded allowing deep fakes and other applications…including one of the original desires to create art from labels or “prompts”. They provided a link to a page of available <span class="caps">AI</span> art tools - <a href="https://pharmapsychotic.com/tools.html">https://pharmapsychotic.com/tools.html</a>.</p>
+<p>A couple hours later I was wasting time again and reading through Reddit/r/pics and saw picture of the <a href="https://www.reddit.com/r/pics/comments/v5qrtz/space_needle_from_a_hotel_window_on_a_rainy_night/">space needle at night in the rain</a>…and I thought, “I wonder if I can get an Neural Net(<span class="caps">NN</span>) to create a piece of art with similar style and&nbsp;content.”</p>
+<p>Here is the original image. <img src="/images/2022/AIArt_01.png"/> Source: reddit user <a href="https://www.reddit.com/user/rjohnstone13/">u/johnstone13</a></p>
+<h2 id="python-script">Python&nbsp;Script</h2>
+<p>First, you need to have <a href="https://github.com/jina-ai/jina">Jina</a>&nbsp;installed</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="op">!</span>pip install jina</span></code></pre></div>
+<p>There is a jina demo server available for us to play&nbsp;with.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a>server_url <span class="op">=</span> <span class="st">'grpc://dalle-flow.jina.ai:51005'</span></span></code></pre></div>
+<p>The next step is quite important. You need to craft the “prompt” or labels that the <span class="caps">AI</span> will use. I admit I goofed around with this part for 30 minutes, adjusting the adjectives and sentence until it produced a desirable&nbsp;result.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">'a rainy photo of the seattle space needle in the background and buildings in the foreground from a hotel window at night'</span></span></code></pre></div>
+<p>Submit the prompt to the server which generates 4 candidates, 2 from <span class="caps">DALL</span>·E-Mega and 2 from <span class="caps">GLID3</span> <span class="caps">XL</span>. This takes about 3&nbsp;minutes.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="im">from</span> docarray <span class="im">import</span> Document</span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>da <span class="op">=</span> Document(text<span class="op">=</span>prompt).post(server_url, parameters<span class="op">=</span>{<span class="st">'num_images'</span>: <span class="dv">2</span>}).matches</span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>da.plot_image_sprites(fig_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>), show_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<p><img src="/images/2022/AIArt_02.png"/></p>
+<p>There is an index value in the upper-left of each of the four results. Select your favorite result and place the index in the <code>fav_id</code> below.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a>fav_id <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a>fav <span class="op">=</span> da[fav_id]</span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a>fav.display()</span></code></pre></div>
+<p><img src="/images/2022/AIArt_03.png"/></p>
+<p>Now we submit the selected candidate to the server for <a href="https://www.assemblyai.com/blog/diffusion-models-for-machine-learning-introduction/">diffusion</a>. This will give 4 images based on the given image. You may allow the model to improvise more by giving skip_rate a near-zero value, or a near-one value to force its closeness to the given image. The whole procedure takes another couple&nbsp;minutes.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a>diffused <span class="op">=</span> fav.post(<span class="ss">f'</span><span class="sc">{</span>server_url<span class="sc">}</span><span class="ss">'</span>, parameters<span class="op">=</span>{<span class="st">'skip_rate'</span>: <span class="fl">0.3</span>, <span class="st">'num_images'</span>: <span class="dv">4</span>}, target_executor<span class="op">=</span><span class="st">'diffusion'</span>).matches</span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a>diffused.plot_image_sprites(fig_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>), show_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<p><img src="/images/2022/AIArt_04.png"/></p>
+<p>Select the image you like most by setting the variable <code>dfav_id</code>. We can look at it&nbsp;individually.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a>dfav_id <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a aria-hidden="true" href="#cb7-3" tabindex="-1"></a>fav <span class="op">=</span> diffused[dfav_id]</span>
+<span id="cb7-4"><a aria-hidden="true" href="#cb7-4" tabindex="-1"></a>fav.display()</span></code></pre></div>
+<p><img src="/images/2022/AIArt_05.png"/></p>
+<p>Finally, submit to the server for upscaling to&nbsp;1024x1024px.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb8-2"><a aria-hidden="true" href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a aria-hidden="true" href="#cb8-3" tabindex="-1"></a>fav <span class="op">=</span> fav.post(<span class="ss">f'</span><span class="sc">{</span>server_url<span class="sc">}</span><span class="ss">/upscale'</span>)</span>
+<span id="cb8-4"><a aria-hidden="true" href="#cb8-4" tabindex="-1"></a>fav.display()</span></code></pre></div>
+<p>So here is the final image. This is my <span class="caps">AI</span> computer-generated art inspired by the original photo&nbsp;above.</p>
+<p><img src="/images/2022/AIArt_06.png"/></p>
+<p>Note that all images generated by the <span class="caps">AI</span> have a large amount of randomness involved, so even if you use the exact same prompts you will receive different&nbsp;results.</p>
+<p>You can take this code, change the prompts to anything, and generate your own images. There is a huge range of possible outputs. from realistic to&nbsp;surrealism.</p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>Ubuntu</td><td> 20.04.4 LTS</td></tr>
+        <tr><td> Python</td><td> 3.8.5</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="fa-brands fa-twitter-square fa-lg"></i> </li> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="fa-brands fa-linkedin fa-lg"></i></li></a><a href="https://github.com/joelotz" target="_blank"> <li> <i class="fa-brands fa-github-square fa-lg"></i> </li> </a><a href="https://www.instagram.com/joelotz/" target="_blank"><li><i class="fa-brands fa-instagram fa-lg"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="fa-solid fa-rss fa-lg"></i></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
