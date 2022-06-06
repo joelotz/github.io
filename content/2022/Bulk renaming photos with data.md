@@ -1,5 +1,5 @@
 ---
-Title: Bulk rename photos to date taken with Exiftool
+Title: Bulk Rename Photos to Date Taken with Exiftool
 Date: 2022-03-25
 Tags: Exiftool, Ubuntu
 Author: Joe
