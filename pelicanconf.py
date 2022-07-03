@@ -107,10 +107,10 @@ MARKUP = ('md', 'ipynb')
 ## PLUGIN CONFIGURATION ##################################
 PLUGIN_PATHS = ['./plugins']
 from pelican_jupyter import markup as nb_markup
-PLUGINS = [nb_markup, 'stardate', 'render_math']
+PLUGINS = [nb_markup, 'stardate', 'render_math','pelican_gist']
 # if you create jupyter files in the content dir, snapshots are saved with the same
 # metadata. These need to be ignored. 
-IGNORE_FILES = ['.ipynb_checkpoints', '.git', '.html']  
+IGNORE_FILES = ['.ipynb_checkpoints', '.git', '.html','.sync.ffs_db']  
 MATH_JAX = {'align':'left','indent':'2em'}
 ARTICLE_EXCLUDES = ['extra'] 
 

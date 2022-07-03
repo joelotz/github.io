@@ -6,3 +6,4 @@ plugins/ipynb/__pycache__
 plugins/render_math/__pycache__
 plugins/stardate/__pycache__
 .vscode/
+.sync.ffs_db
