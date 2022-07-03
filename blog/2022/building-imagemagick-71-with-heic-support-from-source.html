@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    
+    <title> Building Imagemagick 7.1 with <span class="caps">HEIC</span> Support from&nbsp;Source | Delving into Delusion </title>
+
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://kit.fontawesome.com/82e3c98057.js" crossorigin="anonymous"></script> 
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> Building Imagemagick 7.1 with <span class="caps">HEIC</span> Support from&nbsp;Source</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 01, 2022 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75961.7 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/imagemagick/">ImageMagick</a>  <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
+    <p>I upgraded my Ubuntu distro from 20.04 to 22.04 and ImageMagick didn’t come along for the ride… I’m not sure what happened. In this post I build ImageMagick 7.1.0-39 with <span class="caps">HEIC</span> support from source on Ubuntu&nbsp;22.04.</p>
+<p>I first installed from the apt package manager (with no errors) but when verifying the installation I got this&nbsp;code:</p>
+<p><code>convert: error while loading shared libraries: libwebp.so.6: cannot open shared object file: No such file or directory</code></p>
+<p>After some Googling around I decided to try building from source with <span class="caps">HEIC</span> support as I now have an iPhone from work and would like to use ImageMagick to convert .heic to .jpg. Building from source turned out to be surprisingly&nbsp;easy.</p>
+<p>I found a gist from github user <a href="https://gist.github.com/hurricup">Alexandr Evstigneev</a> and made some tweaks to his <a href="https://gist.github.com/hurricup/e14ae5bc47705fca6b1680e7a1fb6580">installation gist</a>.</p>
+<p>Here is&nbsp;mine:</p>
+<div class="gist">
+    <script src='https://gist.github.com/901b3d21b171a64b9e1a4191edc061da.js'></script>
+    <noscript>
+        <pre><code># -- Credits --
+# copied from https://gist.github.com/hurricup/e14ae5bc47705fca6b1680e7a1fb6580
+# which in turn was inspired by https://gist.github.com/rjnienaber/af47fccb8410926ba7ea35f96c3b87fd
+
+# 1. Remove old bundled ImageMagick program
+sudo apt remove imagemagick -y
+
+# 2. Install base dependencies
+sudo apt-get install -y \
+  libde265-dev \
+  libdjvulibre-dev \
+  libfftw3-dev \
+  libghc-bzlib-dev \
+  libgoogle-perftools-dev \
+  libgraphviz-dev \
+  libgs-dev \
+  libheif-dev \
+  libjbig-dev \
+  libjemalloc-dev \
+  libjpeg-dev \
+  liblcms2-dev \
+  liblqr-1-0-dev \
+  liblzma-dev \
+  libopenexr-dev \
+  libpango1.0-dev \
+  libraqm-dev \
+  libraw-dev \
+  libtiff-dev \
+  libwebp-dev \
+  libwmf-dev \
+  libzip-dev \
+  libzstd-dev
+
+# 3. Install it
+git clone --depth 1 --branch 7.1.0-39 https://github.com/ImageMagick/ImageMagick.git
+cd ImageMagick
+
+# 4. Configure the installatino
+./configure \
+	--with-bzlib=yes \
+	--with-djvu=yes \
+	--with-fftw=yes \
+	--with-fontconfig=yes \
+	--with-freetype=yes \
+	--with-gslib=yes \
+	--with-gvc=yes \
+	--with-heic=yes \
+	--with-jbig=yes \
+	--with-jemalloc=yes \
+	--with-jpeg=yes \
+	--with-lcms=yes \
+	--with-lqr=yes \
+	--with-lzma=yes \
+	--with-magick-plus-plus=yes \
+	--with-openexr=yes \
+	--with-openjp2=yes \
+	--with-pango=yes \
+	--with-perl=yes \
+	--with-png=yes \
+	--with-raqm=yes \
+	--with-raw=yes \
+	--with-rsvg=yes \
+	--with-tcmalloc=yes \
+	--with-tiff=yes \
+	--with-webp=yes \
+	--with-wmf=yes \
+	--with-x=yes \
+	--with-xml=yes \
+	--with-zip=yes \
+	--with-zlib=yes \
+	--with-zstd=yes
+
+# 5. Run make install
+make -j 8
+sudo make install
+sudo ldconfig /usr/local/lib
+
+# 6. Last step! Check installation
+identify --version
+
+# 7. You should see something like this
+# --------------------------------------
+# Version: ImageMagick 7.1.0-10 Q16-HDRI x86_64 2021-10-03 https://imagemagick.org
+# Copyright: (C) 1999-2021 ImageMagick Studio LLC
+# License: https://imagemagick.org/script/license.php
+# Features: Cipher DPC HDRI OpenMP(4.5)
+# Delegates (built-in): fontconfig freetype heic jp2 png webp x xml zlib
+# Compiler: gcc (10.3)</code></pre>
+    </noscript>
+</div>
+<p>You can obviously run it as a script or if you are timid (like me) you can copy/paste each line and look for&nbsp;errors.</p>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>Ubuntu</td><td> 20.04 LTS</td></tr>
+        <tr><td> ImageMagick</td><td> 7.1.0-39</td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="fa-brands fa-twitter-square fa-lg"></i> </li> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="fa-brands fa-linkedin fa-lg"></i></li></a><a href="https://github.com/joelotz" target="_blank"> <li> <i class="fa-brands fa-github-square fa-lg"></i> </li> </a><a href="https://www.instagram.com/joelotz/" target="_blank"><li><i class="fa-brands fa-instagram fa-lg"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="fa-solid fa-rss fa-lg"></i></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

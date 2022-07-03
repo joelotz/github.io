@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Joe Lotz">
     
-    <title> Creating Art with Artificial&nbsp;I | Delving into Delusion </title>
+    <title> Upgrading to Imagemagick 7.1 with <span class="caps">HEIC</span>&nbsp;Support | Delving into Delusion </title>
 
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
@@ -38,28 +38,23 @@
         <div class=separator></div>
                 
         <div class=body>
-    <h1 class="title"> Creating Art with Artificial&nbsp;I</h1>
-    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;March 25, 2022 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 75693.4 &nbsp;&nbsp;&nbsp;
+    <h1 class="title"> Upgrading to Imagemagick 7.1 with <span class="caps">HEIC</span>&nbsp;Support</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;July 01, 2022 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate:  &nbsp;&nbsp;&nbsp;
     	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
- <a href="/blog/tags/exiftool/">Exiftool</a>  <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
-    <p>In this post I document the Exiftool bash command for renaming a folder of photo files according to their creation date/time. I like this because my wife’s phone saves images as “IMG_YYMMDD_XXXXX.<span class="caps">JPG</span>” and my phone saves images as “YYMMDD_XXXXX.jpg”. So this combination doesn’t allow me to sort a folder full of images according to filename properly. If I do any sort of editing on her images the ModifiedDate is changed and then I can’t even sort by that in the file&nbsp;explorer.</p>
-<p>So here is the&nbsp;command:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="ex">exiftool</span> <span class="st">'-filename&lt;CreateDate'</span> -d %Y%m%d_%H%M%S%%-c.%%le -ext jpg -r /mnt/Drive/Folder/    </span></code></pre></div>
-<p>Source;&nbsp;https://ninedegreesbelow.com/photography/exiftool-commands.html#rename</p>
+ <a href="/blog/tags/imagemagick/">ImageMagick</a>  <a href="/blog/tags/ubuntu/">Ubuntu</a>     </p>
+    <p>In this post I upgrade my existing ImageMagick installation on Ubuntu 22.04 for <span class="caps">HEIC</span> support, then batch convert a bunch of images from <span class="caps">HEIC</span> to <span class="caps">JPG</span>. I upgraded my Ubuntu distro from 20.04 to 22.04 and ImageMagick didn’t come along for the ride… I’m not sure what happened. I installed from the apt package manager with no errors but when verifying installation I got this&nbsp;code:</p>
+<p><code>convert: error while loading shared libraries: libwebp.so.6: cannot open shared object file: No such file or directory</code></p>
+<p>After some Googling around I decided to try building from source with <span class="caps">HEIC</span> support as I now have an iPhone from work and want to manipulate&nbsp;those.</p>
+<p>Build ImageMagick from source with <span class="caps">HEIC</span>&nbsp;support.</p>
 <ul>
-<li><strong>‘-filename&lt;CreateDate’</strong> means rename the image file using the image’s creation date and&nbsp;time.</li>
-<li><strong>-d</strong> means “<a href="http://owl.phy.queensu.ca/~phil/exiftool/exiftool_pod.html">Set format for date/time values</a>”.</li>
-<li><strong>%Y%m%d_%H%M%S%%-c.%%le</strong>, used in conjunction with “<strong>-d</strong>” specifies the format to use for the date and time when renaming the file. Breaking the format down:
-<ul>
-<li><strong>%Y%m%d_</strong> means the first part of the new file name should be composed of the four digit creation-date year, followed by the two digit month month and day, both represented by two digits. The underscore **_** means put in an underscore after the date part of the file&nbsp;name.</li>
-<li><strong>%H%M%S</strong> means add the hour, minute, and second of the creation time, all represented by two digits. This ensures a <em>mostly</em> unique filename, the next option will ensure&nbsp;it.</li>
-<li><strong>%%-c</strong> means that if two images have the same file name up to this point in the naming process, add “<a href="http://owl.phy.queensu.ca/~phil/exiftool/exiftool_pod.html">a copy number which is automatically incremented</a>” to give each image a unique name. The “-” before the “c” isn’t really necessary, but it puts a dash before the copy&nbsp;number.</li>
-<li><strong>.%%le</strong> means keep the original file name extension, but make it lower-case if it was originally upper-case, a nice option if the cameras uses “<span class="caps">JPG</span>” instead of&nbsp;“jpg”.</li>
-</ul></li>
-<li><strong>-ext jpg -ext mp4</strong> means only rename files with the “jpg” or “mp4” extension. To rename all image files in the source folder, don’t specify any&nbsp;extensions.</li>
-<li><strong>-r</strong> means execute this command recursively for every image file in the top “source” folder (that is, the folder where all the files to be renamed are located), and also for the image files in all the source folder’s subfolders, sub-subfolders, and so&nbsp;on.</li>
-<li><strong>/mnt/drive/folder</strong> is the absolute path to the top folder holding all the images to be renamed (your path will be different, of&nbsp;course).</li>
+<li>Source:&nbsp;https://gist.github.com/hurricup/e14ae5bc47705fca6b1680e7a1fb6580</li>
 </ul>
+<p>[gist:id=901b3d21b171a64b9e1a4191edc061da]</p>
+<p>Batch convert <span class="caps">HEIC</span> to&nbsp;jpg</p>
+<ul>
+<li>https://dnsmichi.at/2021/09/06/convert-heic-to-jpg/</li>
+</ul>
+<p>Build&nbsp;command</p>
     
 <div class="version">
 <h3>Software Versions</h3>
@@ -68,8 +63,8 @@
   <code>
     <table>
         <tr><th>Software</th><th>Version</th></tr>
-        <tr><td>Ubuntu</td><td> 20.04.4 LTS</td></tr>
-        <tr><td> Exiftool</td><td> 11.88</td></tr>
+        <tr><td>Ubuntu</td><td> 20.04 LTS</td></tr>
+        <tr><td> ImageMagic 7.1.0-39</td><td></td></tr>
     </table>
   </code>
 </div>
