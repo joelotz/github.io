@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="http://www.joelotz.com/" rel="alternate"></link><link href="http://www.joelotz.com/blog/all.atom.xml" rel="self"></link><id>http://www.joelotz.com/</id><updated>2022-07-01T00:00:00+05:30</updated><entry><title>Building Imagemagick 7.1 with HEIC Support from Source</title><link href="http://www.joelotz.com/blog/2022/building-imagemagick-71-with-heic-support-from-source.html" rel="alternate"></link><published>2022-07-01T00:00:00+05:30</published><updated>2022-07-01T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:www.joelotz.com,2022-07-01:/blog/2022/building-imagemagick-71-with-heic-support-from-source.html</id><summary type="html">&lt;p&gt;I upgraded my Ubuntu distro from 20.04 to 22.04 and ImageMagick didn’t come along for the ride… I’m not sure what happened. In this post I build ImageMagick 7.1.0-39 with &lt;span class="caps"&gt;HEIC&lt;/span&gt; support from source on Ubuntu&amp;nbsp;22.04.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Delving into Delusion</title><link href="http://www.joelotz.com/" rel="alternate"></link><link href="http://www.joelotz.com/blog/all.atom.xml" rel="self"></link><id>http://www.joelotz.com/</id><updated>2023-01-08T00:00:00+05:30</updated><entry><title>Converting .heic image to .jpg with ImageMagick</title><link href="http://www.joelotz.com/blog/2023/converting-heic-image-to-jpg-with-imagemagick.html" rel="alternate"></link><published>2023-01-08T00:00:00+05:30</published><updated>2023-01-08T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:www.joelotz.com,2023-01-08:/blog/2023/converting-heic-image-to-jpg-with-imagemagick.html</id><summary type="html">&lt;p&gt;This is a quick followup to my post &lt;a href="https://www.joelotz.com/blog/2022/building-imagemagick-71-with-heic-support-from-source.html"&gt;Building Imagemagick 7.1 with &lt;span class="caps"&gt;HEIC&lt;/span&gt; Support from Source&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It’s been about 6 months since converted my Apple .heic images to .jpg and I forgotten what seemed so trivial at the time. I searched my blog posts, as being a repository …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a quick followup to my post &lt;a href="https://www.joelotz.com/blog/2022/building-imagemagick-71-with-heic-support-from-source.html"&gt;Building Imagemagick 7.1 with &lt;span class="caps"&gt;HEIC&lt;/span&gt; Support from Source&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It’s been about 6 months since converted my Apple .heic images to .jpg and I forgotten what seemed so trivial at the time. I searched my blog posts, as being a repository of notes and actions is by far the main purpose of my blog, and I didn’t find anything so I had to Google it. So… time to write a quick post to remind myself the next time I&amp;nbsp;forget.&lt;/p&gt;
+&lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;span id="cb1-1"&gt;&lt;a aria-hidden="true" href="#cb1-1" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;magick&lt;/span&gt; Input.heic -quality 95% Output.jpg&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Many on the inter-tubes say quality should be 90-95% because 100% is much larger file size with little&amp;nbsp;benefit.&lt;/p&gt;
+&lt;p&gt;All the metadata and &lt;span class="caps"&gt;EXIF&lt;/span&gt; is carried over, you can check&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="sourceCode" id="cb2"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;span id="cb2-1"&gt;&lt;a aria-hidden="true" href="#cb2-1" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;identify&lt;/span&gt; -verbose Output.jpg&lt;/span&gt;
+&lt;span id="cb2-2"&gt;&lt;a aria-hidden="true" href="#cb2-2" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;identify&lt;/span&gt; -verbose Output.jpg &lt;span class="kw"&gt;|&lt;/span&gt; &lt;span class="fu"&gt;grep&lt;/span&gt; &lt;span class="st"&gt;"exif"&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="2023"></category><category term="ImageMagick"></category></entry><entry><title>Submitting an INCOSE Application</title><link href="http://www.joelotz.com/blog/2022/submitting-an-incose-application.html" rel="alternate"></link><published>2022-07-23T00:00:00+05:30</published><updated>2022-07-23T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:www.joelotz.com,2022-07-23:/blog/2022/submitting-an-incose-application.html</id><content type="html">&lt;p&gt;I recently submitted an application&amp;nbsp;for&lt;/p&gt;
+&lt;p&gt;https://www.incose.org/systems-engineering-certification/certification-agreements/equivalency-programs&lt;/p&gt;
+&lt;p&gt;https://www.incose.org/systems-engineering-certification/certification&lt;/p&gt;
+&lt;p&gt;https://www.incose.org/docs/default-source/certification/howto_applyforcertification.pdf?sfvrsn=e2a497c6_4&lt;/p&gt;</content><category term="2022"></category></entry><entry><title>Building Imagemagick 7.1 with HEIC Support from Source</title><link href="http://www.joelotz.com/blog/2022/building-imagemagick-71-with-heic-support-from-source.html" rel="alternate"></link><published>2022-07-01T00:00:00+05:30</published><updated>2022-07-01T00:00:00+05:30</updated><author><name>Joe</name></author><id>tag:www.joelotz.com,2022-07-01:/blog/2022/building-imagemagick-71-with-heic-support-from-source.html</id><summary type="html">&lt;p&gt;I upgraded my Ubuntu distro from 20.04 to 22.04 and ImageMagick didn’t come along for the ride… I’m not sure what happened. In this post I build ImageMagick 7.1.0-39 with &lt;span class="caps"&gt;HEIC&lt;/span&gt; support from source on Ubuntu&amp;nbsp;22.04.&lt;/p&gt;
 &lt;p&gt;I first installed from the apt …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I upgraded my Ubuntu distro from 20.04 to 22.04 and ImageMagick didn’t come along for the ride… I’m not sure what happened. In this post I build ImageMagick 7.1.0-39 with &lt;span class="caps"&gt;HEIC&lt;/span&gt; support from source on Ubuntu&amp;nbsp;22.04.&lt;/p&gt;
 &lt;p&gt;I first installed from the apt package manager (with no errors) but when verifying the installation I got this&amp;nbsp;code:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;convert: error while loading shared libraries: libwebp.so.6: cannot open shared object file: No such file or directory&lt;/code&gt;&lt;/p&gt;
@@ -15,6 +25,10 @@
 
 # 1. Remove old bundled ImageMagick program
 sudo apt remove imagemagick -y
+
+# 1b. Update and install libraries for buidling from source
+sudo apt update
+sudo apt install build-essential
 
 # 2. Install base dependencies
 sudo apt-get install -y \
@@ -2802,24 +2816,29 @@ h6:hover .anchor-link {
   font-style: italic;
 }
 &lt;/style&gt;
-&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
- .highlight pre   { background: #f8f8f8; }
- .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
+&lt;style type="text/css"&gt;pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment */
  .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
- .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
- .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
- .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
- .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
- .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
+ .highlight pre  .ch { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
- .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
- .highlight pre  .go { color: #888888 } /* Generic.Output */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
@@ -2832,15 +2851,15 @@ h6:hover .anchor-link {
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
  .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
- .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
  .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
  .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
- .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;CB3F38&lt;/span&gt;; font-weight: bold } /* Name.Exception */
  .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
- .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
  .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
@@ -2857,11 +2876,11 @@ h6:hover .anchor-link {
  .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
  .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
  .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
- .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;AA5D1F&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
  .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt; } /* Literal.String.Regex */
  .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
@@ -5013,24 +5032,29 @@ h6:hover .anchor-link {
   font-style: italic;
 }
 &lt;/style&gt;
-&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
- .highlight pre   { background: #f8f8f8; }
- .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
+&lt;style type="text/css"&gt;pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment */
  .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
- .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
- .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
- .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
- .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
- .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
+ .highlight pre  .ch { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
- .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
- .highlight pre  .go { color: #888888 } /* Generic.Output */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
@@ -5043,15 +5067,15 @@ h6:hover .anchor-link {
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
  .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
- .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
  .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
  .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
- .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;CB3F38&lt;/span&gt;; font-weight: bold } /* Name.Exception */
  .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
- .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
  .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
@@ -5068,11 +5092,11 @@ h6:hover .anchor-link {
  .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
  .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
  .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
- .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;AA5D1F&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
  .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt; } /* Literal.String.Regex */
  .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
@@ -11593,24 +11617,29 @@ h6:hover .anchor-link {
   font-style: italic;
 }
 &lt;/style&gt;
-&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
- .highlight pre   { background: #f8f8f8; }
- .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
+&lt;style type="text/css"&gt;pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment */
  .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
- .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
- .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
- .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
- .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
- .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
+ .highlight pre  .ch { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
- .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
- .highlight pre  .go { color: #888888 } /* Generic.Output */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
@@ -11623,15 +11652,15 @@ h6:hover .anchor-link {
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
  .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
- .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
  .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
  .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
- .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;CB3F38&lt;/span&gt;; font-weight: bold } /* Name.Exception */
  .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
- .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
  .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
@@ -11648,11 +11677,11 @@ h6:hover .anchor-link {
  .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
  .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
  .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
- .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;AA5D1F&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
  .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt; } /* Literal.String.Regex */
  .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
@@ -13220,24 +13249,29 @@ h6:hover .anchor-link {
   font-style: italic;
 }
 &lt;/style&gt;
-&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
- .highlight pre   { background: #f8f8f8; }
- .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
+&lt;style type="text/css"&gt;pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment */
  .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
- .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
- .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
- .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
- .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
- .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
+ .highlight pre  .ch { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
- .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
- .highlight pre  .go { color: #888888 } /* Generic.Output */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
@@ -13250,15 +13284,15 @@ h6:hover .anchor-link {
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
  .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
- .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
  .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
  .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
- .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;CB3F38&lt;/span&gt;; font-weight: bold } /* Name.Exception */
  .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
- .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
  .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
@@ -13275,11 +13309,11 @@ h6:hover .anchor-link {
  .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
  .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
  .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
- .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;AA5D1F&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
  .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt; } /* Literal.String.Regex */
  .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
@@ -15394,24 +15428,29 @@ h6:hover .anchor-link {
   font-style: italic;
 }
 &lt;/style&gt;
-&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
- .highlight pre   { background: #f8f8f8; }
- .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
+&lt;style type="text/css"&gt;pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment */
  .highlight pre  .err { border: 1px solid #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Error */
  .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
  .highlight pre  .o { color: #666666 } /* Operator */
- .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
- .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
- .highlight pre  .cp { color: #&lt;span class="caps"&gt;BC7A00&lt;/span&gt; } /* Comment.Preproc */
- .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
- .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
- .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
+ .highlight pre  .ch { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #&lt;span class="caps"&gt;3D7B7B&lt;/span&gt;; font-style: italic } /* Comment.Special */
  .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
  .highlight pre  .ge { font-style: italic } /* Generic.Emph */
- .highlight pre  .gr { color: #&lt;span class="caps"&gt;FF0000&lt;/span&gt; } /* Generic.Error */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
  .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
- .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
- .highlight pre  .go { color: #888888 } /* Generic.Output */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
  .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
  .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
  .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
@@ -15424,15 +15463,15 @@ h6:hover .anchor-link {
  .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
  .highlight pre  .m { color: #666666 } /* Literal.Number */
  .highlight pre  .s { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String */
- .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
  .highlight pre  .nb { color: #008000 } /* Name.Builtin */
  .highlight pre  .nc { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Class */
  .highlight pre  .no { color: #880000 } /* Name.Constant */
  .highlight pre  .nd { color: #&lt;span class="caps"&gt;AA22FF&lt;/span&gt; } /* Name.Decorator */
- .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
- .highlight pre  .ne { color: #&lt;span class="caps"&gt;D2413A&lt;/span&gt;; font-weight: bold } /* Name.Exception */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #&lt;span class="caps"&gt;CB3F38&lt;/span&gt;; font-weight: bold } /* Name.Exception */
  .highlight pre  .nf { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt; } /* Name.Function */
- .highlight pre  .nl { color: #&lt;span class="caps"&gt;A0A000&lt;/span&gt; } /* Name.Label */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
  .highlight pre  .nn { color: #&lt;span class="caps"&gt;0000FF&lt;/span&gt;; font-weight: bold } /* Name.Namespace */
  .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
  .highlight pre  .nv { color: #19177C } /* Name.Variable */
@@ -15449,11 +15488,11 @@ h6:hover .anchor-link {
  .highlight pre  .dl { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Delimiter */
  .highlight pre  .sd { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt;; font-style: italic } /* Literal.String.Doc */
  .highlight pre  .s2 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Double */
- .highlight pre  .se { color: #&lt;span class="caps"&gt;BB6622&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .se { color: #&lt;span class="caps"&gt;AA5D1F&lt;/span&gt;; font-weight: bold } /* Literal.String.Escape */
  .highlight pre  .sh { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Heredoc */
- .highlight pre  .si { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .si { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt;; font-weight: bold } /* Literal.String.Interpol */
  .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
- .highlight pre  .sr { color: #&lt;span class="caps"&gt;BB6688&lt;/span&gt; } /* Literal.String.Regex */
+ .highlight pre  .sr { color: #&lt;span class="caps"&gt;A45A77&lt;/span&gt; } /* Literal.String.Regex */
  .highlight pre  .s1 { color: #&lt;span class="caps"&gt;BA2121&lt;/span&gt; } /* Literal.String.Single */
  .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
  .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
