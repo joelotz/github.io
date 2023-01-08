@@ -9,7 +9,7 @@
 git pull origin content
 cd output
 git pull origin master
-cd
+cd ..
 ```
 
 
