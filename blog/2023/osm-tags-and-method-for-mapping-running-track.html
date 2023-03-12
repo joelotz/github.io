@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' /> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet" type='text/css' /> 
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="Joe Lotz">
+    
+    <title> <span class="caps">OSM</span> tags and method for mapping running&nbsp;track | Delving into Delusion </title>
+
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/style_startrek.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/haddock_highlighting.css" type="text/css"/> 
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/theme/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/theme/favicon/favicon-16x16.png">
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://kit.fontawesome.com/82e3c98057.js" crossorigin="anonymous"></script> 
+  </head>
+  <body>
+    <div class=container>
+        <div class="header">
+            <a href="http://www.joelotz.com">Delving into Delusion</a> <span class="muted"></span>
+        </div>
+
+        <div class=navigation>
+            <ul>
+	            <li><a href="http://www.joelotz.com/blog/index.html">Blog</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/archives.html">Archive</a> </li>
+	            <li><a href="http://www.joelotz.com/blog/tags/tags.html">Tags</a> </li>
+            </ul>
+        </div>
+        <div class=separator></div>
+                
+        <div class=body>
+    <h1 class="title"> <span class="caps">OSM</span> tags and method for mapping running&nbsp;track</h1>
+    <p class=date> <span style="color: #234764;"><i class="fas icon-calendar"></i></span>&nbsp;March 12, 2023 &nbsp;&nbsp;&nbsp; <span class="staricon-star_trek" style="color: #234764;"></span>&nbsp;Stardate: 76658.6 &nbsp;&nbsp;&nbsp;
+    	   <span style="color: #234764;"><i class="fas icon-tags"></i></span> Tagged as: 
+ <a href="/blog/tags/openstreetmaposm/">OpenStreetMap(OSM)</a>     </p>
+    <p>I recently tried to map a running track at a local high school and forgotten most of the tags and methods which required some research to remind myself again. I know I’ve done this before so wanted to write it down for next time. I didn’t think my <a href="https://wiki.openstreetmap.org/wiki/User:BubbleGuppies">scratchpad/user page</a> on the <a href="https://wiki.openstreetmap.org/wiki/Main_Page"><span class="caps">OSM</span> Wiki</a> was&nbsp;sufficient.</p>
+<figure>
+<img alt="By Martinvl - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=11628422" src="/images/2023/2880px-Piste_athlétisme-en.svg.png"/><figcaption aria-hidden="true">By Martinvl - Own work, <span class="caps">CC</span> <span class="caps">BY</span>-<span class="caps">SA</span> 3.0, https://commons.wikimedia.org/w/index.php?curid=11628422</figcaption>
+</figure>
+<p>I’m most often mapping in high school track and field&nbsp;areas/stadiums.</p>
+<h3 id="track">Track</h3>
+<p>Creating multipolygon relation in <span class="caps">JOSM</span> = <a href="https://blog.mapbox.com/mapping-complex-features-in-josm-using-relations-b930a6aec2c7">https://blog.mapbox.com/mapping-complex-features-in-josm-using-relations-b930a6aec2c7</a></p>
+<p>Track Wikipage = <a href="https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dtrack">https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dtrack</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="va">leisure=</span>track</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="va">sport=</span>athletics</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="va">athletics=</span>running</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="va">lanes=</span><span class="ex">*</span></span></code></pre></div>
+<h3 id="long-jump-track-and-pit">Long Jump Track and&nbsp;Pit</h3>
+<p>Long Jump Wikipage = <a href="https://wiki.openstreetmap.org/wiki/Tag:athletics%3Dlong_jump">https://wiki.openstreetmap.org/wiki/Tag:athletics%3Dlong_jump</a></p>
+<p>Map the track with an area and tag&nbsp;as:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="va">leisure=</span>track</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="va">sport=</span>athletics</span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="va">athletics=</span>long_jump</span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="va">surface=</span>tartan</span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="va">lanes=</span>1</span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="va">area=</span>yes</span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="va">oneway=</span>no <span class="kw">(</span><span class="ex">two</span> pits<span class="kw">)</span></span></code></pre></div>
+<p>Map the pit(s) with an area and tag&nbsp;as:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="va">leisure=</span>pitch</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="va">sport=</span>athletics</span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="va">athletics=</span>long_jump</span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="va">surface=</span>sand</span></code></pre></div>
+    
+<div class="version">
+<h3>Software Versions</h3>
+<p>This is an automated list of software versions used during the writing of this article.</p>
+
+  <code>
+    <table>
+        <tr><th>Software</th><th>Version</th></tr>
+        <tr><td>Ubuntu</td><td> 22.04.02 LTS</td></tr>
+        <tr><td> JOSM</td><td></td></tr>
+    </table>
+  </code>
+</div>
+
+
+        </div>
+        
+        <div class=footer>
+            <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Joe Lotz (me!)</p>
+            <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a> using a modified <a href="https://github.com/fjavieralba/flasky">Flasky</a> theme.
+            <div class=social>
+              <ul>
+<a href="http://twitter.com/lotzjoe" target="_blank"> <li> <i class="fa-brands fa-twitter-square fa-lg"></i> </li> </a><a href="https://www.linkedin.com/in/joelotz/" target="_blank"><li><i class="fa-brands fa-linkedin fa-lg"></i></li></a><a href="https://github.com/joelotz" target="_blank"> <li> <i class="fa-brands fa-github-square fa-lg"></i> </li> </a><a href="https://www.instagram.com/joelotz/" target="_blank"><li><i class="fa-brands fa-instagram fa-lg"></i> </li> </a>              <a href="http://www.joelotz.com/blog/all.atom.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="fa-solid fa-rss fa-lg"></i></i> </li></a>
+              </ul>
+            </div>
+            </p>
+        </div>    
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-48351953-1 ']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
