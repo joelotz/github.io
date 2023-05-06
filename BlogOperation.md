@@ -35,6 +35,8 @@ git push origin content
 #### Other useful commands
 
 ```bash
+git restore --staged <file>... # to unstage
+
 git reset FILE #pulls file out of staging
 git rm FILE #deletes file locally and from repo
 git rm -r DIR #deletes dir and contents locally/repo
